@@ -1,14 +1,22 @@
-
 Features naar aanleiding van feedback mailinglist : 
 
+Must haves:
 * extra template: copy identiteitsbewijs 
-* Mogelijkheid referentie op te geven 
+* Mogelijkheid referentie op te geven (dossiernr, klantnr)
 * Default template tekst per organisatie 
 * Omschrijving per organisatie 
-* include twitter feed van PIM's feedback 
-* templates in Wikipedia per organisatie 
 * mogelijkheid alle pdf's in een keer uit te printen.
 * layout pdf's is nog ruk
+* multilangual
 
-BUGS : teveel .. chech de TODO's in het systeem 
+Should haves:
+* templates in Wikipedia per organisatie
+* PAM brieven naar bel-me-niet-registers (Infofilter, Postfilter, MOA-onderzoekfilter)
 
+Could haves:
+* include twitter feed van PIM's feedback (people talking about #pim?)
+* aan het einde van het proces een donatieknop voor BoF
+* mogelijkheid om "Ik heb zojuist PIM.bof.nl gebruikt voor de volgende organisaties: xxx" te twitteren (viral)
+
+Will not haves:
+BUGS (hehe)
