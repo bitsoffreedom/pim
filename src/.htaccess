@@ -1,0 +1,6 @@
+<FilesMatch "\.(htaccess|conf)$">
+    deny from all
+</FilesMatch>
+
+RewriteEngine on
+RewriteRule ^([A-Za-z]+)$ index.php?page=$1 [L]
