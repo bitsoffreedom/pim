@@ -344,4 +344,47 @@ class Model_Datahamster extends Model_Persistable {
 
         return $datahamster;
     }
+
+    /**
+     * Returns all Users currently available.
+     * @return array
+     */
+    public static function getAll() {
+        $prep_query = "SELECT id, address_id, category_id, parent_id, name " .
+            ", department, web, email " .
+            "FROM `" . self::$tablename . "` ";
+
+        $connection = self::getConnection();
+        $datahamsters = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            $result = $stmt->execute();
+
+            if ( $result === true ) {
+
+                if ( $stmt->bind_result( $id, $address_id, $category_id,
+                        $parent_id, $name, $department, $web, $email ) ) {
+
+                    while ( $stmt->fetch() ) {
+                        $datahamster = new Model_Datahamster( $id );
+                        $datahamster->setAddress( $address_id );
+                        $datahamster->setCategory( $category_id );
+                        $datahamster->setDepartment( $department_id );
+                        $datahamster->setEmail( $email );
+                        $datahamster->setName( $name );
+                        $datahamster->setParent( $parent_id );
+                        $datahamster->setWeb( $web );
+                        $datahamsters[] = $datahamster;
+                    }
+
+                }
+
+            }
+            $stmt->close();
+        }
+
+        return $datahamsters;
+    }
 }

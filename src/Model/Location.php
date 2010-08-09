@@ -208,4 +208,40 @@ class Model_Location extends Model_Persistable {
 
         return $location;
     }
+
+    /**
+     * Returns all Users currently available.
+     * @return array
+     */
+    public static function getAll() {
+        $prep_query = "SELECT id, datahamster_id, name " .
+            "FROM `" . self::$tablename . "` ";
+
+        $connection = self::getConnection();
+        $locations = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            $result = $stmt->execute();
+
+            if ( $result === true ) {
+
+                if ( $stmt->bind_result( $id, $datahamster_id, $name ) ) {
+
+                    while ( $stmt->fetch() ) {
+                        $location = new Model_Location( $id );
+                        $location->setDatahamster( $datahamster_id );
+                        $location->setName( $name );
+                        $locations[] = $location;
+                    }
+
+                }
+
+            }
+            $stmt->close();
+        }
+
+        return $locations;
+    }
 }

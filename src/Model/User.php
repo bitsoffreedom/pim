@@ -241,4 +241,41 @@ class Model_User extends Model_Persistable {
 
         return $user;
     }
+
+    /**
+     * Returns all Users currently available.
+     * @return array
+     */
+    public static function getAll() {
+        $prep_query = "SELECT id, name, realname, password " .
+            "FROM `" . self::$tablename . "` ";
+
+        $connection = self::getConnection();
+        $result = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            $users = $stmt->execute();
+
+            if ( $result === true ) {
+
+                if ( $stmt->bind_result( $id, $name, $realname, $password ) ) {
+
+                    while ( $stmt->fetch() ) {
+                        $user = new Model_User( $id );
+                        $user->setName( $name );
+                        $user->setRealname( $realname );
+                        $user->setPassword( $password, false );
+                        $users[] = $user;
+                    }
+
+                }
+
+            }
+            $stmt->close();
+        }
+
+        return $users;
+    }
 }

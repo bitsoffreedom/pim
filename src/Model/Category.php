@@ -201,12 +201,39 @@ class Model_Category extends Model_Persistable {
         return $category;
     }
 
-/*
-    public static function findAll() {
-        $prep_query = "SELECT name, description " .
+    /**
+     * Returns all Users currently available.
+     * @return array
+     */
+    public static function getAll() {
+        $prep_query = "SELECT id, name, description " .
             "FROM `" . self::$tablename . "` ";
 
         $connection = self::getConnection();
+        $categories = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            $result = $stmt->execute();
+
+            if ( $result === true ) {
+
+                if ( $stmt->bind_result( $id, $name, $description ) ) {
+
+                    while ( $stmt->fetch() ) {
+                        $category = new Model_Category( $id );
+                        $category->setName( $name );
+                        $categories[] = $category;
+                    }
+
+                }
+
+            }
+            $stmt->close();
+        }
+
+        return $categories;
     }
-*/
+
 }

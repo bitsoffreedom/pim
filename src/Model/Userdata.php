@@ -177,4 +177,39 @@ class Model_Userdata extends Model_Persistable {
 
         return $userdata;
     }
+
+    /**
+     * Returns all Userdata currently available.
+     * @return array
+     */
+    public static abstract function getAll() {
+        $prep_query = "SELECT id, name " .
+            "FROM `" . self::$tablename . "` ";
+
+        $connection = self::getConnection();
+        $userdata = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            $result = $stmt->execute();
+
+            if ( $result === true ) {
+
+                if ( $stmt->bind_result( $id, $name ) ) {
+
+                    while ( $stmt->fetch() ) {
+                        $ud = new Model_Userdada( $id );
+                        $ud->setName( $name );
+                        $userdata[] = $ud;
+                    }
+
+                }
+
+            }
+            $stmt->close();
+        }
+
+        return $userdata;
+    }
 }

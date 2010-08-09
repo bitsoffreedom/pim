@@ -270,4 +270,46 @@ class Model_Address extends Model_Persistable {
 
         return $address;
     }
+
+    /**
+     * Returns all Users currently available.
+     * @return array
+     */
+    public static function getAll() {
+        $prep_query = "SELECT id, street, house_number, addition " .
+            ", postal_code, city " .
+            "FROM `" . self::$tablename . "` " .
+            "WHERE id = ?";
+
+        $connection = self::getConnection();
+        $addresses = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            $result = $stmt->execute();
+
+            if ( $result === true ) {
+
+                if ( $stmt->bind_result( $id, $street, $house_number, $addition
+                        , $postal_code, $city ) ) {
+
+                    while ( $stmt->fetch() ) {
+                        $address = new Model_Address( $id );
+                        $address->setStreet( $street );
+                        $address->setHouseNumber( $house_number );
+                        $address->setAddition( $addition );
+                        $address->setPostalCode( $postal_code );
+                        $address->setCity( $city );
+                        $addresses[] = $address;
+                    }
+
+                }
+
+            }
+            $stmt->close();
+        }
+
+        return $addresses;
+    }
 }

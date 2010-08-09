@@ -123,7 +123,14 @@ abstract class Model_Persistable {
 
     /**
      * Finds the Persistable that has the given Id.
+     * @return Model_Persistable
      */
     public static abstract function findById( $id );
+
+    /**
+     * Returns all Persistables currently available.
+     * @return array
+     */
+    public static abstract function getAll();
     
 }
