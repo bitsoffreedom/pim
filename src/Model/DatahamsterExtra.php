@@ -1,13 +1,13 @@
 <?php
 namespace PIM;
 
-class Model_Location extends Model_Persistable {
-
+class Model_DatahamsterExra extends Model_Persistable {
+    
     /**
      *
      * @var string
      */
-    private static $tablename = 'location';
+    private static $tablename = 'datahamster_extra';
 
     /**
      *
@@ -19,8 +19,13 @@ class Model_Location extends Model_Persistable {
      *
      * @var string
      */
-    private $name;
+    private $key;
 
+    /**
+     *
+     * @var string
+     */
+    private $value;
 
     /**
      * Constructor
@@ -39,29 +44,29 @@ class Model_Location extends Model_Persistable {
 
     /**
      *
-     * @return string
-     */
-    public function getName() {
-        return $this->name;
-    }
-
-    /**
      * @return Model_Datahamster
      */
     public function getDatahamster() {
         if ( \is_numeric( $this->datahamster ) ) {
             $this->datahamster = Model_Datahamster::findById( $this->datahamster );
         }
-
         return $this->datahamster;
     }
 
     /**
      *
-     * @param string $name
+     * @return string
      */
-    public function setName( $name ) {
-        $this->name = $name;
+    public function getKey() {
+        return $this->key;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getValue() {
+        return $this->value;
     }
 
     /**
@@ -73,6 +78,22 @@ class Model_Location extends Model_Persistable {
     }
 
     /**
+     *
+     * @param string $key
+     */
+    public function setKey( $key ) {
+        $this->key = $key;
+    }
+
+    /**
+     *
+     * @param string $value
+     */
+    public function setValue( $value ) {
+        $this->value = $value;
+    }
+
+    /**
      * @return bool
      */
     public function insert() {
@@ -81,8 +102,8 @@ class Model_Location extends Model_Persistable {
         }
 
         $prep_query = "INSERT INTO `" . self::$tablename . "` " .
-            "(datahamster_id, name) " .
-            "VALUES (?, ?)";
+            "(datahamster_id, `key`, `value`) " .
+            "VALUES (?, ?, ?)";
 
         $connection = self::getConnection();
 
@@ -90,8 +111,8 @@ class Model_Location extends Model_Persistable {
             $stmt = $connection->prepare( $prep_query );
             $dh_id = ( $this->datahamster instanceof Model_Datahamster )
                     ? $this->datahamster->getId() : $this->datahamster;
-            
-            if ( $stmt->bind_param( "is", $dh_id, $this->name ) ) {
+
+            if ( $stmt->bind_param( "iss", $dh_id, $this->key, $this->value ) ) {
 
                 $result = $stmt->execute();
 
@@ -115,7 +136,7 @@ class Model_Location extends Model_Persistable {
         }
 
         $prep_query = "UPDATE `" . self::$tablename . "` " .
-            "SET datahamster_id = ?, name = ? " .
+            "SET datahamster_id = ?, `key` = ?, `value` = ? " .
             "WHERE id = ?";
 
         $connection = self::getConnection();
@@ -125,7 +146,8 @@ class Model_Location extends Model_Persistable {
             $dh_id = ( $this->datahamster instanceof Model_Datahamster )
                     ? $this->datahamster->getId() : $this->datahamster;
 
-            if ( $stmt->bind_param( "isi", $dh_id, $this->name, $this->id ) ) {
+            if ( $stmt->bind_param( "issi", $dh_id, $this->key, $this->value
+                    , $this->id ) ) {
 
                 $result = $stmt->execute();
                 $stmt->close();
@@ -171,15 +193,15 @@ class Model_Location extends Model_Persistable {
     /**
      *
      * @param int $id
-     * @return Model_Location
+     * @return Model_DatahamsterExtra
      */
     public static function findById( $id ) {
-        $prep_query = "SELECT datahamster_id, name " .
+        $prep_query = "SELECT datahamster_id, `key`, `value` " .
             "FROM `" . self::$tablename . "` " .
             "WHERE id = ?";
 
         $connection = self::getConnection();
-        $location = null;
+        $datahamster_extra = null;
 
         if ( !\is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
@@ -190,12 +212,13 @@ class Model_Location extends Model_Persistable {
 
                 if ( $result === true ) {
 
-                    if ( $stmt->bind_result( $datahamster_id, $name ) ) {
+                    if ( $stmt->bind_result( $datahamster_id, $key, $value ) ) {
 
                         if ( $stmt->fetch() ) {
-                            $location = new Model_Location( $id );
-                            $location->setDatahamster( $datahamster_id );
-                            $location->setName( $name );
+                            $datahamster_extra = new Model_DatahamsterExtra( $id );
+                            $datahamster_extra->setDatahamster( $datahamster_id );
+                            $datahamster_extra->setKey( $key );
+                            $datahamster_extra->setValue( $value );
 
                         }
 
@@ -206,19 +229,61 @@ class Model_Location extends Model_Persistable {
             }
         }
 
-        return $location;
+        return $datahamster_extra;
     }
 
     /**
-     * Returns all Locations currently available.
+     *
+     * @param int $id
+     * @return array
+     */
+    public static function findAllByDatahamster( Model_Datahamster $datahamster ) {
+        $prep_query = "SELECT id, `key`, `value` " .
+            "FROM `" . self::$tablename . "` " .
+            "WHERE datahamster_id = ?";
+
+        $connection = self::getConnection();
+        $datahamster_extras = array();
+
+        if ( !\is_null( $connection ) ) {
+            $stmt = $connection->prepare( $prep_query );
+
+            if ( $stmt->bind_param( "i", $datahamster->getId() ) ) {
+
+                $result = $stmt->execute();
+
+                if ( $result === true ) {
+
+                    if ( $stmt->bind_result( $id, $key, $value ) ) {
+
+                        while ( $stmt->fetch() ) {
+                            $datahamster_extra = new Model_DatahamsterExtra( $id );
+                            $datahamster_extra->setDatahamster( $datahamster->getId() );
+                            $datahamster_extra->setKey( $key );
+                            $datahamster_extra->setValue( $value );
+                            $datahamster_extras[] = $datahamster;
+                        }
+
+                    }
+
+                }
+                $stmt->close();
+            }
+        }
+
+        return $datahamster_extras;
+    }
+
+    /**
+     * Returns all DatahamsterExtra currently available.
      * @return array
      */
     public static function getAll() {
-        $prep_query = "SELECT id, datahamster_id, name " .
+        $prep_query = "SELECT id, datahamster_id, `key`, `value` " .
             "FROM `" . self::$tablename . "` ";
 
         $connection = self::getConnection();
-        $locations = array();
+        $datahamster_extras = array();
 
         if ( !\is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
@@ -227,13 +292,14 @@ class Model_Location extends Model_Persistable {
 
             if ( $result === true ) {
 
-                if ( $stmt->bind_result( $id, $datahamster_id, $name ) ) {
+                if ( $stmt->bind_result( $id, $datahamster_id, $key, $value ) ) {
 
                     while ( $stmt->fetch() ) {
-                        $location = new Model_Location( $id );
-                        $location->setDatahamster( $datahamster_id );
-                        $location->setName( $name );
-                        $locations[] = $location;
+                        $datahamster_extra = new Model_DatahamsterExtra( $id );
+                        $datahamster_extra->setDatahamster( $datahamster_id );
+                        $datahamster_extra->setKey( $key );
+                        $datahamster_extra->setValue( $value );
+                        $datahamster_extras[] = $datahamster_extra;
                     }
 
                 }
@@ -242,6 +308,6 @@ class Model_Location extends Model_Persistable {
             $stmt->close();
         }
 
-        return $locations;
+        return $datahamster_extras;
     }
 }

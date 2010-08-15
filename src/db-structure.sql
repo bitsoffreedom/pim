@@ -41,13 +41,22 @@ create table datahamster (
 	, foreign key( parent_id ) references datahamster( id )
 );
 
+create table datahamster_extra (
+    id int unsigned not null auto_increment
+    , datahamster_id int unsigned not null
+    , `key` varchar(50) not null
+    , `value` text not null
+    , primary key( id )
+    , foreign key( datahamster_id ) references datahamster( id )
+);
+
 create table user (
-        id int unsigned not null auto_increment
-        , name varchar(10) not null
-        , realname varchar(40)
-        , password varchar(50) not null
-        , primary key( id )
-        , unique key( name )
+    id int unsigned not null auto_increment
+    , name varchar(10) not null
+    , realname varchar(40)
+    , password varchar(50) not null
+    , primary key( id )
+    , unique key( name )
 );
 
 SET FOREIGN_KEY_CHECKS=1;

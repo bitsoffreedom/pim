@@ -35,7 +35,7 @@ abstract class Model_Persistable {
      * Constructor
      * @var int $id
      */
-    public function __construct( $id = null) {
+    public function __construct( $id = null ) {
         self::$counter++;
 
         if(!\is_null( $id ) && \is_numeric( $id ) ) {

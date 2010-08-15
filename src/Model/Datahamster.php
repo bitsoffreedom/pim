@@ -5,7 +5,7 @@ class Model_Datahamster extends Model_Persistable {
 
     /**
      *
-     * @var <type>
+     * @var string
      */
     private static $tablename = 'datahamster';
 
@@ -52,11 +52,18 @@ class Model_Datahamster extends Model_Persistable {
     private $email;
 
     /**
+     *
+     * @var array
+     */
+    private $datahamster_extra;
+
+    /**
      * Constructor
      * @param int $id
      */
     public function __construct( $id = null ) {
         parent::__construct( $id );
+        $this->datahamster_extra = null;
     }
 
     /**
@@ -132,6 +139,17 @@ class Model_Datahamster extends Model_Persistable {
     }
 
     /**
+     * @return array
+     */
+    public function getExtras() {
+        if ( \is_null( $this->datahamster_extra ) ) {
+            $this->datahamster_extra =
+                    Model_DatahamsterExra::findAllByDatahamster( $this );
+        }
+        return $this->datahamster_extra;
+    }
+
+    /**
      *
      * @param Model_Address|int $address
      */
@@ -185,6 +203,63 @@ class Model_Datahamster extends Model_Persistable {
      */
     public function setEmail( $email ) {
         $this->email = $email;
+    }
+
+    /**
+     * Adds the given Model_DatahamsterExtra to the list of extra data.
+     * Note that, if the Model_DatahamsterExtra is not yet persisted, it will
+     * be after using this function.
+     *
+     * @param Model_DatahamsterExra &$extra
+     * @return bool
+     */
+    public function addExtra( Model_DatahamsterExra &$extra ) {
+        if ( \is_null( $extra->getId() ) ) {
+            if ( !$extra->insert() ) {
+                return false;
+            }
+        }
+
+        if ( !\in_array($extra, $this->datahamster_extra ) ) {
+            $this->datahamster_extra[] = $extra;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param array $extras An array with instances of Model_DatahamsterExtra
+     * @throws Exception if persisting a Model_DatahamsterExtra fails
+     */
+    public function addAllExtras( array &$extras ) {
+        foreach( $extras as &$extra ) {
+            if ( !$this->addExtra( $extra ) ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param Model_DatahamsterExtra $extra
+     * @return bool
+     */
+    public function removeExtra( Model_DatahamsterExtra &$extra ) {
+        if ( \in_array( $extra, $this->datahamster_extra ) ) {
+            if ( !$extra->delete() ) {
+                return false;
+            }
+
+            for( $i = 0; $i < \count( $this->datahamster_extra ); $i++ ) {
+                if ( $this->datahamster_extra[ $i ] === $extra ) {
+                    unset( $this->datahamster_extra[ $i ] );
+                    $this->datahamster_extra = array_values( $this->datahamster_extra );
+                    break;
+                }
+            }
+        }
+        return true;
     }
 
     /**
