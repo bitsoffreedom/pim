@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Model_Category extends Model_Persistable {
 
@@ -72,7 +71,7 @@ class Model_Category extends Model_Persistable {
      * @return bool
      */
     public function insert() {
-        if ( !\is_null( $this->id ) ) {
+        if ( !is_null( $this->id ) ) {
             return false;
         }
 
@@ -82,7 +81,7 @@ class Model_Category extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "ss", $this->name, $this->description ) ) {
@@ -104,7 +103,7 @@ class Model_Category extends Model_Persistable {
      * @return bool
      */
     public function update() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -114,7 +113,7 @@ class Model_Category extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "ssi", $this->name, $this->description
@@ -133,7 +132,7 @@ class Model_Category extends Model_Persistable {
      * @return bool
      */
     public function delete() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -142,7 +141,7 @@ class Model_Category extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $this->id ) ) {
@@ -174,7 +173,7 @@ class Model_Category extends Model_Persistable {
         $connection = self::getConnection();
         $category = null;
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $id ) ) {
@@ -212,7 +211,7 @@ class Model_Category extends Model_Persistable {
         $connection = self::getConnection();
         $categories = array();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             $result = $stmt->execute();

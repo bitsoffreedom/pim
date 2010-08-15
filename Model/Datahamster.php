@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Model_Datahamster extends Model_Persistable {
 
@@ -78,7 +77,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return Model_Address
      */
     public function getAddress() {
-        if (\is_numeric( $this->address ) ) {
+        if (is_numeric( $this->address ) ) {
             $this->address = Model_Address::findById( $this->address );
         }
         return $this->address;
@@ -89,7 +88,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return Model_Category
      */
     public function getCategory() {
-        if ( \is_numeric( $this->category ) ) {
+        if ( is_numeric( $this->category ) ) {
             $this->category = Model_Category::findById( $this->category );
         }
         return $this->category;
@@ -100,7 +99,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return Model_Datahamster
      */
     public function getParent() {
-        if ( \is_numeric( $this->parent ) ) {
+        if ( is_numeric( $this->parent ) ) {
             $this->parent = Model_Datahamster::findById( $this->parent );
         }
         return $this->parent;
@@ -142,7 +141,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return array
      */
     public function getExtras() {
-        if ( \is_null( $this->datahamster_extra ) ) {
+        if ( is_null( $this->datahamster_extra ) ) {
             $this->datahamster_extra =
                     Model_DatahamsterExra::findAllByDatahamster( $this );
         }
@@ -214,13 +213,13 @@ class Model_Datahamster extends Model_Persistable {
      * @return bool
      */
     public function addExtra( Model_DatahamsterExra &$extra ) {
-        if ( \is_null( $extra->getId() ) ) {
+        if ( is_null( $extra->getId() ) ) {
             if ( !$extra->insert() ) {
                 return false;
             }
         }
 
-        if ( !\in_array($extra, $this->datahamster_extra ) ) {
+        if ( !in_array($extra, $this->datahamster_extra ) ) {
             $this->datahamster_extra[] = $extra;
         }
         return true;
@@ -246,12 +245,12 @@ class Model_Datahamster extends Model_Persistable {
      * @return bool
      */
     public function removeExtra( Model_DatahamsterExtra &$extra ) {
-        if ( \in_array( $extra, $this->datahamster_extra ) ) {
+        if ( in_array( $extra, $this->datahamster_extra ) ) {
             if ( !$extra->delete() ) {
                 return false;
             }
 
-            for( $i = 0; $i < \count( $this->datahamster_extra ); $i++ ) {
+            for( $i = 0; $i < count( $this->datahamster_extra ); $i++ ) {
                 if ( $this->datahamster_extra[ $i ] === $extra ) {
                     unset( $this->datahamster_extra[ $i ] );
                     $this->datahamster_extra = array_values( $this->datahamster_extra );
@@ -266,7 +265,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return bool
      */
     public function insert() {
-        if ( !\is_null( $this->id ) ) {
+        if ( !is_null( $this->id ) ) {
             return false;
         }
 
@@ -276,7 +275,7 @@ class Model_Datahamster extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             $address_id = ( $this->address instanceof Model_Address )
@@ -307,7 +306,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return bool
      */
     public function update() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -318,7 +317,7 @@ class Model_Datahamster extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             $address_id = ( $this->address instanceof Model_Address )
@@ -345,7 +344,7 @@ class Model_Datahamster extends Model_Persistable {
      * @return bool
      */
     public function delete() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -354,7 +353,7 @@ class Model_Datahamster extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $this->id ) ) {
@@ -387,7 +386,7 @@ class Model_Datahamster extends Model_Persistable {
         $connection = self::getConnection();
         $datahamster = null;
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $id ) ) {
@@ -432,7 +431,7 @@ class Model_Datahamster extends Model_Persistable {
         $connection = self::getConnection();
         $datahamsters = array();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             $result = $stmt->execute();

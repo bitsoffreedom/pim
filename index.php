@@ -1,8 +1,6 @@
 <?php
 require_once( 'autoload.php' );
 
-use PIM\Control_Exceptions_InvalidVersionException as InvalidVersionException;
-
 define( 'PIM_CONFIG_FILE', PIM_BASE_PATH . DIRECTORY_SEPARATOR . 'pim.conf' );
 define( 'PHP_MIN_VERSION', '5.3.0' );
 define( 'DEBUG', 1);
@@ -12,13 +10,12 @@ try {
 	    throw new InvalidVersionException( 'PIM needs at least PHP version ' . PHP_MIN_VERSION . ', you have ' . PHP_VERSION );
 	}
 
-	$r = new PIM\Control_Route();
+	$r = new Control_Route();
 	$pageclass = $r->getPageClass();
 
-	$pageclass = "PIM\\" . $pageclass;
 	$p = new $pageclass($r);
 	$p->render();
-} catch (InvalidVersionException $e) {
+} catch (Control_Exceptions_InvalidVersionException $e) {
 	if (DEBUG) {
 		echo 'Exception: ' . $e->getMessage() . "\n";
 		die();
@@ -33,7 +30,7 @@ try {
 }
 
 /*
-$address = new PIM\Model_Address();
+$address = new Model_Address();
 $address->setStreet( 'Bleekstraat' );
 $address->setPostalCode( '1000AA' );
 $address->setHouseNumber( 1 );
@@ -43,12 +40,12 @@ echo PHP_EOL;
 */
 
 /*
-$address = PIM\Model_Address::findById( 1 );
+$address = Model_Address::findById( 1 );
 var_dump( $address );
 echo PHP_EOL;
 
 $address->setHouseNumber( 31 );
 $address->update();
-$address = PIM\Model_Address::findById( 1 );
+$address = Model_Address::findById( 1 );
 var_dump( $address );
 */

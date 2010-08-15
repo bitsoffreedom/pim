@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Control_SelectSector extends Control_Controller
 {
@@ -20,7 +19,7 @@ class Control_SelectSector extends Control_Controller
 				$this->setSectors($s);
 				$this->redirect("bedrijven");
 			}
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			echo "Fout:" . $e->getMessage() . "\n";
 		}
 	}

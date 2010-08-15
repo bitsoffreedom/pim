@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class View_SelectSector extends View_View
 {

@@ -1,8 +1,4 @@
 <?php
-namespace PIM;
-
-use PIM\Control_Exceptions_NullPointerException as NullPointerException;
-use PIM\Control_Exceptions_IOException as IOException;
 
 abstract class Model_Persistable {
 
@@ -38,7 +34,7 @@ abstract class Model_Persistable {
     public function __construct( $id = null ) {
         self::$counter++;
 
-        if(!\is_null( $id ) && \is_numeric( $id ) ) {
+        if(!is_null( $id ) && is_numeric( $id ) ) {
             $this->id = (int)$id;
         }
     }
@@ -50,7 +46,7 @@ abstract class Model_Persistable {
         self::$counter--;
 
         if ( 0 === self::$counter ) {
-            if ( !\is_null( self::$connection ) ) {
+            if ( !is_null( self::$connection ) ) {
                 self::$connection->close();
                 self::$connection = null;
             }
@@ -90,8 +86,8 @@ abstract class Model_Persistable {
      * @return array
      */
     protected static function getConfig() {
-        if ( \is_null( self::$config ) ) {
-            self::$config = \parse_ini_file( \PIM_CONFIG_FILE );
+        if ( is_null( self::$config ) ) {
+            self::$config = parse_ini_file( PIM_CONFIG_FILE );
         }
 
         return self::$config;
@@ -101,15 +97,15 @@ abstract class Model_Persistable {
      * @return mysqli
      */
     protected static function getConnection() {
-        if ( !\is_null( self::$connection ) ) {
+        if ( !is_null( self::$connection ) ) {
             return self::$connection;
         }
 
         $config = self::getConfig();
         $db_config = isset( $config[ 'database' ] ) ? $config[ 'database' ] : null;
 
-        if ( !\is_null( $db_config ) ) {
-            self::$connection = new \mysqli(
+        if ( !is_null( $db_config ) ) {
+            self::$connection = new mysqli(
                     $config[ 'host' ]
                     , $config[ 'username' ]
                     , $config[ 'password' ]

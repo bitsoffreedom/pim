@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 abstract class Control_Controller
 {
@@ -31,7 +30,7 @@ abstract class Control_Controller
 			$this->execPost();
 			break;
 		default:
-			throw new \Exception('Can\'t deal with this method');
+			throw new Exception('Can\'t deal with this method');
 		}
 
 	}

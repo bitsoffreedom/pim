@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class View_StartWidget extends View_Widget
 {

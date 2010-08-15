@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class View_SelectSectorWidget extends View_Widget
 {

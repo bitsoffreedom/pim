@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Control_SelectSectorForm extends Control_Form
 {
@@ -14,7 +13,7 @@ class Control_SelectSectorForm extends Control_Form
 
 		foreach ($_POST['sectoren'] as $value) {
 			if (!ctype_digit($value)) {
-				throw new \Exception('Wrong POST data received');
+				throw new Exception('Wrong POST data received');
 			}
 			array_push($s, $value);
 		}

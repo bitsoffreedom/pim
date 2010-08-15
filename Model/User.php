@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Model_User extends Model_Persistable {
 
@@ -68,12 +67,12 @@ class Model_User extends Model_Persistable {
      * @return bool
      */
     public function verify( $plaintext ) {
-        if ( \is_null( $this->password ) || \strlen( $this->password ) < self::PASSWORD_LENGTH ) {
+        if ( is_null( $this->password ) || strlen( $this->password ) < self::PASSWORD_LENGTH ) {
             return false;
         }
 
-        $salt = \substr( $this->password, 0, self::SALT_LENGTH );
-        return \sha1( $salt . $plaintext ) === \substr( $this->password, self::SALT_LENGTH );
+        $salt = substr( $this->password, 0, self::SALT_LENGTH );
+        return sha1( $salt . $plaintext ) === substr( $this->password, self::SALT_LENGTH );
     }
 
     /**
@@ -99,8 +98,8 @@ class Model_User extends Model_Persistable {
      */
     public function setPassword( $password, $plaintext = true ) {
         if ( true === $plaintext ) {
-            $salt = round( ( 1 + \lcg_value() ) * 1000000000 );
-            $this->password = $salt . \sha1( $salt . $password );
+            $salt = round( ( 1 + lcg_value() ) * 1000000000 );
+            $this->password = $salt . sha1( $salt . $password );
         }
         else {
             $this->password = $password;
@@ -111,7 +110,7 @@ class Model_User extends Model_Persistable {
      * @return bool
      */
     public function insert() {
-        if ( !\is_null( $this->id ) ) {
+        if ( !is_null( $this->id ) ) {
             return false;
         }
 
@@ -121,7 +120,7 @@ class Model_User extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "sss", $this->name, $this->realname
@@ -144,7 +143,7 @@ class Model_User extends Model_Persistable {
      * @return bool
      */
     public function update() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -154,7 +153,7 @@ class Model_User extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "sssi", $this->name, $this->description
@@ -173,7 +172,7 @@ class Model_User extends Model_Persistable {
      * @return bool
      */
     public function delete() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -182,7 +181,7 @@ class Model_User extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $this->id ) ) {
@@ -214,7 +213,7 @@ class Model_User extends Model_Persistable {
         $connection = self::getConnection();
         $user = null;
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $id ) ) {
@@ -253,7 +252,7 @@ class Model_User extends Model_Persistable {
         $connection = self::getConnection();
         $result = array();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             $users = $stmt->execute();

@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Control_SelectCompany extends Control_Controller
 {

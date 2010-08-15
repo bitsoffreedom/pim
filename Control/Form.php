@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 abstract class Control_Form
 {

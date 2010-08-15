@@ -1,5 +1,4 @@
 <?php
-namespace PIM;
 
 class Model_Location extends Model_Persistable {
 
@@ -49,7 +48,7 @@ class Model_Location extends Model_Persistable {
      * @return Model_Datahamster
      */
     public function getDatahamster() {
-        if ( \is_numeric( $this->datahamster ) ) {
+        if ( is_numeric( $this->datahamster ) ) {
             $this->datahamster = Model_Datahamster::findById( $this->datahamster );
         }
 
@@ -76,7 +75,7 @@ class Model_Location extends Model_Persistable {
      * @return bool
      */
     public function insert() {
-        if ( !\is_null( $this->id ) ) {
+        if ( !is_null( $this->id ) ) {
             return false;
         }
 
@@ -86,7 +85,7 @@ class Model_Location extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
             $dh_id = ( $this->datahamster instanceof Model_Datahamster )
                     ? $this->datahamster->getId() : $this->datahamster;
@@ -110,7 +109,7 @@ class Model_Location extends Model_Persistable {
      * @return bool
      */
     public function update() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -120,7 +119,7 @@ class Model_Location extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
             $dh_id = ( $this->datahamster instanceof Model_Datahamster )
                     ? $this->datahamster->getId() : $this->datahamster;
@@ -140,7 +139,7 @@ class Model_Location extends Model_Persistable {
      * @return bool
      */
     public function delete() {
-        if ( \is_null( $this->id ) ) {
+        if ( is_null( $this->id ) ) {
             return false;
         }
 
@@ -149,7 +148,7 @@ class Model_Location extends Model_Persistable {
 
         $connection = self::getConnection();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $this->id ) ) {
@@ -181,7 +180,7 @@ class Model_Location extends Model_Persistable {
         $connection = self::getConnection();
         $location = null;
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             if ( $stmt->bind_param( "i", $id ) ) {
@@ -220,7 +219,7 @@ class Model_Location extends Model_Persistable {
         $connection = self::getConnection();
         $locations = array();
 
-        if ( !\is_null( $connection ) ) {
+        if ( !is_null( $connection ) ) {
             $stmt = $connection->prepare( $prep_query );
 
             $result = $stmt->execute();
