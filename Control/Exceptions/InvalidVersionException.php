@@ -1,7 +1,5 @@
 <?php
-namespace PIM;
-
-class Control_Exceptions_InvalidVersionException extends \Exception {
+class Control_Exceptions_InvalidVersionException extends Exception {
 
     /**
      * Constructor.
