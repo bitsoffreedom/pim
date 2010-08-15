@@ -1,5 +1,7 @@
 <?php
 
+require_once (PIM_BASE_PATH . '/Model/Persistable.php');
+
 class Model_Category extends Model_Persistable {
 
     /**

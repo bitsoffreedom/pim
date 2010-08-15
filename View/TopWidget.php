@@ -1,5 +1,7 @@
 <?php
 
+require_once (PIM_BASE_PATH . '/View/Widget.php');
+
 class View_TopWidget extends View_Widget
 {
 	private $body;

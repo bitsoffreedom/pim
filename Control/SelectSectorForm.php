@@ -1,5 +1,7 @@
 <?php
 
+require_once (PIM_BASE_PATH . '/Control/Form.php');
+
 class Control_SelectSectorForm extends Control_Form
 {
 	private $sectors = NULL;
