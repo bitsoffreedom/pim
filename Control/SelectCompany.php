@@ -1,12 +1,13 @@
 <?php
 
 require_once (PIM_BASE_PATH . '/Control/Controller.php');
+require_once (PIM_BASE_PATH . '/View/SelectCompany.php');
 
 class Control_SelectCompany extends Control_Controller
 {
 	public function execGet()
 	{
-		echo "hello, world\n";
+                return new View_SelectCompany();
 	}
 
 	public function execPost()

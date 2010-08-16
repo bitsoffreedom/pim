@@ -3,12 +3,15 @@
 require_once (PIM_BASE_PATH . '/Control/Controller.php');
 require_once (PIM_BASE_PATH . '/Control/SelectSectorForm.php');
 require_once (PIM_BASE_PATH . '/View/SelectSector.php');
+require_once (PIM_BASE_PATH . '/Model/Category.php');
 
 class Control_SelectSector extends Control_Controller
 {
 	public function execGet()
 	{
-                echo new View_SelectSector();
+		/* XXX: get model from model class/object */
+		$c = Model_Category::getAll();
+                return new View_SelectSector($c);
 	}
 
 	public function execPost()
@@ -17,14 +20,16 @@ class Control_SelectSector extends Control_Controller
 			$f = new Control_SelectSectorForm();
 			$s = $f->getSectors();
 			if (empty($s)) {
-				$v = new View_SelectSector();
-				echo $v;
+				/* XXX: get model from model class/object */
+				$c = Model_Category::getAll();
+				$v = new View_SelectSector($c, "Probeer maar, selecteer nog een keer niets.");
+				return $v;
 			} else {
 				$this->setSectors($s);
-				$this->redirect("bedrijven");
+				$this->setLocation("bedrijven");
 			}
-		} catch (Exception $e) {
-			echo "Fout:" . $e->getMessage() . "\n";
+		} catch (\Exception $e) {
+			return "Fout:" . $e->getMessage() . "\n";
 		}
 	}
 }

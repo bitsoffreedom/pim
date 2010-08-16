@@ -3,7 +3,12 @@
 abstract class Control_Controller
 {
         private $route;
-	
+
+	/* HTTP response */
+	private $status_line;
+	private $location;
+	private $buffer;
+
 	abstract function execGet();
 	abstract function execPost();
 
@@ -12,37 +17,59 @@ abstract class Control_Controller
                 $this->route = $r;
 
 		if (session_start() == FALSE) {
-			throw new Exception("Could initialize the session");
+			// "Could initialize the session"
+			/* XXX: show what went wrong */
+			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
+			exit(0);
 		}
 		session_cache_expire(30);
 		/* This might cause problems for mozilla according to the PHP manual
 		 * page */
 		session_cache_limiter("private");
-        }
 
-	public function render()
-	{
 		switch ($_SERVER['REQUEST_METHOD']) {
 		case "GET":
-			$this->execGet();
+			$this->status_line = "HTTP/1.1 200 OK";
+			$this->buffer = $this->execGet();
 			break;
 		case "POST":
-			$this->execPost();
+			$this->status_line = "HTTP/1.1 200 OK";
+			$this->buffer = $this->execPost();
 			break;
 		default:
-			throw new Exception('Can\'t deal with this method');
+			$this->setStatusLine('HTTP/1.0 501 Not Implemented');
+			$this->buffer = false;
 		}
+        }
 
-	}
-
-	protected function redirect($l)
+	public function display()
 	{
-		header(sprintf('Location: %s', $l));
+		header($this->status_line);
+		if (!empty($this->location))
+			header(sprintf('Location: %s', $this->location));
+		
+		if (!empty($this->buffer))
+			echo $this->buffer;
 	}
 
 	protected function setSectors($sectors)
 	{	
 		$_SESSION['sectors'] = $sectors;
+	}
+
+	protected function setStatusLine($l)
+	{
+		$this->status_line = $l;
+	}
+	
+	protected function setLocation($l)
+	{
+		$this->location = $l;
+	}
+	
+	protected function setBuffer($b)
+	{
+		$this->buffer = $b;
 	}
 }
 

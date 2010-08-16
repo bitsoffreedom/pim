@@ -6,9 +6,14 @@ require_once (PIM_BASE_PATH . '/View/TopWidget.php');
 
 class View_SelectSector extends View_View
 {
-	public function __construct()
+	private $category_list;
+
+	public function __construct($c, $e = false)
 	{
 		$sw = new View_SelectSectorWidget();
+		$sw->setCategoryList($c);
+		if (!empty($e))
+			$sw->setErrorMsg($e);
 		$sw->render();
 
 		$tw = new View_TopWidget();

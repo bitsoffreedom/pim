@@ -11,19 +11,20 @@
 			<h1>1. Wie wil je aanschrijven?</h1>
 			
 			<p>Welke sectoren wil je aanschrijven?</p>
+<?php
+	if (!empty($errormsg)) {
+		printf("<span>%s</span>", $errormsg);
+	}
+?>
 
 			<form action="sectoren" method="post">
 			<ul>
-				<li>BANK EN VERZEKERINGSWEZEN</li>
-				<input type="checkbox" name="sectoren[]" value="1" /> 
-				<li>INTERNET</li>
-				<input type="checkbox" name="sectoren[]" value="2" /> 
-				<li>MEDIA</li>
-				<input type="checkbox" name="sectoren[]" value="3" /> 
-				<li>OPENBAAR VERVOER</li>
-				<input type="checkbox" name="sectoren[]" value="4" /> 
-				<li>TELECOM</li>
-				<input type="checkbox" name="sectoren[]" value="5" /> 
+<?php
+	foreach ($categorylist as $c) {
+		printf("<li>a: %s</li>", $c->getName());
+		printf("<input type=\"checkbox\" name=\"sectoren[]\" value=\"%d\" />", $c->getName(), $c->getId());
+	}
+?>
 				<input type="submit" />
 			</ul>
 			</form>
