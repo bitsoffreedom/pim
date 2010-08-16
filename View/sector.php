@@ -23,7 +23,8 @@
 				<li>OPENBAAR VERVOER</li>
 				<input type="checkbox" name="sectoren[]" value="4" /> 
 				<li>TELECOM</li>
-				<input type="checkbox" name="sectoren[]" value="5" />
+				<input type="checkbox" name="sectoren[]" value="5" /> 
+				<input type="submit" />
 			</ul>
 			</form>
 			
