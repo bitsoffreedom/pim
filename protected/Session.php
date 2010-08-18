@@ -80,13 +80,15 @@ class Session {
      * @return bool
      */
     private function init() {
-        session_name( 'pim' );
-        session_set_cookie_params( 0, '/' );
-        session_cache_expire( 30 );
+        if ( !$this->started ) {
+            session_name( 'pim' );
+            session_set_cookie_params( 0, '/' );
+            session_cache_expire( 30 );
 
-        /* This might cause problems for mozilla according to the PHP manual
-         * page */
-        session_cache_limiter( 'private' );
+            /* This might cause problems for mozilla according to the PHP manual
+             * page */
+            session_cache_limiter( 'private' );
+        }
         
         $success = session_start();
         $this->initialized = $success;
