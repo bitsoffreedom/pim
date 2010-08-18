@@ -1,5 +1,7 @@
 <?php
 
+require_once( PIM_BASE_PATH . '/protected/Session.php' );
+
 abstract class Control_Controller
 {
         private $route;
@@ -12,35 +14,31 @@ abstract class Control_Controller
 	abstract function execGet();
 	abstract function execPost();
 
-        public function __construct($r)
-        {
-                $this->route = $r;
+    public function __construct($r)
+    {
+        $this->route = $r;
 
-		if (session_start() == FALSE) {
-			// "Could initialize the session"
-			/* XXX: show what went wrong */
-			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
-			exit(0);
-		}
-		session_cache_expire(30);
-		/* This might cause problems for mozilla according to the PHP manual
-		 * page */
-		session_cache_limiter("private");
-
-		switch ($_SERVER['REQUEST_METHOD']) {
-		case "GET":
-			$this->status_line = "HTTP/1.1 200 OK";
-			$this->buffer = $this->execGet();
-			break;
-		case "POST":
-			$this->status_line = "HTTP/1.1 200 OK";
-			$this->buffer = $this->execPost();
-			break;
-		default:
-			$this->setStatusLine('HTTP/1.0 501 Not Implemented');
-			$this->buffer = false;
-		}
+        if (Session::get()->start() === false) {
+            // "Could initialize the session"
+            /* XXX: show what went wrong */
+            $this->setStatusLine('HTTP/1.0 500 Internal Server Error');
+            exit(0);
         }
+
+        switch ($_SERVER['REQUEST_METHOD']) {
+        case "GET":
+            $this->status_line = "HTTP/1.1 200 OK";
+            $this->buffer = $this->execGet();
+            break;
+        case "POST":
+            $this->status_line = "HTTP/1.1 200 OK";
+            $this->buffer = $this->execPost();
+            break;
+        default:
+            $this->setStatusLine('HTTP/1.0 501 Not Implemented');
+            $this->buffer = false;
+        }
+    }
 
 	public function display()
 	{

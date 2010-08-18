@@ -5,6 +5,7 @@ define( 'PIM_CONFIG_FILE', PIM_BASE_PATH . DIRECTORY_SEPARATOR . 'pim.conf' );
 define( 'PHP_MIN_VERSION', '5.3.0' );
 define( 'DEBUG', 1);
 
+require_once ('Control/Admin.php');
 require_once ('Control/SelectSector.php');
 require_once ('Control/SelectCompany.php');
 require_once ('Control/Route.php');
@@ -12,6 +13,8 @@ require_once ('Control/Route.php');
 require_once ('Control/Exceptions/NullPointerException.php');
 require_once ('Control/Exceptions/IOException.php');
 require_once ('Control/Exceptions/InvalidVersionException.php');
+
+require_once ('protected/Session.php');
 
 if (version_compare( PHP_VERSION, PHP_MIN_VERSION ) < 0 ) {
 	/* XXX: show what went wrong */

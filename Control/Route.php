@@ -4,8 +4,12 @@ class Control_Route
 {
         private $pageclass;
         private $pagename;
-        private $pages = array( "bedrijven" => "Control_SelectCompany",
-                                "sectoren" => "Control_SelectSector");
+        private $pages = array
+            (
+                "bedrijven" => "Control_SelectCompany",
+                "sectoren" => "Control_SelectSector",
+                "admin" => "Control_Admin"
+            );
 
         public function __construct()
         {
