@@ -74,6 +74,15 @@ class Session {
     }
 
     /**
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function  __isset( $name ) {
+        return isset( $_SESSION[ $name ] );
+    }
+
+    /**
      * Initializes the session.
      * I found this initialization stuff on
      * http://security.nl/artikel/34117/1/PHP_sessions%3B_hoe_het_wel_moet.html
