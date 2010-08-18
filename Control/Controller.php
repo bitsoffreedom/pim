@@ -1,6 +1,6 @@
 <?php
 
-require_once( PIM_BASE_PATH . '/protected/Session.php' );
+require_once( PIM_BASE_PATH . '/Session.php' );
 
 abstract class Control_Controller
 {
