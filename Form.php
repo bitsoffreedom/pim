@@ -4,6 +4,7 @@ class IntegerForm
 {
 	private $integers;
 
+	// @param string name
 	public function __construct($name)
 	{
 		$this->integers = Array();

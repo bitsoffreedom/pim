@@ -2,7 +2,7 @@
 
 require_once (PIM_BASE_PATH . '/Control/Controller.php');
 require_once (PIM_BASE_PATH . '/Form.php');
-require_once (PIM_BASE_PATH . '/View/SelectSector.php');
+require_once (PIM_BASE_PATH . '/View/View.php');
 require_once (PIM_BASE_PATH . '/Model/Category.php');
 
 class Control_SelectSector extends Control_Controller
@@ -25,7 +25,7 @@ class Control_SelectSector extends Control_Controller
 				$v = new View_SelectSector($c, "Probeer maar, selecteer nog een keer niets.");
 				return $v;
 			} else {
-				$this->setSectors($s);
+				$_SESSION['sectors'] = $s;
 				$this->setLocation("bedrijven");
 			}
 		} catch (\Exception $e) {

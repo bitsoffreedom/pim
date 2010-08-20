@@ -1,12 +1,15 @@
 <?php
 
-abstract class View_Widget
+abstract class Widget
 {
+	// $var string
 	private $buffer = NULL;
+	// $var string
 	private $viewfile;
 
 	abstract protected function render();
 
+	// @param string $file
 	protected function setViewFile($file)
 	{
 		$this->viewfile = $file;
@@ -36,6 +39,75 @@ abstract class View_Widget
 	public function __toString()
 	{
 		return $this->buffer;
+	}
+}
+
+class TopWidget extends Widget
+{
+	// @var string
+	private $body;
+
+	public function __construct()
+	{
+		$this->setViewFile("top.php");
+	}
+
+	// @param string
+	public function setBody($body)
+	{
+		$this->body = $body;
+	}
+
+	public function render()
+	{
+		$this->renderInternal(Array("body" => $this->body));
+	}
+}
+
+class SelectSectorWidget extends Widget
+{
+	// @var array
+	private $category_list;
+	// @var string
+	private $errormsg;
+
+	public function __construct()
+	{
+		$this->setViewFile("sector.php");
+	}
+
+	// @param array
+	public function setCategoryList($c)
+	{
+		$this->category_list = $c;
+	}
+
+	// @param string
+	public function setErrorMsg($m)
+	{
+		$this->errormsg = $m;
+	}
+
+	public function render()
+	{
+		$this->renderInternal(
+			Array(
+			"categorylist" => $this->category_list,
+			"errormsg" => $this->errormsg
+			));
+	}
+}
+
+class CompanyWidget extends Widget
+{
+	public function __construct()
+	{
+		$this->setViewFile("company.php");
+	}
+
+	public function render()
+	{
+		$this->renderInternal();
 	}
 }
 

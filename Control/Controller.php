@@ -4,41 +4,48 @@ require_once( PIM_BASE_PATH . '/Session.php' );
 
 abstract class Control_Controller
 {
+	// @var class Route
         private $route;
 
 	/* HTTP response */
+	// @var string
 	private $status_line;
+	// @var string
 	private $location;
+	// @var string
 	private $buffer;
 
+	// @return string
 	abstract function execGet();
+	// @return string
 	abstract function execPost();
 
-    public function __construct($r)
-    {
-        $this->route = $r;
+	// @param Route r
+	public function __construct($r)
+	{
+		$this->route = $r;
 
-        if (Session::get()->start() === false) {
-            // "Could initialize the session"
-            /* XXX: show what went wrong */
-            $this->setStatusLine('HTTP/1.0 500 Internal Server Error');
-            exit(0);
-        }
+		if (Session::get()->start() === false) {
+			// "Could initialize the session"
+			/* XXX: show what went wrong */
+			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
+			exit(0);
+		}
 
-        switch ($_SERVER['REQUEST_METHOD']) {
-        case "GET":
-            $this->status_line = "HTTP/1.1 200 OK";
-            $this->buffer = $this->execGet();
-            break;
-        case "POST":
-            $this->status_line = "HTTP/1.1 200 OK";
-            $this->buffer = $this->execPost();
-            break;
-        default:
-            $this->setStatusLine('HTTP/1.0 501 Not Implemented');
-            $this->buffer = false;
-        }
-    }
+		switch ($_SERVER['REQUEST_METHOD']) {
+		case "GET":
+			$this->status_line = "HTTP/1.1 200 OK";
+			$this->buffer = $this->execGet();
+			break;
+		case "POST":
+			$this->status_line = "HTTP/1.1 200 OK";
+			$this->buffer = $this->execPost();
+			break;
+		default:
+			$this->setStatusLine('HTTP/1.0 501 Not Implemented');
+			$this->buffer = false;
+		}
+	}
 
 	public function display()
 	{
@@ -50,21 +57,19 @@ abstract class Control_Controller
 			echo $this->buffer;
 	}
 
-	protected function setSectors($sectors)
-	{	
-		$_SESSION['sectors'] = $sectors;
-	}
-
+	// @param String $L
 	protected function setStatusLine($l)
 	{
 		$this->status_line = $l;
 	}
-	
+
+	// @param string $l
 	protected function setLocation($l)
 	{
 		$this->location = $l;
 	}
-	
+
+	// @param string $l
 	protected function setBuffer($b)
 	{
 		$this->buffer = $b;

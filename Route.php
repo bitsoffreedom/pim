@@ -2,8 +2,11 @@
 
 class Route
 {
+	// @var string
         private $pageclass;
+	// @var string
         private $pagename;
+	// @var array
         private $pages = array
             (
                 "bedrijven" => "Control_SelectCompany",
@@ -24,11 +27,13 @@ class Route
                 }
         }
 
+	// @return string
         public function getPageName()
         {
-                return $pagename;
+                return $this->pagename;
         }
 
+	// @return string
         public function getPageClass()
         {
                 return $this->pageclass;
