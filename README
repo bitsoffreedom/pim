@@ -1,1 +1,17 @@
-README
+PIM is dependent on MySQL. 
+
+Instruction on howto install, configure and create the database with the proper
+permissions you can find in the MySQL manual.
+
+To import the database structure you can use the command:
+
+$ mysql -u pim -p pim < db-structure.sql
+
+To configure the database connection for PIM change the variables appropriatly
+and add its contents to pim.conf in the root of the PIM project.
+
+[database]
+host = "localhost"
+username = "pim"
+password = "pim"
+database = "pim"
