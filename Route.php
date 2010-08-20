@@ -1,6 +1,6 @@
 <?php
 
-class Control_Route
+class Route
 {
         private $pageclass;
         private $pagename;

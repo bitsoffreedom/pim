@@ -7,9 +7,9 @@ class Control_Admin extends Control_Controller
 
     /**
      * Constructor
-     * @param Control_Route $r
+     * @param Route $r
      */
-    public function __construct( Control_Route $r ) {
+    public function __construct( Route $r ) {
         parent::__construct( $r );
     }
 
