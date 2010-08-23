@@ -25,7 +25,7 @@ class Control_SelectSector extends Control_Controller
 				$v = new View_SelectSector($c, "Probeer maar, selecteer nog een keer niets.");
 				return $v;
 			} else {
-				$_SESSION['sectors'] = $s;
+				Session::get()->sectors = $s;
 				$this->setLocation("bedrijven");
 			}
 		} catch (Exception $e) {

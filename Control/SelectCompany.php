@@ -9,12 +9,12 @@ class Control_SelectCompany extends Control_Controller
 {
 	public function execGet()
 	{
-		$_SESSION['companies'] = Array();
+		Session::get()->companies = Array();
 		try {
 			$c = Model_Category::getAll();
-			$hamsters = Model_Datahamster::categorySearch($_SESSION['sectors']);
-			if (!empty($_SESSION['companies']))
-				$sel = Model_Datahamster::findByIdList($_SESSION['companies']);
+			$hamsters = Model_Datahamster::categorySearch(Session::get()->sectors);
+			if (!empty(Session::get()->companies))
+				$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 			else
 				$sel = Array();
 			return new View_SelectCompany($hamsters, $c, $sel);
@@ -36,10 +36,10 @@ class Control_SelectCompany extends Control_Controller
 			$companies = $companyform->getIntegers();
 			if (!empty($companies)) {
 				/* XXX: WRONG WRONG WRONG WRONG */
-				$_SESSION['companies'] = $companies;
+				Session::get()->companies = $companies;
 
 				$c = Model_Category::getAll();
-				$sel = Model_Datahamster::findByIdList($_SESSION['companies']);
+				$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 				return new View_SelectCompany(Array(), $c, $sel);
 			}
 		} catch (Exception $e) {
@@ -59,25 +59,25 @@ class Control_SelectCompany extends Control_Controller
 			if (empty($cname)) {
 				if (empty($sectors)) {
 					$c = Model_Category::getAll();
-					$sel = Model_Datahamster::findByIdList($_SESSION['companies']);
+					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 					return new View_SelectCompany(Array(), $c, $sel);
 				} else {
-					$_SESSION['sectors'] = $sectors;
+					Session::get()->sectors = $sectors;
 
 					$c = Model_Category::getAll();
-					$hamsters = Model_Datahamster::categorySearch($_SESSION['sectors']);
-					$sel = Model_Datahamster::findByIdList($_SESSION['companies']);
+					$hamsters = Model_Datahamster::categorySearch(Session::get()->sectors);
+					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 					return new View_SelectCompany($hamsters, $c, $sel);
 				}
 			} else {
 				if (empty($sectors)) {
 					/* XXX: please select a sector */
 				} else {
-					$_SESSION['sectors'] = $sectors;
+					Session::get()->sectors = $sectors;
 
 					$c = Model_Category::getAll();
 					$hamsters = Model_Datahamster::hamsterSearch($sectors, $cname);
-					$sel = Model_Datahamster::findByIdList($_SESSION['companies']);
+					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 					return new View_SelectCompany($hamsters, $c, $sel);
 				}
 			}
