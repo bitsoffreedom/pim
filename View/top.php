@@ -16,9 +16,25 @@
 	</ul>
 	
 	<div id="logo"><h1>Privacy Assistent - Privacy Inzage Machine</h1></div>
-
+        <div id="wizard">
+                <div id="wiz_nav">
+                        <div id="grrbalk"></div>
+                        <span id="bucket">Mijn lijstje</span>
+                        <span id="arrow1"><h3>1</h3> Wie wil je aanschrijven?</span>
+                        <span id="arrow2"><h3>2</h3> Vul je gegevens in</span>
+                        <span id="arrow3"><h3>3</h3> Maak de brieven</span>
+                </div>
+                <div style="left: 30px; float: left">
+                        <ul>
+<? foreach ($companies as $company) { ?>
+                        <li><?=$company->getName()?></li>
+<? } ?>
+                        </ul>
+                </div>
 <?=$body?>
-	
+                <div id="wizard_bottom"></div>
+        </div>
+
 	<div id="footer">
 		&copy; BitsOfFreedom, alle rechten voorbehouden. PIM is open source. Word <a href="#vriend">vriend</a>, <a href="#domee">doe mee</a> of <a href="#doneer">doneer</a>
 		

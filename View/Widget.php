@@ -46,6 +46,8 @@ class TopWidget extends Widget
 {
 	// @var string
 	private $body;
+	// @var array
+        private $companies = Array();
 
 	public function __construct()
 	{
@@ -58,9 +60,20 @@ class TopWidget extends Widget
 		$this->body = $body;
 	}
 
+	// @param array $c
+        public function setCompanySelection($c)
+        {
+                $this->companies = $c;
+        }
+
 	public function render()
 	{
-		$this->renderInternal(Array("body" => $this->body));
+		$this->renderInternal(
+		    Array(
+		    "body" => $this->body,
+		    "companies" => $this->companies
+		    )
+		);
 	}
 }
 
@@ -100,15 +113,34 @@ class SelectSectorWidget extends Widget
 
 class CompanyWidget extends Widget
 {
+        private $company_list;
+        private $sector_list;
+
 	public function __construct()
 	{
 		$this->setViewFile("company.php");
+		$this->company_list = Array();
 	}
 
 	public function render()
 	{
-		$this->renderInternal();
+                $this->renderInternal(
+                        Array(
+                        "companylist" => $this->company_list,
+                        "sectorlist" => $this->sector_list
+                        )
+                );
 	}
+
+        public function setCompanyList($c)
+        {
+                $this->company_list = $c;
+        }
+
+        public function setSectorList($s)
+        {
+                $this->sector_list = $s;
+        }
 }
 
 ?>

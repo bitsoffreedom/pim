@@ -1,132 +1,134 @@
 <?php
 
-abstract class Model_Persistable {
+abstract class Model_Persistable
+{
+	/**
+	*
+	* @var array
+	*/
+	private static $config = null;
 
+	/**
+	*
+	* @var mysqli
+	*/
+	private static $connection = null;
 
-    /**
-     *
-     * @var array
-     */
-    private static $config = null;
+	/**
+	*
+	* @var int
+	*/
+	protected static $counter = 0;
 
-    /**
-     *
-     * @var mysqli
-     */
-    private static $connection = null;
+	/**
+	*
+	* @var int
+	*/
+	protected $id;
 
-    /**
-     *
-     * @var int
-     */
-    protected static $counter = 0;
+	/**
+	* Constructor
+	* @var int $id
+	*/
+	public function __construct( $id = null )
+	{
+		self::$counter++;
 
-    /**
-     *
-     * @var int
-     */
-    protected $id;
+		if(!is_null( $id ) && is_numeric( $id ) ) {
+			$this->id = (int)$id;
+		}
+	}
 
-    /**
-     * Constructor
-     * @var int $id
-     */
-    public function __construct( $id = null ) {
-        self::$counter++;
+	/**
+	* Destructor
+	*/
+	public function __destruct()
+	{
+		self::$counter--;
 
-        if(!is_null( $id ) && is_numeric( $id ) ) {
-            $this->id = (int)$id;
-        }
-    }
+		if ( 0 === self::$counter ) {
+			if ( !is_null( self::$connection ) ) {
+				self::$connection->close();
+				self::$connection = null;
+			}
+		}
+	}
 
-    /**
-     * Destructor
-     */
-    public function __destruct() {
-        self::$counter--;
+	/**
+	* @return int
+	*/
+	public function getId()
+	{
+		return $this->id;
+	}
 
-        if ( 0 === self::$counter ) {
-            if ( !is_null( self::$connection ) ) {
-                self::$connection->close();
-                self::$connection = null;
-            }
-        }
-    }
+	/**
+	* Inserts this Parsistable into the database.
+	*
+	* @return bool
+	*/
+	public abstract function insert();
 
-    /**
-     * @return int
-     */
-    public function getId() {
-        return $this->id;
-    }
+	/**
+	* Updates the current state of this Persistable to the database
+	*
+	* @return bool
+	*/
+	public abstract function update();
 
-    /**
-     * Inserts this Parsistable into the database.
-     *
-     * @return bool
-     */
-    public abstract function insert();
+	/**
+	* Removes this Persistable from the database
+	*
+	* @return bool
+	*/
+	public abstract function delete();
 
-    /**
-     * Updates the current state of this Persistable to the database
-     *
-     * @return bool
-     */
-    public abstract function update();
+	/**
+	*
+	* @return array
+	*/
+	protected static function getConfig()
+	{
+		if ( is_null( self::$config ) ) {
+			self::$config = parse_ini_file( PIM_CONFIG_FILE );
+		}
 
-    /**
-     * Removes this Persistable from the database
-     *
-     * @return bool
-     */
-    public abstract function delete();
+		return self::$config;
+	}
 
-    /**
-     *
-     * @return array
-     */
-    protected static function getConfig() {
-        if ( is_null( self::$config ) ) {
-            self::$config = parse_ini_file( PIM_CONFIG_FILE );
-        }
+	/**
+	* @return mysqli
+	*/
+	protected static function getConnection()
+	{
+		if ( !is_null( self::$connection ) ) {
+			return self::$connection;
+		}
 
-        return self::$config;
-    }
+		$config = self::getConfig();
+		$db_config = isset( $config[ 'database' ] ) ? $config[ 'database' ] : null;
 
-    /**
-     * @return mysqli
-     */
-    protected static function getConnection() {
-        if ( !is_null( self::$connection ) ) {
-            return self::$connection;
-        }
+		if ( !is_null( $db_config ) ) {
+			self::$connection = new mysqli(
+			    $config[ 'host' ]
+			    , $config[ 'username' ]
+			    , $config[ 'password' ]
+			    , $config[ 'database' ]
+			);
+			return self::$connection;
+		}
+		return null;
+	}
 
-        $config = self::getConfig();
-        $db_config = isset( $config[ 'database' ] ) ? $config[ 'database' ] : null;
+	/**
+	* Finds the Persistable that has the given Id.
+	* @return Model_Persistable
+	*/
+	public static abstract function findById( $id );
 
-        if ( !is_null( $db_config ) ) {
-            self::$connection = new mysqli(
-                    $config[ 'host' ]
-                    , $config[ 'username' ]
-                    , $config[ 'password' ]
-                    , $config[ 'database' ]
-            );
-            return self::$connection;
-        }
-
-        return null;
-    }
-
-    /**
-     * Finds the Persistable that has the given Id.
-     * @return Model_Persistable
-     */
-    public static abstract function findById( $id );
-
-    /**
-     * Returns all Persistables currently available.
-     * @return array
-     */
-    public static abstract function getAll();
-    
+	/**
+	* Returns all Persistables currently available.
+	* @return array
+	*/
+	public static abstract function getAll();
 }

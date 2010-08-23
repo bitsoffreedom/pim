@@ -21,16 +21,16 @@ abstract class View
 
 class View_SelectCompany extends View
 {
-	// @var array
-	private $category_list;
-
-	public function __construct()
+	public function __construct($c, $s, $sel)
 	{
 		$cw = new CompanyWidget();
+		$cw->setCompanyList($c);
+		$cw->setSectorList($s);
 		$cw->render();
 
 		$tw = new TopWidget();
 		$tw->setBody($cw);
+		$tw->setCompanySelection($sel);
 		$tw->render();
 
 		$this->setBuffer((string)$tw);

@@ -28,7 +28,7 @@ class Control_SelectSector extends Control_Controller
 				$_SESSION['sectors'] = $s;
 				$this->setLocation("bedrijven");
 			}
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			return "Fout:" . $e->getMessage() . "\n";
 		}
 	}

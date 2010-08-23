@@ -15,3 +15,25 @@ host = "localhost"
 username = "pim"
 password = "pim"
 database = "pim"
+
+Here are some useful commands for testing purposes. When the Administration
+interface is finished these should be removed.
+drop table user;
+drop table location;
+drop table datahamster_extra;
+drop table datahamster;
+drop table category;
+drop table address;
+
+insert into address values (NULL, 'teststraat', 1, NULL, '1337AA', 'Hamsterstad');
+insert into category values (NULL, 'sector1', 'test sector 1');
+insert into category values (NULL, 'sector2', 'test sector 2');
+insert into category values (NULL, 'sector3', 'test sector 3');
+insert into datahamster values (NULL, 1, 1, NULL, 'test hamster 1', 'test dep 1', 'test web 1', 'test email 1');
+insert into datahamster values (NULL, 1, 2, NULL, 'test hamster 2', 'test dep 2', 'test web 2', 'test email 2');
+insert into datahamster values (NULL, 1, 3, NULL, 'test hamster 3', 'test dep 3', 'test web 3', 'test email 3');
+insert into location values (NULL, 1, 'Test');
+insert into datahamster_extra values (NULL, 1, 'test', 'test');
+insert into datahamster_extra values (NULL, 2, 'test', 'test');
+insert into datahamster_extra values (NULL, 3, 'test', 'test');
+-- insert into user values (mysql_insert_id);

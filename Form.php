@@ -22,9 +22,33 @@ class IntegerForm
 		}
 	}
 
+	// @return array w/ integers
 	public function getIntegers()
 	{
 		return $this->integers;
+	}
+}
+
+class StringForm
+{
+	private $string;
+
+	// @param string name
+	public function __construct($name)
+	{
+		if (!is_array($_POST) || !array_key_exists($name, $_POST))
+			return;
+
+		if ($_POST[$name] != "" && !ctype_alnum($_POST[$name]))
+				throw new Exception('Wrong POST data received');
+
+		$this->string = $_POST[$name];
+	}
+
+	// @return string
+	public function getString()
+	{
+		return $this->string;
 	}
 }
 
