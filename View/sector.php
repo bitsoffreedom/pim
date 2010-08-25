@@ -14,10 +14,7 @@
                                 <td><input type="checkbox" name="sectoren[]" value="<?=$c->getId()?>" /></td>
                         </tr>
 <? } ?>
-                        <tr><td><input style="position: absolute; top: 325px; left: 10px; border: 0px; font: 12px Arial, Helvetica, sans-serif, courier; font-size: 10px; color: #D2CCC5; width: 102px; height: 31px; background-image: url('http://localhost/pim/static/volgende.png')" type="submit" value="VOLGENDE" /></td></tr>
+                        <tr><td><input class="volgende" type="submit" value="VOLGENDE" /></td></tr>
                         </form>
                         </table>
-
-			
-			
 		</div>

@@ -85,8 +85,26 @@ ul.nav a { font-size: 16px; }
 	left: 250px;
 	width: 650px;
 }
+input[type=submit].volgende {
+	text-align: left;
+	border: 0px;
+}
 
-div.volgende, div.vorige { position: absolute; top: 325px; font-size: 14px; color: #D2CCC5; width: 102px; height: 31px; }
-div.volgende { right: 10px; background: transparent url(volgende.png) no-repeat;  padding: 9px 0 9px 10px; }
-div.vorige { left: 10px; background: transparent url(vorige.png) no-repeat; padding: 9px 0 9px 50px; }
-
+input[type=submit].volgende, div.volgende, div.vorige {
+	position: absolute;
+	top: 325px;
+	font-size: 12px;
+	color: #D2CCC5;
+	width: 102px;
+	height: 31px;
+}
+input[type=submit].volgende, div.volgende {
+	right: 10px;
+	background: transparent url(volgende.png) no-repeat;
+	padding: 8px 0 8px 10px;
+}
+div.vorige {
+	left: 10px;
+	background: transparent url(vorige.png) no-repeat;
+	padding: 8px 0 8px 50px;
+}
