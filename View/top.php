@@ -42,16 +42,5 @@
 	</div>
 
 </div>
-
-<script src="static/cufon-yui.js" type="text/javascript"></script>	
-<script src="static/Univers.font.js" type="text/javascript"></script>
-<script type="text/javascript">
-	Cufon.replace('.nav a');
-	Cufon.replace('.vorige');
-	Cufon.replace('.volgende');
-	
-	Cufon.now();
-</script>
-
 </body>
 </html>
