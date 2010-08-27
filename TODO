@@ -1,1 +1,26 @@
-* Determine PIM license. Possible GPLv3?
+- Generalize the ORM (whatever is possible; Perhaps code can be copied from Yii,
+their SQLBuilder looked fine)
+- PDF generation (also decide which library to use);
+- Introduce SQL transactions in the ORM;
+- Save the Session state in the database;
+- Finish company selection, user info entry steps (Alexander);
+- Create the administrative interface (Coen).
+
+Currently a race exists.
+
+The Session state saves the following data:
+- a list of sectors;
+- a list of selected companies;
+- More stuff which isn't relevant in this context.
+
+These list point to rows in the database.
+
+When the following happens the user would enter an unknown state.
+
+- A user selects a sector (The Session state now has an entry which points to a database row)
+- An administrator deletes this row from the database;
+- The user continues with the next step but the reference isn't valid anymore.
+
+A solution would be to store the Session state in the database and update it
+atomically using transactions.
+
