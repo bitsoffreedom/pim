@@ -1,12 +1,12 @@
 <?php
 
-class Control_Exceptions_NullPointerException extends \Exception {
+class Control_Exceptions_NullPointerException extends Exception {
 
     /**
      * Constructor.
      * @param string $message
      * @param int $code
-     * @param \Exception $previous
+     * @param Exception $previous
      */
     public function __construct( $message = "", $code = 0, Exception $previous = null ) {
         parent::__construct( $message, $code, $previous );
