@@ -8,7 +8,7 @@
 <? } ?>
                         <table>
                         <form action="sectoren" method="post">
-<? foreach ($categorylist as $c) { ?>
+<? foreach ($sectorlist as $c) { ?>
                         <tr>
                                 <td><?=$c->getName()?></td>
                                 <td><input type="checkbox" name="sectoren[]" value="<?=$c->getId()?>" /></td>

@@ -40,12 +40,12 @@ class View_SelectCompany extends View
 class View_SelectSector extends View
 {
 	// @var array
-	private $category_list;
+	private $sector_list;
 
 	public function __construct($c, $e = false)
 	{
 		$sw = new SelectSectorWidget();
-		$sw->setCategoryList($c);
+		$sw->setSectorList($c);
 		if (!empty($e))
 			$sw->setErrorMsg($e);
 		$sw->render();

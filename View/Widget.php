@@ -80,7 +80,7 @@ class TopWidget extends Widget
 class SelectSectorWidget extends Widget
 {
 	// @var array
-	private $category_list;
+	private $sector_list;
 	// @var string
 	private $errormsg;
 
@@ -90,9 +90,9 @@ class SelectSectorWidget extends Widget
 	}
 
 	// @param array
-	public function setCategoryList($c)
+	public function setSectorList($c)
 	{
-		$this->category_list = $c;
+		$this->sector_list = $c;
 	}
 
 	// @param string
@@ -105,7 +105,7 @@ class SelectSectorWidget extends Widget
 	{
 		$this->renderInternal(
 			Array(
-			"categorylist" => $this->category_list,
+			"sectorlist" => $this->sector_list,
 			"errormsg" => $this->errormsg
 			));
 	}

@@ -2,13 +2,13 @@
 
 require_once (PIM_BASE_PATH . '/Model/Persistable.php');
 
-class Model_Category extends Model_Persistable
+class Model_Sector extends Model_Persistable
 {
 	/**
 	*
 	* @var string
 	*/
-	private static $tablename = 'category';
+	private static $tablename = 'sector';
 
 	/**
 	*
@@ -173,7 +173,7 @@ class Model_Category extends Model_Persistable
 	/**
 	*
 	* @param int $id
-	* @return Model_Category
+	* @return Model_Sector
 	*/
 	public static function findById( $id )
 	{
@@ -182,7 +182,7 @@ class Model_Category extends Model_Persistable
 		    "WHERE id = ?";
 
 		$connection = self::getConnection();
-		$category = null;
+		$sector = null;
 
 		if ( !is_null( $connection ) ) {
 			$stmt = $connection->prepare( $prep_query );
@@ -192,8 +192,8 @@ class Model_Category extends Model_Persistable
 				if ( $result === true ) {
 					if ( $stmt->bind_result( $name, $description ) ) {
 						if ( $stmt->fetch() ) {
-							$category = new Model_Category( $id );
-							$category->setName( $name );
+							$sector = new Model_Sector( $id );
+							$sector->setName( $name );
 
 						}
 					}
@@ -201,7 +201,7 @@ class Model_Category extends Model_Persistable
 				$stmt->close();
 			}
 		}
-		return $category;
+		return $sector;
 	}
 
 	/**
@@ -214,7 +214,7 @@ class Model_Category extends Model_Persistable
 		    "FROM `" . self::$tablename . "` ";
 
 		$connection = self::getConnection();
-		$categories = array();
+		$sectors = array();
 
 		if ( !is_null( $connection ) ) {
 			$stmt = $connection->prepare( $prep_query );
@@ -224,15 +224,15 @@ class Model_Category extends Model_Persistable
 			if ( $result === true ) {
 				if ( $stmt->bind_result( $id, $name, $description ) ) {
 					while ( $stmt->fetch() ) {
-						$category = new Model_Category( $id );
-						$category->setName( $name );
-						$categories[] = $category;
+						$sector = new Model_Sector( $id );
+						$sector->setName( $name );
+						$sectors[] = $sector;
 					}
 				}
 			}
 			$stmt->close();
 		}
 
-		return $categories;
+		return $sectors;
 	}
 }

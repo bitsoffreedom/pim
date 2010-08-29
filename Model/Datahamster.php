@@ -18,9 +18,9 @@ class Model_Datahamster extends Model_Persistable
 
 	/**
 	*
-	* @var Model_Category|int
+	* @var Model_Sector|int
 	*/
-	private $category;
+	private $sector;
 
 	/**
 	*
@@ -90,14 +90,14 @@ class Model_Datahamster extends Model_Persistable
 
 	/**
 	*
-	* @return Model_Category
+	* @return Model_Sector
 	*/
-	public function getCategory()
+	public function getSector()
 	{
-		if ( is_numeric( $this->category ) ) {
-			$this->category = Model_Category::findById( $this->category );
+		if ( is_numeric( $this->sector ) ) {
+			$this->sector = Model_Sector::findById( $this->sector );
 		}
-		return $this->category;
+		return $this->sector;
 	}
 
 	/**
@@ -171,11 +171,11 @@ class Model_Datahamster extends Model_Persistable
 
 	/**
 	*
-	* @param Model_Category|int $category
+	* @param Model_Sector|int $sector
 	*/
-	public function setCategory( $category )
+	public function setSector( $sector )
 	{
-		$this->category = $category;
+		$this->sector = $sector;
 	}
 
 	/**
@@ -293,7 +293,7 @@ class Model_Datahamster extends Model_Persistable
 		}
 
 		$prep_query = "INSERT INTO `" . self::$tablename . "` " .
-		    "(address_id, category_id, parent_id, name, department, web, email) " .
+		    "(address_id, sector_id, parent_id, name, department, web, email) " .
 		    "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
 		$connection = self::getConnection();
@@ -303,12 +303,12 @@ class Model_Datahamster extends Model_Persistable
 
 			$address_id = ( $this->address instanceof Model_Address )
 			    ? $this->address->getId() : $this->address;
-			$category_id = ($this->category instanceof Model_Category )
-			    ? $this->category->getId() : $this->category;
+			$sector_id = ($this->sector instanceof Model_Sector )
+			    ? $this->sector->getId() : $this->sector;
 			$parent_id = ( $this->parent instanceof Model_Datahamster )
 			    ? $this->parent->getId() : $this->parent;
 
-			if ( $stmt->bind_param( "iiissss", $address_id, $category_id
+			if ( $stmt->bind_param( "iiissss", $address_id, $sector_id
 			    , $parent_id, $this->name, $this->department, $this->web
 			    , $this->email ) ) {
 
@@ -335,7 +335,7 @@ class Model_Datahamster extends Model_Persistable
 		}
 
 		$prep_query = "UPDATE `" . self::$tablename . "` " .
-		    "SET address_id = ?, categpry_id = ? , parent_id = ?" .
+		    "SET address_id = ?, sector_id = ? , parent_id = ?" .
 		    ", name = ?, department = ?, web = ?, email = ?" .
 		    "WHERE id = ?";
 
@@ -346,12 +346,12 @@ class Model_Datahamster extends Model_Persistable
 
 			$address_id = ( $this->address instanceof Model_Address )
 			    ? $this->address->getId() : $this->address;
-			$category_id = ($this->category instanceof Model_Category )
-			    ? $this->category->getId() : $this->category;
+			$sector_id = ($this->sector instanceof Model_Sector )
+			    ? $this->sector->getId() : $this->sector;
 			$parent_id = ( $this->parent instanceof Model_Datahamster )
 			    ? $this->parent->getId() : $this->parent;
 
-			if ( $stmt->bind_param( "iiissssi", $address_id, $category_id
+			if ( $stmt->bind_param( "iiissssi", $address_id, $sector_id
 			    , $parent_id, $this->name, $this->department, $this->web
 			    , $this->email, $this->id ) ) {
 
@@ -405,7 +405,7 @@ class Model_Datahamster extends Model_Persistable
 	*/
 	public static function findById( $id )
 	{
-		$prep_query = "SELECT address_id, category_id, parent_id, name " .
+		$prep_query = "SELECT address_id, sector_id, parent_id, name " .
 		    ", department, web, email " .
 		    "FROM `" . self::$tablename . "` " .
 		    "WHERE id = ?";
@@ -422,13 +422,13 @@ class Model_Datahamster extends Model_Persistable
 
 				if ( $result === true ) {
 
-					if ( $stmt->bind_result( $address_id, $category_id,
+					if ( $stmt->bind_result( $address_id, $sector_id,
 					    $parent_id, $name, $department, $web, $email ) ) {
 
 						if ( $stmt->fetch() ) {
 							$datahamster = new Model_Datahamster( $id );
 							$datahamster->setAddress( $address_id );
-							$datahamster->setCategory( $category_id );
+							$datahamster->setSector( $sector_id );
 							$datahamster->setDepartment( $department_id );
 							$datahamster->setEmail( $email );
 							$datahamster->setName( $name );
@@ -450,7 +450,7 @@ class Model_Datahamster extends Model_Persistable
 	*/
 	public static function getAll()
 	{
-		$prep_query = "SELECT id, address_id, category_id, parent_id, name " .
+		$prep_query = "SELECT id, address_id, sector_id, parent_id, name " .
 		    ", department, web, email " .
 		    "FROM `" . self::$tablename . "` ";
 
@@ -464,13 +464,13 @@ class Model_Datahamster extends Model_Persistable
 
 			if ( $result === true ) {
 
-				if ( $stmt->bind_result( $id, $address_id, $category_id,
+				if ( $stmt->bind_result( $id, $address_id, $sector_id,
 				    $parent_id, $name, $department, $web, $email ) ) {
 
 					while ( $stmt->fetch() ) {
 						$datahamster = new Model_Datahamster( $id );
 						$datahamster->setAddress( $address_id );
-						$datahamster->setCategory( $category_id );
+						$datahamster->setSector( $sector_id );
 						$datahamster->setDepartment( $department_id );
 						$datahamster->setEmail( $email );
 						$datahamster->setName( $name );
@@ -488,25 +488,25 @@ class Model_Datahamster extends Model_Persistable
 	}
 
 	/**
-	* Search for hamster within one or more categories with a specified
+	* Search for hamster within one or more sectors with a specified
 	* string
 	*/
-	public static function hamsterSearch($categories, $name)
+	public static function hamsterSearch($sectors, $name)
 	{
-		foreach ($categories as $id) {
+		foreach ($sectors as $id) {
 			if (!is_int($id)) {
 				throw new Exception('Ilegal data');
 			}
 		}
 
-		$clist = implode(", ", $categories);
+		$clist = implode(", ", $sectors);
 
 		if (!ctype_alnum($name))
 			throw new Exception('Ilegal data');
 
-		$prep_query = "SELECT id, address_id, category_id, parent_id," .
+		$prep_query = "SELECT id, address_id, sector_id, parent_id," .
 		    "name , department, web, email " .  "FROM `" .
-		    self::$tablename . "` WHERE category_id IN (" . $clist . ")" .
+		    self::$tablename . "` WHERE sector_id IN (" . $clist . ")" .
 		    " AND name LIKE \"%" .  $name . "%\"";
 
 		$connection = self::getConnection();
@@ -521,13 +521,13 @@ class Model_Datahamster extends Model_Persistable
 
 		if ( $result === true ) {
 			if ( $stmt->bind_result( $id, $address_id,
-			    $category_id, $parent_id, $name, $department, $web,
+			    $sector_id, $parent_id, $name, $department, $web,
 			    $email ) ) {
 
 				while ( $stmt->fetch() ) {
 					$datahamster = new Model_Datahamster( $id );
 					$datahamster->setAddress( $address_id );
-					$datahamster->setCategory( $category_id );
+					$datahamster->setSector( $sector_id );
 					$datahamster->setDepartment( $department );
 					$datahamster->setEmail( $email );
 					$datahamster->setName( $name );
@@ -543,19 +543,19 @@ class Model_Datahamster extends Model_Persistable
 		return $datahamsters;
 	}
 
-	public static function categorySearch($categories)
+	public static function sectorSearch($sectors)
 	{
-		foreach ($categories as $id) {
+		foreach ($sectors as $id) {
 			if (!is_int($id)) {
 				throw new Exception('Ilegal data');
 			}
 		}
 
-		$clist = implode(", ", $categories);
+		$clist = implode(", ", $sectors);
 
-		$prep_query = "SELECT id, address_id, category_id, parent_id," .
+		$prep_query = "SELECT id, address_id, sector_id, parent_id," .
 		    "name , department, web, email " .  "FROM `" .
-		    self::$tablename . "` WHERE category_id IN (" . $clist . ")";
+		    self::$tablename . "` WHERE sector_id IN (" . $clist . ")";
 
 		$connection = self::getConnection();
 		$datahamsters = array();
@@ -569,13 +569,13 @@ class Model_Datahamster extends Model_Persistable
 
 		if ( $result === true ) {
 			if ( $stmt->bind_result( $id, $address_id,
-			    $category_id, $parent_id, $name, $department, $web,
+			    $sector_id, $parent_id, $name, $department, $web,
 			    $email ) ) {
 
 				while ( $stmt->fetch() ) {
 					$datahamster = new Model_Datahamster( $id );
 					$datahamster->setAddress( $address_id );
-					$datahamster->setCategory( $category_id );
+					$datahamster->setSector( $sector_id );
 					$datahamster->setDepartment( $department );
 					$datahamster->setEmail( $email );
 					$datahamster->setName( $name );
@@ -604,7 +604,7 @@ class Model_Datahamster extends Model_Persistable
 
 		$list = implode(", ", $id_list);
 
-		$prep_query = "SELECT id, address_id, category_id, parent_id," .
+		$prep_query = "SELECT id, address_id, sector_id, parent_id," .
 		    "name , department, web, email " .  "FROM `" .
 		    self::$tablename . "` WHERE id IN (" . $list . ")";
 
@@ -620,13 +620,13 @@ class Model_Datahamster extends Model_Persistable
 
 		if ( $result === true ) {
 			if ( $stmt->bind_result( $id, $address_id,
-			    $category_id, $parent_id, $name, $department, $web,
+			    $sector_id, $parent_id, $name, $department, $web,
 			    $email ) ) {
 
 				while ( $stmt->fetch() ) {
 					$datahamster = new Model_Datahamster( $id );
 					$datahamster->setAddress( $address_id );
-					$datahamster->setCategory( $category_id );
+					$datahamster->setSector( $sector_id );
 					$datahamster->setDepartment( $department );
 					$datahamster->setEmail( $email );
 					$datahamster->setName( $name );

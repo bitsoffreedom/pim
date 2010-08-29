@@ -11,7 +11,7 @@ create table address (
 	, primary key( id )
 );
 
-create table category (
+create table sector (
 	id int unsigned not null auto_increment
 	, name varchar(30) not null
 	, description text null
@@ -29,7 +29,7 @@ create table location (
 create table datahamster ( 
 	id int unsigned not null auto_increment
 	, address_id int unsigned not null
-	, category_id int unsigned not null
+	, sector_id int unsigned not null
 	, parent_id int unsigned null
 	, name varchar(50) not null
 	, department varchar(50) null
@@ -37,7 +37,7 @@ create table datahamster (
 	, email varchar(50) null
 	, primary key( id )
 	, foreign key( address_id ) references address( id )
-	, foreign key( category_id ) references category( id )
+	, foreign key( sector_id ) references sector( id )
 	, foreign key( parent_id ) references datahamster( id )
 );
 

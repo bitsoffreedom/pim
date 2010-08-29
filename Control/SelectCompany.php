@@ -3,7 +3,7 @@
 require_once (PIM_BASE_PATH . '/Control/Controller.php');
 require_once (PIM_BASE_PATH . '/View/View.php');
 require_once (PIM_BASE_PATH . '/Model/Datahamster.php');
-require_once (PIM_BASE_PATH . '/Model/Category.php');
+require_once (PIM_BASE_PATH . '/Model/Sector.php');
 
 class Control_SelectCompany extends Control_Controller
 {
@@ -11,8 +11,8 @@ class Control_SelectCompany extends Control_Controller
 	{
 		Session::get()->companies = Array();
 		try {
-			$c = Model_Category::getAll();
-			$hamsters = Model_Datahamster::categorySearch(Session::get()->sectors);
+			$c = Model_Sector::getAll();
+			$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
 			if (!empty(Session::get()->companies))
 				$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 			else
@@ -38,7 +38,7 @@ class Control_SelectCompany extends Control_Controller
 				/* XXX: WRONG WRONG WRONG WRONG */
 				Session::get()->companies = $companies;
 
-				$c = Model_Category::getAll();
+				$c = Model_Sector::getAll();
 				$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 				return new View_SelectCompany(Array(), $c, $sel);
 			}
@@ -58,14 +58,14 @@ class Control_SelectCompany extends Control_Controller
 			// from the specified sectors.
 			if (empty($cname)) {
 				if (empty($sectors)) {
-					$c = Model_Category::getAll();
+					$c = Model_Sector::getAll();
 					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 					return new View_SelectCompany(Array(), $c, $sel);
 				} else {
 					Session::get()->sectors = $sectors;
 
-					$c = Model_Category::getAll();
-					$hamsters = Model_Datahamster::categorySearch(Session::get()->sectors);
+					$c = Model_Sector::getAll();
+					$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
 					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 					return new View_SelectCompany($hamsters, $c, $sel);
 				}
@@ -75,7 +75,7 @@ class Control_SelectCompany extends Control_Controller
 				} else {
 					Session::get()->sectors = $sectors;
 
-					$c = Model_Category::getAll();
+					$c = Model_Sector::getAll();
 					$hamsters = Model_Datahamster::hamsterSearch($sectors, $cname);
 					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
 					return new View_SelectCompany($hamsters, $c, $sel);
