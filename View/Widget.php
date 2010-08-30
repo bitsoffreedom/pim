@@ -103,6 +103,8 @@ class SelectSectorWidget extends Widget
 	public function render()
 	{
 		$sel_sectors = Session::get()->sectors;
+		if (empty($sel_sectors))
+			$sel_sectors = Array();
 
 		$this->renderInternal(
 			Array(
@@ -127,7 +129,11 @@ class CompanyWidget extends Widget
 	{
 		// Retrieve the list of all sectors
 		$sector_list = Model_Sector::getAll();
+		if (empty($sector_list))
+			$sector_list = Array();
 		$sel_sectors = Session::get()->sectors;
+		if (empty($sel_sectors))
+			$sel_sectors = Array();
 
                 $this->renderInternal(
                         Array(
