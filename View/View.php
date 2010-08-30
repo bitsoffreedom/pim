@@ -21,16 +21,14 @@ abstract class View
 
 class View_SelectCompany extends View
 {
-	public function __construct($c, $s, $sel)
+	public function __construct($c)
 	{
 		$cw = new CompanyWidget();
 		$cw->setCompanyList($c);
-		$cw->setSectorList($s);
 		$cw->render();
 
 		$tw = new TopWidget();
 		$tw->setBody($cw);
-		$tw->setCompanySelection($sel);
 		$tw->render();
 
 		$this->setBuffer((string)$tw);
@@ -52,6 +50,20 @@ class View_SelectSector extends View
 
 		$tw = new TopWidget();
 		$tw->setBody($sw);
+		$tw->render();
+
+		$this->setBuffer((string)$tw);
+	}
+}
+
+class View_UserInfo extends View
+{
+	public function __construct()
+	{
+		$dw = new DataWidget();
+		$dw->render();
+		$tw = new TopWidget();
+		$tw->setBody($dw);
 		$tw->render();
 
 		$this->setBuffer((string)$tw);

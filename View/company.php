@@ -8,11 +8,18 @@
 			<form action="bedrijven" method="post">
 			<div style="float: left">
 				<input type="text" name="naam" /> <br />
+				<input type="hidden" name="zoekform" value="0" />
 			</div>
 
 			<div style="float: right">
 <? foreach ($sectorlist as $s) { ?>
-				<input type="checkbox" name="sectoren[]" value="<?=$s->getId()?>" /><?=$s->getName()?><br />
+	<?
+	if (in_array($s->getId(), $sel_sectorlist))
+		$checked = "checked";
+	else
+		$checked = "";
+	?>
+				<input type="checkbox" name="sectoren[]" value="<?=$s->getId()?>" <?=$checked?> /><?=$s->getName()?><br />
 <? } ?>
 			</div>
 
@@ -22,12 +29,12 @@
 
 			<div>
 
+                        <form action="bedrijven" method="post">
 <? if (empty($companylist)) { ?>
 			<p>Niks gevonden</p>
 <? } else { ?>
 
                         <table>
-                        <form action="bedrijven" method="post">
 <?	foreach ($companylist as $c) { ?>
                         <tr>
                                 <td><?=$c->getName()?></td>
@@ -37,12 +44,13 @@
                                 <td><input type="checkbox" name="bedrijven[]" value="<?=$c->getId()?>" /></td>
                         </tr>
 <?	} ?>
-                        <tr><td><input type="submit" value="Voeg toe"/></td></tr>
-                        </form>
+                        <tr><td><input type="submit" name="btn1" value="Voeg toe"/></td></tr>
                         </table>
 <? } ?>
 			
-			<div class="vorige">VORIGE</div>
-			<div class="volgende">VOLGENDE</div>
+			<input type="hidden" name="lijstform" value="0" />
+			<div class="vorige"><a href="sector">VORIGE</a></div>
+			<input class="volgende" type="submit" name="btn2" value="VOLGENDE" />
 			</div>
+                        </form>
 		</div>

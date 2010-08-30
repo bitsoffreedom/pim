@@ -11,7 +11,8 @@ class Route
             (
                 "bedrijven" => "Control_SelectCompany",
                 "sectoren" => "Control_SelectSector",
-                "admin" => "Control_Admin"
+                "admin" => "Control_Admin",
+                "gegevens" => "Control_UserInfo",
             );
 
         public function __construct()

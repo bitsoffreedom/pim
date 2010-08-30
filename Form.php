@@ -52,4 +52,29 @@ class StringForm
 	}
 }
 
+class KeyExists
+{
+	private $key;
+
+	// @param "array w/ strings" buttons
+	public function __construct($keys)
+	{
+		if (!is_array($_POST))
+			return;
+
+		foreach ($keys as $k) {
+			if (array_key_exists($k, $_POST)) {
+				$this->key = $k;
+				return;
+			}
+		}
+	}
+
+	// @return string
+	public function getKey()
+	{
+		return $this->key;
+	}
+}
+
 ?>

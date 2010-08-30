@@ -8,10 +8,16 @@
 <? } ?>
                         <table>
                         <form action="sectoren" method="post">
-<? foreach ($sectorlist as $c) { ?>
+<? foreach ($sectorlist as $s) { ?>
+	<?
+	if (in_array($s->getId(), $sel_sectorlist))
+		$checked = "checked";
+	else
+		$checked = "";
+	?>
                         <tr>
-                                <td><?=$c->getName()?></td>
-                                <td><input type="checkbox" name="sectoren[]" value="<?=$c->getId()?>" /></td>
+                                <td><?=$s->getName()?></td>
+                                <td><input type="checkbox" name="sectoren[]" value="<?=$s->getId()?>" <?=$checked?> /></td>
                         </tr>
 <? } ?>
                         <tr><td><input class="volgende" type="submit" value="VOLGENDE" /></td></tr>

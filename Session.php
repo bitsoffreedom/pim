@@ -1,5 +1,10 @@
 <?php
 
+/* The session state should look as follows:
+ * companies should be an array with zero or more entries;
+ * sectors should be an array with zero or more entries;
+ */
+
 class Session
 {
 	/**

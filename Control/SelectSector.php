@@ -22,7 +22,7 @@ class Control_SelectSector extends Control_Controller
 			if (empty($s)) {
 				/* XXX: get model from model class/object */
 				$c = Model_Sector::getAll();
-				$v = new View_SelectSector($c, "Probeer maar, selecteer nog een keer niets.");
+				$v = new View_SelectSector($c, "U heeft geen sector geselecteerd.");
 				return $v;
 			} else {
 				Session::get()->sectors = $s;

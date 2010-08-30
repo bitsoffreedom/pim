@@ -8,6 +8,7 @@ define( 'DEBUG', 1);
 require_once ('Control/Admin.php');
 require_once ('Control/SelectSector.php');
 require_once ('Control/SelectCompany.php');
+require_once ('Control/UserInfo.php');
 
 require_once ('Control/Exceptions/NullPointerException.php');
 require_once ('Control/Exceptions/IOException.php');

@@ -5,7 +5,7 @@ require_once( PIM_BASE_PATH . '/Session.php' );
 abstract class Control_Controller
 {
 	// @var class Route
-        private $route;
+        protected $route;
 
 	/* HTTP response */
 	// @var string
@@ -52,6 +52,11 @@ abstract class Control_Controller
 		header($this->status_line);
 		if (!empty($this->location))
 			header(sprintf('Location: %s', $this->location));
+
+		// disable caching
+		header( "Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
+		header( "Cache-Control: no-cache, must-revalidate" );
+		header( "Pragma: no-cache" );
 		
 		if (!empty($this->buffer))
 			echo $this->buffer;

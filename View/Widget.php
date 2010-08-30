@@ -46,8 +46,6 @@ class TopWidget extends Widget
 {
 	// @var string
 	private $body;
-	// @var array
-        private $companies = Array();
 
 	public function __construct()
 	{
@@ -60,18 +58,19 @@ class TopWidget extends Widget
 		$this->body = $body;
 	}
 
-	// @param array $c
-        public function setCompanySelection($c)
-        {
-                $this->companies = $c;
-        }
-
 	public function render()
 	{
+		// Retrieve the list of companies selected
+		$ses_comp = Session::get()->companies;
+		if (empty($ses_comp))
+			$sel_comp = Array();
+		else
+			$sel_comp = Model_Datahamster::findByIdList($ses_comp);
+
 		$this->renderInternal(
 		    Array(
 		    "body" => $this->body,
-		    "companies" => $this->companies
+		    "companies" => $sel_comp 
 		    )
 		);
 	}
@@ -103,10 +102,13 @@ class SelectSectorWidget extends Widget
 
 	public function render()
 	{
+		$sel_sectors = Session::get()->sectors;
+
 		$this->renderInternal(
 			Array(
 			"sectorlist" => $this->sector_list,
-			"errormsg" => $this->errormsg
+			"errormsg" => $this->errormsg,
+			"sel_sectorlist" => $sel_sectors
 			));
 	}
 }
@@ -114,7 +116,6 @@ class SelectSectorWidget extends Widget
 class CompanyWidget extends Widget
 {
         private $company_list;
-        private $sector_list;
 
 	public function __construct()
 	{
@@ -124,10 +125,15 @@ class CompanyWidget extends Widget
 
 	public function render()
 	{
+		// Retrieve the list of all sectors
+		$sector_list = Model_Sector::getAll();
+		$sel_sectors = Session::get()->sectors;
+
                 $this->renderInternal(
                         Array(
                         "companylist" => $this->company_list,
-                        "sectorlist" => $this->sector_list
+                        "sectorlist" => $sector_list,
+			"sel_sectorlist" => $sel_sectors
                         )
                 );
 	}
@@ -136,11 +142,22 @@ class CompanyWidget extends Widget
         {
                 $this->company_list = $c;
         }
+}
 
-        public function setSectorList($s)
-        {
-                $this->sector_list = $s;
-        }
+class DataWidget extends Widget
+{
+	public function __construct()
+	{
+		$this->setViewFile("data.php");
+	}
+
+	public function render()
+	{
+                $this->renderInternal(
+                        Array(
+                        )
+                );
+	}
 }
 
 ?>

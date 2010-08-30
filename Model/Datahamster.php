@@ -545,6 +545,9 @@ class Model_Datahamster extends Model_Persistable
 
 	public static function sectorSearch($sectors)
 	{
+		if (empty($sectors))
+			return Array();
+
 		foreach ($sectors as $id) {
 			if (!is_int($id)) {
 				throw new Exception('Ilegal data');
@@ -591,10 +594,15 @@ class Model_Datahamster extends Model_Persistable
 		return $datahamsters;
 	}
 
+	/* Returns a list of Datahamster objects
+	 * An array of integers should be given as input If this list is empty,
+	 * an empty array is returned. If this list does not contain integers
+	 * an Exception is thrown.
+	 */
 	public static function findByIdList($id_list)
 	{
 		if (empty($id_list))
-			throw new Exception('Empty list');
+			return Array();
 
 		foreach ($id_list as $id) {
 			if (!is_int($id)) {

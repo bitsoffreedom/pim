@@ -9,15 +9,12 @@ class Control_SelectCompany extends Control_Controller
 {
 	public function execGet()
 	{
-		Session::get()->companies = Array();
 		try {
-			$c = Model_Sector::getAll();
-			$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
-			if (!empty(Session::get()->companies))
-				$sel = Model_Datahamster::findByIdList(Session::get()->companies);
-			else
-				$sel = Array();
-			return new View_SelectCompany($hamsters, $c, $sel);
+			$sectors = Session::get()->sectors;
+			if (empty($sectors))
+				throw new Exception('No sectors selected');
+			$hamsters = Model_Datahamster::sectorSearch($sectors);
+			return new View_SelectCompany($hamsters);
 		} catch (Exception $e) {
 			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
 			return "Fout:" . $e->getMessage() . "\n";
@@ -26,27 +23,25 @@ class Control_SelectCompany extends Control_Controller
 
 	public function execPost()
 	{
-		/* This code is to update the company list */
-		/* This basically is the wrong place to put this. However, If
-		 * we put it in a separate controller we have to bounce the
-		 * user back to this page. Please note  that this code has to
-		 * return something if it modifies the session state. */
-		try {
-			$companyform = new IntegerForm("bedrijven");
-			$companies = $companyform->getIntegers();
-			if (!empty($companies)) {
-				/* XXX: WRONG WRONG WRONG WRONG */
-				Session::get()->companies = $companies;
-
-				$c = Model_Sector::getAll();
-				$sel = Model_Datahamster::findByIdList(Session::get()->companies);
-				return new View_SelectCompany(Array(), $c, $sel);
-			}
-		} catch (Exception $e) {
-			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
-			return "Fout:" . $e->getMessage() . "\n";
+		/*
+		 * Based on the Key given in the form the form which is used is
+		 * identified.
+		 */
+		$sb = new KeyExists(Array("zoekform", "lijstform"));
+		if ($sb->getKey() == "zoekform") {
+			return $this->searchform();
+		} else if ($sb->getKey() == "lijstform") {
+			return $this->listform();
 		}
 
+		/* XXX: I'm not entirely sure this is the proper
+		 * response. Also an error should be written back. */
+		$this->setStatusLine('HTTP/1.0 400 Bad Request');
+		return "";
+	}
+
+	private function searchform()
+	{
 		try {
 			$sectorform = new IntegerForm("sectoren");
 			$sectors = $sectorform->getIntegers();
@@ -56,36 +51,66 @@ class Control_SelectCompany extends Control_Controller
 
 			// With an empty search field merely get the companies
 			// from the specified sectors.
-			if (empty($cname)) {
-				if (empty($sectors)) {
-					$c = Model_Sector::getAll();
-					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
-					return new View_SelectCompany(Array(), $c, $sel);
-				} else {
-					Session::get()->sectors = $sectors;
+			if (empty($cname) && empty($sectors)) {
+				return new View_SelectCompany(Array());
+			} else if (empty($cname) && !empty($sectors)) {
+				Session::get()->sectors = $sectors;
 
-					$c = Model_Sector::getAll();
-					$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
-					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
-					return new View_SelectCompany($hamsters, $c, $sel);
-				}
-			} else {
-				if (empty($sectors)) {
-					/* XXX: please select a sector */
-				} else {
-					Session::get()->sectors = $sectors;
+				$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
+				return new View_SelectCompany($hamsters);
+			} else if (!empty($cname) && empty($sectors)) {
+				/* XXX: please select a sector */
+				return new View_SelectCompany(Array());
+			} else if (!empty($cname) && !empty($sectors)) {
+				Session::get()->sectors = $sectors;
 
-					$c = Model_Sector::getAll();
-					$hamsters = Model_Datahamster::hamsterSearch($sectors, $cname);
-					$sel = Model_Datahamster::findByIdList(Session::get()->companies);
-					return new View_SelectCompany($hamsters, $c, $sel);
-				}
+				$hamsters = Model_Datahamster::hamsterSearch($sectors, $cname);
+				return new View_SelectCompany($hamsters);
 			}
 		} catch (Exception $e) {
 			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
 			return "Fout:" . $e->getMessage() . "\n";
 		}
+	}
 
+	private function listform()
+	{
+		try {
+			$companyform = new IntegerForm("bedrijven");
+			$company_ids = $companyform->getIntegers();
+
+			if (!empty($company_ids)) {
+				/* XXX: This basic check assumes that all the MySQL
+				 * innodb constraints are met */
+				$company_list = Model_Datahamster::findByIdList($company_ids);
+				if (count($company_ids) != count($company_list))
+					throw new Exception("Not all Ids where found");
+
+				if (empty(Session::get()->companies))
+					Session::get()->companies = $company_ids;
+				else
+					Session::get()->companies = array_unique(array_merge(Session::get()->companies, $company_ids));
+
+			}
+			$sb = new KeyExists(Array("btn1", "btn2"));
+			switch ($sb->getKey()) {
+			case "btn1":
+				$company_sids = Session::get()->companies;
+				if ($company_sids == NULL)
+					$company_sids = Array();
+				$hamsters = Model_Datahamster::findByIdList($company_sids);
+				return new View_SelectCompany($hamsters);
+			case "btn2":
+				$this->setLocation("gegevens");
+				break;
+			default:
+				/* shouldn't happen */
+				break;
+			}
+		} catch (Exception $e) {
+			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
+			return "Fout:" . $e->getMessage() . "\n";
+		}
 	}
 }
 
