@@ -12,9 +12,33 @@ class Model_Datahamster extends Model_Persistable
 
 	/**
 	*
-	* @var Model_Address|int
+	* @var string
 	*/
-	private $address;
+	private $street = null;
+
+	/**
+	*
+	* @var int
+	*/
+	private $house_number = null;
+
+	/**
+	*
+	* @var string
+	*/
+	private $addition = null;
+
+	/**
+	*
+	* @var string
+	*/
+	private $postal_code = null;
+
+	/**
+	*
+	* @var string
+	*/
+	private $city = null;
 
 	/**
 	*
@@ -74,18 +98,6 @@ class Model_Datahamster extends Model_Persistable
 	public function __destruct()
 	{
 		parent::__destruct();
-	}
-
-	/**
-	*
-	* @return Model_Address
-	*/
-	public function getAddress()
-	{
-		if (is_numeric( $this->address ) ) {
-			$this->address = Model_Address::findById( $this->address );
-		}
-		return $this->address;
 	}
 
 	/**
@@ -155,18 +167,49 @@ class Model_Datahamster extends Model_Persistable
 	{
 		if ( is_null( $this->datahamster_extra ) ) {
 			$this->datahamster_extra =
-			    Model_DatahamsterExra::findAllByDatahamster( $this );
+			    Model_DatahamsterExtra::findAllByDatahamster( $this );
 		}
 		return $this->datahamster_extra;
 	}
 
 	/**
-	*
-	* @param Model_Address|int $address
+	* @return string
 	*/
-	public function setAddress( $address )
+	public function getStreet()
 	{
-		$this->address = $address;
+		return $this->street;
+	}
+
+	/**
+	* @return int
+	*/
+	public function getHouseNumber()
+	{
+		return $this->house_number;
+	}
+
+	/**
+	* @return string
+	*/
+	public function getAddition()
+	{
+		return $this->addition;
+	}
+
+	/**
+	* @return string
+	*/
+	public function getPostalCode()
+	{
+		return $this->postal_code;
+	}
+
+	/**
+	* @return string
+	*/
+	public function getCity()
+	{
+		return $this->city;
 	}
 
 	/**
@@ -221,6 +264,51 @@ class Model_Datahamster extends Model_Persistable
 	public function setEmail( $email )
 	{
 		$this->email = $email;
+	}
+
+	/**
+	*
+	* @param string $street
+	*/
+	public function setStreet( $street )
+	{
+		$this->street = $street;
+	}
+
+	/**
+	*
+	* @param int $house_number
+	*/
+	public function setHouseNumber( $house_number )
+	{
+		$this->house_number = $house_number;
+	}
+
+	/**
+	*
+	* @param string $addition
+	*/
+	public function setAddition( $addition )
+	{
+		$this->addition = $addition;
+	}
+
+	/**
+	*
+	* @param string $postal_code
+	*/
+	public function setPostalCode( $postal_code )
+	{
+		$this->postal_code = $postal_code;
+	}
+
+	/**
+	*
+	* @param string $city
+	*/
+	public function setCity( $city )
+	{
+		$this->city = $city;
 	}
 
 	/**
@@ -293,24 +381,24 @@ class Model_Datahamster extends Model_Persistable
 		}
 
 		$prep_query = "INSERT INTO `" . self::$tablename . "` " .
-		    "(address_id, sector_id, parent_id, name, department, web, email) " .
-		    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		    "( sector_id, parent_id, name, department, web, email," .
+		    " street, house_number, addition, postal_code, city) " .
+		    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		$connection = self::getConnection();
 
 		if ( !is_null( $connection ) ) {
 			$stmt = $connection->prepare( $prep_query );
 
-			$address_id = ( $this->address instanceof Model_Address )
-			    ? $this->address->getId() : $this->address;
 			$sector_id = ($this->sector instanceof Model_Sector )
 			    ? $this->sector->getId() : $this->sector;
 			$parent_id = ( $this->parent instanceof Model_Datahamster )
 			    ? $this->parent->getId() : $this->parent;
 
-			if ( $stmt->bind_param( "iiissss", $address_id, $sector_id
-			    , $parent_id, $this->name, $this->department, $this->web
-			    , $this->email ) ) {
+			if ($stmt->bind_param( "iisssssisss", $sector_id ,
+			    $parent_id, $this->name, $this->department,
+			    $this->web , $this->email, $this->street, $this->house_number,
+			    $this->addition, $this->postal_code, $this->city) ) {
 
 				$result = $stmt->execute();
 
@@ -335,8 +423,10 @@ class Model_Datahamster extends Model_Persistable
 		}
 
 		$prep_query = "UPDATE `" . self::$tablename . "` " .
-		    "SET address_id = ?, sector_id = ? , parent_id = ?" .
+		    "SET sector_id = ? , parent_id = ?" .
 		    ", name = ?, department = ?, web = ?, email = ?" .
+		    ", street = ?, house_number = ?, addition = ?" .
+		    ", postal_code = ?, city = ? " .
 		    "WHERE id = ?";
 
 		$connection = self::getConnection();
@@ -344,16 +434,15 @@ class Model_Datahamster extends Model_Persistable
 		if ( !is_null( $connection ) ) {
 			$stmt = $connection->prepare( $prep_query );
 
-			$address_id = ( $this->address instanceof Model_Address )
-			    ? $this->address->getId() : $this->address;
 			$sector_id = ($this->sector instanceof Model_Sector )
 			    ? $this->sector->getId() : $this->sector;
 			$parent_id = ( $this->parent instanceof Model_Datahamster )
 			    ? $this->parent->getId() : $this->parent;
 
-			if ( $stmt->bind_param( "iiissssi", $address_id, $sector_id
+			if ( $stmt->bind_param( "iissssisisssi", $sector_id
 			    , $parent_id, $this->name, $this->department, $this->web
-			    , $this->email, $this->id ) ) {
+			    , $this->email, $this->id, $this->street, $this->house_number
+			    , $this->addition, $this->postal_code, $this->city  ) ) {
 
 			$result = $stmt->execute();
 			$stmt->close();
@@ -405,8 +494,9 @@ class Model_Datahamster extends Model_Persistable
 	*/
 	public static function findById( $id )
 	{
-		$prep_query = "SELECT address_id, sector_id, parent_id, name " .
-		    ", department, web, email " .
+		$prep_query = "SELECT sector_id, parent_id, name " .
+		    ", department, web, email, street, house_number, addition" .
+		    ", postal_code, city " .
 		    "FROM `" . self::$tablename . "` " .
 		    "WHERE id = ?";
 
@@ -422,18 +512,24 @@ class Model_Datahamster extends Model_Persistable
 
 				if ( $result === true ) {
 
-					if ( $stmt->bind_result( $address_id, $sector_id,
-					    $parent_id, $name, $department, $web, $email ) ) {
+					if ( $stmt->bind_result( $sector_id,
+					    $parent_id, $name, $department,
+					    $web, $email, $street, $house_number,
+					    $addition , $postal_code, $city) ) {
 
 						if ( $stmt->fetch() ) {
 							$datahamster = new Model_Datahamster( $id );
-							$datahamster->setAddress( $address_id );
 							$datahamster->setSector( $sector_id );
 							$datahamster->setDepartment( $department_id );
 							$datahamster->setEmail( $email );
 							$datahamster->setName( $name );
 							$datahamster->setParent( $parent_id );
 							$datahamster->setWeb( $web );
+							$datahamster->setStreet( $street );
+							$datahamster->setHouseNumber( $house_number );
+							$datahamster->setAddition( $addition );
+							$datahamster->setPostalCode( $postal_code );
+							$datahamster->setCity( $city );
 						}
 
 					}
@@ -450,8 +546,10 @@ class Model_Datahamster extends Model_Persistable
 	*/
 	public static function getAll()
 	{
-		$prep_query = "SELECT id, address_id, sector_id, parent_id, name " .
-		    ", department, web, email " .
+		$prep_query = "SELECT id, sector_id, parent_id, name " .
+		    ", department, web, email, street, house_number, addition" .
+		    ", postal_code, city " .
+
 		    "FROM `" . self::$tablename . "` ";
 
 		$connection = self::getConnection();
@@ -464,18 +562,24 @@ class Model_Datahamster extends Model_Persistable
 
 			if ( $result === true ) {
 
-				if ( $stmt->bind_result( $id, $address_id, $sector_id,
-				    $parent_id, $name, $department, $web, $email ) ) {
+				if ( $stmt->bind_result( $id, $sector_id,
+				    $parent_id, $name, $department, $web,
+				    $email, $street, $house_number, $addition ,
+				    $postal_code, $city) ) {
 
 					while ( $stmt->fetch() ) {
 						$datahamster = new Model_Datahamster( $id );
-						$datahamster->setAddress( $address_id );
 						$datahamster->setSector( $sector_id );
 						$datahamster->setDepartment( $department_id );
 						$datahamster->setEmail( $email );
 						$datahamster->setName( $name );
 						$datahamster->setParent( $parent_id );
 						$datahamster->setWeb( $web );
+						$datahamster->setStreet( $street );
+						$datahamster->setHouseNumber( $house_number );
+						$datahamster->setAddition( $addition );
+						$datahamster->setPostalCode( $postal_code );
+						$datahamster->setCity( $city );
 						$datahamsters[] = $datahamster;
 					}
 				}
@@ -504,8 +608,9 @@ class Model_Datahamster extends Model_Persistable
 		if (!ctype_alnum($name))
 			throw new Exception('Ilegal data');
 
-		$prep_query = "SELECT id, address_id, sector_id, parent_id," .
-		    "name , department, web, email " .  "FROM `" .
+		$prep_query = "SELECT id, sector_id, parent_id," .
+		    "name , department, web, email, street, house_number" .
+		    "addition , postal_code, city " .  "FROM `" .
 		    self::$tablename . "` WHERE sector_id IN (" . $clist . ")" .
 		    " AND name LIKE \"%" .  $name . "%\"";
 
@@ -520,19 +625,23 @@ class Model_Datahamster extends Model_Persistable
 		$result = $stmt->execute();
 
 		if ( $result === true ) {
-			if ( $stmt->bind_result( $id, $address_id,
-			    $sector_id, $parent_id, $name, $department, $web,
-			    $email ) ) {
+			if ( $stmt->bind_result( $id, $sector_id, $parent_id,
+			    $name, $department, $web, $email, $street,
+			    $house_number, $addition ,$postal_code, $city ) ) {
 
 				while ( $stmt->fetch() ) {
 					$datahamster = new Model_Datahamster( $id );
-					$datahamster->setAddress( $address_id );
 					$datahamster->setSector( $sector_id );
 					$datahamster->setDepartment( $department );
 					$datahamster->setEmail( $email );
 					$datahamster->setName( $name );
 					$datahamster->setParent( $parent_id );
 					$datahamster->setWeb( $web );
+					$datahamster->setStreet( $street );
+					$datahamster->setHouseNumber( $house_number );
+					$datahamster->setAddition( $addition );
+					$datahamster->setPostalCode( $postal_code );
+					$datahamster->setCity( $city );
 					$datahamsters[] = $datahamster;
 				}
 
@@ -556,8 +665,9 @@ class Model_Datahamster extends Model_Persistable
 
 		$clist = implode(", ", $sectors);
 
-		$prep_query = "SELECT id, address_id, sector_id, parent_id," .
-		    "name , department, web, email " .  "FROM `" .
+		$prep_query = "SELECT id, sector_id, parent_id," .
+		    "name , department, web, email, street, house_number, " .
+		    " addition , postal_code, city FROM `" .
 		    self::$tablename . "` WHERE sector_id IN (" . $clist . ")";
 
 		$connection = self::getConnection();
@@ -571,19 +681,23 @@ class Model_Datahamster extends Model_Persistable
 		$result = $stmt->execute();
 
 		if ( $result === true ) {
-			if ( $stmt->bind_result( $id, $address_id,
-			    $sector_id, $parent_id, $name, $department, $web,
-			    $email ) ) {
+			if ( $stmt->bind_result( $id, $sector_id, $parent_id,
+			    $name, $department, $web, $email, $street,
+			    $house_number, $addition ,$postal_code, $city) ) {
 
 				while ( $stmt->fetch() ) {
 					$datahamster = new Model_Datahamster( $id );
-					$datahamster->setAddress( $address_id );
 					$datahamster->setSector( $sector_id );
 					$datahamster->setDepartment( $department );
 					$datahamster->setEmail( $email );
 					$datahamster->setName( $name );
 					$datahamster->setParent( $parent_id );
 					$datahamster->setWeb( $web );
+					$datahamster->setStreet( $street );
+					$datahamster->setHouseNumber( $house_number );
+					$datahamster->setAddition( $addition );
+					$datahamster->setPostalCode( $postal_code );
+					$datahamster->setCity( $city );
 					$datahamsters[] = $datahamster;
 				}
 
@@ -612,8 +726,9 @@ class Model_Datahamster extends Model_Persistable
 
 		$list = implode(", ", $id_list);
 
-		$prep_query = "SELECT id, address_id, sector_id, parent_id," .
-		    "name , department, web, email " .  "FROM `" .
+		$prep_query = "SELECT id, sector_id, parent_id," .
+		    "name , department, web, email, street, house_number, " .
+		    " addition , postal_code, city FROM `" .
 		    self::$tablename . "` WHERE id IN (" . $list . ")";
 
 		$connection = self::getConnection();
@@ -627,19 +742,24 @@ class Model_Datahamster extends Model_Persistable
 		$result = $stmt->execute();
 
 		if ( $result === true ) {
-			if ( $stmt->bind_result( $id, $address_id,
+			if ( $stmt->bind_result( $id,
 			    $sector_id, $parent_id, $name, $department, $web,
-			    $email ) ) {
+			    $email, $street, $house_number, $addition
+			    , $postal_code, $city ) ) {
 
 				while ( $stmt->fetch() ) {
 					$datahamster = new Model_Datahamster( $id );
-					$datahamster->setAddress( $address_id );
 					$datahamster->setSector( $sector_id );
 					$datahamster->setDepartment( $department );
 					$datahamster->setEmail( $email );
 					$datahamster->setName( $name );
 					$datahamster->setParent( $parent_id );
 					$datahamster->setWeb( $web );
+					$datahamster->setStreet( $street );
+					$datahamster->setHouseNumber( $house_number );
+					$datahamster->setAddition( $addition );
+					$datahamster->setPostalCode( $postal_code );
+					$datahamster->setCity( $city );
 					$datahamsters[] = $datahamster;
 				}
 

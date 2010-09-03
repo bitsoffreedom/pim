@@ -2,7 +2,7 @@
 
 require_once (PIM_BASE_PATH . '/Model/Persistable.php');
 
-class Model_DatahamsterExra extends Model_Persistable
+class Model_DatahamsterExtra extends Model_Persistable
 {
 	/**
 	*
@@ -275,7 +275,7 @@ class Model_DatahamsterExra extends Model_Persistable
 							$datahamster_extra->setDatahamster( $datahamster->getId() );
 							$datahamster_extra->setKey( $key );
 							$datahamster_extra->setValue( $value );
-							$datahamster_extras[] = $datahamster;
+							$datahamster_extras[] = $datahamster_extra;
 						}
 
 					}
