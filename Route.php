@@ -13,6 +13,7 @@ class Route
                 "sectoren" => "Control_SelectSector",
                 "admin" => "Control_Admin",
                 "gegevens" => "Control_UserInfo",
+                "genereer" => "Control_Generate",
             );
 
         public function __construct()

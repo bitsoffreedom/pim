@@ -54,9 +54,9 @@ abstract class Control_Controller
 			header(sprintf('Location: %s', $this->location));
 
 		// disable caching
-		header( "Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
-		header( "Cache-Control: no-cache, must-revalidate" );
-		header( "Pragma: no-cache" );
+		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT" );
+		header("Cache-Control: no-cache, must-revalidate" );
+		header("Pragma: no-cache" );
 		
 		if (!empty($this->buffer))
 			echo $this->buffer;

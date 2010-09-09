@@ -58,9 +58,11 @@ class View_SelectSector extends View
 
 class View_UserInfo extends View
 {
-	public function __construct()
+	public function __construct($errmsg = false)
 	{
 		$dw = new DataWidget();
+		if ($errmsg)
+			$dw->setErrorMessage($errmsg);
 		$dw->render();
 		$tw = new TopWidget();
 		$tw->setBody($dw);

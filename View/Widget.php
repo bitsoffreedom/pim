@@ -1,5 +1,8 @@
 <?php
 
+require_once (PIM_BASE_PATH . '/Model/Datahamster.php');
+require_once (PIM_BASE_PATH . '/Model/DatahamsterExtra.php');
+
 abstract class Widget
 {
 	// $var string
@@ -152,6 +155,8 @@ class CompanyWidget extends Widget
 
 class DataWidget extends Widget
 {
+	private $error_msg;
+
 	public function __construct()
 	{
 		$this->setViewFile("data.php");
@@ -159,10 +164,24 @@ class DataWidget extends Widget
 
 	public function render()
 	{
+		$extras = Array();
+		$ses_companies = Session::get()->companies;
+		if (!empty($ses_companies)) {
+			$companies = Model_Datahamster::findByIdList($ses_companies);
+			foreach ($companies as $c)
+				$extras = array_merge($extras, $c->getExtras());
+		}
                 $this->renderInternal(
                         Array(
+			"extras" => $extras,
+			"errmsg" => $this->error_msg
                         )
                 );
+	}
+
+	public function setErrorMessage($m)
+	{
+		$this->error_msg = $m;
 	}
 }
 
