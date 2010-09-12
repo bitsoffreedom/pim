@@ -1,31 +1,62 @@
 <?php
 
-/* The session state should look as follows:
- * companies should be an array with zero or more entries;
- * sectors should be an array with zero or more entries;
- */
-
 class Session
 {
 	/**
 	*
 	* @var Session
 	*/
-	private static $instance = null;
+	private static $instance;
 
 	/**
-	*
-	* @var bool
-	*/
-	private $started = false;
-
-	/**
-	* Calls session_start()
+	* Initializes the session.
+	* I found this initialization stuff on
+	* http://security.nl/artikel/34117/1/PHP_sessions%3B_hoe_het_wel_moet.html
 	* @return bool
 	*/
-	public function start()
+	public function __construct()
 	{
-		return $this->init();
+		session_name( 'pim' );
+		session_set_cookie_params( 0, '/' );
+		session_cache_expire( 30 );
+
+		/* This might cause problems for mozilla according to the PHP manual
+		* page */
+		session_cache_limiter( 'private' );
+
+		if (!session_start()) {
+			throw new Exception("Failed to start the session");
+		}
+
+		// Regenerates the session id to avoid session fixation.
+		session_regenerate_id( true );
+	}
+
+	/**
+	 * Start a new session instance
+	 * @return false on failure. true on success;
+	 */
+	public static function start()
+	{
+		if (isset(self::$instance))
+			return (false);
+
+		$c = __CLASS__;
+		self::$instance = new $c;
+
+		return (true);
+	}
+
+	/**
+	 * Retrieve the current session instance
+	 * @return null on failure an instance on success
+	 */
+	public static function get() 
+	{
+		if (!isset(self::$instance))
+			return null;
+
+		return self::$instance;
 	}
 
 	/**
@@ -34,15 +65,6 @@ class Session
 	public function destroy()
 	{
 		session_destroy();
-		$this->started = false;
-	}
-
-	/**
-	* Regenerates the session id to avoid session fixation.
-	*/
-	public function regenerateId()
-	{
-		session_regenerate_id( true );
 	}
 
 	/**
@@ -61,14 +83,8 @@ class Session
 	*/
 	public function  __get( $name )
 	{
-		if ( $this->started ) {
-			if ( isset( $_SESSION[ $name ] ) ) {
-				return $_SESSION[ $name ];
-			}
-				return null;
-		}
-		else {
-			return null;
+		if ( isset( $_SESSION[ $name ] ) ) {
+			return $_SESSION[ $name ];
 		}
 	}
 
@@ -79,9 +95,7 @@ class Session
 	*/
 	public function  __set( $name, $value )
 	{
-		if ( $this->started ) {
-			$_SESSION[ $name ] = $value;
-		}
+		$_SESSION[ $name ] = $value;
 	}
 
 	/**
@@ -93,43 +107,6 @@ class Session
 	{
 		return isset( $_SESSION[ $name ] );
 	}
-
-	/**
-	* Initializes the session.
-	* I found this initialization stuff on
-	* http://security.nl/artikel/34117/1/PHP_sessions%3B_hoe_het_wel_moet.html
-	* @return bool
-	*/
-	private function init()
-	{
-		if ( !$this->started ) {
-			session_name( 'pim' );
-			session_set_cookie_params( 0, '/' );
-			session_cache_expire( 30 );
-
-			/* This might cause problems for mozilla according to the PHP manual
-			* page */
-			session_cache_limiter( 'private' );
-		}
-
-		$success = session_start();
-		$this->initialized = $success;
-		$this->started = $success;
-		return $success;
-	}
-
-	/**
-	*
-	* @return Session
-	*/
-	public static function get()
-	{
-		if ( is_null( self::$instance ) ) {
-			self::$instance = new Session();
-			return self::$instance;
-		}
-
-		self::$instance->regenerateId();
-		return self::$instance;
-	}
 }
+
+?>

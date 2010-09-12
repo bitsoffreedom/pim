@@ -25,7 +25,7 @@ abstract class Control_Controller
 	{
 		$this->route = $r;
 
-		if (Session::get()->start() === false) {
+		if (Session::start() === false) {
 			// "Could initialize the session"
 			/* XXX: show what went wrong */
 			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
