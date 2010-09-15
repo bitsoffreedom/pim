@@ -5,6 +5,7 @@ their SQLBuilder looked fine)
 - Save the Session state in the database;
 - Finish company selection, user info entry steps (Alexander);
 - Create the administrative interface (Coen).
+- Create a proper way to identify when a session has expired.
 
 Currently a race exists.
 
