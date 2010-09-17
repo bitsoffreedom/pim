@@ -4,8 +4,9 @@ their SQLBuilder looked fine)
 - Introduce SQL transactions in the ORM;
 - Save the Session state in the database;
 - Finish company selection, user info entry steps (Alexander);
-- Create the administrative interface (Coen).
-- Create a proper way to identify when a session has expired.
+- Create the administrative interface (Coen);
+- Create a proper way to identify when a session has expired;
+- Create a way to delete companies from the list.
 
 Currently a race exists.
 
