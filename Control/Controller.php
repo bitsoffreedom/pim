@@ -2,7 +2,7 @@
 
 require_once( PIM_BASE_PATH . '/Session.php' );
 
-abstract class Control_Controller
+abstract class Controller
 {
 	// @var class Route
         protected $route;

@@ -1,7 +1,7 @@
 <?php
 require_once( PIM_BASE_PATH . '/Control/Controller.php' );
 
-class Control_Admin extends Control_Controller
+class Control_Admin extends Controller
 {
 	/**
 	* Constructor

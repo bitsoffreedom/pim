@@ -5,7 +5,7 @@ require_once (PIM_BASE_PATH . '/Form.php');
 require_once (PIM_BASE_PATH . '/View/View.php');
 require_once (PIM_BASE_PATH . '/Model/Sector.php');
 
-class Control_SelectSector extends Control_Controller
+class Control_SelectSector extends Controller
 {
 	public function execGet()
 	{

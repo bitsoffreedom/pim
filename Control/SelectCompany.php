@@ -5,7 +5,7 @@ require_once (PIM_BASE_PATH . '/View/View.php');
 require_once (PIM_BASE_PATH . '/Model/Datahamster.php');
 require_once (PIM_BASE_PATH . '/Model/Sector.php');
 
-class Control_SelectCompany extends Control_Controller
+class Control_SelectCompany extends Controller
 {
 	public function execGet()
 	{
