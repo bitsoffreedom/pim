@@ -11,10 +11,6 @@ require_once ('Control/SelectCompany.php');
 require_once ('Control/UserInfo.php');
 require_once ('Control/Generate.php');
 
-require_once ('Control/Exceptions/NullPointerException.php');
-require_once ('Control/Exceptions/IOException.php');
-require_once ('Control/Exceptions/InvalidVersionException.php');
-
 require_once ('Session.php');
 require_once ('Route.php');
 
