@@ -63,7 +63,7 @@ class Control_UserInfo extends Control_Controller
 		if (count($fields) == 1) {
 			return new View_UserInfo("Voer een " . $fields[0] . " in");
 		} else if (count($fields) > 1) {
-			$field = array_pop(&$fields);
+			$field = array_pop($fields);
 			$field_list = implode(", ", $fields); 
 
 			return new View_UserInfo("Voer een " . $field_list . " en " . $field . " in");
