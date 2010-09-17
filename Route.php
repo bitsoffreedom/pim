@@ -6,6 +6,9 @@ class Route
         private $pageclass;
 	// @var string
         private $pagename;
+	// @var string
+	private $param;
+
 	// @var array
         private $pages = array
             (
@@ -18,10 +21,14 @@ class Route
 
         public function __construct()
         {
-                if (array_key_exists('page', $_GET) && array_key_exists($_GET['page'], $this->pages)) {
+		if (array_key_exists('page', $_GET) &&
+		    array_key_exists($_GET['page'], $this->pages)) {
                         $this->pageclass = $this->pages[$_GET['page']];
                         $this->pagename = $_GET['page'];
 
+			if(array_key_exists('param', $_GET) &&
+			    ctype_digit($_GET['param']))
+				$this->param = (int)$_GET['param'];
                 } else {
                         /* Page not found! */
                         $this->pagename = "startpage";
@@ -40,6 +47,12 @@ class Route
         {
                 return $this->pageclass;
         }
+
+	// @return string
+	public function getParam()
+	{
+		return $this->param;
+	}
 }
 
 ?>

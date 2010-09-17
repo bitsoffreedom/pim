@@ -52,6 +52,7 @@ class Control_SelectCompany extends Control_Controller
 			// With an empty search field merely get the companies
 			// from the specified sectors.
 			if (empty($cname) && empty($sectors)) {
+				Session::get()->sectors = Array();
 				return new View_SelectCompany(Array());
 			} else if (empty($cname) && !empty($sectors)) {
 				Session::get()->sectors = $sectors;
@@ -59,6 +60,7 @@ class Control_SelectCompany extends Control_Controller
 				$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
 				return new View_SelectCompany($hamsters);
 			} else if (!empty($cname) && empty($sectors)) {
+				Session::get()->sectors = Array();
 				/* XXX: please select a sector */
 				return new View_SelectCompany(Array());
 			} else if (!empty($cname) && !empty($sectors)) {
@@ -101,6 +103,7 @@ class Control_SelectCompany extends Control_Controller
 				$hamsters = Model_Datahamster::findByIdList($company_sids);
 				return new View_SelectCompany($hamsters);
 			case "btn2":
+				/* XXX: if company_list is empty show error and don't continue */
 				$this->setLocation("gegevens");
 				break;
 			default:

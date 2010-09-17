@@ -5,3 +5,4 @@
 
 RewriteEngine on
 RewriteRule ^([A-Za-z]+)$ index.php?page=$1 [L]
+RewriteRule ^genereer/([0-9]+)$ index.php?page=genereer&param=$1

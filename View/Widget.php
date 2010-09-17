@@ -164,6 +164,10 @@ class DataWidget extends Widget
 
 	public function render()
 	{
+		$firstname_val = Session::get()->firstname;
+		$lastname_val = Session::get()->lastname;
+		$extras_val = Session::get()->extras;
+
 		$extras = Array();
 		$ses_companies = Session::get()->companies;
 		if (!empty($ses_companies)) {
@@ -173,6 +177,9 @@ class DataWidget extends Widget
 		}
                 $this->renderInternal(
                         Array(
+			"firstname_val" => $firstname_val,
+			"lastname_val" => $lastname_val,
+			"extras_val" => $extras_val,
 			"extras" => $extras,
 			"errmsg" => $this->error_msg
                         )
@@ -182,6 +189,53 @@ class DataWidget extends Widget
 	public function setErrorMessage($m)
 	{
 		$this->error_msg = $m;
+	}
+}
+
+class GenerateWidget extends Widget
+{
+	public function __construct()
+	{
+		$this->setViewFile("generate.php");
+	}
+
+	public function render()
+	{
+		$ses_companies = Session::get()->companies;
+		$companies = Model_Datahamster::findByIdList($ses_companies);
+
+		$this->renderInternal(Array("companylist" => $companies,));
+	}
+}
+
+class LetterWidget extends Widget
+{
+	private $company;
+
+	public function __construct()
+	{
+		$this->setViewFile("letter.php");
+	}
+
+	public function render()
+	{
+		$firstname = Session::get()->firstname;
+		$lastname = Session::get()->lastname;
+		$extras = Session::get()->extras;
+
+		$this->renderInternal(
+		    Array(
+		    "company" => $this->company,
+		    "firstname" => $firstname,
+		    "lastname" => $lastname,
+		    "extras" => $extras,
+		    )
+		);
+	}
+
+	public function setCompany($company)
+	{
+		$this->company = $company;
 	}
 }
 

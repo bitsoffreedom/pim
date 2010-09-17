@@ -72,4 +72,31 @@ class View_UserInfo extends View
 	}
 }
 
+class View_Generate extends View
+{
+	public function __construct()
+	{
+		$gw = new GenerateWidget();
+		$gw->render();
+
+		$tw = new TopWidget();
+		$tw->setBody($gw);
+		$tw->render();
+
+		$this->setBuffer((string)$tw);
+	}
+}
+
+class View_Letter extends View
+{
+	public function __construct($company)
+	{
+		$lw = new LetterWidget();
+		$lw->setCompany($company);
+		$lw->render();
+
+		$this->setBuffer((string)$lw);
+	}
+}
+
 ?>

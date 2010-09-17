@@ -20,7 +20,7 @@ class Control_SelectSector extends Control_Controller
 			$f = new IntegerForm("sectoren");
 			$s = $f->getIntegers();
 			if (empty($s)) {
-				/* XXX: get model from model class/object */
+				Session::get()->sectors = Array();
 				$c = Model_Sector::getAll();
 				$v = new View_SelectSector($c, "U heeft geen sector geselecteerd.");
 				return $v;

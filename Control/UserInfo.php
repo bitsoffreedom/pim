@@ -22,14 +22,15 @@ class Control_UserInfo extends Control_Controller
 			return;
 		}
 
-		$id_form = new IntegerForm("sectoren");
-		$identifiers = $id_form->getIntegers();
-
 		$firstname_form = new StringForm("voornaam");
 		$firstname = $firstname_form->getString();
 
+		Session::get()->firstname = $firstname;
+
 		$lastname_form = new StringForm("achternaam");
 		$lastname = $lastname_form->getString();
+
+		Session::get()->lastname = $lastname;
 
 		if (empty($firstname))
 			$fields[] = "voornaam";
@@ -45,8 +46,14 @@ class Control_UserInfo extends Control_Controller
 
 		if (!empty($extras)) {
 			foreach ($extras as $extra) {
-				$form = new StringForm($extra->getValue());
+				$form = new StringForm($extra->getId());
 				$value = $form->getString();
+
+				/* Direct modifications of the session state isn't possible. This is Fucked */
+				$ses_extras = Session::get()->extras;
+				$ses_extras[$extra->getId()] = $value;
+				Session::get()->extras = $ses_extras;
+
 				if (empty($value)) {
 					$fields[] = $extra->getValue();
 				}
