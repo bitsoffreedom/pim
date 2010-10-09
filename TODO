@@ -1,9 +1,5 @@
-- Generalize the ORM (whatever is possible; Perhaps code can be copied from Yii,
-their SQLBuilder looked fine) (Alexander);
 - PDF generation (also decide which library to use);
-- Introduce SQL transactions in the ORM;
 - Save the Session state in the database;
-- Finish company selection, user info entry steps (Alexander);
 - Create the administrative interface (Coen);
 - Create a proper way to identify when a session has expired;
 - Create a way to delete companies from the list.
