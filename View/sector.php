@@ -10,14 +10,14 @@
                         <form action="sectoren" method="post">
 <? foreach ($sectorlist as $s) { ?>
 	<?
-	if (in_array($s->getId(), $sel_sectorlist))
+	if (in_array($s->id, $sel_sectorlist))
 		$checked = "checked";
 	else
 		$checked = "";
 	?>
                         <tr>
-                                <td><?=$s->getName()?></td>
-                                <td><input type="checkbox" name="sectoren[]" value="<?=$s->getId()?>" <?=$checked?> /></td>
+                                <td><?=$s->name?></td>
+                                <td><input type="checkbox" name="sectoren[]" value="<?=$s->id?>" <?=$checked?> /></td>
                         </tr>
 <? } ?>
                         <tr><td><input class="volgende" type="submit" value="VOLGENDE" /></td></tr>

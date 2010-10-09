@@ -27,7 +27,7 @@
                 <div style="left: 30px; float: left">
                         <ul>
 <? foreach ($companies as $company) { ?>
-                        <li><?=$company->getName()?></li>
+                        <li><?=$company->name?></li>
 <? } ?>
                         </ul>
                 </div>

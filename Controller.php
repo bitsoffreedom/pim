@@ -3,8 +3,7 @@
 require_once( PIM_BASE_PATH . '/Session.php' );
 require_once (PIM_BASE_PATH . '/Form.php');
 require_once (PIM_BASE_PATH . '/View/View.php');
-require_once (PIM_BASE_PATH . '/Model/Datahamster.php');
-require_once (PIM_BASE_PATH . '/Model/Sector.php');
+require_once (PIM_BASE_PATH . '/Model/ActiveRecord.php');
 
 abstract class Controller
 {
@@ -136,12 +135,12 @@ class Control_Generate extends Controller
 	public function execGet()
 	{
 		$companyids = Session::get()->companies;
-		$companies = Model_Datahamster::findByIdList($companyids);
+		$companies = Model_Datahamster::find($companyids);
 
 		$param = $this->route->getParam();
 
 		foreach ($companies as $company) {
-			if ($company->getId() == $param)
+			if ($company->id == $param)
 				return new View_Letter($company);
 		}
 
@@ -162,7 +161,7 @@ class Control_SelectCompany extends Controller
 			$sectors = Session::get()->sectors;
 			if (empty($sectors))
 				throw new Exception('No sectors selected');
-			$hamsters = Model_Datahamster::sectorSearch($sectors);
+			$hamsters = Model_Datahamster::find_all_by_sector_id($sectors);
 			return new View_SelectCompany($hamsters);
 		} catch (Exception $e) {
 			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
@@ -206,7 +205,7 @@ class Control_SelectCompany extends Controller
 			} else if (empty($cname) && !empty($sectors)) {
 				Session::get()->sectors = $sectors;
 
-				$hamsters = Model_Datahamster::sectorSearch(Session::get()->sectors);
+				$hamsters = Model_Datahamster::find_all_by_sector_id(Session::get()->sectors);
 				return new View_SelectCompany($hamsters);
 			} else if (!empty($cname) && empty($sectors)) {
 				Session::get()->sectors = Array();
@@ -233,7 +232,7 @@ class Control_SelectCompany extends Controller
 			if (!empty($company_ids)) {
 				/* XXX: This basic check assumes that all the MySQL
 				 * innodb constraints are met */
-				$company_list = Model_Datahamster::findByIdList($company_ids);
+				$company_list = Model_Datahamster::find($company_ids);
 				if (count($company_ids) != count($company_list))
 					throw new Exception("Not all Ids where found");
 
@@ -249,7 +248,7 @@ class Control_SelectCompany extends Controller
 				$company_sids = Session::get()->companies;
 				if ($company_sids == NULL)
 					$company_sids = Array();
-				$hamsters = Model_Datahamster::findByIdList($company_sids);
+				$hamsters = Model_Datahamster::find($company_sids);
 				return new View_SelectCompany($hamsters);
 			case "btn2":
 				/* XXX: if company_list is empty show error and don't continue */
@@ -271,7 +270,7 @@ class Control_SelectSector extends Controller
 	public function execGet()
 	{
 		/* XXX: get model from model class/object */
-		$c = Model_Sector::getAll();
+		$c = Model_Sector::all();
                 return new View_SelectSector($c);
 	}
 
@@ -282,7 +281,7 @@ class Control_SelectSector extends Controller
 			$s = $f->getIntegers();
 			if (empty($s)) {
 				Session::get()->sectors = Array();
-				$c = Model_Sector::getAll();
+				$c = Model_Sector::all();
 				$v = new View_SelectSector($c, "U heeft geen sector geselecteerd.");
 				return $v;
 			} else {
@@ -331,22 +330,22 @@ class Control_UserInfo extends Controller
 		$extras = Array();
 
 		/* For all comppanies in the session state find their corresponding fields */
-		$companies = Model_Datahamster::findByIdList($ses_companies);
+		$companies = Model_Datahamster::find($ses_companies);
 		foreach ($companies as $c)
-			$extras = array_merge($extras, $c->getExtras());
+			$extras = array_merge($extras, $c->datahamsterextra);
 
 		if (!empty($extras)) {
 			foreach ($extras as $extra) {
-				$form = new StringForm($extra->getId());
+				$form = new StringForm($extra->id);
 				$value = $form->getString();
 
 				/* Direct modifications of the session state isn't possible. This is Fucked */
 				$ses_extras = Session::get()->extras;
-				$ses_extras[$extra->getId()] = $value;
+				$ses_extras[$extra->id] = $value;
 				Session::get()->extras = $ses_extras;
 
 				if (empty($value)) {
-					$fields[] = $extra->getValue();
+					$fields[] = $extra->value;
 				}
 			}
 		}

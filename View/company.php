@@ -14,12 +14,12 @@
 			<div style="float: right">
 <? foreach ($sectorlist as $s) { ?>
 	<?
-	if (in_array($s->getId(), $sel_sectorlist))
+	if (in_array($s->id, $sel_sectorlist))
 		$checked = "checked";
 	else
 		$checked = "";
 	?>
-				<input type="checkbox" name="sectoren[]" value="<?=$s->getId()?>" <?=$checked?> /><?=$s->getName()?><br />
+				<input type="checkbox" name="sectoren[]" value="<?=$s->id?>" <?=$checked?> /><?=$s->name?><br />
 <? } ?>
 			</div>
 
@@ -37,11 +37,11 @@
                         <table>
 <?	foreach ($companylist as $c) { ?>
                         <tr>
-                                <td><?=$c->getName()?></td>
-                                <td><?=$c->getDepartment()?></td>
-                                <td><?=$c->getWeb()?></td>
-                                <td><?=$c->getEmail()?></td>
-                                <td><input type="checkbox" name="bedrijven[]" value="<?=$c->getId()?>" /></td>
+                                <td><?=$c->name?></td>
+                                <td><?=$c->department?></td>
+                                <td><?=$c->web?></td>
+                                <td><?=$c->email?></td>
+                                <td><input type="checkbox" name="bedrijven[]" value="<?=$c->id?>" /></td>
                         </tr>
 <?	} ?>
                         <tr><td><input type="submit" name="btn1" value="Voeg toe"/></td></tr>

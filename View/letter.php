@@ -5,10 +5,10 @@
   </head>
   <body>
     <div class="address">
-    <?=$company->getName()?><br />
-    <?=$company->getDepartment()?><br />
-    <?=$company->getStreet()?> <?=$company->getHouseNumber()?> <br />
-    <?=$company->getPostalCode()?> <?=$company->getCity()?>
+    <?=$company->name?><br />
+    <?=$company->department?><br />
+    <?=$company->street?> <?=$company->house_number?> <br />
+    <?=$company->postal_code?> <?=$company->city?>
     </div>
     <div class="letter">
     <p>Geachte Heer/Mevrouw,</p>

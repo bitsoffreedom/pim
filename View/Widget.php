@@ -1,7 +1,6 @@
 <?php
 
-require_once (PIM_BASE_PATH . '/Model/Datahamster.php');
-require_once (PIM_BASE_PATH . '/Model/DatahamsterExtra.php');
+require_once (PIM_BASE_PATH . '/Model/ActiveRecord.php');
 
 abstract class Widget
 {
@@ -68,7 +67,7 @@ class TopWidget extends Widget
 		if (empty($ses_comp))
 			$sel_comp = Array();
 		else
-			$sel_comp = Model_Datahamster::findByIdList($ses_comp);
+			$sel_comp = Model_Datahamster::find($ses_comp);
 
 		$this->renderInternal(
 		    Array(
@@ -131,7 +130,7 @@ class CompanyWidget extends Widget
 	public function render()
 	{
 		// Retrieve the list of all sectors
-		$sector_list = Model_Sector::getAll();
+		$sector_list = Model_Sector::all();
 		if (empty($sector_list))
 			$sector_list = Array();
 		$sel_sectors = Session::get()->sectors;
@@ -171,9 +170,9 @@ class DataWidget extends Widget
 		$extras = Array();
 		$ses_companies = Session::get()->companies;
 		if (!empty($ses_companies)) {
-			$companies = Model_Datahamster::findByIdList($ses_companies);
+			$companies = Model_Datahamster::find($ses_companies);
 			foreach ($companies as $c)
-				$extras = array_merge($extras, $c->getExtras());
+				$extras = array_merge($extras, $c->datahamsterextra);
 		}
                 $this->renderInternal(
                         Array(
@@ -202,7 +201,7 @@ class GenerateWidget extends Widget
 	public function render()
 	{
 		$ses_companies = Session::get()->companies;
-		$companies = Model_Datahamster::findByIdList($ses_companies);
+		$companies = Model_Datahamster::find($ses_companies);
 
 		$this->renderInternal(Array("companylist" => $companies,));
 	}
