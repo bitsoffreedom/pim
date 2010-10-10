@@ -54,7 +54,7 @@ abstract class Connection
 	 */
 	public static function instance()
 	{
-		$info = static::parse_config();
+		$info = self::parse_config();
 
 		require_once (dirname(__FILE__) . '/adapters/MysqlAdapter.php');
 
@@ -73,7 +73,7 @@ abstract class Connection
 	public static function parse_config()
 	{
 		$config = parse_ini_file( PIM_CONFIG_FILE );
-		$info = new \stdClass();
+		$info = new stdClass();
 		$info->protocol = 'mysql';
 		$info->host = $config['host'];
 		$info->db = $config['database'];
@@ -104,7 +104,7 @@ abstract class Connection
 			else
 				$host = "unix_socket=$info->host";
 
-			$this->connection = new PDO("$info->protocol:$host;dbname=$info->db",$info->user,$info->pass,static::$PDO_OPTIONS);
+			$this->connection = new PDO("$info->protocol:$host;dbname=$info->db",$info->user,$info->pass,self::$PDO_OPTIONS);
 		} catch (PDOException $e) {
 			throw new DatabaseException($e);
 		}
@@ -286,8 +286,8 @@ abstract class Connection
 	 */
 	public function quote_name($string)
 	{
-		return $string[0] === static::$QUOTE_CHARACTER || $string[strlen($string)-1] === static::$QUOTE_CHARACTER ?
-			$string : static::$QUOTE_CHARACTER . $string . static::$QUOTE_CHARACTER;
+		return $string[0] === self::$QUOTE_CHARACTER || $string[strlen($string)-1] === self::$QUOTE_CHARACTER ?
+			$string : self::$QUOTE_CHARACTER . $string . self::$QUOTE_CHARACTER;
 	}
 
 	/**
@@ -321,7 +321,7 @@ abstract class Connection
 	public function string_to_datetime($string)
 	{
 		$date = date_create($string);
-		$errors = \DateTime::getLastErrors();
+		$errors = DateTime::getLastErrors();
 
 		if ($errors['warning_count'] > 0 || $errors['error_count'] > 0)
 			return null;

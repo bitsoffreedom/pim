@@ -24,27 +24,27 @@ class Cache
 			$file = ucwords(Inflector::instance()->camelize($url['scheme']));
 			$class = "$file";
 			require_once dirname(__FILE__) . "/cache/$file.php";
-			static::$adapter = new $class($url);
+			self::$adapter = new $class($url);
 		}
 		else
-			static::$adapter = null;
+			self::$adapter = null;
 
-		static::$options = array_merge(array('expire' => 30),$options);
+		self::$options = array_merge(array('expire' => 30),$options);
 	}
 
 	public static function flush()
 	{
-		if (static::$adapter)
-			static::$adapter->flush();
+		if (self::$adapter)
+			self::$adapter->flush();
 	}
 
 	public static function get($key, $closure)
 	{
-		if (!static::$adapter)
+		if (!self::$adapter)
 			return $closure();
 
-		if (!($value = static::$adapter->read($key)))
-			static::$adapter->write($key,($value = $closure()),static::$options['expire']);
+		if (!($value = self::$adapter->read($key)))
+			self::$adapter->write($key,($value = $closure()),self::$options['expire']);
 
 		return $value;
 	}

@@ -212,7 +212,7 @@ abstract class AbstractRelationship implements InterfaceRelationship
 
 	protected function merge_association_options($options)
 	{
-		$available_options = array_merge(self::$valid_association_options,static::$valid_association_options);
+		$available_options = array_merge(self::$valid_association_options,self::$valid_association_options);
 		$valid_options = array_intersect_key(array_flip($available_options),$options);
 
 		foreach ($valid_options as $option => $v)

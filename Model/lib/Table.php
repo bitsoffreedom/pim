@@ -90,7 +90,7 @@ class Table
 		if ($close)
 		{
 			ConnectionManager::drop_connection();
-			static::clear_cache();
+			self::clear_cache();
 		}
 		return ($this->conn = ConnectionManager::get_connection());
 	}
@@ -390,7 +390,7 @@ class Table
 
 		foreach ($hash as $name => &$value)
 		{
-			if ($value instanceof \DateTime)
+			if ($value instanceof DateTime)
 			{
 				if (isset($this->columns[$name]) && $this->columns[$name]->type == Column::DATE)
 					$hash[$name] = $this->conn->date_to_string($value);

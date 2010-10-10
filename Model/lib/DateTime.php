@@ -32,7 +32,7 @@
  * @package ActiveRecord
  * @see http://php.net/manual/en/class.datetime.php
  */
-class ActiveRecord_DateTime extends \DateTime
+class ActiveRecord_DateTime extends DateTime
 {
 	/**
 	 * Default format used for format() and __toString()
@@ -48,17 +48,17 @@ class ActiveRecord_DateTime extends \DateTime
 		'time'    => 'H:i',
 		'short'   => 'd M H:i',
 		'long'    => 'F d, Y H:i',
-		'atom'    => \DateTime::ATOM,
-		'cookie'  => \DateTime::COOKIE,
-		'iso8601' => \DateTime::ISO8601,
-		'rfc822'  => \DateTime::RFC822,
-		'rfc850'  => \DateTime::RFC850,
-		'rfc1036' => \DateTime::RFC1036,
-		'rfc1123' => \DateTime::RFC1123,
-		'rfc2822' => \DateTime::RFC2822,
-		'rfc3339' => \DateTime::RFC3339,
-		'rss'     => \DateTime::RSS,
-		'w3c'     => \DateTime::W3C);
+		'atom'    => DateTime::ATOM,
+		'cookie'  => DateTime::COOKIE,
+		'iso8601' => DateTime::ISO8601,
+		'rfc822'  => DateTime::RFC822,
+		'rfc850'  => DateTime::RFC850,
+		'rfc1036' => DateTime::RFC1036,
+		'rfc1123' => DateTime::RFC1123,
+		'rfc2822' => DateTime::RFC2822,
+		'rfc3339' => DateTime::RFC3339,
+		'rss'     => DateTime::RSS,
+		'w3c'     => DateTime::W3C);
 
 	private $model;
 	private $attribute_name;

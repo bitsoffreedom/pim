@@ -103,7 +103,7 @@ class CallBack
 	{
 		$this->klass = Reflections::instance()->get($model_class_name);
 
-		foreach (static::$VALID_CALLBACKS as $name)
+		foreach (self::$VALID_CALLBACKS as $name)
 		{
 			// look for explicitly defined static callback
 			if (($definition = $this->klass->getStaticPropertyValue($name,null)))

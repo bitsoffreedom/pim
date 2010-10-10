@@ -8,7 +8,7 @@
  *
  * @package ActiveRecord
  */
-class ActiveRecordException extends \Exception {};
+class ActiveRecordException extends Exception {};
 
 /**
  * Thrown when a record cannot be found.
