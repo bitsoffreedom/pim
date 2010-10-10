@@ -2,7 +2,7 @@
 
 define( 'PIM_BASE_PATH', dirname( __FILE__ ) );
 define( 'PIM_CONFIG_FILE', PIM_BASE_PATH . DIRECTORY_SEPARATOR . 'pim.conf' );
-define( 'PHP_MIN_VERSION', '5.2.6' );
+define( 'PHP_MIN_VERSION', '5.3.0' );
 define( 'DEBUG', 1);
 
 require_once ('Controller.php');
