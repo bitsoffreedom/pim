@@ -13,7 +13,6 @@ require 'lib/Reflections.php';
 require 'lib/Inflector.php';
 require 'lib/CallBack.php';
 require 'lib/Exceptions.php';
-require 'lib/Cache.php';
 
 class Model_Sector extends Model
 {
