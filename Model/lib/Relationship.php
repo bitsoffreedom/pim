@@ -250,7 +250,7 @@ abstract class AbstractRelationship implements InterfaceRelationship
 		$reflection = Reflections::instance()->add($class_name)->get($class_name);
 
 		if (!$reflection->isSubClassOf('Model'))
-			throw new RelationshipException("'$class_name' must extend from ActiveRecord\\Model");
+			throw new RelationshipException("'$class_name' must extend from Model");
 
 		$this->class_name = $class_name;
 	}
@@ -346,11 +346,11 @@ abstract class AbstractRelationship implements InterfaceRelationship
  * # Table: people
  * # Primary key: id
  * # Foreign key: school_id
- * class Person extends ActiveRecord\Model {}
+ * class Person extends Model {}
  *
  * # Table: schools
  * # Primary key: id
- * class School extends ActiveRecord\Model {
+ * class School extends Model {
  *   static $has_many = array(
  *     array('people')
  *   );
@@ -360,14 +360,14 @@ abstract class AbstractRelationship implements InterfaceRelationship
  * Example using options:
  *
  * <code>
- * class Payment extends ActiveRecord\Model {
+ * class Payment extends Model {
  *   static $belongs_to = array(
  *     array('person'),
  *     array('order')
  *   );
  * }
  *
- * class Order extends ActiveRecord\Model {
+ * class Order extends Model {
  *   static $has_many = array(
  *     array('people',
  *           'through'    => 'payments',
@@ -519,11 +519,11 @@ class HasMany extends AbstractRelationship
  * <code>
  * # Table name: states
  * # Primary key: id
- * class State extends ActiveRecord\Model {}
+ * class State extends Model {}
  *
  * # Table name: people
  * # Foreign key: state_id
- * class Person extends ActiveRecord\Model {
+ * class Person extends Model {
  *   static $has_one = array(array('state'));
  * }
  * </code>
@@ -563,9 +563,9 @@ class HasAndBelongsToMany extends AbstractRelationship
  * Belongs to relationship.
  *
  * <code>
- * class School extends ActiveRecord\Model {}
+ * class School extends Model {}
  *
- * class Person extends ActiveRecord\Model {
+ * class Person extends Model {
  *   static $belongs_to = array(
  *     array('school')
  *   );
@@ -575,9 +575,9 @@ class HasAndBelongsToMany extends AbstractRelationship
  * Example using options:
  *
  * <code>
- * class School extends ActiveRecord\Model {}
+ * class School extends Model {}
  *
- * class Person extends ActiveRecord\Model {
+ * class Person extends Model {
  *   static $belongs_to = array(
  *     array('school', 'primary_key' => 'school_id')
  *   );

@@ -25,7 +25,7 @@
  * </code>
  *
  * <code>
- * class Person extends ActiveRecord\Model {
+ * class Person extends Model {
  *   static $belongs_to = array(
  *     array('parent', 'foreign_key' => 'parent_id', 'class_name' => 'Person')
  *   );
@@ -41,7 +41,7 @@
  *   );
  * }
  *
- * class Order extends ActiveRecord\Model {
+ * class Order extends Model {
  *   static $belongs_to = array(
  *     array('person')
  *   );
@@ -149,7 +149,7 @@ class Model
 	 * Allows you to create aliases for attributes.
 	 *
 	 * <code>
-	 * class Person extends ActiveRecord\Model {
+	 * class Person extends Model {
 	 *   static $alias_attribute = array(
 	 *     'the_first_name' => 'first_name',
 	 *     'the_last_name' => 'last_name');
@@ -170,7 +170,7 @@ class Model
 	 * This is the opposite of {@link attr_protected $attr_protected}.
 	 *
 	 * <code>
-	 * class Person extends ActiveRecord\Model {
+	 * class Person extends Model {
 	 *   static $attr_accessible = array('first_name','last_name');
 	 * }
 	 *
@@ -200,7 +200,7 @@ class Model
 	 * Delegates calls to a relationship.
 	 *
 	 * <code>
-	 * class Person extends ActiveRecord\Model {
+	 * class Person extends Model {
 	 *   static $belongs_to = array(array('venue'),array('host'));
 	 *   static $delegate = array(
 	 *     array('name', 'state', 'to' => 'venue'),
@@ -267,7 +267,7 @@ class Model
 	 *
 	 * EXAMPLE:
 	 * <code>
-	 * class User extends ActiveRecord\Model {
+	 * class User extends Model {
 	 *
 	 *   # define custom getter methods. Note you must
 	 *   # prepend get_ to your method name:
@@ -288,7 +288,7 @@ class Model
 	 * custom getter for 'name':
 	 *
 	 * <code>
-	 * class User extends ActiveRecord\Model {
+	 * class User extends Model {
 	 *
 	 *   # INCORRECT way to do it
 	 *   # function get_name() {
@@ -341,7 +341,7 @@ class Model
 	 *
 	 * EXAMPLE:
 	 * <code>
-	 * class User extends ActiveRecord\Model {
+	 * class User extends Model {
 	 *
 	 *   # define custom setter methods. Note you must
 	 *   # prepend set_ to your method name:
@@ -362,7 +362,7 @@ class Model
 	 * custom setter for 'name':
 	 *
 	 * <code>
-	 * class User extends ActiveRecord\Model {
+	 * class User extends Model {
 	 *
 	 *   # INCORRECT way to do it
 	 *   # function set_name($name) {
@@ -430,8 +430,8 @@ class Model
 		if (array_key_exists($name,$table->columns) && !is_object($value))
 			$value = $table->columns[$name]->cast($value,self::connection());
 
-		// convert php's \DateTime to ours
-		if ($value instanceof \DateTime)
+		// convert php's DateTime to ours
+		if ($value instanceof DateTime)
 			$value = new DateTime($value->format('Y-m-d H:i:s T'));
 
 		// make sure DateTime values know what model they belong to so
@@ -666,7 +666,7 @@ class Model
 	/**
 	 * Throws an exception if this model is set to readonly.
 	 *
-	 * @throws ActiveRecord\ReadOnlyException
+	 * @throws ReadOnlyException
 	 * @param string $method_name Name of method that was invoked on model for exception message
 	 */
 	private function verify_not_readonly($method_name)
@@ -1009,7 +1009,7 @@ class Model
 	/**
 	 * Passing $guard_attributes as true will throw an exception if an attribute does not exist.
 	 *
-	 * @throws ActiveRecord\UndefinedPropertyException
+	 * @throws UndefinedPropertyException
 	 * @param array $attributes An array in the form array(name => value, ...)
 	 * @param boolean $guard_attributes Flag of whether or not attributes should be guarded
 	 */
@@ -1671,7 +1671,7 @@ class Model
 			else
 				$connection->commit();
 		}
-		catch (\Exception $e)
+		catch (Exception $e)
 		{
 			$connection->rollback();
 			throw $e;

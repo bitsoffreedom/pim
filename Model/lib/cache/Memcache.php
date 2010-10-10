@@ -6,7 +6,7 @@ class Memcache
 
 	public function __construct($options)
 	{
-		$this->memcache = new \Memcache();
+		$this->memcache = new Memcache();
 
 		if (!$this->memcache->connect($options['host']))
 			throw new CacheException("Could not connect to $options[host]:$options[port]");

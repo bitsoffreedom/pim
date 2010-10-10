@@ -39,7 +39,7 @@ class Table
 	/**
 	 * A instance of CallBack for this model/table
 	 * @static
-	 * @var object ActiveRecord\CallBack
+	 * @var object CallBack
 	 */
 	public $callback;
 

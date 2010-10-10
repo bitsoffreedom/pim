@@ -211,7 +211,7 @@ abstract class Serialization
 	{
 		foreach ($this->attributes as &$value)
 		{
-			if ($value instanceof \DateTime)
+			if ($value instanceof DateTime)
 				$value = $value->format(self::$DATETIME_FORMAT);
 		}
 		return $this->attributes;
