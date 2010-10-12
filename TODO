@@ -1,6 +1,6 @@
 - PDF generation (also decide which library to use);
-- Save the Session state in the database;
-- Create the administrative interface (Coen);
+- Save the Session state in the database (Alexander, see http://marc.info/?l=php-general&m=128680663832006&w=2); 
+- Create the administrative interface (Coen, Alexander);
 - Create a proper way to identify when a session has expired;
 - Create a way to delete companies from the list.
 
