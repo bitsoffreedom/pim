@@ -64,4 +64,44 @@ class Model_DatahamsterExtra extends Model
 
 }
 
+class Model_User extends Model
+{
+	const PASSWORD_LENGTH = 50;
+	const SALT_LENGTH = 10;
+
+	static $table_name = 'user';
+	static $primary_key = 'id';
+	static $db = 'pim';
+
+	/**
+	*
+	* @param string $plaintext The plaintext password
+	* @return bool
+	*/
+	public function verify( $plaintext ) {
+		if ( is_null( $this->password ) || strlen( $this->password ) < self::PASSWORD_LENGTH ) {
+			return false;
+		}
+
+		$salt = substr( $this->password, 0, self::SALT_LENGTH );
+		return sha1( $salt . $plaintext ) === substr( $this->password, self::SALT_LENGTH );
+	}
+
+	/**
+	*
+	* @param string $password The password
+	* @param bool $plaintext Whether the password is in plaintext
+	*/
+	public function setPassword( $password, $plaintext = true ) {
+		if ( true === $plaintext ) {
+			$salt = round( ( 1 + lcg_value() ) * 1000000000 );
+			$this->password = $salt . sha1( $salt . $password );
+		}
+		else {
+			$this->password = $password;
+		}
+	}
+}
+
+
 ?>
