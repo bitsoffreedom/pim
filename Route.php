@@ -17,6 +17,7 @@ class Route
                 "admin" => "Control_Admin",
                 "gegevens" => "Control_UserInfo",
                 "genereer" => "Control_Generate",
+		"login" => "Control_Login",
             );
 
         public function __construct()

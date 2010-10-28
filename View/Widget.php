@@ -238,4 +238,62 @@ class LetterWidget extends Widget
 	}
 }
 
+class AdminTopWidget extends Widget
+{
+	// @var string
+	private $body;
+
+	public function __construct()
+	{
+		$this->setViewFile("admin_top.php");
+	}
+
+	// @param string
+	public function setBody($body)
+	{
+		$this->body = $body;
+	}
+
+	public function render()
+	{
+		$this->renderInternal(
+		    Array(
+		    "body" => $this->body,
+		    )
+		);
+	}
+}
+
+
+class LoginWidget extends Widget
+{
+	private $wrongdata = 0; 
+	private $username;
+
+	public function __construct()
+	{
+		$this->setViewFile("login.php");
+	}
+
+	public function render()
+	{
+		$this->renderInternal(
+		    Array(
+			"wrongdata" => $this->wrongdata,
+			"username" => $this->username,
+		    )
+		);
+	}
+
+	public function setWrongData()
+	{
+		$this->wrongdata = 1;
+	}
+
+	public function setUsername($u)
+	{
+		$this->username = $u;
+	}
+}
+
 ?>

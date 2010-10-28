@@ -48,6 +48,7 @@ create table user (
 	, name varchar(10) not null
 	, realname varchar(40)
 	, password varchar(50) not null
+	, password_changed datetime not null
 	, primary key( id )
 	, unique key( name )
 );

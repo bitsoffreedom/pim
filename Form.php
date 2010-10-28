@@ -39,7 +39,12 @@ class StringForm
 		if (!is_array($_POST) || !array_key_exists($name, $_POST))
 			return;
 
-		if ($_POST[$name] != "" && !ctype_alnum($_POST[$name]))
+		/* XXX: this is wrong wrong wrong. I need to understand how
+		 * POST data is processed in PHP to fix this. */
+		if ($_POST[$name] != "" && (!ctype_alnum($_POST[$name]) &&
+			!ctype_punct($_POST[$name]) &&
+			!ctype_digit($_POST[$name]) &&
+			!ctype_space($_POST[$name])))
 				throw new Exception('Wrong POST data received');
 
 		$this->string = $_POST[$name];

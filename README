@@ -23,7 +23,6 @@ drop table location;
 drop table datahamster_extra;
 drop table datahamster;
 drop table sector;
-drop table address;
 
 insert into sector values (NULL, 'Telefonie', 'Telefonie');
 insert into sector values (NULL, 'Internet', 'Internet');

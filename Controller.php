@@ -98,35 +98,24 @@ class Control_Admin extends Controller
 	public function execGet()
 	{
 		// First see if we're already logged in
-		if ( $this->sessionOK() ) {
+		/* XXX: also check if password has changed */
+		if (Session::get()->state == 1) {
+			echo "Login";
 		    
-		}
-		else {
-
+		} else {
+			$this->setLocation("login");
 		}
 	}
 
 	public function execPost()
 	{
 		// First see if we're already logged in
-		if ( $this->sessionOK() ) {
+		if (Session::get()->state == 1) {
 
 		}
 		else {
 		    
 		}
-	}
-
-	/**
-	*
-	* @return bool
-	*/
-	private function sessionOK() {
-		$session = Session::get();
-		$session->start();
-
-		return ( isset( $session->user )
-		    && $session->user instanceof Session_User );
 	}
 }
 
@@ -361,6 +350,38 @@ class Control_UserInfo extends Controller
 
 		/* Success! */
 		$this->setLocation("genereer");
+	}
+}
+
+class Control_Login extends Controller
+{
+	public function execGet()
+	{
+		/* User already logged in. */
+		if (Session::get()->state == 1)
+			return;
+
+		return new View_Login();
+	}
+
+	public function execPost()
+	{
+		/* User already logged in. */
+		if (Session::get()->state == 1)
+			return;
+
+		$form_username = new StringForm("username");
+		$form_password = new StringForm("password");
+		
+		$u = Model_User::find_by_name($form_username->getString());
+		if ($u && $u->verify($form_password->getString())) {
+			$this->setLocation("admin");
+			Session::get()->state = 1;
+			Session::get()->username = $u->name;
+			Session::get()->logged_in = 0; // XXX: date
+		} else {
+			return new View_Login(1, $form_username->getString());
+		}
 	}
 }
 

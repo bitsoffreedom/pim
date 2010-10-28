@@ -99,4 +99,23 @@ class View_Letter extends View
 	}
 }
 
+class View_Login extends View
+{
+	public function __construct($wrongdata = 0, $username = NULL)
+	{
+		$lw = new LoginWidget();
+		if ($wrongdata)
+			$lw->setWrongData();
+		if ($username)
+			$lw->setUsername($username);
+		$lw->render();
+
+		$tw = new AdminTopWidget();
+		$tw->setBody($lw);
+		$tw->render();
+
+		$this->setBuffer((string)$tw);
+	}
+}
+
 ?>
