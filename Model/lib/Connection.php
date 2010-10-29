@@ -79,6 +79,7 @@ abstract class Connection
 		$info->db = $config['database'];
 		$info->user = $config['username'];
 		$info->pass = $config['password'];
+		$info->charset = "utf8";
 
 		return $info;
 	}

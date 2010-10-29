@@ -53,6 +53,7 @@ abstract class Controller
 	public function display()
 	{
 		header($this->status_line);
+		header('Content-Type: text/html; charset=utf-8');
 		if (!empty($this->location))
 			header(sprintf('Location: %s', $this->location));
 
