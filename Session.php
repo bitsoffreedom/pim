@@ -30,6 +30,15 @@ class Session
 
 		// Regenerates the session id to avoid session fixation.
 		session_regenerate_id( true );
+
+		if (!array_key_exists('initialized', $_SESSION)) {
+			$_SESSION['sectors'] = Array();
+			$_SESSION['companies'] = Array();
+			$_SESSION['firstname'] = Array();
+			$_SESSION['lastname'] = Array();
+			$_SESSION['initialized'] = 1;
+		}
+
 	}
 
 	/**
