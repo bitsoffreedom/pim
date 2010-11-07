@@ -67,7 +67,7 @@ class TopWidget extends Widget
 		if (empty($ses_comp))
 			$sel_comp = Array();
 		else
-			$sel_comp = Model_Datahamster::find($ses_comp);
+			$sel_comp = Model_Datahamster::find_all_by_id($ses_comp);
 
 		$this->renderInternal(
 		    Array(
@@ -131,17 +131,22 @@ class CompanyWidget extends Widget
 	{
 		// Retrieve the list of all sectors
 		$sector_list = Model_Sector::all();
-		if (empty($sector_list))
-			$sector_list = Array();
-		$sel_sectors = Session::get()->sectors;
-		if (empty($sel_sectors))
-			$sel_sectors = Array();
+		$sel_sector_ids = Session::get()->sectors;
+		$sel_sector_list = Array();
+		$not_sel_sector_list = Array();
+
+		foreach ($sector_list as $s) {
+			if (in_array($s->id, $sel_sector_ids))
+				$sel_sector_list[] = $s;
+			else
+				$not_sel_sector_list[] = $s;
+		}
 
                 $this->renderInternal(
                         Array(
                         "companylist" => $this->company_list,
-                        "sectorlist" => $sector_list,
-			"sel_sectorlist" => $sel_sectors
+			"sel_sector_list" => $sel_sector_list,
+			"not_sel_sector_list" => $not_sel_sector_list,
                         )
                 );
 	}

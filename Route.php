@@ -18,6 +18,9 @@ class Route
                 "gegevens" => "Control_UserInfo",
                 "genereer" => "Control_Generate",
 		"login" => "Control_Login",
+		"bedrijf_administratie" => "Control_AdminCompanies",
+		"sector_toevoegen" => "Control_AddSector",
+		"sector_verwijderen" => "Control_DelSector",
             );
 
         public function __construct()

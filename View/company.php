@@ -1,5 +1,27 @@
 		<div id="content">
 			<h1>1. Wie wil je aanschrijven?</h1>
+
+			<div id="facets">
+
+<? if (!empty($sel_sector_list)) { ?>
+			<h2>Filters</h2>
+			<ul>
+	<? foreach ($sel_sector_list as $s) { ?>
+				<li><?=$s->name?> <a href="sector_verwijderen/<?=$s->id?>">(Verwijder)</a></li>
+	<? } ?>
+			</ul>
+<? } ?>
+<?
+if (!empty($not_sel_sector_list)) {
+?>
+			<h2>Per sector</h2>
+			<ul>
+			<?  foreach ($not_sel_sector_list as $s) { ?>
+			<li><a href="sector_toevoegen/<?=$s->id?>"><?=$s->name?></a></li>
+			<? } ?>
+			</ul>
+<? } ?>
+			</div>
 			
 			<p>Welke bedrijven wil je aanschrijven?</p>
 
@@ -9,18 +31,6 @@
 			<div style="float: left">
 				<input type="text" name="naam" /> <br />
 				<input type="hidden" name="zoekform" value="0" />
-			</div>
-
-			<div style="float: right">
-<? foreach ($sectorlist as $s) { ?>
-	<?
-	if (in_array($s->id, $sel_sectorlist))
-		$checked = "checked";
-	else
-		$checked = "";
-	?>
-				<input type="checkbox" name="sectoren[]" value="<?=$s->id?>" <?=$checked?> /><?=$s->name?><br />
-<? } ?>
 			</div>
 
 				<input type="submit" value="Zoeken" />

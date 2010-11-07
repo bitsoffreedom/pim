@@ -4,5 +4,7 @@
 
 
 RewriteEngine on
-RewriteRule ^([A-Za-z]+)$ index.php?page=$1 [L]
+RewriteRule ^([A-Za-z_]+)$ index.php?page=$1 [L]
 RewriteRule ^genereer/([0-9]+)$ index.php?page=genereer&param=$1
+RewriteRule ^sector_toevoegen/([0-9]+)$ index.php?page=sector_toevoegen&param=$1
+RewriteRule ^sector_verwijderen/([0-9]+)$ index.php?page=sector_verwijderen&param=$1

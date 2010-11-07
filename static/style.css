@@ -11,6 +11,14 @@ a { color: #fff;}
 a img { border: none; }
 a:hover { color: #fff; }
 
+#facets {
+	float: right;
+}
+
+#facets a {
+	color: #000;
+}
+
 #container {
 	position: relative;
 	margin: 0 auto;

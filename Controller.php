@@ -143,15 +143,59 @@ class Control_Generate extends Controller
 	}
 }
 
+class Control_AddSector extends Controller
+{
+	public function execGet()
+	{
+		/* XXX: check if sector_id points to something real */
+		$sector_id = $this->route->getParam();
+
+		$sectors = Session::get()->sectors;
+		if (!in_array($sector_id, $sectors)) {
+			$sectors[] = $sector_id;
+			Session::get()->sectors = $sectors;
+		}
+
+		$this->setLocation("../bedrijven");
+	}
+
+	public function execPost()
+	{
+	}
+}
+
+class Control_DelSector extends Controller
+{
+	public function execGet()
+	{
+		$sector_id = $this->route->getParam();
+		$sectors = Session::get()->sectors;
+
+		if (($key = array_search($sector_id, $sectors)) !== FALSE) {
+			unset($sectors[$key]);
+			Session::get()->sectors = $sectors;
+		}
+
+		$this->setLocation("../bedrijven");
+	}
+
+	public function execPost()
+	{
+	}
+}
+
 class Control_SelectCompany extends Controller
 {
 	public function execGet()
 	{
 		try {
 			$sectors = Session::get()->sectors;
+			$hamsters = Array();
 			if (empty($sectors))
-				throw new Exception('No sectors selected');
-			$hamsters = Model_Datahamster::find_all_by_sector_id($sectors);
+				$hamsters = Model_Datahamster::all();
+			else
+				$hamsters = Model_Datahamster::find_all_by_sector_id($sectors);
+
 			return new View_SelectCompany($hamsters);
 		} catch (Exception $e) {
 			$this->setStatusLine('HTTP/1.0 500 Internal Server Error');
@@ -181,30 +225,14 @@ class Control_SelectCompany extends Controller
 	private function searchform()
 	{
 		try {
-			$sectorform = new IntegerForm("sectoren");
-			$sectors = $sectorform->getIntegers();
-
 			$searchform = new StringForm("naam");
 			$cname = $searchform->getString();
 
-			// With an empty search field merely get the companies
-			// from the specified sectors.
-			if (empty($cname) && empty($sectors)) {
-				Session::get()->sectors = Array();
-				return new View_SelectCompany(Array());
-			} else if (empty($cname) && !empty($sectors)) {
-				Session::get()->sectors = $sectors;
-
+			if (empty($cname)) {
 				$hamsters = Model_Datahamster::find_all_by_sector_id(Session::get()->sectors);
 				return new View_SelectCompany($hamsters);
-			} else if (!empty($cname) && empty($sectors)) {
-				Session::get()->sectors = Array();
-				/* XXX: please select a sector */
-				return new View_SelectCompany(Array());
-			} else if (!empty($cname) && !empty($sectors)) {
-				Session::get()->sectors = $sectors;
-
-				$hamsters = Model_Datahamster::hamsterSearch($sectors, $cname);
+			} else  {
+				$hamsters = Model_Datahamster::hamsterSearch(Session::get()->sectors, $cname);
 				return new View_SelectCompany($hamsters);
 			}
 		} catch (Exception $e) {
@@ -238,7 +266,7 @@ class Control_SelectCompany extends Controller
 				$company_sids = Session::get()->companies;
 				if ($company_sids == NULL)
 					$company_sids = Array();
-				$hamsters = Model_Datahamster::find($company_sids);
+				$hamsters = Model_Datahamster::find_all_by_id($company_sids);
 				return new View_SelectCompany($hamsters);
 			case "btn2":
 				/* XXX: if company_list is empty show error and don't continue */
