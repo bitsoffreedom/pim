@@ -78,8 +78,3 @@ class Relation(models.Model):
 	src = models.ForeignKey(Organisation, related_name='src')
 	dest = models.ForeignKey(Organisation, related_name='dest')
 	confidence = models.DecimalField(max_digits=10, decimal_places=0)
-
-class Church(Organisation):
-	religion = models.CharField(max_length=200)
-	number_of_priests = models.DecimalField(max_digits=10, decimal_places=0)
-
