@@ -147,17 +147,17 @@ def delkeyword(request, param):
 	return HttpResponseRedirect('/letter/')
 
 def userdata(request):
-	if request.method == 'POST': # If the form has been submitted...
-		form = UserForm(request.POST) # A form bound to the POST data
-		if form.is_valid(): # All validation rules pass
+	if request.method == 'POST':
+		form = UserForm(request.POST)
+		if form.is_valid():
 			request.session['firstname'] = form.cleaned_data['firstname']
 			request.session['lastname'] = form.cleaned_data['lastname']
 			request.session['street_address'] = form.cleaned_data['street_address']
 			request.session['postcode'] = form.cleaned_data['postcode']
 			request.session['city'] = form.cleaned_data['city']
-			return HttpResponseRedirect('/letter/generate') # Redirect after POST
+			return HttpResponseRedirect('/letter/generate')
 	else:
-		form = UserForm() # An unbound form
+		form = UserForm()
 
 	return render_to_response('userdata.html', {'form': form,},
 		context_instance=RequestContext(request))
@@ -169,18 +169,12 @@ def generate(request):
 	return render_to_response('generate.html', {'selected_companies': selected_companies})
 
 def generatepdf(request, param):
-	# Create the HttpResponse object with the appropriate PDF headers.
 	response = HttpResponse(mimetype='application/pdf')
-	response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
+	response['Content-Disposition'] = 'attachment; filename=brief.pdf'
 
-	# Create the PDF object, using the response object as its "file."
 	p = canvas.Canvas(response)
-
-	# Draw things on the PDF. Here's where the PDF generation happens.
-	# See the ReportLab documentation for the full list of functionality.
 	p.drawString(100, 100, "Hello world.")
-
-	# Close the PDF object cleanly, and we're done.
 	p.showPage()
 	p.save()
+
 	return response
