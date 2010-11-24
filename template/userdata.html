@@ -63,7 +63,7 @@
         <p>Geef het adres op waar je het antwoord op wil ontvangen</p>
       </div>
       <div id="results">
-      <form action="/letter/userdata" method="post">
+      <form action="/userdata" method="post">
         {% csrf_token %}
 	{{ form.as_p }}
         <input type="submit" value="verzenden"/>
@@ -78,10 +78,10 @@
       <ul>
         
         {% for c in selected_companies %}
-        <li><a class="delete" href="/letter/delcompany/{{ c.pk }}">X</a> {{ c.preflabel }}</li>
+        <li><a class="delete" href="/delcompany/{{ c.pk }}">X</a> {{ c.preflabel }}</li>
         {% endfor %}
       </ul>
-      <p><a href="/letter/">wijzig</a></p>
+      <p><a href="/">wijzig</a></p>
       {% endif %}
     </div>
     </div>

@@ -68,10 +68,10 @@
         <div class="grey">Actieve filters</div>
           <ul>
             {% for city in selected_cities %}
-            <li><a class="delete" href="/letter/delcity/{{ city.pk }}">X</a>{{ city }}</li>
+            <li><a class="delete" href="/delcity/{{ city.pk }}">X</a>{{ city }}</li>
             {% endfor %}
             {% for keyword in selected_keywords %}
-            <li><a class="delete" href="/letter/delkeyword/{{ keyword.pk }}">X</a> {{ keyword }}</li>
+            <li><a class="delete" href="/delkeyword/{{ keyword.pk }}">X</a> {{ keyword }}</li>
             {% endfor %}
           </ul>
         </div>
@@ -98,7 +98,7 @@
       </div>
       <div id="results">
         <p>{{ org_count }} organisatie(s) gevonden.</p>
-        <form action="/letter/" method="post">
+        <form action="/" method="post">
           {% csrf_token %}
 	  {% for org in organisations.object_list %}
           <p><input type="checkbox" name="companies" value="{{ org.id }}" />{{ org.preflabel }}</p>
@@ -107,11 +107,11 @@
 	</form>
         <div id="nav">
           {% if organisations.has_previous %}
-          <a href="/letter/{{ organisations.previous_page_number }}">Vorige</a>
+          <a href="/{{ organisations.previous_page_number }}">Vorige</a>
           {% endif %}
           Pagina {{ organisations.number }} van de {{ organisations.paginator.num_pages }}
           {% if organisations.has_next %}
-          <a href="/letter/{{ organisations.next_page_number }}">Volgende</a>
+          <a href="/{{ organisations.next_page_number }}">Volgende</a>
           {% endif %}
         </div>
       </div>
@@ -124,10 +124,10 @@
       <ul>
         
         {% for c in selected_companies %}
-        <li><a class="delete" href="/letter/delcompany/{{ c.pk }}">X</a> {{ c.preflabel }}</li>
+        <li><a class="delete" href="/delcompany/{{ c.pk }}">X</a> {{ c.preflabel }}</li>
         {% endfor %}
       </ul>
-      <p><a href="/letter/userdata">Begin met de brieven</a></p>
+      <p><a href="/userdata">Begin met de brieven</a></p>
       {% endif %}
     </div>
     </div>

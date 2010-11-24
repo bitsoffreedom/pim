@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <title>Brief</title>
+  </head>
+  <body>
+    <ul>
+      <li>Name: {{ firstname }} {{ lastname }}</li>
+      <li>StreetAddress: {{ street_address }}</li>
+      <li>Housenr:$Scratch_variable</li>
+      <li>Postcode: {{ postcode }}</li>
+      <li>City: {{ city }}</li>
+    </ul>
+
+    <ul>
+      <li>To: {{ organisation.preflabel }},</li>
+      <li>Address: {{ organisation.street_address }}</li>
+      <li>Date: Zie post-stempel</li>
+      <li>City : {{ organisation.city }}</li>
+    </ul>
+
+    <p>Att:$PreferedLabelOfOrganizationalUnit</p>
+
+    <p>_Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
+
+    <p>Geachte Heer/Mevrouw,</p>
+
+    <p>Op basis van artikel 35 van de Wet bescherming persoonsgegevens (Wbp)
+    verneem ik graag of u persoonsgegevens van mij verwerkt. Indien dat het
+    geval is, verzoek ik u om een volledig overzicht in begrijpelijke vorm, een
+    omschrijving van de doeleinden van de verwerking, de herkomst van de
+    gegevens en een overzicht van de organisaties aan wie u deze gegevens heeft
+    verstrekt.</p>
+
+    <p>Wellicht ten overvloede vermeld ik dat in lid 1 van het wetsartikel een
+    termijn van vier weken wordt genoemd waarin u aan dit verzoek moet
+    voldoen.</p>
+
+    <p>Een kopie van mijn identiteitsbewijs is als bijlage opgenomen.</p>
+
+    <p>Hoogachtend, {{ firstname }} {{ lastname }}</p>
+  </body>
+</html>

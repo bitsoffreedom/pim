@@ -44,7 +44,7 @@ def index(request, param = None):
 				if pk not in request.session['companies']:
 					request.session['companies'].append(pk)
 					request.session.modified = True
-			return HttpResponseRedirect('/letter/')
+			return HttpResponseRedirect('/')
 	else:
 		form = AddCompanyForm()
 
@@ -87,7 +87,7 @@ def delcompany(request, param):
 	request.session['companies'].remove(company_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect('/letter/')
+	return HttpResponseRedirect('/')
 
 def addcity(request, param):
 	cities = request.session.setdefault('cities', [])
@@ -102,7 +102,7 @@ def addcity(request, param):
 	if city_id not in request.session['cities']:
 		request.session['cities'].append(city_id)
 		request.session.modified = True
-	return HttpResponseRedirect('/letter/')
+	return HttpResponseRedirect('/')
 
 def delcity(request, param):
 	request.session.setdefault('cities', [])
@@ -115,7 +115,7 @@ def delcity(request, param):
 	request.session['cities'].remove(city_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect('/letter/')
+	return HttpResponseRedirect('/')
 
 def addkeyword(request, param):
 	request.session.setdefault('keywords', [])
@@ -131,7 +131,7 @@ def addkeyword(request, param):
 	if keyword_id not in request.session['keywords']:
 		request.session['keywords'].append(keyword_id)
 		request.session.modified = True
-	return HttpResponseRedirect('/letter/')
+	return HttpResponseRedirect('/')
 
 def delkeyword(request, param):
 	request.session.setdefault('keywords', [])
@@ -144,7 +144,7 @@ def delkeyword(request, param):
 	request.session['keywords'].remove(keyword_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect('/letter/')
+	return HttpResponseRedirect('/')
 
 def userdata(request):
 	if request.method == 'POST':
@@ -155,7 +155,7 @@ def userdata(request):
 			request.session['street_address'] = form.cleaned_data['street_address']
 			request.session['postcode'] = form.cleaned_data['postcode']
 			request.session['city'] = form.cleaned_data['city']
-			return HttpResponseRedirect('/letter/generate')
+			return HttpResponseRedirect('/generate')
 	else:
 		form = UserForm()
 
@@ -168,12 +168,65 @@ def generate(request):
 
 	return render_to_response('generate.html', {'selected_companies': selected_companies})
 
+def generatehtml(request, param):
+	request.session.setdefault('companies', [])
+
+	try:
+		company_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	if company_id not in request.session['companies']:
+		return HttpResponse("fail")
+
+	required_keys = (
+		'firstname',
+		'lastname',
+		'street_address',
+		'postcode',
+		'city'
+	)
+	# <= means issubset
+	if required_keys <= request.session.keys():
+		return HttpResponse("fail")
+
+	try:
+		organisation = Organisation.objects.get(pk=company_id)
+	except Organisation.DoesNotExist:
+		return HttpResponse("fail")
+
+	return render_to_response('generatehtml.html',
+		{
+		'organisation': organisation,
+		'firstname': request.session['firstname'],
+		'lastname': request.session['lastname'],
+		'street_address': request.session['street_address'],
+		'postcode': request.session['postcode'],
+		'city': request.session['city']
+		})
+
 def generatepdf(request, param):
+	request.session.setdefault('companies', [])
+
+	try:
+		company_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	if company_id not in request.session['companies']:
+		return HttpResponse("fail")
+
+	try:
+		organisation = Organisation.objects.get(pk=company_id)
+	except Organisation.DoesNotExist:
+		return HttpResponse("fail")
+
 	response = HttpResponse(mimetype='application/pdf')
-	response['Content-Disposition'] = 'attachment; filename=brief.pdf'
+	response['Content-Disposition'] = "attachment; filename=brief_bedrijf%d.pdf" % (company_id)
 
 	p = canvas.Canvas(response)
-	p.drawString(100, 100, "Hello world.")
+	p.drawString(1, 1, "Onderwerp: Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)")
+	p.drawString(2, 2, "Geachte Heer/Mevrouw,")
 	p.showPage()
 	p.save()
 

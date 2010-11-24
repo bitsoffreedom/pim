@@ -10,5 +10,6 @@ urlpatterns = patterns('',
     (r'^delcompany/(?P<param>\d+)$', 'letter.views.delcompany'),
     (r'^userdata$', 'letter.views.userdata'),
     (r'^generate$', 'letter.views.generate'),
+    (r'^generatehtml/(?P<param>\d+)$', 'letter.views.generatehtml'),
     (r'^generatepdf/(?P<param>\d+)$', 'letter.views.generatepdf'),
 )
