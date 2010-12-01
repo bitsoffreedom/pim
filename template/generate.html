@@ -1,3 +1,13 @@
-{% for c in selected_companies %}
-<a href="/generatehtml/{{ c.pk }}">{{ c }}</a>
-{% endfor %}
+<html>
+  <head>
+    <title>PIM - Privacy Inzage Machine</title>
+  </head>
+  <body>
+    <h1>Brieven</h1>
+    <ul>
+      {% for c in selected_companies %}
+      <li><a href="/generatehtml/{{ c.pk }}">{{ c }}</a></li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
