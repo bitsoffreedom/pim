@@ -104,7 +104,7 @@ class Organisation(models.Model):
 		"maatschappij en dienstverleners en andere organisaties")
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)
-	consumerinforation = models.ManyToManyField(ConsumerInformation)
+	consumerinformation = models.ManyToManyField(ConsumerInformation)
 
 	class Meta:
 		verbose_name=_('organisation')
