@@ -17,10 +17,9 @@ def search(request):
 	if len(city_ids) > 0:
 		org_list = org_list.filter(city__in = city_ids)
 
-	# TODO: Update to use tags instead of keywords.
-	keyword_ids = request.session['keywords']
-	if len(keyword_ids) > 0:
-		org_list = org_list.filter(keyword__in = keyword_ids)
+	tag_ids = request.session['tags']
+	if len(tag_ids) > 0:
+		org_list = org_list.filter(tags__in = tag_ids)
 
 	return org_list
 
@@ -28,8 +27,7 @@ def index(request, param = None):
 	# initialize the session
 	request.session.setdefault('cities', [])
 	request.session.setdefault('companies', [])
-	# TODO: Use tags instead of keywords
-	request.session.setdefault('keywords', [])
+	request.session.setdefault('tags', [])
 
 	# URL processing
 	page_id = 1
@@ -54,11 +52,9 @@ def index(request, param = None):
 
 
 	cities = City.objects.all()
-	# TODO: Use tags instead of keywords.
-	keywords = Keyword.objects.all()
+	tags = Organisation.tags.all()
 	selected_cities = City.objects.filter(pk__in = request.session['cities'])
-	# TODO: Use tags instead of keywords.
-	selected_keywords = Keyword.objects.filter(pk__in = request.session['keywords'])
+	selected_tags = Organisation.tags.filter(pk__in = request.session['tags'])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 	org_list = search(request)
 	org_count = org_list.count()
@@ -73,14 +69,12 @@ def index(request, param = None):
 		{
 		'cities': cities,
 		'form': form,
-		# TODO: Use tags instead of keywords.
-		'keywords': keywords,
+		'tags': tags,
 		'org_count': org_count,
 		'organisations': org,
 		'selected_cities': selected_cities,
 		'selected_companies': selected_companies,
-		# TODO: Use tags instead of keywords.
-		'selected_keywords': selected_keywords,
+		'selected_tags': selected_tags,
 		},
 		context_instance=RequestContext(request))
 
@@ -125,32 +119,31 @@ def delcity(request, param):
 
 	return HttpResponseRedirect('/')
 
-# TODO: Use tags instead of keywords.
 def addkeyword(request, param):
-	request.session.setdefault('keywords', [])
+	request.session.setdefault('tags', [])
 
 	try:
-		keyword_id = int(param)
+		tag_id = int(param)
 	except (ValueError, TypeError):
 		return HttpResponse("fail")
 
-	if not Keyword.objects.filter(pk=keyword_id):
+	if not Organisation.tags.filter(pk=tag_id):
 		return HttpResponse("fail")
 
-	if keyword_id not in request.session['keywords']:
-		request.session['keywords'].append(keyword_id)
+	if tag_id not in request.session['tags']:
+		request.session['tags'].append(tag_id)
 		request.session.modified = True
 	return HttpResponseRedirect('/')
 
 def delkeyword(request, param):
-	request.session.setdefault('keywords', [])
+	request.session.setdefault('tags', [])
 
 	try:
-		keyword_id = int(param)
+		tag_id = int(param)
 	except (ValueError, TypeError):
 		return HttpResponse("fail")
 
-	request.session['keywords'].remove(keyword_id)
+	request.session['tags'].remove(tag_id)
 	request.session.modified = True
 
 	return HttpResponseRedirect('/')

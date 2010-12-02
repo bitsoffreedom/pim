@@ -1,5 +1,0 @@
-#	hasmyname = models.BooleanField()
-#	hasmystreetaddress = models.BooleanField()
-#	hasmytelephonenumber = models.BooleanField()
-#	hasmyairmilecardied = models.BooleanField()
-#	hasmycardlicensenumber = models.BooleanField()

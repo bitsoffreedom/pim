@@ -63,15 +63,15 @@
         <p>Kies hieronder de bedrijven die wilt aanschrijven</p>
       </div>
       <div id="facets">
-        {% if selected_cities or selected_keywords %}
+        {% if selected_cities or selected_tags %}
         <div id="active_filters">
         <div class="grey">Actieve filters</div>
           <ul>
             {% for city in selected_cities %}
             <li><a class="delete" href="/delcity/{{ city.pk }}">X</a>{{ city }}</li>
             {% endfor %}
-            {% for keyword in selected_keywords %}
-            <li><a class="delete" href="/delkeyword/{{ keyword.pk }}">X</a> {{ keyword }}</li>
+            {% for tag in selected_tags %}
+            <li><a class="delete" href="/delkeyword/{{ tag.pk }}">X</a> {{ tag }}</li>
             {% endfor %}
           </ul>
         </div>
@@ -86,11 +86,11 @@
             {% endfor %}
           </ul>
           {% endif %}
-          {% if keywords %}
+          {% if tags %}
           <p>Trefwoorden</p>
           <ul>
-            {% for keyword in keywords %}
-            <li><a href="addkeyword/{{ keyword.id}}">{{ keyword }}</a></li>
+            {% for tag in tags %}
+            <li><a href="addkeyword/{{ tag.id}}">{{ tag }}</a></li>
             {% endfor %}
           </ul>
           {% endif %}

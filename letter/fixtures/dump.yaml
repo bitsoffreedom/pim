@@ -20,10 +20,9 @@
   pk: 5
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [1]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -35,10 +34,9 @@
   pk: 1
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [1]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -50,10 +48,9 @@
   pk: 2
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [1]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -65,10 +62,9 @@
   pk: 3
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [1]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -80,10 +76,9 @@
   pk: 4
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [1]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -95,10 +90,9 @@
   pk: 5
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: []
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -110,10 +104,9 @@
   pk: 6
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [1]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -125,10 +118,9 @@
   pk: 7
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: []
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -140,10 +132,9 @@
   pk: 8
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [2]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -155,10 +146,9 @@
   pk: 9
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [2]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -170,10 +160,9 @@
   pk: 10
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [2]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -185,10 +174,9 @@
   pk: 11
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [2]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -200,10 +188,9 @@
   pk: 12
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [3]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -215,10 +202,9 @@
   pk: 13
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [4]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -230,10 +216,9 @@
   pk: 14
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -245,10 +230,9 @@
   pk: 15
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -260,10 +244,9 @@
   pk: 16
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: []
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -275,10 +258,9 @@
   pk: 17
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -290,10 +272,9 @@
   pk: 18
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: []
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -305,10 +286,9 @@
   pk: 19
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -320,10 +300,9 @@
   pk: 20
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -335,10 +314,9 @@
   pk: 21
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -350,10 +328,9 @@
   pk: 22
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -365,10 +342,9 @@
   pk: 23
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -380,10 +356,9 @@
   pk: 24
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -395,10 +370,9 @@
   pk: 25
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -410,10 +384,9 @@
   pk: 26
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -425,10 +398,9 @@
   pk: 27
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -440,10 +412,9 @@
   pk: 28
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
@@ -455,10 +426,9 @@
   pk: 29
 - fields:
     answernr: ''
-    brands: []
     consumerrelation: [5]
     city: 1
-    country_name: 1
+    country: 1
     housenr: ''
     postbus: ''
     postcode: ''
