@@ -20,22 +20,31 @@ class RelationTypeAdmin(admin.ModelAdmin):
 admin.site.register(RelationType, RelationTypeAdmin)
 
 class RelationInline(admin.TabularInline):
-	model = Relation
-	fk_name = 'from_organisation'
+    model = Relation
+    fk_name = 'from_organisation'
+    extra = 1
 
+class BrandInline(admin.TabularInline):
+    model = Brand
+    prepopulated_fields = {"slug": ("name",)}
+    extra = 1
+
+class IdentifierInline(admin.TabularInline):
+    model = Identifier
+    extra = 1
 
 class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('name',)
-    list_filter = ('consumerinformation', 'consumerrelation')
+    list_filter = ('collectedinformation', 'consumerrelation', 'country', 'sector')
     search_fields = ['name', 'short_name']
     
     save_as = True
-    inlines = [RelationInline, ]
+    inlines = [RelationInline, BrandInline, IdentifierInline]
 
     prepopulated_fields = {"short_name": ("name",)}
 
-    filter_horizontal = ('consumerrelation', 'consumerinformation')
+    filter_horizontal = ('collectedinformation', 'consumerrelation')
 
 
 admin.site.register(Organisation, OrganisationAdmin)
@@ -101,21 +110,6 @@ class SectorAdmin(admin.ModelAdmin):
 
 admin.site.register(Sector, SectorAdmin)
 
-class BrandAdmin(admin.ModelAdmin):
-    date_hierarchy = ''
-    list_display = ('name',)
-    list_filter = ()
-    search_fields = []
-
-    fieldsets = ()
-    
-    save_as = True
-    inlines = []
-
-    prepopulated_fields = {"slug": ("name",)}
-
-
-admin.site.register(Brand, BrandAdmin)
 
 class ConsumerRelationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
@@ -130,7 +124,7 @@ class ConsumerRelationAdmin(admin.ModelAdmin):
 
 admin.site.register(ConsumerRelation, ConsumerRelationAdmin)
 
-class ConsumerInformationAdmin(admin.ModelAdmin):
+class CollectedInformationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     #list_display = ()
     list_filter = ()
@@ -141,4 +135,4 @@ class ConsumerInformationAdmin(admin.ModelAdmin):
     save_as = True
     inlines = []
 
-admin.site.register(ConsumerInformation, ConsumerInformationAdmin)
+admin.site.register(CollectedInformation, CollectedInformationAdmin)

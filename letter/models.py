@@ -48,6 +48,7 @@ class ConsumerRelation(models.Model):
 		return self.role
 
 class Brand(models.Model):
+	owner = models.ForeignKey('Organisation')
 	name = models.CharField(max_length=20)
 	slug = models.SlugField()
 
@@ -64,17 +65,17 @@ class Identifier(models.Model):
 	organisation = models.ForeignKey('Organisation')
 
 	class Meta:
-		verbose_name=_('identifier')
-		verbose_name_plural=_('identifiers')
+		verbose_name=_('consumer identifier')
+		verbose_name_plural=_('consumer identifiers')
 
-class ConsumerInformation(models.Model):
+class CollectedInformation(models.Model):
 	""" Information which companies have about an user"""
 	
 	name = models.CharField(max_length=200, blank=True, help_text="")
 
 	class Meta:
-		verbose_name=_('consumer information')
-		verbose_name_plural=_('consumer information')
+		verbose_name=_('collected information')
+		verbose_name_plural=_('collected information')
 
 	def __unicode__(self):
 		return self.name
@@ -95,15 +96,14 @@ class Organisation(models.Model):
 	country = models.ForeignKey(Country)
 	sector = models.ForeignKey(Sector)
 	website = models.CharField(max_length=200, blank=True)
-	brands = models.ManyToManyField(Brand, blank=True, null=True)
 	tags = TaggableManager()
 	notificationnumber = models.DecimalField(max_digits=10,
 	     decimal_places=0, blank=True, null=True, help_text="CBP registernummer")
 	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True, null=True,
-	     verbose_name='relation',
+	     verbose_name='consumer relation',
 	     help_text=_('The sort of relations this organisation has with consumers.'))
-	consumerinformation = models.ManyToManyField(ConsumerInformation, blank=True, null=True,
-	     verbose_name=('information'),
+	collectedinformation = models.ManyToManyField(CollectedInformation, blank=True, null=True,
+	     verbose_name=('collected information'),
 	     help_text=_('The sort of information this organisation gathers about consumers.'))
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)
