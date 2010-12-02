@@ -113,10 +113,27 @@ class Organisation(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class RelationType(models.Model):
+	""" Types of relationships. """
+
+	name = models.CharField(max_length=64, verbose_name=_('name'))
+	slug = models.SlugField()
+
+	class Meta:
+		verbose_name = _('relation type')
+		verbose_name_plural = _('relation types')
+
+	def __unicode__(self):
+		return self.name
+
 class Relation(models.Model):
 	""" A relation between two companies """
 	
-	src = models.ForeignKey(Organisation, related_name='src')
-	dest = models.ForeignKey(Organisation, related_name='dest')
-	confidence = models.DecimalField(max_digits=10, decimal_places=0)
+	from_organisation = models.ForeignKey(Organisation, 
+	                                      related_name='from',
+	                                      verbose_name=_('from'))
+	to_organisation = models.ForeignKey(Organisation, 
+	                                    related_name='to',
+	                                    verbose_name=_('to'))
+	type = models.ForeignKey(RelationType)
 

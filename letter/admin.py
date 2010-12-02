@@ -1,16 +1,37 @@
 from letter.models import *
 from django.contrib import admin
 
-class OrganisationAdmin(admin.ModelAdmin):
+from django.utils.translation import ugettext_lazy as _
+
+class RelationTypeAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ('name',)
-    list_filter = ('consumerinformation', 'consumerrelation')
-    search_fields = ['name', 'short_name']
+    #list_display = ()
+    list_filter = ()
+    search_fields = []
 
     fieldsets = ()
     
     save_as = True
     inlines = []
+
+    prepopulated_fields = {"slug": ("name",)}
+
+
+admin.site.register(RelationType, RelationTypeAdmin)
+
+class RelationInline(admin.TabularInline):
+	model = Relation
+	fk_name = 'from_organisation'
+
+
+class OrganisationAdmin(admin.ModelAdmin):
+    date_hierarchy = ''
+    list_display = ('name',)
+    list_filter = ('consumerinformation', 'consumerrelation')
+    search_fields = ['name', 'short_name']
+    
+    save_as = True
+    inlines = [RelationInline, ]
 
     prepopulated_fields = {"short_name": ("name",)}
 
