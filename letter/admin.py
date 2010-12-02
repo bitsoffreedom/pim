@@ -3,8 +3,8 @@ from django.contrib import admin
 
 class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
-    list_filter = ()
+    list_display = ('name',)
+    list_filter = ('consumerinformation', 'consumerrelation')
     search_fields = []
 
     fieldsets = ()
