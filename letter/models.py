@@ -92,7 +92,7 @@ class Organisation(models.Model):
 	postbus = models.CharField(max_length=20, blank=True)
 	postcode = models.CharField(max_length=20, blank=True)
 	city = models.ForeignKey(City, blank=True, null=True)
-	country_name = models.ForeignKey(Country, blank=True, null=True)
+	country = models.ForeignKey(Country, blank=True, null=True)
 	sector = models.ForeignKey(Sector, blank=True, null=True)
 	website = models.CharField(max_length=200, blank=True)
 	brands = models.ManyToManyField(Brand, blank=True, null=True)
