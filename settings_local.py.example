@@ -1,0 +1,65 @@
+from settings_default import *
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'Europe/Amsterdam'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'nl-nl'
+
+# DATABASE_ENGINE = 'mysql'
+# DATABASE_NAME = ''
+# DATABASE_USER = ''             # Not used with sqlite3.
+# DATABASE_PASSWORD = ''         # Not used with sqlite3.
+# DATABASE_HOST = ''             # Set to empty string for localhost. Not used with sqlite3.
+# DATABASE_PORT = ''             # Set to empty string for default. Not used with sqlite3.
+
+
+# DEBUG = False
+
+
+# Just append to the default value
+# INSTALLED_APPS += (
+# 	'my_little_app',
+# )
+
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = ''
+# DEFAULT_FROM_EMAIL = ''
+
+
+# Cache settings
+# CACHE_BACKEND = 'locmem://'
+# CACHE_PREFIX = DJANGO_PROJECT
+# CACHE_TIMEOUT = 60
+
+
+# Sentry settings
+# What should these site's errors by called in the log?
+# SENTRY_NAME = 'www.mysite.com'
+# Just one daily email
+# ADMINS = ()
+# SENTRY_ADMINS = (
+#     ('Name', 'emai'),
+# )
+# MANAGERS = SENTRY_ADMINS
+
+# General logging
+# No debuggin and log errors & warnings to sentry
+# import logging
+# logging.basicConfig(level=logging.WARNING,
+#                     format='%(levelname)-8s %(message)s')
+# 
+# 
+# from sentry.client.handlers import SentryHandler
+# 
+# logging.getLogger().addHandler(SentryHandler())
+# 
+# # Add StreamHandler to sentry's default so you can catch missed exceptions
+# logging.getLogger('sentry').addHandler(logging.StreamHandler())
