@@ -12,6 +12,9 @@ class OrganisationAdmin(admin.ModelAdmin):
     save_as = True
     inlines = []
 
+    prepopulated_fields = {"short_name": ("name",)}
+
+
 admin.site.register(Organisation, OrganisationAdmin)
 
 class RelationAdmin(admin.ModelAdmin):
