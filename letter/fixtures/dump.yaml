@@ -1,0 +1,470 @@
+- fields:
+    role: Auto-eigenaar
+  model: letter.ConsumerRelation
+  pk: 1
+- fields:
+    role: Bank-klant
+  model: letter.ConsumerRelation
+  pk: 2
+- fields:
+    role: Betaler
+  model: letter.ConsumerRelation
+  pk: 3
+- fields:
+    role: Buitenland-betaler
+  model: letter.ConsumerRelation
+  pk: 4
+- fields:
+    role: Consument
+  model: letter.ConsumerRelation
+  pk: 5
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [1]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'ANWB'
+    sector: 1
+    website: 'http://www.anwb.nl'
+    street_address: ''
+  model: letter.organisation
+  pk: 1
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [1]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Stg. Automotive Belangen Nederland'
+    sector: 1
+    website: ''
+    street_address: ''
+  model: letter.organisation
+  pk: 2
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [1]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Stg de Autobranche (Stidenda) Denktank '
+    sector: 1
+    website: 'http://www.stidenda.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 3
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [1]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Stg. RDC'
+    sector: 1
+    website: 'http://www.rdc.nl'
+    street_address: ''
+  model: letter.organisation
+  pk: 4
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [1]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Voortuigdata.nl Samenwerking tussen Voogd & Voogd Diensten en A2SP '
+    sector: 1
+    website: 'http://www.voertuigdata.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 5
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: []
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Voogd&Voogd Diensten'
+    sector: 1
+    website: 'http://www.voertuigdata.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 6
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [1]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'VWE Bureau voor Voertuigdocumentatie en-informatie B.V.'
+    sector: 1
+    website: 'http://www.vwe.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 7
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: []
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: ''
+    sector: 1
+    website: 'http://www.voogd.com/'
+    street_address: ''
+  model: letter.organisation
+  pk: 8
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [2]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'ABN AMRO Bank N.V.'
+    sector: 1
+    website: 'http://www.abnamro.nl'
+    street_address: ''
+  model: letter.organisation
+  pk: 9
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [2]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'ING Bank N.V.'
+    sector: 1
+    website: 'http://www.ing.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 10
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [2]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Rabobank Trust Company'
+    sector: 1
+    website: 'http://www.rabobank.nl'
+    street_address: ''
+  model: letter.organisation
+  pk: 11
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [2]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'SNS REAAL N.V.'
+    sector: 1
+    website: ''
+    street_address: ''
+  model: letter.organisation
+  pk: 12
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [3]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Mobile2Pay Nederland BV'
+    sector: 1
+    website: 'http://www.mobile2pay.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 13
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [4]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Society for Worldwide Interbank Financial Telecommunication (SWIFT), Belgi'
+    sector: 1
+    website: ''
+    street_address: ''
+  model: letter.organisation
+  pk: 14
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Albert Heijn, Zaandam'
+    sector: 1
+    website: ''
+    street_address: ''
+  model: letter.organisation
+  pk: 15
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Albert Heijn, Zaandam'
+    sector: 1
+    website: 'http://www.albert.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 16
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: []
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Acxiom Corporation, USA'
+    sector: 1
+    website: ''
+    street_address: ''
+  model: letter.organisation
+  pk: 17
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Acxiom Nederland B.V., dochter van Acxiom Corporation, USA'
+    sector: 1
+    website: ''
+    street_address: ''
+  model: letter.organisation
+  pk: 18
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: []
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Maxeda B.V.'
+    sector: 1
+    website: 'http://www.maxeda.com/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 19
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Magazijn De Bijenkorf B.V.'
+    sector: 1
+    website: 'http://www.debijenkorf.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 20
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Magazijn De Bijenkorf B.V.'
+    sector: 1
+    website: 'http://www.debijenkorf.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 21
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Magazijn De Bijenkorf B.V.'
+    sector: 1
+    website: 'http://www.debijenkorf.nl/ '
+    street_address: ''
+  model: letter.organisation
+  pk: 22
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Cendris Dataconsulting B.V.'
+    sector: 1
+    website: 'http://www.cendris.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 23
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Cendris Dataconsulting B.V.'
+    sector: 1
+    website: 'http://www.cendris.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 24
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Experian Nederland B.V.'
+    sector: 1
+    website: 'http://www.experian.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 25
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Experian Nederland B.V.'
+    sector: 1
+    website: 'http://www.experian.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 26
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Experian Nederland B.V.'
+    sector: 1
+    website: 'http://www.experian.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 27
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Experian Nederland B.V.'
+    sector: 1
+    website: 'http://www.experian.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 28
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Experian Nederland B.V.'
+    sector: 1
+    website: 'http://www.experian.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 29
+- fields:
+    answernr: ''
+    brands: []
+    consumerrelation: [5]
+    city: 1
+    country_name: 1
+    housenr: ''
+    postbus: ''
+    postcode: ''
+    name: 'Experian Nederland B.V.'
+    sector: 1
+    website: 'http://www.experian.nl/'
+    street_address: ''
+  model: letter.organisation
+  pk: 30
