@@ -55,6 +55,9 @@ class Brand(models.Model):
 		verbose_name=_('brand')
 		verbose_name_plural=_('brands')
 
+	def __unicode__(self):
+		return self.name
+
 class Identifier(models.Model):
 	""" Identifier which company require to identify a user in the letter """
 	name = models.CharField(max_length=20)
@@ -79,7 +82,7 @@ class ConsumerInformation(models.Model):
 class Organisation(models.Model):
 	""" A model representing an organisation. """
 
-	name = models.CharField(max_length=200, verbose_name=_('organisation name'), help_text="De officiele naam van de organisatie")
+	name = models.CharField(max_length=200, verbose_name=_('name'), help_text="De officiele naam van de organisatie")
 	""" Official name of organisation. """
 	short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
 	kvknumber = models.CharField(max_length=200, blank=True)
