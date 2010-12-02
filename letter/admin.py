@@ -5,7 +5,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('name',)
     list_filter = ('consumerinformation', 'consumerrelation')
-    search_fields = []
+    search_fields = ['name', 'short_name']
 
     fieldsets = ()
     
@@ -19,7 +19,7 @@ admin.site.register(Organisation, OrganisationAdmin)
 
 class RelationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    #list_display = ('name',)
     list_filter = ()
     search_fields = []
 
@@ -32,7 +32,7 @@ admin.site.register(Relation, RelationAdmin)
 
 class CityAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    list_display = ('name',)
     list_filter = ()
     search_fields = []
 
@@ -48,7 +48,7 @@ admin.site.register(City, CityAdmin)
 
 class CountryAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    list_display = ('name',)
     list_filter = ()
     search_fields = []
 
@@ -64,7 +64,7 @@ admin.site.register(Country, CountryAdmin)
 
 class SectorAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    list_display = ('name',)
     list_filter = ()
     search_fields = []
 
@@ -80,7 +80,7 @@ admin.site.register(Sector, SectorAdmin)
 
 class BrandAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    list_display = ('name',)
     list_filter = ()
     search_fields = []
 
@@ -96,7 +96,7 @@ admin.site.register(Brand, BrandAdmin)
 
 class ConsumerRelationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    #list_display = ()
     list_filter = ()
     search_fields = []
 
@@ -109,7 +109,7 @@ admin.site.register(ConsumerRelation, ConsumerRelationAdmin)
 
 class ConsumerInformationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ()
+    #list_display = ()
     list_filter = ()
     search_fields = []
 
