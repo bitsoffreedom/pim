@@ -10,7 +10,6 @@ class OrganisationAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
 
 admin.site.register(Organisation, OrganisationAdmin)
@@ -24,7 +23,6 @@ class RelationAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
 
 admin.site.register(Relation, RelationAdmin)
@@ -38,8 +36,10 @@ class CityAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
+
+    prepopulated_fields = {"slug": ("name",)}
+
 
 admin.site.register(City, CityAdmin)
 
@@ -52,8 +52,10 @@ class CountryAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
+
+    prepopulated_fields = {"slug": ("name",)}
+
 
 admin.site.register(Country, CountryAdmin)
 
@@ -66,8 +68,10 @@ class SectorAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
+
+    prepopulated_fields = {"slug": ("name",)}
+
 
 admin.site.register(Sector, SectorAdmin)
 
@@ -80,8 +84,10 @@ class BrandAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
+
+    prepopulated_fields = {"slug": ("name",)}
+
 
 admin.site.register(Brand, BrandAdmin)
 
@@ -94,7 +100,6 @@ class ConsumerRelationAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
 
 admin.site.register(ConsumerRelation, ConsumerRelationAdmin)
@@ -108,7 +113,6 @@ class ConsumerInformationAdmin(admin.ModelAdmin):
     fieldsets = ()
     
     save_as = True
-    save_on_top = True
     inlines = []
 
 admin.site.register(ConsumerInformation, ConsumerInformationAdmin)
