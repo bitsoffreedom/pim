@@ -49,6 +49,7 @@ class ConsumerRelation(models.Model):
 
 class Brand(models.Model):
 	name = models.CharField(max_length=20)
+	slug = models.SlugField()
 
 	class Meta:
 		verbose_name=_('brand')
