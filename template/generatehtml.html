@@ -4,23 +4,21 @@
   </head>
   <body>
     <ul>
-      <li>Name: {{ firstname }} {{ lastname }}</li>
-      <li>StreetAddress: {{ street_address }}</li>
-      <li>Housenr:$Scratch_variable</li>
-      <li>Postcode: {{ postcode }}</li>
-      <li>City: {{ city }}</li>
+      <li>{{ firstname }} {{ lastname }}</li>
+      <li>{{ street_address }}</li>
+      <li>{{ postcode }}</li>
+      <li>{{ city }}</li>
     </ul>
 
     <ul>
-      <li>To: {{ organisation.preflabel }},</li>
-      <li>Address: {{ organisation.street_address }}</li>
-      <li>Date: Zie post-stempel</li>
-      <li>City : {{ organisation.city }}</li>
+      <li>{{ organisation.preflabel }},</li>
+      <li>{{ organisation.street_address }}</li>
+      <li>{{ organisation.city }}</li>
     </ul>
 
-    <p>Att:$PreferedLabelOfOrganizationalUnit</p>
+    <p>{{ organisation.preflabel }}</p>
 
-    <p>_Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
+    <p>Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
 
     <p>Geachte Heer/Mevrouw,</p>
 
