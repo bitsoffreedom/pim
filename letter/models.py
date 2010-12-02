@@ -92,16 +92,18 @@ class Organisation(models.Model):
 	postbus = models.CharField(max_length=20, blank=True)
 	postcode = models.CharField(max_length=20, blank=True)
 	city = models.ForeignKey(City, blank=True, null=True)
-	country = models.ForeignKey(Country, blank=True, null=True)
-	sector = models.ForeignKey(Sector, blank=True, null=True)
+	country = models.ForeignKey(Country)
+	sector = models.ForeignKey(Sector)
 	website = models.CharField(max_length=200, blank=True)
 	brands = models.ManyToManyField(Brand, blank=True, null=True)
 	tags = TaggableManager()
 	notificationnumber = models.DecimalField(max_digits=10,
 	     decimal_places=0, blank=True, null=True, help_text="CBP registernummer")
 	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True, null=True,
+	     verbose_name='relation',
 	     help_text=_('The sort of relations this organisation has with consumers.'))
-	consumerinformation = models.ManyToManyField(ConsumerInformation, blank=True, null=True, 
+	consumerinformation = models.ManyToManyField(ConsumerInformation, blank=True, null=True,
+	     verbose_name=('information'),
 	     help_text=_('The sort of information this organisation gathers about consumers.'))
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)

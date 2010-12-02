@@ -35,6 +35,8 @@ class OrganisationAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {"short_name": ("name",)}
 
+    filter_horizontal = ('consumerrelation', 'consumerinformation')
+
 
 admin.site.register(Organisation, OrganisationAdmin)
 
