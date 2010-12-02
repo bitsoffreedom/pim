@@ -98,13 +98,13 @@ class Organisation(models.Model):
 	brands = models.ManyToManyField(Brand, blank=True, null=True)
 	tags = TaggableManager()
 	notificationnumber = models.DecimalField(max_digits=10,
-		decimal_places=0, blank=True, null=True, help_text="CBP registernummer")
-	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True,
-		null=True, help_text="Rol van de burger/consument ten opzichte van de" \
-		"maatschappij en dienstverleners en andere organisaties")
+	     decimal_places=0, blank=True, null=True, help_text="CBP registernummer")
+	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True, null=True,
+	     help_text=_('The sort of relations this organisation has with consumers.'))
+	consumerinformation = models.ManyToManyField(ConsumerInformation, blank=True, null=True, 
+	     help_text=_('The sort of information this organisation gathers about consumers.'))
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)
-	consumerinformation = models.ManyToManyField(ConsumerInformation)
 
 	class Meta:
 		verbose_name=_('organisation')
