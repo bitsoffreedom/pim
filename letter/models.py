@@ -42,12 +42,12 @@ class Identifier(models.Model):
 	name = models.CharField(max_length=20)
 	identifiers = models.ForeignKey("Organisation")
 
-class HasMy(models.Model):
+class ConsumerInformation(models.Model):
 	""" Information which companies have about an user"""
 	name = models.CharField(max_length=200, blank=True, help_text="")
 
 	def __unicode__(self):
-		return self.name;
+		return self.name
 
 class Organisation(models.Model):
 	""" A model representing an organisation. """
@@ -74,7 +74,7 @@ class Organisation(models.Model):
 		"maatschappij en dienstverleners en andere organisaties")
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)
-	hasmy = models.ManyToManyField(HasMy)
+	consumerinforation = models.ManyToManyField(ConsumerInformation)
 
 	def __unicode__(self):
 		return self.name;
