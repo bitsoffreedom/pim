@@ -40,9 +40,9 @@ admin.site.register(Organisation, OrganisationAdmin)
 
 class RelationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    #list_display = ('name',)
-    list_filter = ()
-    search_fields = []
+    list_display = ('from_organisation', 'to_organisation', 'type')
+    list_filter = ('type','from_organisation','to_organisation')
+    search_fields = ['from_organsiation__name', 'to_organisation__name']
 
     fieldsets = ()
     
