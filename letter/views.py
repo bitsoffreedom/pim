@@ -2,19 +2,22 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
-from models import City, Organisation, Keyword
-from forms import AddCompanyForm, UserForm
+from letter.models import City, Organisation
+from letter.forms import AddCompanyForm, UserForm
 
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 
 def search(request):
+	""" Search for specific tags or cities. """
+	
 	org_list = Organisation.objects.all()
 
 	city_ids = request.session['cities']
 	if len(city_ids) > 0:
 		org_list = org_list.filter(city__in = city_ids)
 
+	# TODO: Update to use tags instead of keywords.
 	keyword_ids = request.session['keywords']
 	if len(keyword_ids) > 0:
 		org_list = org_list.filter(keyword__in = keyword_ids)
@@ -25,6 +28,7 @@ def index(request, param = None):
 	# initialize the session
 	request.session.setdefault('cities', [])
 	request.session.setdefault('companies', [])
+	# TODO: Use tags instead of keywords
 	request.session.setdefault('keywords', [])
 
 	# URL processing
@@ -50,8 +54,10 @@ def index(request, param = None):
 
 
 	cities = City.objects.all()
+	# TODO: Use tags instead of keywords.
 	keywords = Keyword.objects.all()
 	selected_cities = City.objects.filter(pk__in = request.session['cities'])
+	# TODO: Use tags instead of keywords.
 	selected_keywords = Keyword.objects.filter(pk__in = request.session['keywords'])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 	org_list = search(request)
@@ -67,11 +73,13 @@ def index(request, param = None):
 		{
 		'cities': cities,
 		'form': form,
+		# TODO: Use tags instead of keywords.
 		'keywords': keywords,
 		'org_count': org_count,
 		'organisations': org,
 		'selected_cities': selected_cities,
 		'selected_companies': selected_companies,
+		# TODO: Use tags instead of keywords.
 		'selected_keywords': selected_keywords,
 		},
 		context_instance=RequestContext(request))
@@ -117,6 +125,7 @@ def delcity(request, param):
 
 	return HttpResponseRedirect('/')
 
+# TODO: Use tags instead of keywords.
 def addkeyword(request, param):
 	request.session.setdefault('keywords', [])
 
