@@ -63,7 +63,7 @@ def index(request, param = None):
 	except (EmptyPage, InvalidPage):
 		return HttpResponse("fail")
 
-	return render_to_response('index.html',
+	return render_to_response('pim/index.html',
 		{
 		'cities': cities,
 		'form': form,
@@ -159,14 +159,14 @@ def userdata(request):
 	else:
 		form = UserForm()
 
-	return render_to_response('userdata.html', {'form': form,},
+	return render_to_response('pim/userdata.html', {'form': form,},
 		context_instance=RequestContext(request))
 
 def generate(request):
 	request.session.setdefault('companies', [])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 
-	return render_to_response('generate.html', {'selected_companies': selected_companies})
+	return render_to_response('pim/generate.html', {'selected_companies': selected_companies})
 
 def generatehtml(request, param):
 	request.session.setdefault('companies', [])
@@ -195,7 +195,7 @@ def generatehtml(request, param):
 	except Organisation.DoesNotExist:
 		return HttpResponse("fail")
 
-	return render_to_response('generatehtml.html',
+	return render_to_response('pim/generatehtml.html',
 		{
 		'organisation': organisation,
 		'firstname': request.session['firstname'],
