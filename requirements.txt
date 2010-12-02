@@ -3,4 +3,5 @@ django_extensions
 django_debug_toolbar
 django-staticfiles
 django-sentry
+django-taggit
 

@@ -82,5 +82,6 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'sentry.client',
     'staticfiles',
+    'taggit',
     'pim.letter'
 )

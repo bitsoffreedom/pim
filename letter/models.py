@@ -1,3 +1,5 @@
+from taggit.managers import TaggableManager
+
 from django.utils.translation import ugettext_lazy as _
 
 from django.db import models
@@ -32,12 +34,6 @@ class ConsumerRelation(models.Model):
 	def __unicode__(self):
 		return self.role;
 
-class Keyword(models.Model):
-	keyword = models.CharField(max_length=20)
-
-	def __unicode__(self):
-		return self.keyword;
-
 class Brand(models.Model):
 	name = models.CharField(max_length=20)
 
@@ -70,7 +66,7 @@ class Organisation(models.Model):
 	sector = models.ForeignKey(Sector, blank=True, null=True)
 	website = models.CharField(max_length=200, blank=True)
 	brands = models.ManyToManyField(Brand, blank=True, null=True)
-	keyword = models.ManyToManyField(Keyword, blank=True, null=True)
+	tags = TaggableManager()
 	notificationnumber = models.DecimalField(max_digits=10,
 		decimal_places=0, blank=True, null=True, help_text="CBP registernummer")
 	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True,
