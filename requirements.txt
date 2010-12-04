@@ -1,5 +1,5 @@
 Django>=1.2.3
-django_extensions
+-e git://github.com/django-extensions/django-extensions.git#egg=django-extensions
 django_debug_toolbar
 django-staticfiles
 django-sentry
