@@ -33,6 +33,10 @@ class IdentifierInline(admin.TabularInline):
     model = Identifier
     extra = 1
 
+class CPBRegistrationInline(admin.TabularInline):
+    model = CPBRegistration
+    extra = 1
+
 class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('name',)
@@ -40,7 +44,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ['name', 'short_name']
     
     save_as = True
-    inlines = [RelationInline, BrandInline, IdentifierInline]
+    inlines = [RelationInline, BrandInline, IdentifierInline, CPBRegistrationInline]
 
     prepopulated_fields = {"short_name": ("name",)}
 

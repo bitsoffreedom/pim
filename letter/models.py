@@ -97,8 +97,6 @@ class Organisation(models.Model):
 	sector = models.ForeignKey(Sector, blank=True, null=True)
 	website = models.CharField(max_length=200, blank=True)
 	tags = TaggableManager()
-	notificationnumber = models.DecimalField(max_digits=10,
-	     decimal_places=0, blank=True, null=True, help_text="CBP registernummer")
 	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True, null=True,
 	     verbose_name='consumer relation',
 	     help_text=_('The sort of relations this organisation has with consumers.'))
@@ -138,4 +136,33 @@ class Relation(models.Model):
 	                                    related_name='to',
 	                                    verbose_name=_('to'))
 	type = models.ForeignKey(RelationType)
+
+class CPBRegistration(models.Model):
+	""" A database registered with the CPB. This
+		model should match the data in the public 
+		BKR register as closely as possible. 
+
+		TODO: Either directly contact the CPB about
+		their datastructure and/or regular data
+		synchronization of the public register or
+		make a real good study of register access results.
+		
+		This model should be intelligent and do stuff like:
+		1) We fill in the registration number.
+		2) Go out to CPB and request all available information
+		   about stored data, intended use etcetera.
+		3) Fill this into our own database.
+		4) Update the organisation with the kinds of data
+		   stored by this party.
+	    
+		Reference: http://www.cbpweb.nl/Pages/ind_reg_meldreg.aspx
+	"""
+	
+	organisation = models.ForeignKey(Organisation)	  
+	# To do: add a validator here making sure that the result is always 7 digits long.
+	registration_number = models.PositiveIntegerField(primary_key=True, verbose_name=_('registration number'))
+	name = models.CharField(max_length=255, verbose_name=_('database name'))
+	
+	def __unicode__(self):
+		return self.name
 
