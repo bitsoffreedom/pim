@@ -342,13 +342,6 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">notificationnumber</FONT
-        ></TD>
-        <TD ALIGN="LEFT"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">DecimalField</FONT
-        ></TD></TR>
-        
-        <TR><TD ALIGN="LEFT" BORDER="0"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">consumerrelation</FONT
         ></TD>
         <TD ALIGN="LEFT"
@@ -446,6 +439,39 @@ digraph name {
     </TABLE>
     >]
   
+    pim_letter_models_CPBRegistration [label=<
+    <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+     <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
+     ><FONT FACE="Helvetica Bold" COLOR="white"
+     >CPBRegistration</FONT></TD></TR>
+
+    
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">organisation</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">ForeignKey</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">registration_number</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">PositiveIntegerField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">name</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+    
+    </TABLE>
+    >]
+  
 
 
 
@@ -509,6 +535,12 @@ digraph name {
     
     pim_letter_models_Relation -> pim_letter_models_RelationType
     [label="type"] ;
+    
+  
+    
+    
+    pim_letter_models_CPBRegistration -> pim_letter_models_Organisation
+    [label="organisation"] ;
     
   
 
