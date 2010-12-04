@@ -161,7 +161,7 @@ class CPBRegistration(models.Model):
 	organisation = models.ForeignKey(Organisation)	  
 	# To do: add a validator here making sure that the result is always 7 digits long.
 	registration_number = models.PositiveIntegerField(primary_key=True, verbose_name=_('registration number'))
-	name = models.CharField(max_length=255, verbose_name=_('database name'))
+	name = models.CharField(max_length=255, verbose_name=_('database name'), blank=True, null=True)
 	
 	def __unicode__(self):
 		return self.name
