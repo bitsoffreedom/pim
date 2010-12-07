@@ -23,4 +23,6 @@ urlpatterns += patterns('',
     # Django Admin
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    (r'^password_reset/', 'django.contrib.auth.views.password_reset'),
+    (r'^password_reset_done/', 'django.contrib.auth.views.password_reset_done'),
 )
