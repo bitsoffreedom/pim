@@ -149,6 +149,9 @@ def delkeyword(request, param):
 	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def userdata(request):
+	request.session.setdefault('companies', [])
+	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
+
 	if request.method == 'POST':
 		form = UserForm(request.POST)
 		if form.is_valid():
@@ -161,7 +164,11 @@ def userdata(request):
 	else:
 		form = UserForm()
 
-	return render_to_response('pim/userdata.html', {'form': form,},
+	return render_to_response('pim/userdata.html',
+		{
+		'form': form,
+		'selected_companies': selected_companies
+		},
 		context_instance=RequestContext(request))
 
 def generate(request):
