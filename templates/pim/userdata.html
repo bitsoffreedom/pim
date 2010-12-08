@@ -77,7 +77,7 @@
       {% else %}
       <ul>
         {% for c in selected_companies %}
-        <li><a class="delete" href="{% url letter.views.delcompany c.pk %}">X</a> {{ c }}</li>
+        <li>{{ c }}</li>
         {% endfor %}
       </ul>
       <p><a href="{% url letter.views.index %}">wijzig</a></p>
