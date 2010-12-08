@@ -15,7 +15,7 @@
       <h1>Brieven</h1>
       <ul>
         {% for c in selected_companies %}
-        <li><a href="/generatehtml/{{ c.pk }}">{{ c }}</a></li>
+        <li><a href="{% url letter.views.generatehtml c.pk %}">{{ c }}</a></li>
         {% endfor %}
       </ul>
     </div>

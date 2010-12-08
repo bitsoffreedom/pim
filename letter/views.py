@@ -4,7 +4,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 from letter.models import City, Organisation
 from letter.forms import AddCompanyForm, UserForm
-
+from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 
@@ -46,7 +46,7 @@ def index(request, param = None):
 				if pk not in request.session['companies']:
 					request.session['companies'].append(pk)
 					request.session.modified = True
-			return HttpResponseRedirect('/')
+			return HttpResponseRedirect(reverse('letter.views.index'))
 	else:
 		form = AddCompanyForm()
 
@@ -89,7 +89,7 @@ def delcompany(request, param):
 	request.session['companies'].remove(company_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def addcity(request, param):
 	cities = request.session.setdefault('cities', [])
@@ -104,7 +104,7 @@ def addcity(request, param):
 	if city_id not in request.session['cities']:
 		request.session['cities'].append(city_id)
 		request.session.modified = True
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def delcity(request, param):
 	request.session.setdefault('cities', [])
@@ -117,7 +117,7 @@ def delcity(request, param):
 	request.session['cities'].remove(city_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def addkeyword(request, param):
 	request.session.setdefault('tags', [])
@@ -133,7 +133,7 @@ def addkeyword(request, param):
 	if tag_id not in request.session['tags']:
 		request.session['tags'].append(tag_id)
 		request.session.modified = True
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def delkeyword(request, param):
 	request.session.setdefault('tags', [])
@@ -146,7 +146,7 @@ def delkeyword(request, param):
 	request.session['tags'].remove(tag_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect('/')
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def userdata(request):
 	if request.method == 'POST':
@@ -157,7 +157,7 @@ def userdata(request):
 			request.session['street_address'] = form.cleaned_data['street_address']
 			request.session['postcode'] = form.cleaned_data['postcode']
 			request.session['city'] = form.cleaned_data['city']
-			return HttpResponseRedirect('/generate')
+			return HttpResponseRedirect(reverse('letter.views.generate'))
 	else:
 		form = UserForm()
 

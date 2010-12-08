@@ -68,10 +68,10 @@
         <div class="grey">Actieve filters</div>
           <ul>
             {% for city in selected_cities %}
-            <li><a class="delete" href="/delcity/{{ city.pk }}">X</a>{{ city }}</li>
+            <li><a class="delete" href="{% url letter.views.delcity city.pk %}">X</a>{{ city }}</li>
             {% endfor %}
             {% for tag in selected_tags %}
-            <li><a class="delete" href="/delkeyword/{{ tag.pk }}">X</a> {{ tag }}</li>
+            <li><a class="delete" href="{% url letter.views.delkeyword tag.pk %}">X</a> {{ tag }}</li>
             {% endfor %}
           </ul>
         </div>
@@ -82,7 +82,7 @@
           <p>Stad</p>
           <ul>
             {% for city in cities %}
-            <li><a href="addcity/{{ city.id}}">{{ city }}</a></li>
+            <li><a href="{% url letter.views.addcity city.id %}">{{ city }}</a></li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -90,7 +90,7 @@
           <p>Trefwoorden</p>
           <ul>
             {% for tag in tags %}
-            <li><a href="addkeyword/{{ tag.id}}">{{ tag }}</a></li>
+            <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -98,7 +98,7 @@
       </div>
       <div id="results">
         <p>{{ org_count }} organisatie(s) gevonden.</p>
-        <form action="/" method="post">
+        <form action="{% url letter.views.index %}" method="post">
           {% csrf_token %}
 	  {% for org in organisations.object_list %}
           <p><input type="checkbox" name="companies" value="{{ org.id }}" />{{ org }}</p>
@@ -107,11 +107,11 @@
 	</form>
         <div id="nav">
           {% if organisations.has_previous %}
-          <a href="/{{ organisations.previous_page_number }}">Vorige</a>
+          <a href="{% url letter.views.index organisations.previous_page_number %}">Vorige</a>
           {% endif %}
           Pagina {{ organisations.number }} van de {{ organisations.paginator.num_pages }}
           {% if organisations.has_next %}
-          <a href="/{{ organisations.next_page_number }}">Volgende</a>
+          <a href="{% url letter.views.index organisations.next_page_number %}">Volgende</a>
           {% endif %}
         </div>
       </div>
@@ -124,10 +124,10 @@
       <ul>
         
         {% for c in selected_companies %}
-        <li><a class="delete" href="/delcompany/{{ c.pk }}">X</a> {{ c }}</li>
+        <li><a class="delete" href="{% url letter.views.delcompany c.pk %}">X</a> {{ c }}</li>
         {% endfor %}
       </ul>
-      <p><a href="/userdata">Begin met de brieven</a></p>
+      <p><a href="{% url letter.views.userdata %}">Begin met de brieven</a></p>
       {% endif %}
     </div>
     </div>

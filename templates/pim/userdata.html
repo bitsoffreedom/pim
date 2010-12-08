@@ -63,7 +63,7 @@
         <p>Geef het adres op waar je het antwoord op wil ontvangen</p>
       </div>
       <div id="results">
-      <form action="/userdata" method="post">
+      <form action="{% url letter.views.userdata %}" method="post">
         {% csrf_token %}
 	{{ form.as_p }}
         <input type="submit" value="verzenden"/>
@@ -76,12 +76,11 @@
       <p>Je hebt nog geen bedrijven geselecteerd</p>
       {% else %}
       <ul>
-        
         {% for c in selected_companies %}
-        <li><a class="delete" href="/delcompany/{{ c.pk }}">X</a> {{ c }}</li>
+        <li><a class="delete" href="{% url letter.views.delcompany c.pk %}">X</a> {{ c }}</li>
         {% endfor %}
       </ul>
-      <p><a href="/">wijzig</a></p>
+      <p><a href="{% url letter.views.index %}">wijzig</a></p>
       {% endif %}
     </div>
     </div>
