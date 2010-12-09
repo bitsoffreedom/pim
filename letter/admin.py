@@ -34,8 +34,8 @@ class IdentifierInline(admin.TabularInline):
     model = Identifier
     extra = 1
 
-class CPBRegistrationInline(admin.TabularInline):
-    model = CPBRegistration
+class CBPRegistrationInline(admin.TabularInline):
+    model = CBPRegistration
     extra = 1
 
 class OrganisationAdmin(admin.ModelAdmin):
@@ -45,7 +45,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ['name', 'short_name']
     
     save_as = True
-    inlines = [RelationInline, BrandInline, IdentifierInline, CPBRegistrationInline]
+    inlines = [RelationInline, BrandInline, IdentifierInline, CBPRegistrationInline]
 
     prepopulated_fields = {"short_name": ("name",)}
 

@@ -137,19 +137,19 @@ class Relation(models.Model):
 	                                    verbose_name=_('to'))
 	type = models.ForeignKey(RelationType)
 
-class CPBRegistration(models.Model):
-	""" A database registered with the CPB. This
+class CBPRegistration(models.Model):
+	""" A database registered with the CBP. This
 		model should match the data in the public 
 		BKR register as closely as possible. 
 
-		TODO: Either directly contact the CPB about
+		TODO: Either directly contact the CBP about
 		their datastructure and/or regular data
 		synchronization of the public register or
 		make a real good study of register access results.
 		
 		This model should be intelligent and do stuff like:
 		1) We fill in the registration number.
-		2) Go out to CPB and request all available information
+		2) Go out to CBP and request all available information
 		   about stored data, intended use etcetera.
 		3) Fill this into our own database.
 		4) Update the organisation with the kinds of data
