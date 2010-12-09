@@ -23,6 +23,7 @@ class RelationInline(admin.TabularInline):
     model = Relation
     fk_name = 'from_organisation'
     extra = 1
+    fields = ('type', 'to_organisation')
 
 class BrandInline(admin.TabularInline):
     model = Brand
@@ -56,10 +57,9 @@ admin.site.register(Organisation, OrganisationAdmin)
 class RelationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('from_organisation', 'to_organisation', 'type')
-    list_filter = ('type','from_organisation','to_organisation')
-    search_fields = ['from_organsiation__name', 'to_organisation__name']
-
-    fieldsets = ()
+    list_filter = ('type', 'from_organisation', 'to_organisation')
+    search_fields = ['from_organisation__name', 'to_organisation__name']
+    fields = ('from_organisation', 'type', 'to_organisation')
     
     save_as = True
     inlines = []
