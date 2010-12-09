@@ -162,6 +162,12 @@ class CBPRegistration(models.Model):
 	# To do: add a validator here making sure that the result is always 7 digits long.
 	registration_number = models.PositiveIntegerField(primary_key=True, verbose_name=_('registration number'))
 	name = models.CharField(max_length=255, verbose_name=_('database name'), blank=True, null=True)
+	purpose = models.CharField(max_length=2048, verbose_name=_('purpose of processing'), blank=True, null=True)
+	# XXX: There is no way to translate the registration number to a valid CBP URL. That is why we save the url. 
+	# XXX: at some point we want to change this to just the unique internal
+	# cbp identifier (moid). Or tell the CBP their application is retarted,
+	# and they should fix it.
+	url = models.URLField(max_length=255,verbose_name=_('cbp url'), blank=True, null=True)
 	
 	def __unicode__(self):
 		return self.name
