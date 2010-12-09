@@ -87,10 +87,8 @@ class Organisation(models.Model):
 	""" Official name of organisation. """
 	short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
 	kvknumber = models.CharField(max_length=200, blank=True)
-	street_address = models.CharField(max_length=200, verbose_name=_('street address'), blank=True)
+	address = models.CharField(max_length=200, verbose_name=_('street address or po box'), blank=True)
 	housenr = models.CharField(max_length=20, verbose_name=_('house number'), blank=True)
-	answernr = models.CharField(max_length=20, verbose_name=_('answer number'), blank=True)
-	postbus = models.CharField(max_length=20, blank=True)
 	postcode = models.CharField(max_length=20, blank=True)
 	city = models.ForeignKey(City, blank=True, null=True)
 	country = models.ForeignKey(Country, blank=True, null=True, default=lambda:Country.objects.get(name='The Netherlands'))
