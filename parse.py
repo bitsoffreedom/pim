@@ -52,7 +52,7 @@ class Role():
 def createrole(r):
 	print "- fields:"
 	print "    role: %s" % (r.role)
-	print "  model: letter.ConsumerRelation"
+	print "  model: letter.CitizenRole"
 	print "  pk: %d" % (r.pk)
 
 def createorganisation(o):

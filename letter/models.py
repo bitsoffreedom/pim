@@ -37,12 +37,12 @@ class Sector(models.Model):
 	def __unicode__(self):
 		return self.name
 	
-class ConsumerRelation(models.Model):
-	role = models.CharField(max_length=20)
+class CitizenRole(models.Model):
+	name = models.CharField(max_length=20)
 
 	class Meta:
-		verbose_name=_('consumer relation')
-		verbose_name_plural=_('consumer relations')
+		verbose_name=_('citizen role')
+		verbose_name_plural=_('citizen roles')
 
 	def __unicode__(self):
 		return self.role
@@ -97,9 +97,9 @@ class Organisation(models.Model):
 	sector = models.ForeignKey(Sector, blank=True, null=True)
 	website = models.CharField(max_length=200, blank=True)
 	tags = TaggableManager()
-	consumerrelation = models.ManyToManyField(ConsumerRelation, blank=True, null=True,
-	     verbose_name='consumer relation',
-	     help_text=_('The sort of relations this organisation has with consumers.'))
+	consumerrelation = models.ManyToManyField(CitizenRole, blank=True, null=True,
+	     verbose_name='citizen role',
+	     help_text=_('The sort of relations this organisation has with citizens.'))
 	collectedinformation = models.ManyToManyField(CollectedInformation, blank=True, null=True,
 	     verbose_name=('collected information'),
 	     help_text=_('The sort of information this organisation gathers about consumers.'))

@@ -115,7 +115,7 @@ class SectorAdmin(admin.ModelAdmin):
 admin.site.register(Sector, SectorAdmin)
 
 
-class ConsumerRelationAdmin(admin.ModelAdmin):
+class CitizenRoleAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     #list_display = ()
     list_filter = ()
@@ -126,7 +126,7 @@ class ConsumerRelationAdmin(admin.ModelAdmin):
     save_as = True
     inlines = []
 
-admin.site.register(ConsumerRelation, ConsumerRelationAdmin)
+admin.site.register(CitizenRole, CitizenRoleAdmin)
 
 class CollectedInformationAdmin(admin.ModelAdmin):
     date_hierarchy = ''

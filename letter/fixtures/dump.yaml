@@ -1,22 +1,22 @@
 - fields:
     role: Auto-eigenaar
-  model: letter.ConsumerRelation
+  model: letter.CitizenRole
   pk: 1
 - fields:
     role: Bank-klant
-  model: letter.ConsumerRelation
+  model: letter.CitizenRole
   pk: 2
 - fields:
     role: Betaler
-  model: letter.ConsumerRelation
+  model: letter.CitizenRole
   pk: 3
 - fields:
     role: Buitenland-betaler
-  model: letter.ConsumerRelation
+  model: letter.CitizenRole
   pk: 4
 - fields:
     role: Consument
-  model: letter.ConsumerRelation
+  model: letter.CitzenRole
   pk: 5
 - fields:
     answernr: ''
