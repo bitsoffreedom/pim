@@ -10,8 +10,8 @@ ENVDIR=env
 
 if [ ! -d $ENVDIR ]; then
     echo "Preparing virtualenv environment in $ENVDIR directory"
-    pip install virtualenv
-    if [ $? == 0 ]; then
+    
+    if pip install virtualenv; then
         echo 'VirtualEnv installed allright'
     else
         echo 'Error installing VirtualEnv, breaking off'
