@@ -1,0 +1,51 @@
+- fields: {name: physical}
+  model: letter.p3pcategory
+  pk: 1
+- fields: {name: online}
+  model: letter.p3pcategory
+  pk: 2
+- fields: {name: uniqueid}
+  model: letter.p3pcategory
+  pk: 3
+- fields: {name: purchase}
+  model: letter.p3pcategory
+  pk: 4
+- fields: {name: financial}
+  model: letter.p3pcategory
+  pk: 5
+- fields: {name: computer}
+  model: letter.p3pcategory
+  pk: 6
+- fields: {name: navigation}
+  model: letter.p3pcategory
+  pk: 7
+- fields: {name: interactive}
+  model: letter.p3pcategory
+  pk: 8
+- fields: {name: demographic}
+  model: letter.p3pcategory
+  pk: 9
+- fields: {name: content}
+  model: letter.p3pcategory
+  pk: 10
+- fields: {name: state}
+  model: letter.p3pcategory
+  pk: 11
+- fields: {name: political}
+  model: letter.p3pcategory
+  pk: 12
+- fields: {name: health}
+  model: letter.p3pcategory
+  pk: 13
+- fields: {name: preference}
+  model: letter.p3pcategory
+  pk: 14
+- fields: {name: location}
+  model: letter.p3pcategory
+  pk: 15
+- fields: {name: government}
+  model: letter.p3pcategory
+  pk: 16
+- fields: {name: other-category}
+  model: letter.p3pcategory
+  pk: 17

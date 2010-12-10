@@ -71,6 +71,12 @@ class Identifier(models.Model):
 class P3PCategory(models.Model):
 	name = models.CharField(max_length=200)
 
+	class Meta:
+		verbose_name=_('P3P category')
+		verbose_name_plural=_('P3P categories')
+	def __unicode__(self):
+		return self.name
+
 class CollectedInformation(models.Model):
 	""" Information which companies have about an user"""
 	
