@@ -68,10 +68,14 @@ class Identifier(models.Model):
 		verbose_name=_('consumer identifier')
 		verbose_name_plural=_('consumer identifiers')
 
+class P3PCategory(models.Model):
+	name = models.CharField(max_length=200)
+
 class CollectedInformation(models.Model):
 	""" Information which companies have about an user"""
 	
 	name = models.CharField(max_length=200, blank=True, help_text="")
+	p3p_category = models.ForeignKey(P3PCategory)
 
 	class Meta:
 		verbose_name=_('collected information')
