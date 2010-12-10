@@ -95,7 +95,7 @@ class Organisation(models.Model):
 	sector = models.ForeignKey(Sector, blank=True, null=True)
 	website = models.CharField(max_length=200, blank=True)
 	tags = TaggableManager()
-	consumerrelation = models.ManyToManyField(CitizenRole, blank=True, null=True,
+	citizenrole = models.ManyToManyField(CitizenRole, blank=True, null=True,
 	     verbose_name='citizen role',
 	     help_text=_('The sort of relations this organisation has with citizens.'))
 	collectedinformation = models.ManyToManyField(CollectedInformation, blank=True, null=True,

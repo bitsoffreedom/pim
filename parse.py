@@ -60,7 +60,7 @@ def createorganisation(o):
 #	print "    altlabel: '%s'" % (o.altlabel)
 	print "    answernr: '%s'" % (o.answernr)
 #	print "    brands: [%s]" % (",".join(o.brands))
-	print "    consumerrelation: [%s]" % (",".join(o.citizenorconsumerrole))
+	print "    citizenrole: [%s]" % (",".join(o.citizenorconsumerrole))
 	print "    city: %d" % (o.city)
 	print "    country: %d" % (o.country_name)
 #	if o.hasmyname:

@@ -41,7 +41,7 @@ class CBPRegistrationInline(admin.TabularInline):
 class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('name',)
-    list_filter = ('collectedinformation', 'consumerrelation', 'country', 'sector')
+    list_filter = ('collectedinformation', 'citizenrole', 'country', 'sector')
     search_fields = ['name', 'short_name']
     
     save_as = True
@@ -49,7 +49,7 @@ class OrganisationAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {"short_name": ("name",)}
 
-    filter_horizontal = ('collectedinformation', 'consumerrelation')
+    filter_horizontal = ('collectedinformation', 'citizenrole')
 
 
 admin.site.register(Organisation, OrganisationAdmin)
