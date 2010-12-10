@@ -45,7 +45,7 @@ class CitizenRole(models.Model):
 		verbose_name_plural=_('citizen roles')
 
 	def __unicode__(self):
-		return self.role
+		return self.name;
 
 class Brand(models.Model):
 	owner = models.ForeignKey('Organisation')
@@ -87,7 +87,7 @@ class Organisation(models.Model):
 	""" Official name of organisation. """
 	short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
 	kvknumber = models.CharField(max_length=200, blank=True)
-	address = models.CharField(max_length=200, verbose_name=_('street address or po box'), blank=True)
+	address = models.CharField(max_length=200, verbose_name=_('street address or PO box'), blank=True)
 	housenr = models.CharField(max_length=20, verbose_name=_('house number'), blank=True)
 	postcode = models.CharField(max_length=20, blank=True)
 	city = models.ForeignKey(City, blank=True, null=True)
