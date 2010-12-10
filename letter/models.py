@@ -101,7 +101,7 @@ class Organisation(models.Model):
 	postcode = models.CharField(max_length=20, blank=True)
 	organisationtype = models.ForeignKey(OrganisationType, blank=True, null=True)
 	city = models.ForeignKey(City, blank=True, null=True)
-	country = models.ForeignKey(Country, blank=True, null=True, default=lambda:Country.objects.get(name='The Netherlands'))
+	country = models.ForeignKey(Country, blank=True, null=True, default=lambda:Country.objects.get(name='Nederland'))
 	sector = models.ForeignKey(Sector, blank=True, null=True)
 	website = models.CharField(max_length=200, blank=True)
 	tags = TaggableManager()
