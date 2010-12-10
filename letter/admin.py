@@ -140,3 +140,10 @@ class CollectedInformationAdmin(admin.ModelAdmin):
     inlines = []
 
 admin.site.register(CollectedInformation, CollectedInformationAdmin)
+
+class OrganisationTypeAdmin(admin.ModelAdmin):
+    model = OrganisationType
+    extra = 1
+
+admin.site.register(OrganisationType, OrganisationTypeAdmin)
+

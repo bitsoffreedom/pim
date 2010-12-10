@@ -80,6 +80,16 @@ class CollectedInformation(models.Model):
 	def __unicode__(self):
 		return self.name
 
+class OrganisationType(models.Model):
+	""" The possible types of Organisation that exist. e.g. nonprofit,
+	business etc """
+
+	name = models.CharField(max_length=40, verbose_name=_('name'))
+
+	def __unicode__(self):
+		return self.name
+	
+
 class Organisation(models.Model):
 	""" A model representing an organisation. """
 
@@ -89,6 +99,7 @@ class Organisation(models.Model):
 	kvknumber = models.CharField(max_length=200, blank=True)
 	address = models.CharField(max_length=200, verbose_name=_('street address or PO box'), blank=True)
 	postcode = models.CharField(max_length=20, blank=True)
+	organisationtype = models.ForeignKey(OrganisationType, blank=True, null=True)
 	city = models.ForeignKey(City, blank=True, null=True)
 	country = models.ForeignKey(Country, blank=True, null=True, default=lambda:Country.objects.get(name='The Netherlands'))
 	sector = models.ForeignKey(Sector, blank=True, null=True)
