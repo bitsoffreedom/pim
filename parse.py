@@ -51,14 +51,14 @@ class Role():
 
 def createrole(r):
 	print "- fields:"
-	print "    role: %s" % (r.role)
+	print "    name: %s" % (r.role)
 	print "  model: letter.CitizenRole"
 	print "  pk: %d" % (r.pk)
 
 def createorganisation(o):
 	print "- fields:"
 #	print "    altlabel: '%s'" % (o.altlabel)
-	print "    answernr: '%s'" % (o.answernr)
+#	print "    answernr: '%s'" % (o.answernr)
 #	print "    brands: [%s]" % (",".join(o.brands))
 	print "    citizenrole: [%s]" % (",".join(o.citizenorconsumerrole))
 	print "    city: %d" % (o.city)
@@ -73,14 +73,14 @@ def createorganisation(o):
 #		print "    hasmyairmilecardid: true"
 #	if o.hasmycardlicensenumber:
 #		print "    hasmycardlicensenumber: true"
-	print "    housenr: '%s'" % (o.housenr)
+#	print "    housenr: '%s'" % (o.housenr)
 #	print "    keyword: [%s]" % (",".join(o.keyword))
-	print "    postbus: '%s'" % (o.postbus)
+#	print "    postbus: '%s'" % (o.postbus)
 	print "    postcode: '%s'" % (o.postcode)
 	print "    name: '%s'" % (o.preflabel.encode('ascii','ignore'))
 	print "    sector: %d" % (o.sector)
 	print "    website: '%s'" % (o.website)
-	print "    street_address: '%s'" % (o.street_address)
+	print "    address: '%s'" % (o.street_address)
 	print "  model: letter.organisation"
 	print "  pk: %d" % (o.pk)
 
