@@ -1,135 +1,109 @@
 <html>
   <head>
     <title>PIM - Privacy Inzage Machine</title>
-      <style type="text/css" media="screen">
-      body {
-      background-color: lightgrey;
-      }
-      #supertop {
-      width: 1000px;
-      }
-      #top {
-      height: 80px;
-      border-bottom: 1px solid lightgrey;
-      }
-      #search {
-      background-color: #fff;
-      width: 700px;
-      height: 600px;
-      margin-right: 0px;
-      padding-right: 0px;
-      }
-      #active_filters, #filters {
-      margin-left: 10px;
-      margin-top: 10px;
-      }
-      #active_filters {
-      border: 1px lightgrey solid;
-      }
-      #facets {
-      float: left;
-      padding-right: 40px;
-      }
-      #results {
-      float:right;
-      width: 510px;
-      }
-      #search {
-      float: left;
-      margin-right: 20px;
-      }
-      .grey {
-      background-color: lightgrey;
-      }
-      #sel_org {
-      margin-top: 10px;
-      margin-left: 0;
-      padding-left: 0;
-      float: right;
-      width: 280px;
-      }
-      #sel_org_top {
-      background-color: #666;
-      }
-      a.delete {
-      color: red;
-      }
-      </style>
+      <link rel="stylesheet" href="/static/global/style.css" type="text/css" />
   </head>
   <body>
-    <div id="supertop">
-    <div id="search">
-      <div id="top">
-        <p>Kies hieronder de bedrijven die wilt aanschrijven</p>
+    <div id="info" >
+      <a href="#">Disclaimer</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div id="center">
+      <div id="nav">
+        <a href="#">Home</a>
+        <a href="#">Over Pim</a>
+        <a href="#">Contact</a>
+        <a href="#">Pers</a>
+        <a href="#">Privacy</a>
       </div>
-      <div id="facets">
-        {% if selected_cities or selected_tags %}
-        <div id="active_filters">
-        <div class="grey">Actieve filters</div>
+      <div id="selection">
+        <div id="query">
+          <div id="step1">
+            <div class="stepnumber">1</div><div class="steptext">Kies de bedrijven</div>
+          </div>
+          <div id="step2">
+            <div class="stepnumber">2</div><div class="steptext">Vul je gegevens in</div>
+          </div>
+          <div id="step3">
+            <div class="stepnumber">3</div><div class="steptext">Maak de brieven</div>
+          </div>
+          <div id="banner">
+            <h1>Kies hieronder de bedrijven die je wilt aanschrijven</h1>
+          </div>
+          <div id="filter">
+            <div id="active_filters">
+              <p>Geselecteerd op</p>
+            {% if selected_cities or selected_tags %}
+              <ul>
+                {% for city in selected_cities %}
+                <li><a class="delete" href="{% url letter.views.delcity city.pk %}">X</a>{{ city }}</li>
+                {% endfor %}
+                {% for tag in selected_tags %}
+                <li><a class="delete" href="{% url letter.views.delkeyword tag.pk %}">X</a> {{ tag }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            </div>
+            <p>Verfijn resultaten op</p>
+              {% if cities %}
+              <p>Stad</p>
+              <ul>
+                {% for city in cities %}
+                <li><a href="{% url letter.views.addcity city.id %}">{{ city }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              {% if tags %}
+              <p>Trefwoorden</p>
+              <ul>
+                {% for tag in tags %}
+                <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+          </div>
+          <div id="organisations">
+            <h2>Bedrijven</h2>
+            <p>{{ org_count }} organisatie(s) gevonden.</p>
+            <form action="{% url letter.views.index %}" method="post">
+              {% csrf_token %}
+    	  {% for org in organisations.object_list %}
+              <p><input type="checkbox" name="companies" value="{{ org.id }}" />{{ org }}</p>
+              {% endfor %}
+              <p><input type="submit" value="Submit"/></p>
+    	    </form>
+            <div id="nav">
+              {% if organisations.has_previous %}
+              <a href="{% url letter.views.index organisations.previous_page_number %}">Vorige</a>
+              {% endif %}
+              Pagina {{ organisations.number }} van de {{ organisations.paginator.num_pages }}
+              {% if organisations.has_next %}
+              <a href="{% url letter.views.index organisations.next_page_number %}">Volgende</a>
+              {% endif %}
+            </div>
+          </div>
+          <div id="selected_organisations">
+          {% if selected_companies|length == 0 %}
+          <p>Je hebt nog geen bedrijven geselecteerd</p>
+          {% else %}
           <ul>
-            {% for city in selected_cities %}
-            <li><a class="delete" href="{% url letter.views.delcity city.pk %}">X</a>{{ city }}</li>
-            {% endfor %}
-            {% for tag in selected_tags %}
-            <li><a class="delete" href="{% url letter.views.delkeyword tag.pk %}">X</a> {{ tag }}</li>
+            
+            {% for c in selected_companies %}
+            <li><a class="delete" href="{% url letter.views.delcompany c.pk %}">X</a> {{ c }}</li>
             {% endfor %}
           </ul>
+          <p><a href="{% url letter.views.userdata %}">Begin met de brieven</a></p>
+          {% endif %}
+          </div>
         </div>
-        {% endif %}
-        <div id="filters">
-	  <div class="grey"><p>Verfijn op:</p></div>
-          {% if cities %}
-          <p>Stad</p>
-          <ul>
-            {% for city in cities %}
-            <li><a href="{% url letter.views.addcity city.id %}">{{ city }}</a></li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-          {% if tags %}
-          <p>Trefwoorden</p>
-          <ul>
-            {% for tag in tags %}
-            <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-        </div>
-      </div>
-      <div id="results">
-        <p>{{ org_count }} organisatie(s) gevonden.</p>
-        <form action="{% url letter.views.index %}" method="post">
-          {% csrf_token %}
-	  {% for org in organisations.object_list %}
-          <p><input type="checkbox" name="companies" value="{{ org.id }}" />{{ org }}</p>
-          {% endfor %}
-          <p><input type="submit" value="Submit"/></p>
-	</form>
-        <div id="nav">
-          {% if organisations.has_previous %}
-          <a href="{% url letter.views.index organisations.previous_page_number %}">Vorige</a>
-          {% endif %}
-          Pagina {{ organisations.number }} van de {{ organisations.paginator.num_pages }}
-          {% if organisations.has_next %}
-          <a href="{% url letter.views.index organisations.next_page_number %}">Volgende</a>
-          {% endif %}
+        <div id="rtext">
+          <h1>Privacy assistent</h1>
+          <p>Lorem ipsum</p>
         </div>
       </div>
     </div>
-    <div id="sel_org">
-      <span id="sel_org_top">Geselecteerde bedrijven</span>
-      {% if selected_companies|length == 0 %}
-      <p>Je hebt nog geen bedrijven geselecteerd</p>
-      {% else %}
-      <ul>
-        
-        {% for c in selected_companies %}
-        <li><a class="delete" href="{% url letter.views.delcompany c.pk %}">X</a> {{ c }}</li>
-        {% endfor %}
-      </ul>
-      <p><a href="{% url letter.views.userdata %}">Begin met de brieven</a></p>
-      {% endif %}
-    </div>
+    <div id="bottom_info">
+    <p>test</p>
     </div>
   </body>
 </html>
