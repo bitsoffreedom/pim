@@ -34,13 +34,10 @@
             <div id="active_filters">
               <p>Geselecteerd op</p>
 
-            {% if selected_cities or selected_tags or selected_citizenroles %}
+            {% if selected_tags or selected_citizenroles %}
               <ul>
                 {% for role in selected_citizenroles %}
                 <li><a class="delete" href="{% url letter.views.delcitizenrole role.0 %}">X</a>{{ role.1 }}</li>
-                {% endfor %}
-                {% for city in selected_cities %}
-                <li><a class="delete" href="{% url letter.views.delcity city.pk %}">X</a>{{ city }}</li>
                 {% endfor %}
                 {% for tag in selected_tags %}
                 <li><a class="delete" href="{% url letter.views.delkeyword tag.pk %}">X</a> {{ tag }}</li>
@@ -58,14 +55,6 @@
                 <li><a href="{% url letter.views.addcitizenrole 4 %}">Ik shop veel</a></li>
                 <li><a href="{% url letter.views.addcitizenrole 5 %}">Ik heb m'n eigen bedrijf</a></li>
               </ul>
-              {% if cities %}
-              <p>Stad</p>
-              <ul>
-                {% for city in cities %}
-                <li><a href="{% url letter.views.addcity city.id %}">{{ city }}</a></li>
-                {% endfor %}
-              </ul>
-              {% endif %}
               {% if tags %}
               <p>Trefwoorden</p>
               <ul>

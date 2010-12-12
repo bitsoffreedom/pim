@@ -20,13 +20,9 @@ CITIZENROLE_MAPPER = (
 )
 
 def search(request):
-	""" Search for specific tags or cities. """
+	""" Search for specific tags. """
 	
 	org_list = Organisation.objects.all()
-
-	city_ids = request.session['cities']
-	if len(city_ids) > 0:
-		org_list = org_list.filter(city__in = city_ids)
 
 	tag_ids = request.session['tags']
 	if len(tag_ids) > 0:
@@ -37,7 +33,6 @@ def search(request):
 def index(request, param = None):
 	# initialize the session
 	request.session.setdefault('roles', [])
-	request.session.setdefault('cities', [])
 	request.session.setdefault('companies', [])
 	request.session.setdefault('tags', [])
 
@@ -49,10 +44,8 @@ def index(request, param = None):
 		except (ValueError, TypeError):
 			return HttpResponse("fail")
 
-	cities = City.objects.all()
 	tags = Organisation.tags.all()
 	selected_citizenroles = [x for x in CITIZENROLE_MAPPER if x[0] in request.session['roles']]
-	selected_cities = City.objects.filter(pk__in = request.session['cities'])
 	selected_tags = Organisation.tags.filter(pk__in = request.session['tags'])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 	org_list = search(request)
@@ -66,12 +59,10 @@ def index(request, param = None):
 
 	return render_to_response('pim/index.html',
 		{
-		'cities': cities,
 		'tags': tags,
 		'org_count': org_count,
 		'organisations': org,
 		'selected_citizenroles': selected_citizenroles,
-		'selected_cities': selected_cities,
 		'selected_companies': selected_companies,
 		'selected_tags': selected_tags,
 		},
@@ -133,34 +124,6 @@ def delcompany(request, param):
 		return HttpResponse("fail")
 
 	request.session['companies'].remove(company_id)
-	request.session.modified = True
-
-	return HttpResponseRedirect(reverse('letter.views.index'))
-
-def addcity(request, param):
-	cities = request.session.setdefault('cities', [])
-	try:
-		city_id = int(param)
-	except (ValueError, TypeError):
-		return HttpResponse("fail")
-
-	if not City.objects.filter(pk=city_id):
-		return HttpResponse("fail")
-
-	if city_id not in request.session['cities']:
-		request.session['cities'].append(city_id)
-		request.session.modified = True
-	return HttpResponseRedirect(reverse('letter.views.index'))
-
-def delcity(request, param):
-	request.session.setdefault('cities', [])
-
-	try:
-		city_id = int(param)
-	except (ValueError, TypeError):
-		return HttpResponse("fail")
-
-	request.session['cities'].remove(city_id)
 	request.session.modified = True
 
 	return HttpResponseRedirect(reverse('letter.views.index'))
