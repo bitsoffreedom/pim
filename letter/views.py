@@ -39,6 +39,7 @@ def index(request, param = None):
 	request.session.setdefault('roles', [])
 	request.session.setdefault('companies', [])
 	request.session.setdefault('tags', [])
+	request.session.setdefault('sectors', [])
 
 	# URL processing
 	page_id = 1
@@ -49,6 +50,8 @@ def index(request, param = None):
 			return HttpResponse("fail")
 
 	tags = Organisation.tags.all()
+	sectors = Sector.objects.all()
+	selected_sectors = Sector.objects.filter(pk__in = request.session['sectors'])
 	selected_citizenroles = [x for x in CITIZENROLE_MAPPER if x[0] in request.session['roles']]
 	selected_tags = Organisation.tags.filter(pk__in = request.session['tags'])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
@@ -64,8 +67,10 @@ def index(request, param = None):
 	return render_to_response('pim/index.html',
 		{
 		'tags': tags,
+		'sectors': sectors,
 		'org_count': org_count,
 		'organisations': org,
+		'selected_sectors': selected_sectors,
 		'selected_citizenroles': selected_citizenroles,
 		'selected_companies': selected_companies,
 		'selected_tags': selected_tags,
@@ -100,6 +105,34 @@ def delcitizenrole(request, param):
 		return HttpResponse("fail")
 
 	request.session['roles'].remove(role_id)
+	request.session.modified = True
+
+	return HttpResponseRedirect(reverse('letter.views.index'))
+
+def addsector(request, param):
+	sectors = request.session.setdefault('sectors', [])
+	try:
+		sector_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	if not Sector.objects.filter(pk=sector_id):
+		return HttpResponse("fail")
+
+	if sector_id not in request.session['sectors']:
+		request.session['sectors'].append(sector_id)
+		request.session.modified = True
+	return HttpResponseRedirect(reverse('letter.views.index'))
+
+def delsector(request, param):
+	request.session.setdefault('sectors', [])
+
+	try:
+		sector_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	request.session['sectors'].remove(sector_id)
 	request.session.modified = True
 
 	return HttpResponseRedirect(reverse('letter.views.index'))

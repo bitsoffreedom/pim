@@ -34,13 +34,16 @@
             <div id="active_filters">
               <p>Geselecteerd op</p>
 
-            {% if selected_tags or selected_citizenroles %}
+            {% if selected_tags or selected_citizenroles or selected_sectors %}
               <ul>
                 {% for role in selected_citizenroles %}
                 <li><a class="delete" href="{% url letter.views.delcitizenrole role.0 %}">X</a>{{ role.1 }}</li>
                 {% endfor %}
                 {% for tag in selected_tags %}
                 <li><a class="delete" href="{% url letter.views.delkeyword tag.pk %}">X</a> {{ tag }}</li>
+                {% endfor %}
+                {% for sector in selected_sectors %}
+                <li><a class="delete" href="{% url letter.views.delsector sector.pk %}">X</a> {{ sector }}</li>
                 {% endfor %}
               </ul>
             {% endif %}
@@ -60,6 +63,14 @@
               <ul>
                 {% for tag in tags %}
                 <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              <p>Sectors</p>
+              {% if sectors %}
+              <ul>
+                {% for sector in sectors %}
+                <li><a href="{% url letter.views.addsector sector.id %}">{{ sector }}</a></li>
                 {% endfor %}
               </ul>
               {% endif %}
