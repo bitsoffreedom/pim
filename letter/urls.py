@@ -3,6 +3,8 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('',
     (r'^$', 'letter.views.index'),
     (r'^(?P<param>\d+)$', 'letter.views.index'),
+    (r'^addcitizenrole/(?P<param>\d+)$', 'letter.views.addcitizenrole'),
+    (r'^delcitizenrole/(?P<param>\d+)$', 'letter.views.delcitizenrole'),
     (r'^addcity/(?P<param>\d+)$', 'letter.views.addcity'),
     (r'^delcity/(?P<param>\d+)$', 'letter.views.delcity'),
     (r'^addkeyword/(?P<param>\d+)$', 'letter.views.addkeyword'),

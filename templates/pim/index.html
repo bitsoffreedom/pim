@@ -33,8 +33,12 @@
           <div id="filter">
             <div id="active_filters">
               <p>Geselecteerd op</p>
-            {% if selected_cities or selected_tags %}
+
+            {% if selected_cities or selected_tags or selected_citizenroles %}
               <ul>
+                {% for role in selected_citizenroles %}
+                <li><a class="delete" href="{% url letter.views.delcitizenrole role.0 %}">X</a>{{ role.1 }}</li>
+                {% endfor %}
                 {% for city in selected_cities %}
                 <li><a class="delete" href="{% url letter.views.delcity city.pk %}">X</a>{{ city }}</li>
                 {% endfor %}
@@ -45,6 +49,15 @@
             {% endif %}
             </div>
             <p>Verfijn resultaten op</p>
+              <p>Zoek afhankelijk van uw situatie</p>
+              <ul>
+                {# XXX: there should be a mapper between citizenroles and These names. For now this is good enough #}
+                <li><a href="{% url letter.views.addcitizenrole 1 %}">Ik heb een Auto</a></li>
+                <li><a href="{% url letter.views.addcitizenrole 2 %}">Ik heb een Bankrekening</a></li>
+                <li><a href="{% url letter.views.addcitizenrole 3 %}">Ik reis veel</a></li>
+                <li><a href="{% url letter.views.addcitizenrole 4 %}">Ik shop veel</a></li>
+                <li><a href="{% url letter.views.addcitizenrole 5 %}">Ik heb m'n eigen bedrijf</a></li>
+              </ul>
               {% if cities %}
               <p>Stad</p>
               <ul>

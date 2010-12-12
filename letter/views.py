@@ -2,11 +2,22 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
-from letter.models import City, Organisation
+from letter.models import *
 from letter.forms import UserForm
 from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+
+# XXX: Currently a 1:1 mapping. Should be extended to 1:many
+# XXX: All the mapper code included in the index and addcitizenrole methods are
+# basically hacks. They should be replaced.
+CITIZENROLE_MAPPER = (
+	(1, "Ik heb een Auto", "Auto-eigenaar"),
+	(2, "Ik heb een Bankrekening", "Bank-klant"),
+	(3, "Ik heb reis veel", "Buitendland-betaler"),
+	(4, "Ik heb shop veel", "Consument"),
+	(5, "Ik heb m'n eigen bedrijf", "Ondernemer"),
+)
 
 def search(request):
 	""" Search for specific tags or cities. """
@@ -25,6 +36,7 @@ def search(request):
 
 def index(request, param = None):
 	# initialize the session
+	request.session.setdefault('roles', [])
 	request.session.setdefault('cities', [])
 	request.session.setdefault('companies', [])
 	request.session.setdefault('tags', [])
@@ -39,6 +51,7 @@ def index(request, param = None):
 
 	cities = City.objects.all()
 	tags = Organisation.tags.all()
+	selected_citizenroles = [x for x in CITIZENROLE_MAPPER if x[0] in request.session['roles']]
 	selected_cities = City.objects.filter(pk__in = request.session['cities'])
 	selected_tags = Organisation.tags.filter(pk__in = request.session['tags'])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
@@ -57,11 +70,44 @@ def index(request, param = None):
 		'tags': tags,
 		'org_count': org_count,
 		'organisations': org,
+		'selected_citizenroles': selected_citizenroles,
 		'selected_cities': selected_cities,
 		'selected_companies': selected_companies,
 		'selected_tags': selected_tags,
 		},
 		context_instance=RequestContext(request))
+
+def addcitizenrole(request, param):
+	roles = request.session.setdefault('roles', [])
+	try:
+		role_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	if role_id not in [r[0] for r in CITIZENROLE_MAPPER]:
+		return HttpResponse("fail1")
+
+	citizenrole = [r[2] for r in CITIZENROLE_MAPPER if r[0] == role_id]
+	if not CitizenRole.objects.filter(name=citizenrole[0]):
+		return HttpResponse("fail2")
+
+	if role_id not in request.session['roles']:
+		request.session['roles'].append(role_id)
+		request.session.modified = True
+	return HttpResponseRedirect(reverse('letter.views.index'))
+
+def delcitizenrole(request, param):
+	request.session.setdefault('roles', [])
+
+	try:
+		role_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	request.session['roles'].remove(role_id)
+	request.session.modified = True
+
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def addcompany(request, param):
 	company = request.session.setdefault('companies', [])
