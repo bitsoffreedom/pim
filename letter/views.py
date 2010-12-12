@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 from letter.models import City, Organisation
-from letter.forms import AddCompanyForm, UserForm
+from letter.forms import UserForm
 from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -37,20 +37,6 @@ def index(request, param = None):
 		except (ValueError, TypeError):
 			return HttpResponse("fail")
 
-	# Form processing
-	if request.method == 'POST':
-		form = AddCompanyForm(request.POST)
-		if form.is_valid():
-			companies = [comp.pk for comp in form.cleaned_data['companies']]
-			for pk in companies:
-				if pk not in request.session['companies']:
-					request.session['companies'].append(pk)
-					request.session.modified = True
-			return HttpResponseRedirect(reverse('letter.views.index'))
-	else:
-		form = AddCompanyForm()
-
-
 	cities = City.objects.all()
 	tags = Organisation.tags.all()
 	selected_cities = City.objects.filter(pk__in = request.session['cities'])
@@ -68,7 +54,6 @@ def index(request, param = None):
 	return render_to_response('pim/index.html',
 		{
 		'cities': cities,
-		'form': form,
 		'tags': tags,
 		'org_count': org_count,
 		'organisations': org,
@@ -77,6 +62,21 @@ def index(request, param = None):
 		'selected_tags': selected_tags,
 		},
 		context_instance=RequestContext(request))
+
+def addcompany(request, param):
+	company = request.session.setdefault('companies', [])
+	try:
+		company_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponse("fail")
+
+	if not Organisation.objects.filter(pk=company_id):
+		return HttpResponse("fail")
+
+	if company_id not in request.session['companies']:
+		request.session['companies'].append(company_id)
+		request.session.modified = True
+	return HttpResponseRedirect(reverse('letter.views.index'))
 
 def delcompany(request, param):
 	request.session.setdefault('companies', [])

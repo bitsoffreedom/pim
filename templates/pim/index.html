@@ -65,13 +65,11 @@
           <div id="organisations">
             <h2>Bedrijven</h2>
             <p>{{ org_count }} organisatie(s) gevonden.</p>
-            <form action="{% url letter.views.index %}" method="post">
-              {% csrf_token %}
-    	  {% for org in organisations.object_list %}
-              <p><input type="checkbox" name="companies" value="{{ org.id }}" />{{ org }}</p>
-              {% endfor %}
-              <p><input type="submit" value="Submit"/></p>
-    	    </form>
+            <ul>
+            {% for org in organisations.object_list %}
+              <li><a href="{% url letter.views.addcompany org.id %}"> {{ org }}</a></li>
+            {% endfor %}
+            </ul>
             <div id="nav">
               {% if organisations.has_previous %}
               <a href="{% url letter.views.index organisations.previous_page_number %}">Vorige</a>
