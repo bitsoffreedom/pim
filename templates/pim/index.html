@@ -70,7 +70,7 @@
               <li><a href="{% url letter.views.addcompany org.id %}"> {{ org }}</a></li>
             {% endfor %}
             </ul>
-            <div id="nav">
+            <div id="company_nav">
               {% if organisations.has_previous %}
               <a href="{% url letter.views.index organisations.previous_page_number %}">Vorige</a>
               {% endif %}
