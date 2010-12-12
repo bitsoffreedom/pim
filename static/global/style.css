@@ -26,24 +26,24 @@ body {
 
 }
 #nav > a, #info > a {
-  color: white; 
+	color: white; 
 }
 #bottom_info {
 	background-color: black;
 	height: 100px;
 
-  /* XXX: This is a hack to stop the margins from collapsing. */
-  border-top: 1px solid #000;
+	/* XXX: This is a hack to stop the margins from collapsing. */
+	border-top: 1px solid #000;
 }
 #center {
 	background-color: black;
 	background-image: url('background.jpg');
 	background-repeat: no-repeat;
 
-  height: 1000px;
+	height: 1000px;
 
-  /* XXX: This is a hack to stop the margins from collapsing. */
-  border-top: 1px solid #000;
+	/* XXX: This is a hack to stop the margins from collapsing. */
+	border-top: 1px solid #000;
 }
 #selection {
 	margin-left: 290px;
@@ -51,65 +51,61 @@ body {
 	width: 1000px;
 }
 #query {
-  background-color: #fff;
+	background-color: #fff;
 	width: 720px;
 	height: 600px;
-  float: left;
+	float: left;
 }
 #rtext {
-  float: left;
-  width: 200px;
-  margin-left: 20px;
+	float: left;
+	width: 200px;
+	margin-left: 20px;
 }
 #step1, #step2, #step3 {
-  float: left;
-  padding-left: 20px;
-  width: 220px;
+	float: left;
+	padding-left: 20px;
+	width: 220px;
 }
 #step2 {
-  background-color: grey;
+	background-color: grey;
 }
 #step3 {
-  background-color: lightgrey;
+	background-color: lightgrey;
 }
 .stepnumber {
-  color: green;
-  font-size: 30px;
-  font-weight: bold;
-  float: left;
-  width: 40px;
+	color: green;
+	font-size: 30px;
+	font-weight: bold;
+	float: left;
+	width: 40px;
 }
 .steptext {
-  font-weight: bold;
-  text-align: center;
-  float: left;
-  margin-top: 10px;
+	font-weight: bold;
+	text-align: center;
+	float: left;
+	margin-top: 10px;
 }
-
 h1 {
-  font-size: 20px;
+	font-size: 20px;
 }
-
 #banner {
-  margin-top: 50px;
-  margin-left: 30px;
+	margin-top: 50px;
+	margin-left: 30px;
 }
-
 #filter {
-  border-right: 2px dotted grey;
-  width: 200px;
-  height: 500px;
-  float: left;
+	border-right: 2px dotted grey;
+	width: 200px;
+	height: 500px;
+	float: left;
 }
-
 #organisations {
-  border-right: 2px dotted grey;
-  width: 300px;
-  height: 500px;
-  float: left;
+	border-right: 2px dotted grey;
+	width: 300px;
+	height: 500px;
+	float: left;
 }
 #active_filters {
-  border: 1px solid green;
-  margin-left: 20px;
-  margin-right: 20px;
+	border: 1px solid green;
+	margin-left: 20px;
+	margin-right: 20px;
 }
