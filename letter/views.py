@@ -24,6 +24,10 @@ def search(request):
 	
 	org_list = Organisation.objects.all()
 
+	selected_citizenroles = [x[2] for x in CITIZENROLE_MAPPER if x[0] in request.session['roles']]
+	if len(selected_citizenroles) > 0:
+		org_list = org_list.filter(citizenrole__name__in = selected_citizenroles)
+
 	tag_ids = request.session['tags']
 	if len(tag_ids) > 0:
 		org_list = org_list.filter(tags__in = tag_ids)
