@@ -98,6 +98,10 @@ h1 {
 	height: 500px;
 	float: left;
 }
+#filter ul, #organisations ul, #selected_organisations ul {
+	list-style-type: none;	
+	padding-left: 5px;
+}
 #organisations {
 	border-right: 2px dotted grey;
 	width: 300px;
