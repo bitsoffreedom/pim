@@ -1,35 +1,6 @@
-<html>
-  <head>
-    <title>PIM - Privacy Inzage Machine</title>
-      <link rel="stylesheet" href="/static/global/style.css" type="text/css" />
-  </head>
-  <body>
-    <div id="info" >
-      <a href="#">Disclaimer</a>
-      <a href="#">FAQ</a>
-    </div>
-    <div id="center">
-      <div id="nav">
-        <a href="#">Home</a>
-        <a href="#">Over Pim</a>
-        <a href="#">Contact</a>
-        <a href="#">Pers</a>
-        <a href="#">Privacy</a>
-      </div>
-      <div id="selection">
-        <div id="query">
-          <div id="step1">
-            <div class="stepnumber">1</div><div class="steptext">Kies de bedrijven</div>
-          </div>
-          <div id="step2">
-            <div class="stepnumber">2</div><div class="steptext">Vul je gegevens in</div>
-          </div>
-          <div id="step3">
-            <div class="stepnumber">3</div><div class="steptext">Maak de brieven</div>
-          </div>
-          <div id="banner">
-            <h1>Kies hieronder de bedrijven die je wilt aanschrijven</h1>
-          </div>
+{% extends "pim/pimbase.html" %}
+
+{% block content %}
           <div id="filter">
             <div id="active_filters">
               <p>Geselecteerd op</p>
@@ -106,15 +77,4 @@
           <p><a href="{% url letter.views.userdata %}">Begin met de brieven</a></p>
           {% endif %}
           </div>
-        </div>
-        <div id="rtext">
-          <h1>Privacy assistent</h1>
-          <p>Lorem ipsum</p>
-        </div>
-      </div>
-    </div>
-    <div id="bottom_info">
-    <p>test</p>
-    </div>
-  </body>
-</html>
+{% endblock %}

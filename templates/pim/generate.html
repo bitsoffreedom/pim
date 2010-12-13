@@ -1,23 +1,9 @@
-<html>
-  <head>
-    <title>PIM - Privacy Inzage Machine</title>
-      <style type="text/css" media="screen">
-      body {
-      background-color: lightgrey;
-      }
-      #supertop {
-      width: 1000px;
-      }
-      </style>
-  </head>
-  <body>
-    <div id="supertop">
-      <h1>Brieven</h1>
-      <ul>
-        {% for c in selected_companies %}
-        <li><a href="{% url letter.views.generatehtml c.pk %}">{{ c }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
-  </body>
-</html>
+{% extends "pim/pimbase.html" %}
+
+{% block content %}
+          <ul>
+            {% for c in selected_companies %}
+            <li><a href="{% url letter.views.generatehtml c.pk %}">{{ c }}</a></li>
+            {% endfor %}
+          </ul>
+{% endblock %}
