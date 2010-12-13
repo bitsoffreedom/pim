@@ -1,350 +1,751 @@
-- fields:
-    name: Auto-eigenaar
-  model: letter.CitizenRole
+- fields: {name: Amsterdam, slug: amsterdam}
+  model: letter.city
   pk: 1
-- fields:
-    name: Bank-klant
-  model: letter.CitizenRole
+- fields: {name: Hilversum, slug: hilversum}
+  model: letter.city
   pk: 2
-- fields:
-    name: Betaler
-  model: letter.CitizenRole
+- fields: {name: Rotterdam, slug: rotterdam}
+  model: letter.city
   pk: 3
-- fields:
-    name: Buitenland-betaler
-  model: letter.CitizenRole
+- fields: {name: Utrecht, slug: utrecht}
+  model: letter.city
   pk: 4
-- fields:
-    name: Consument
-  model: letter.CitizenRole
+- fields: {name: Zoetermeer, slug: zoetermeer}
+  model: letter.city
   pk: 5
+- fields: {name: Bunnink, slug: bunnink}
+  model: letter.city
+  pk: 6
+- fields: {name: Den Haag, slug: den-haag}
+  model: letter.city
+  pk: 7
+- fields: {name: Nederland, slug: nederland}
+  model: letter.country
+  pk: 1
+- fields: {name: Handhaving, slug: handhaving}
+  model: letter.sector
+  pk: 1
+- fields: {name: Mobiliteit, slug: mobiliteit}
+  model: letter.sector
+  pk: 3
+- fields: {name: Profiling, slug: profiling}
+  model: letter.sector
+  pk: 4
+- fields: {name: Auto-eigenaar}
+  model: letter.citizenrole
+  pk: 1
+- fields: {name: Bank-klant}
+  model: letter.citizenrole
+  pk: 2
+- fields: {name: Betaler}
+  model: letter.citizenrole
+  pk: 3
+- fields: {name: Buitenland-betaler}
+  model: letter.citizenrole
+  pk: 4
+- fields: {name: Consument}
+  model: letter.citizenrole
+  pk: 5
+- fields: {name: Ondernemer}
+  model: letter.citizenrole
+  pk: 6
+- fields: {name: Register-Hufter}
+  model: letter.citizenrole
+  pk: 7
+- fields: {name: physical}
+  model: letter.p3pcategory
+  pk: 1
+- fields: {name: online}
+  model: letter.p3pcategory
+  pk: 2
+- fields: {name: uniqueid}
+  model: letter.p3pcategory
+  pk: 3
+- fields: {name: purchase}
+  model: letter.p3pcategory
+  pk: 4
+- fields: {name: financial}
+  model: letter.p3pcategory
+  pk: 5
+- fields: {name: computer}
+  model: letter.p3pcategory
+  pk: 6
+- fields: {name: navigation}
+  model: letter.p3pcategory
+  pk: 7
+- fields: {name: interactive}
+  model: letter.p3pcategory
+  pk: 8
+- fields: {name: demographic}
+  model: letter.p3pcategory
+  pk: 9
+- fields: {name: content}
+  model: letter.p3pcategory
+  pk: 10
+- fields: {name: state}
+  model: letter.p3pcategory
+  pk: 11
+- fields: {name: political}
+  model: letter.p3pcategory
+  pk: 12
+- fields: {name: health}
+  model: letter.p3pcategory
+  pk: 13
+- fields: {name: preference}
+  model: letter.p3pcategory
+  pk: 14
+- fields: {name: location}
+  model: letter.p3pcategory
+  pk: 15
+- fields: {name: government}
+  model: letter.p3pcategory
+  pk: 16
+- fields: {name: other-category}
+  model: letter.p3pcategory
+  pk: 17
+- fields: {name: naam, p3p_category: 1}
+  model: letter.collectedinformation
+  pk: 1
+- fields: {name: naw, p3p_category: 1}
+  model: letter.collectedinformation
+  pk: 2
+- fields: {name: email, p3p_category: 2}
+  model: letter.collectedinformation
+  pk: 3
+- fields: {name: kenteken, p3p_category: 16}
+  model: letter.collectedinformation
+  pk: 4
+- fields: {name: burgerservicenummer, p3p_category: 16}
+  model: letter.collectedinformation
+  pk: 5
+- fields: {name: rijbewijsnummer, p3p_category: 16}
+  model: letter.collectedinformation
+  pk: 6
+- fields: {name: airmileskaartID, p3p_category: 4}
+  model: letter.collectedinformation
+  pk: 7
+- fields: {name: telefoon, p3p_category: 1}
+  model: letter.collectedinformation
+  pk: 8
+- fields: {name: geboortedatum, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 9
+- fields: {name: leeftijd, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 10
+- fields: {name: burgelijkestaat, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 11
+- fields: {name: verhaalsinformatie, p3p_category: 5}
+  model: letter.collectedinformation
+  pk: 12
+- fields: {name: betalingservaringen, p3p_category: 5}
+  model: letter.collectedinformation
+  pk: 13
+- fields: {name: bedrijfsinformatie, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 14
+- fields: {name: verhuisinformatie, p3p_category: 17}
+  model: letter.collectedinformation
+  pk: 15
+- fields: {name: registratie eerdere toetsingen, p3p_category: 17}
+  model: letter.collectedinformation
+  pk: 16
+- fields: {name: verhuisinformatie, p3p_category: 17}
+  model: letter.collectedinformation
+  pk: 17
+- fields: {name: onroerend goed gegevens, p3p_category: 4}
+  model: letter.collectedinformation
+  pk: 18
+- fields: {name: voertuiggegevens, p3p_category: 16}
+  model: letter.collectedinformation
+  pk: 19
+- fields: {name: faillissementsgegevens, p3p_category: 17}
+  model: letter.collectedinformation
+  pk: 20
+- fields: {name: geslacht, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 21
+- fields: {name: leeftijdsklasse, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 22
+- fields: {name: inkomensklasse, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 23
+- fields: {name: Mosaic Origins, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 24
+- fields: {name: kredietwaardigheid, p3p_category: 5}
+  model: letter.collectedinformation
+  pk: 25
+- fields: {name: klasse van type woning, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 26
+- fields: {name: leeftijdsklasse kinderen, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 27
+- fields: {name: aantal verhuizingen in klassen, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 28
+- fields: {name: aantal auto's in huishouden, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 29
+- fields: {name: klasse van eigendom van woning, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 30
+- fields: {name: transactiewaarde van woning, p3p_category: 5}
+  model: letter.collectedinformation
+  pk: 31
+- fields: {name: hypotheeksom woning, p3p_category: 5}
+  model: letter.collectedinformation
+  pk: 32
+- fields: {name: klasse van laatse verhuizing, p3p_category: 9}
+  model: letter.collectedinformation
+  pk: 33
+- fields: {name: registratie van zakelijk activiteiten op adres, p3p_category: 17}
+  model: letter.collectedinformation
+  pk: 34
+- fields: {name: bedrijfsleven}
+  model: letter.organisationtype
+  pk: 1
+- fields: {name: religieuze}
+  model: letter.organisationtype
+  pk: 2
+- fields: {name: overheid}
+  model: letter.organisationtype
+  pk: 3
+- fields: {name: gezondheidszorg}
+  model: letter.organisationtype
+  pk: 4
+- fields: {name: financieel}
+  model: letter.organisationtype
+  pk: 5
+- fields: {name: lobby}
+  model: letter.organisationtype
+  pk: 6
+- fields: {name: liefdadigheid}
+  model: letter.organisationtype
+  pk: 7
 - fields:
-    citizenrole: [1]
+    address: 'Wassenaarseweg  220  '
+    citizenrole: [1, 5]
     city: 1
+    collectedinformation: [1, 2]
     country: 1
-    postcode: ''
-    name: 'ANWB'
-    sector: 1
-    website: 'http://www.anwb.nl'
-    address: ''
+    kvknumber: 27157000  0000
+    name: ANWB b.v.
+    organisationtype: 1
+    postcode: 2596 EC
+    sector: 3
+    short_name: anwb
+    website: http://www.anwb.nl
   model: letter.organisation
   pk: 1
 - fields:
+    address: ''
     citizenrole: [1]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Stg. Automotive Belangen Nederland
+    organisationtype: null
     postcode: ''
-    name: 'Stg. Automotive Belangen Nederland'
     sector: 1
+    short_name: ''
     website: ''
-    address: ''
   model: letter.organisation
   pk: 2
 - fields:
+    address: ''
     citizenrole: [1]
     city: 1
+    collectedinformation: []
     country: 1
-    postcode: ''
+    kvknumber: ''
     name: 'Stg de Autobranche (Stidenda) Denktank '
+    organisationtype: null
+    postcode: ''
     sector: 1
-    website: 'http://www.stidenda.nl/'
-    address: ''
+    short_name: ''
+    website: http://www.stidenda.nl/
   model: letter.organisation
   pk: 3
 - fields:
+    address: ''
     citizenrole: [1]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Stg. RDC
+    organisationtype: null
     postcode: ''
-    name: 'Stg. RDC'
     sector: 1
-    website: 'http://www.rdc.nl'
-    address: ''
+    short_name: ''
+    website: http://www.rdc.nl
   model: letter.organisation
   pk: 4
 - fields:
+    address: ''
     citizenrole: [1]
     city: 1
+    collectedinformation: []
     country: 1
-    postcode: ''
+    kvknumber: ''
     name: 'Voortuigdata.nl Samenwerking tussen Voogd & Voogd Diensten en A2SP '
+    organisationtype: null
+    postcode: ''
     sector: 1
+    short_name: ''
     website: 'http://www.voertuigdata.nl/ '
-    address: ''
   model: letter.organisation
   pk: 5
 - fields:
+    address: ''
     citizenrole: []
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Voogd&Voogd Diensten
+    organisationtype: null
     postcode: ''
-    name: 'Voogd&Voogd Diensten'
     sector: 1
+    short_name: ''
     website: 'http://www.voertuigdata.nl/ '
-    address: ''
   model: letter.organisation
   pk: 6
 - fields:
+    address: ''
     citizenrole: [1]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: VWE Bureau voor Voertuigdocumentatie en-informatie B.V.
+    organisationtype: null
     postcode: ''
-    name: 'VWE Bureau voor Voertuigdocumentatie en-informatie B.V.'
     sector: 1
+    short_name: ''
     website: 'http://www.vwe.nl/ '
-    address: ''
   model: letter.organisation
   pk: 7
 - fields:
-    citizenrole: []
-    city: 1
-    country: 1
-    postcode: ''
-    name: ''
-    sector: 1
-    website: 'http://www.voogd.com/'
     address: ''
-  model: letter.organisation
-  pk: 8
-- fields:
     citizenrole: [2]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: ABN AMRO Bank N.V.
+    organisationtype: null
     postcode: ''
-    name: 'ABN AMRO Bank N.V.'
     sector: 1
-    website: 'http://www.abnamro.nl'
-    address: ''
+    short_name: ''
+    website: http://www.abnamro.nl
   model: letter.organisation
   pk: 9
 - fields:
+    address: ''
     citizenrole: [2]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: ING Bank N.V.
+    organisationtype: null
     postcode: ''
-    name: 'ING Bank N.V.'
     sector: 1
+    short_name: ''
     website: 'http://www.ing.nl/ '
-    address: ''
   model: letter.organisation
   pk: 10
 - fields:
+    address: ''
     citizenrole: [2]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Rabobank Trust Company
+    organisationtype: null
     postcode: ''
-    name: 'Rabobank Trust Company'
     sector: 1
-    website: 'http://www.rabobank.nl'
-    address: ''
+    short_name: ''
+    website: http://www.rabobank.nl
   model: letter.organisation
   pk: 11
 - fields:
+    address: ''
     citizenrole: [2]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: SNS REAAL N.V.
+    organisationtype: null
     postcode: ''
-    name: 'SNS REAAL N.V.'
     sector: 1
+    short_name: ''
     website: ''
-    address: ''
   model: letter.organisation
   pk: 12
 - fields:
+    address: ''
     citizenrole: [3]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Mobile2Pay Nederland BV
+    organisationtype: null
     postcode: ''
-    name: 'Mobile2Pay Nederland BV'
     sector: 1
-    website: 'http://www.mobile2pay.nl/'
-    address: ''
+    short_name: ''
+    website: http://www.mobile2pay.nl/
   model: letter.organisation
   pk: 13
 - fields:
+    address: ''
     citizenrole: [4]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Society for Worldwide Interbank Financial Telecommunication (SWIFT), Belgi
+    organisationtype: null
     postcode: ''
-    name: 'Society for Worldwide Interbank Financial Telecommunication (SWIFT), Belgi'
     sector: 1
+    short_name: ''
     website: ''
-    address: ''
   model: letter.organisation
   pk: 14
 - fields:
-    citizenrole: [5]
-    city: 1
+    address: ''
+    citizenrole: []
+    city: null
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Bureau voor Kredietinformaties W.G.J. Jansen B.V.
+    organisationtype: null
     postcode: ''
-    name: 'Albert Heijn, Zaandam'
-    sector: 1
+    sector: null
+    short_name: bureau-voor-kredietinformaties-wgj-jansen-bv
     website: ''
-    address: ''
   model: letter.organisation
-  pk: 15
+  pk: 36
 - fields:
+    address: ''
     citizenrole: [5]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Albert Heijn, Zaandam
+    organisationtype: null
     postcode: ''
-    name: 'Albert Heijn, Zaandam'
     sector: 1
-    website: 'http://www.albert.nl/'
-    address: ''
+    short_name: ''
+    website: http://www.albert.nl/
   model: letter.organisation
   pk: 16
 - fields:
+    address: ''
     citizenrole: []
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Acxiom Corporation, USA
+    organisationtype: null
     postcode: ''
-    name: 'Acxiom Corporation, USA'
     sector: 1
+    short_name: ''
     website: ''
-    address: ''
   model: letter.organisation
   pk: 17
 - fields:
+    address: ''
     citizenrole: [5]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Acxiom Nederland B.V., dochter van Acxiom Corporation, USA
+    organisationtype: null
     postcode: ''
-    name: 'Acxiom Nederland B.V., dochter van Acxiom Corporation, USA'
     sector: 1
+    short_name: ''
     website: ''
-    address: ''
   model: letter.organisation
   pk: 18
 - fields:
+    address: ''
     citizenrole: []
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Maxeda B.V.
+    organisationtype: null
     postcode: ''
-    name: 'Maxeda B.V.'
     sector: 1
+    short_name: ''
     website: 'http://www.maxeda.com/ '
-    address: ''
   model: letter.organisation
   pk: 19
 - fields:
+    address: ''
     citizenrole: [5]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Magazijn De Bijenkorf B.V.
+    organisationtype: null
     postcode: ''
-    name: 'Magazijn De Bijenkorf B.V.'
     sector: 1
+    short_name: ''
     website: 'http://www.debijenkorf.nl/ '
-    address: ''
   model: letter.organisation
   pk: 20
 - fields:
+    address: ''
     citizenrole: [5]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Magazijn De Bijenkorf B.V.
+    organisationtype: null
     postcode: ''
-    name: 'Magazijn De Bijenkorf B.V.'
     sector: 1
+    short_name: ''
     website: 'http://www.debijenkorf.nl/ '
-    address: ''
   model: letter.organisation
   pk: 21
 - fields:
+    address: ''
     citizenrole: [5]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Magazijn De Bijenkorf B.V.
+    organisationtype: null
     postcode: ''
-    name: 'Magazijn De Bijenkorf B.V.'
     sector: 1
+    short_name: ''
     website: 'http://www.debijenkorf.nl/ '
-    address: ''
   model: letter.organisation
   pk: 22
 - fields:
+    address: ''
     citizenrole: [5]
     city: 1
+    collectedinformation: []
     country: 1
+    kvknumber: ''
+    name: Cendris Dataconsulting B.V.
+    organisationtype: null
     postcode: ''
-    name: 'Cendris Dataconsulting B.V.'
     sector: 1
-    website: 'http://www.cendris.nl/'
-    address: ''
+    short_name: ''
+    website: http://www.cendris.nl/
   model: letter.organisation
   pk: 23
 - fields:
-    citizenrole: [5]
-    city: 1
-    country: 1
-    postcode: ''
-    name: 'Cendris Dataconsulting B.V.'
-    sector: 1
-    website: 'http://www.cendris.nl/'
     address: ''
+    citizenrole: []
+    city: null
+    collectedinformation: []
+    country: 1
+    kvknumber: ''
+    name: Bovag
+    organisationtype: null
+    postcode: ''
+    sector: null
+    short_name: bovag
+    website: www.bovag.nl
   model: letter.organisation
-  pk: 24
+  pk: 32
 - fields:
-    citizenrole: [5]
-    city: 1
-    country: 1
-    postcode: ''
-    name: 'Experian Nederland B.V.'
-    sector: 1
-    website: 'http://www.experian.nl/'
     address: ''
+    citizenrole: []
+    city: null
+    collectedinformation: []
+    country: 1
+    kvknumber: ''
+    name: Dienst Wegverkeer(RDW)
+    organisationtype: 3
+    postcode: ''
+    sector: null
+    short_name: dienst-wegverkeerrdw
+    website: http://www.rdw.nl
   model: letter.organisation
-  pk: 25
+  pk: 33
 - fields:
-    citizenrole: [5]
+    address: Wielingenstraat 28
+    citizenrole: []
     city: 1
+    collectedinformation: []
     country: 1
-    postcode: ''
-    name: 'Experian Nederland B.V.'
-    sector: 1
-    website: 'http://www.experian.nl/'
-    address: ''
+    kvknumber: ''
+    name: Stichting "Rai Vereniging"
+    organisationtype: 6
+    postcode: 1070 BS
+    sector: null
+    short_name: rai-vereniging
+    website: www.rai.nl
   model: letter.organisation
-  pk: 26
+  pk: 34
 - fields:
-    citizenrole: [5]
-    city: 1
-    country: 1
-    postcode: ''
-    name: 'Experian Nederland B.V.'
-    sector: 1
-    website: 'http://www.experian.nl/'
     address: ''
+    citizenrole: []
+    city: null
+    collectedinformation: []
+    country: 1
+    kvknumber: ''
+    name: BIS Consumerdata
+    organisationtype: 1
+    postcode: ''
+    sector: 4
+    short_name: bis-consumerdata
+    website: ''
   model: letter.organisation
-  pk: 27
+  pk: 35
 - fields:
-    citizenrole: [5]
-    city: 1
+    address: Postbus 16604
+    citizenrole: [1, 2, 3, 4, 5, 6]
+    city: 7
+    collectedinformation: [1, 2, 3, 4, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+      20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
     country: 1
-    postcode: ''
-    name: 'Experian Nederland B.V.'
-    sector: 1
-    website: 'http://www.experian.nl/'
-    address: ''
-  model: letter.organisation
-  pk: 28
-- fields:
-    citizenrole: [5]
-    city: 1
-    country: 1
-    postcode: ''
-    name: 'Experian Nederland B.V.'
-    sector: 1
-    website: 'http://www.experian.nl/'
-    address: ''
-  model: letter.organisation
-  pk: 29
-- fields:
-    citizenrole: [5]
-    city: 1
-    country: 1
-    postcode: ''
-    name: 'Experian Nederland B.V.'
-    sector: 1
-    website: 'http://www.experian.nl/'
-    address: ''
+    kvknumber: ''
+    name: Experian Nederland B.V.
+    organisationtype: 1
+    postcode: '2500BP '
+    sector: null
+    short_name: experian
+    website: http://www.experian.nl/
   model: letter.organisation
   pk: 30
+- fields:
+    address: ''
+    citizenrole: [1]
+    city: null
+    collectedinformation: [1, 2]
+    country: 1
+    kvknumber: ''
+    name: Vereniging Koninklijke Nederlandse Toeristenbond ANWB
+    organisationtype: null
+    postcode: ''
+    sector: null
+    short_name: anwb
+    website: http://anwb.nl
+  model: letter.organisation
+  pk: 31
+- fields:
+    address: ''
+    citizenrole: []
+    city: null
+    collectedinformation: []
+    country: 1
+    kvknumber: ''
+    name: Dun & Bradstreet B.V.
+    organisationtype: null
+    postcode: ''
+    sector: null
+    short_name: dun-bradstreet-bv
+    website: ''
+  model: letter.organisation
+  pk: 37
+- fields:
+    address: ''
+    citizenrole: []
+    city: null
+    collectedinformation: []
+    country: 1
+    kvknumber: ''
+    name: Graydon Nederland B.V.
+    organisationtype: null
+    postcode: ''
+    sector: 4
+    short_name: graydon-nederland-bv
+    website: ''
+  model: letter.organisation
+  pk: 38
+- fields: {name: LevertGegevensAan, slug: levertgegevensaan}
+  model: letter.relationtype
+  pk: 1
+- fields: {name: OntvangtGegevensVan, slug: ontvangtgegevensvan}
+  model: letter.relationtype
+  pk: 2
+- fields: {name: IsAandeelhouderVan, slug: isaandeelhoudervan}
+  model: letter.relationtype
+  pk: 3
+- fields: {name: HeeftAandeelhouder, slug: heeftaandeelin}
+  model: letter.relationtype
+  pk: 4
+- fields: {name: IsWerkmaatschappijVan, slug: iswerkmaatschappijvan}
+  model: letter.relationtype
+  pk: 5
+- fields: {name: HeeftWerkmaatschapij, slug: heeftwerkmaatschapij}
+  model: letter.relationtype
+  pk: 6
+- fields: {name: Autotrace, organisation: 30, purpose: 'Combineert alle relevante
+      gegevens uit openbaar beschikbare bronnen en maakt adressen, schulden en bezittingen
+      inzichtelijk', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8b8e888d82'}
+  model: letter.cbpregistration
+  pk: 1249896
+- fields: {name: Credit Check, organisation: 30, purpose: Online inzicht in kredietwaardigheid
+      en betaalgedrag van consumenten, url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8b8e888d80'}
+  model: letter.cbpregistration
+  pk: 1249903
+- fields: {name: Family View, organisation: 30, purpose: Het verzamelen van gegevens
+      op adresniveau teneinde een waarschijnlijkheidsscore te kunnen bepalen dat iemand
+      op een bepaald aanbod reageert. Bevat meer dan 1400 onderscheidende kenmerken.
+      Geeft inzicht in specifieke kenmerken van alle huishoudens in Nederland, url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=808588898f'}
+  model: letter.cbpregistration
+  pk: 1197570
+- fields: {name: Occasion Check, organisation: 30, purpose: 'Het beschikbaar stellen
+      van informatie aan de consument met betrekking tot een occasion Indien de consument
+      daarvoor toestemming heeft verleend, het beschikbaar stellen van de gegevens
+      en voertuiggegevens aan de verzekerinsgmaatschappij Indien de consument daarvoor
+      toestemming heeft verleend, het beschikbaar stellen van de gegevens en voertuiggegevens
+      aan de autobranche De gegevens worden verwerkt ten behoeve van statistische
+      doeleinden ', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8f8f85828b'}
+  model: letter.cbpregistration
+  pk: 1357351
+- fields: {name: Person View, organisation: 30, purpose: 'Beschikbare demografische
+      gegevens zijn: geslacht, leeftijdsklasse, Mosaic Origins type en tijdsduur huidige
+      bewoning persoon; toegevoegd worden andere kenmerken als burgerlijke staat,
+      hoofdhuishouden en inkomen', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=80808e8d89'}
+  model: letter.cbpregistration
+  pk: 1430071
+- fields: {name: Verhaalsinformatie, organisation: 30, purpose: 'Voor consumenten
+      worden inkomens, uitkeringen en vermogensbestanddelen onderzocht', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8b8e888d8f'}
+  model: letter.cbpregistration
+  pk: 1249915
+- fields: {name: Best address, organisation: 30, purpose: "Het verifi\xEBren van het\
+      \ woonadres en/of verblijfadres en/of correspondentieadres van personen. Het\
+      \ traceren van personen. Het leveren van een bijdrage aan voorkoming en signalering\
+      \ van fraude en andere vormen van criminaliteit door de opdrachtgevers zelf.",
+    url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8e8d8f8d89'}
+  model: letter.cbpregistration
+  pk: 1290948
+- fields: {name: Klantenadministratie, organisation: 1, purpose: 'Verantwoorde uitoefening
+      van bedrijfsdoelstellingen van de ANWB mede t.b.v de dochtervennootschappen
+      v.d. ANWB en samenwerkende partners Opslaan gegevens (ex-)klanten, voor opstellen
+      van aanbiedingen, voorbereiding van offertes, ter uitvoering van overeenkomsten
+      voor leveren producten en diensten, leveren service, onderhoud en geven voorlichting
+      en nakomen garantieverplichtingen Het verwerken van gegevens voor direct marketing
+      doeleinden met uitzondering van gezondheidsgegevens. t.b.v. managementinformatie,
+      product en dienstontwikkeling en het bepalen van de algemene strategie Uitvoering
+      of toepassing van andere wetten Het behandelen van geschillen en het doen uitoefenen
+      van (accountants)controle Uitvoeren van debiteuren controle t.b.v. orderverwerking
+      en verkoopondersteuning/marketing', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8084898884&refer=true&theme=purple'}
+  model: letter.cbpregistration
+  pk: 1107519
