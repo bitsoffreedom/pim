@@ -68,7 +68,7 @@ def index(request, param = None):
 		},
 		context_instance=RequestContext(request))
 def addcitizenrole(request, param):
-	sectors = request.session.setdefault('roles', [])
+	request.session.setdefault('roles', [])
 	try:
 		role_id = int(param)
 	except (ValueError, TypeError):
