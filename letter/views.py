@@ -8,25 +8,14 @@ from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 
-# XXX: Currently a 1:1 mapping. Should be extended to 1:many
-# XXX: All the mapper code included in the index and addcitizenrole methods are
-# basically hacks. They should be replaced.
-CITIZENROLE_MAPPER = (
-	(1, "Ik heb een Auto", "Auto-eigenaar"),
-	(2, "Ik heb een Bankrekening", "Bank-klant"),
-	(3, "Ik heb reis veel", "Buitendland-betaler"),
-	(4, "Ik heb shop veel", "Consument"),
-	(5, "Ik heb m'n eigen bedrijf", "Ondernemer"),
-)
-
 def search(request):
 	""" Search for specific tags. """
 	
 	org_list = Organisation.objects.all()
 
-	selected_citizenroles = [x[2] for x in CITIZENROLE_MAPPER if x[0] in request.session['roles']]
-	if len(selected_citizenroles) > 0:
-		org_list = org_list.filter(citizenrole__name__in = selected_citizenroles)
+	role_ids = request.session['tags']
+	if len(role_ids) > 0:
+		org_list = org_list.filter(citizenrole__in = role_ids)
 
 	tag_ids = request.session['tags']
 	if len(tag_ids) > 0:
@@ -51,8 +40,9 @@ def index(request, param = None):
 
 	tags = Organisation.tags.all()
 	sectors = Sector.objects.all()
+	citizenroles = CitizenRole.objects.all()
 	selected_sectors = Sector.objects.filter(pk__in = request.session['sectors'])
-	selected_citizenroles = [x for x in CITIZENROLE_MAPPER if x[0] in request.session['roles']]
+	selected_citizenroles = CitizenRole.objects.filter(pk__in = request.session['roles'])
 	selected_tags = Organisation.tags.filter(pk__in = request.session['tags'])
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 	org_list = search(request)
@@ -68,6 +58,7 @@ def index(request, param = None):
 		{
 		'tags': tags,
 		'sectors': sectors,
+		'citizenroles': citizenroles,
 		'org_count': org_count,
 		'organisations': org,
 		'selected_sectors': selected_sectors,
@@ -76,20 +67,15 @@ def index(request, param = None):
 		'selected_tags': selected_tags,
 		},
 		context_instance=RequestContext(request))
-
 def addcitizenrole(request, param):
-	roles = request.session.setdefault('roles', [])
+	sectors = request.session.setdefault('roles', [])
 	try:
 		role_id = int(param)
 	except (ValueError, TypeError):
 		return HttpResponse("fail")
 
-	if role_id not in [r[0] for r in CITIZENROLE_MAPPER]:
-		return HttpResponse("fail1")
-
-	citizenrole = [r[2] for r in CITIZENROLE_MAPPER if r[0] == role_id]
-	if not CitizenRole.objects.filter(name=citizenrole[0]):
-		return HttpResponse("fail2")
+	if not CitizenRole.objects.filter(pk=role_id):
+		return HttpResponse("fail")
 
 	if role_id not in request.session['roles']:
 		request.session['roles'].append(role_id)

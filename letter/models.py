@@ -39,6 +39,9 @@ class Sector(models.Model):
 	
 class CitizenRole(models.Model):
 	name = models.CharField(max_length=20)
+	firstperson = models.CharField(max_length=200, help_text=_("First \
+		person singular description of the citizen role. This is used to generate \
+		understandable descriptions for the filters."))
 
 	class Meta:
 		verbose_name=_('citizen role')
