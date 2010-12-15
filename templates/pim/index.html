@@ -1,77 +1,98 @@
 {% extends "pim/pimbase.html" %}
 
 {% block content %}
-          <div id="filter">
-            <div id="active_filters">
-              <p>Geselecteerd op</p>
-
+		<div id="wizard">
+			<ol id="steps" class="flat-list">
+				<li class="selected"><span class="step-count">1</span> Kies de bedrijven</li>
+				<li><span class="step-count">2</span> Vul je gegevens in</li>
+				<li id="step-3"><span class="step-count">3</span> Maak de brieven</li>
+			</ol>
+			
+			<h1>Kies hieronder welke bedrijven je wilt aanschrijven.</h1>
+			
+			<div id="fake-column-borders" class="clearfix">
+				<div id="filters" class="column">
+					<div id="active-filters">
+						<h3>Actieve filters:</h3>
             {% if selected_tags or selected_citizenroles or selected_sectors %}
               <ul>
                 {% for role in selected_citizenroles %}
-                <li><a class="delete" href="{% url letter.views.delcitizenrole role.pk %}">X</a>{{ role.firstperson }}</li>
+                <li><a href="{% url letter.views.delcitizenrole role.pk %}">{{ role.firstperson }}</a></li>
                 {% endfor %}
                 {% for tag in selected_tags %}
-                <li><a class="delete" href="{% url letter.views.delkeyword tag.pk %}">X</a> {{ tag }}</li>
+                <li><a href="{% url letter.views.delkeyword tag.pk %}">{{ tag }}</li></a>
                 {% endfor %}
                 {% for sector in selected_sectors %}
-                <li><a class="delete" href="{% url letter.views.delsector sector.pk %}">X</a> {{ sector }}</li>
+                <li><a href="{% url letter.views.delsector sector.pk %}">{{ sector }}</a></li>
                 {% endfor %}
               </ul>
             {% endif %}
-            </div>
-            <p>Verfijn resultaten op</p>
-              <p>Zoek afhankelijk van uw situatie</p>
-              <ul>
-                {% for citizenrole in citizenroles %}
-                <li><a href="{% url letter.views.addcitizenrole citizenrole.id %}">{{ citizenrole.firstperson }}</a></li>
-                {% endfor %}
-              </ul>
-              {% if tags %}
-              <p>Trefwoorden</p>
-              <ul>
-                {% for tag in tags %}
-                <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-              <p>Sectors</p>
-              {% if sectors %}
-              <ul>
-                {% for sector in sectors %}
-                <li><a href="{% url letter.views.addsector sector.id %}">{{ sector }}</a></li>
-                {% endfor %}
-              </ul>
-              {% endif %}
-          </div>
-          <div id="organisations">
-            <h2>Bedrijven</h2>
-            <p>{{ org_count }} organisatie(s) gevonden.</p>
-            <ul>
-            {% for org in organisations.object_list %}
-              <li><a href="{% url letter.views.addcompany org.id %}"> {{ org }}</a></li>
+					</div>
+					
+					<h3>Verfijn resultaat op:</h3>
+					
+					<h4>Zoekterm</h4>
+					<form action="" method="get">
+						<fieldset>
+							<input type="text" name="search-word" />
+							<input type="submit" value="zoek" />
+						</fieldset>
+					</form>
+					
+					<h4>Zoek afhankelijk van uw situatie</h4>
+          <ul>
+            {% for citizenrole in citizenroles %}
+            <li><a href="{% url letter.views.addcitizenrole citizenrole.id %}">{{ citizenrole.firstperson }}</a></li>
             {% endfor %}
-            </ul>
-            <div id="company_nav">
-              {% if organisations.has_previous %}
-              <a href="{% url letter.views.index organisations.previous_page_number %}">Vorige</a>
-              {% endif %}
-              Pagina {{ organisations.number }} van de {{ organisations.paginator.num_pages }}
-              {% if organisations.has_next %}
-              <a href="{% url letter.views.index organisations.next_page_number %}">Volgende</a>
-              {% endif %}
-            </div>
-          </div>
-          <div id="selected_organisations">
+          </ul>
+
+          {% if tags %}
+          <p>Trefwoorden</p>
+          <ul>
+            {% for tag in tags %}
+            <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+          <p>Sectors</p>
+          {% if sectors %}
+          <ul>
+            {% for sector in sectors %}
+            <li><a href="{% url letter.views.addsector sector.id %}">{{ sector }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+					
+					
+					<!-- Hier is nog geen interface voor. Misschien voor de beta nog even weglaten. -->
+					<a href="">Uitgebreid zoeken</a>
+					
+					<a href="">Hulp nodig?</a>
+				</div>
+				
+				<div id="result-list" class="column">
+					<h2>Bedrijven</h2>
+					
+					<ol>
+            {% for org in organisations.object_list %}
+						<li><a href="{% url letter.views.addcompany org.id %}">{{ org }}</a></li>
+            {% endfor %}
+					</ol>
+				</div>
+				
+				<div id="selected-hamsters" class="column">
+					<h2>Geselecteerd</h2>
           {% if selected_companies|length == 0 %}
           <p>Je hebt nog geen bedrijven geselecteerd</p>
           {% else %}
           <ul>
-            
             {% for c in selected_companies %}
-            <li><a class="delete" href="{% url letter.views.delcompany c.pk %}">X</a> {{ c }}</li>
+            <li>{{ c }}</li>
             {% endfor %}
           </ul>
-          <p><a href="{% url letter.views.userdata %}">Begin met de brieven</a></p>
           {% endif %}
-          </div>
+				</div>
+				
+				<a href="{% url letter.views.userdata %}" id="next-step">Klaar<span>Door naar stap 2</span></a>
+			</div>
 {% endblock %}
