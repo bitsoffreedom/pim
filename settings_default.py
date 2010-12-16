@@ -83,5 +83,5 @@ INSTALLED_APPS = (
     'sentry.client',
     'staticfiles',
     'taggit',
-    'pim.letter'
+    'pim.pimbase'
 )

@@ -2,8 +2,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
-from letter.models import *
-from letter.forms import UserForm
+from pimbase.models import *
+from pimbase.forms import UserForm
 from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -80,7 +80,7 @@ def addcitizenrole(request, param):
 	if role_id not in request.session['roles']:
 		request.session['roles'].append(role_id)
 		request.session.modified = True
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delcitizenrole(request, param):
 	request.session.setdefault('roles', [])
@@ -93,7 +93,7 @@ def delcitizenrole(request, param):
 	request.session['roles'].remove(role_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def addsector(request, param):
 	sectors = request.session.setdefault('sectors', [])
@@ -108,7 +108,7 @@ def addsector(request, param):
 	if sector_id not in request.session['sectors']:
 		request.session['sectors'].append(sector_id)
 		request.session.modified = True
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delsector(request, param):
 	request.session.setdefault('sectors', [])
@@ -121,7 +121,7 @@ def delsector(request, param):
 	request.session['sectors'].remove(sector_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def addcompany(request, param):
 	company = request.session.setdefault('companies', [])
@@ -136,7 +136,7 @@ def addcompany(request, param):
 	if company_id not in request.session['companies']:
 		request.session['companies'].append(company_id)
 		request.session.modified = True
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delcompany(request, param):
 	request.session.setdefault('companies', [])
@@ -149,7 +149,7 @@ def delcompany(request, param):
 	request.session['companies'].remove(company_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def addkeyword(request, param):
 	request.session.setdefault('tags', [])
@@ -165,7 +165,7 @@ def addkeyword(request, param):
 	if tag_id not in request.session['tags']:
 		request.session['tags'].append(tag_id)
 		request.session.modified = True
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delkeyword(request, param):
 	request.session.setdefault('tags', [])
@@ -178,7 +178,7 @@ def delkeyword(request, param):
 	request.session['tags'].remove(tag_id)
 	request.session.modified = True
 
-	return HttpResponseRedirect(reverse('letter.views.index'))
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def userdata(request):
 	request.session.setdefault('companies', [])
@@ -192,7 +192,7 @@ def userdata(request):
 			request.session['street_address'] = form.cleaned_data['street_address']
 			request.session['postcode'] = form.cleaned_data['postcode']
 			request.session['city'] = form.cleaned_data['city']
-			return HttpResponseRedirect(reverse('letter.views.generate'))
+			return HttpResponseRedirect(reverse('pimbase.views.generate'))
 	else:
 		form = UserForm()
 

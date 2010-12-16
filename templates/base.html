@@ -1,14 +1,50 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="{{ LANGUAGE_CODE }}" lang="{{ LANGUAGE_CODE }}">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>{% block htmltitle %}{% endblock %}</title>
-	{% block htmlheader %}{% endblock %}
-</head>
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /> -->
+		<title>PIM</title>
+		
+		<link href="/static/global/style.css" media="screen" rel="stylesheet" type="text/css" />
+		
+		<!--[if lt IE 9]>
+		<script type="text/javascript" src="/static/global/IE9.js"></script>
+		<![endif]-->
+		
+		<script type="text/javascript" src="http://use.typekit.com/wge3fla.js"></script>
+		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+		
+		<!--<base href="http://82.94.216.83/dataview/" />-->
+	</head>
 <body>
-{% block content %}{% endblock %}
+	<div id="content" class="clearfix">
+		<img src="/static/global/pim_logo.png" alt="PIM logo" id="pim-logo"/>
+		<img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/>
+		
+		<ul id="main-nav" class="flat-list">
+			<li><a href="">Home</a></li>
+			<li><a href="">Over PIM</a></li>
+			<li><a href="">Contact</a></li>
+			<li><a href="">Pers</a></li>
+			<li><a href="">Privacy</a></li>
+		</ul>
+		
+		<div id="sub-nav"><a href="">Disclaimer</a> | <a href="">FAQ</a></div>
+        {% block content %}
+        {% endblock %}
+			<div id="footer">Bits of Freedom 2010 | <a href="mailto:info@bitsoffreedom.nl">info@bitsoffreedom.nl</a> | <a href="">Creative Commons</a></div>
+		</div>
+		
+		<h5>Privacy assistent</h5>
+		<p>Curabitur nec dolor vel quam porta tempor in ut quam. Etiam at nulla tortor, at euismod dolor. Sed rutrum enim ut diam aliquet eget ullamcorper purus sollicitudin. Curabitur a metus sed diam volutpat adipiscing ac a sapien. Phasellus nec nulla nulla, sit amet sollicitudin augue. Etiam vulputate mauris sit amet mi posuere ac ultrices felis dapibus. Nullam faucibus quam vitae diam dignissim imperdiet.</p>
+	
+		<h5>Hoe werkt PIM?</h5>
+		<p>Curabitur nec dolor vel quam porta tempor in ut quam. Etiam at nulla tortor, at euismod dolor. Sed rutrum enim ut diam aliquet eget ullamcorper purus sollicitudin. Curabitur a metus sed diam volutpat adipiscing ac a sapien. Phasellus nec nulla nulla, sit amet sollicitudin augue. Etiam vulputate mauris sit amet mi posuere ac ultrices felis dapibus. Nullam faucibus quam vitae diam dignissim imperdiet.</p>
+		
+	</div>
+	
+	<div id="bottom">
+		
+	</div>
 </body>
 </html>

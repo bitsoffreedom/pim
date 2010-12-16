@@ -1,230 +1,230 @@
 - fields: {name: Amsterdam, slug: amsterdam}
-  model: letter.city
+  model: pimbase.city
   pk: 1
 - fields: {name: Hilversum, slug: hilversum}
-  model: letter.city
+  model: pimbase.city
   pk: 2
 - fields: {name: Rotterdam, slug: rotterdam}
-  model: letter.city
+  model: pimbase.city
   pk: 3
 - fields: {name: Utrecht, slug: utrecht}
-  model: letter.city
+  model: pimbase.city
   pk: 4
 - fields: {name: Zoetermeer, slug: zoetermeer}
-  model: letter.city
+  model: pimbase.city
   pk: 5
 - fields: {name: Bunnink, slug: bunnink}
-  model: letter.city
+  model: pimbase.city
   pk: 6
 - fields: {name: Den Haag, slug: den-haag}
-  model: letter.city
+  model: pimbase.city
   pk: 7
 - fields: {name: Nederland, slug: nederland}
-  model: letter.country
+  model: pimbase.country
   pk: 1
 - fields: {name: Handhaving, slug: handhaving}
-  model: letter.sector
+  model: pimbase.sector
   pk: 1
 - fields: {name: Mobiliteit, slug: mobiliteit}
-  model: letter.sector
+  model: pimbase.sector
   pk: 3
 - fields: {name: Profiling, slug: profiling}
-  model: letter.sector
+  model: pimbase.sector
   pk: 4
 - fields: {name: Auto-eigenaar}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 1
 - fields: {name: Bank-klant}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 2
 - fields: {name: Betaler}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 3
 - fields: {name: Buitenland-betaler}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 4
 - fields: {name: Consument}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 5
 - fields: {name: Ondernemer}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 6
 - fields: {name: Register-Hufter}
-  model: letter.citizenrole
+  model: pimbase.citizenrole
   pk: 7
 - fields: {name: physical}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 1
 - fields: {name: online}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 2
 - fields: {name: uniqueid}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 3
 - fields: {name: purchase}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 4
 - fields: {name: financial}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 5
 - fields: {name: computer}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 6
 - fields: {name: navigation}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 7
 - fields: {name: interactive}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 8
 - fields: {name: demographic}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 9
 - fields: {name: content}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 10
 - fields: {name: state}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 11
 - fields: {name: political}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 12
 - fields: {name: health}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 13
 - fields: {name: preference}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 14
 - fields: {name: location}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 15
 - fields: {name: government}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 16
 - fields: {name: other-category}
-  model: letter.p3pcategory
+  model: pimbase.p3pcategory
   pk: 17
 - fields: {name: naam, p3p_category: 1}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 1
 - fields: {name: naw, p3p_category: 1}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 2
 - fields: {name: email, p3p_category: 2}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 3
 - fields: {name: kenteken, p3p_category: 16}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 4
 - fields: {name: burgerservicenummer, p3p_category: 16}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 5
 - fields: {name: rijbewijsnummer, p3p_category: 16}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 6
 - fields: {name: airmileskaartID, p3p_category: 4}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 7
 - fields: {name: telefoon, p3p_category: 1}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 8
 - fields: {name: geboortedatum, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 9
 - fields: {name: leeftijd, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 10
 - fields: {name: burgelijkestaat, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 11
 - fields: {name: verhaalsinformatie, p3p_category: 5}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 12
 - fields: {name: betalingservaringen, p3p_category: 5}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 13
 - fields: {name: bedrijfsinformatie, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 14
 - fields: {name: verhuisinformatie, p3p_category: 17}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 15
 - fields: {name: registratie eerdere toetsingen, p3p_category: 17}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 16
 - fields: {name: verhuisinformatie, p3p_category: 17}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 17
 - fields: {name: onroerend goed gegevens, p3p_category: 4}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 18
 - fields: {name: voertuiggegevens, p3p_category: 16}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 19
 - fields: {name: faillissementsgegevens, p3p_category: 17}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 20
 - fields: {name: geslacht, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 21
 - fields: {name: leeftijdsklasse, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 22
 - fields: {name: inkomensklasse, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 23
 - fields: {name: Mosaic Origins, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 24
 - fields: {name: kredietwaardigheid, p3p_category: 5}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 25
 - fields: {name: klasse van type woning, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 26
 - fields: {name: leeftijdsklasse kinderen, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 27
 - fields: {name: aantal verhuizingen in klassen, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 28
 - fields: {name: aantal auto's in huishouden, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 29
 - fields: {name: klasse van eigendom van woning, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 30
 - fields: {name: transactiewaarde van woning, p3p_category: 5}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 31
 - fields: {name: hypotheeksom woning, p3p_category: 5}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 32
 - fields: {name: klasse van laatse verhuizing, p3p_category: 9}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 33
 - fields: {name: registratie van zakelijk activiteiten op adres, p3p_category: 17}
-  model: letter.collectedinformation
+  model: pimbase.collectedinformation
   pk: 34
 - fields: {name: bedrijfsleven}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 1
 - fields: {name: religieuze}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 2
 - fields: {name: overheid}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 3
 - fields: {name: gezondheidszorg}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 4
 - fields: {name: financieel}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 5
 - fields: {name: lobby}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 6
 - fields: {name: liefdadigheid}
-  model: letter.organisationtype
+  model: pimbase.organisationtype
   pk: 7
 - fields:
     address: 'Wassenaarseweg  220  '
@@ -239,7 +239,7 @@
     sector: 3
     short_name: anwb
     website: http://www.anwb.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 1
 - fields:
     address: ''
@@ -254,7 +254,7 @@
     sector: 1
     short_name: ''
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 2
 - fields:
     address: ''
@@ -269,7 +269,7 @@
     sector: 1
     short_name: ''
     website: http://www.stidenda.nl/
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 3
 - fields:
     address: ''
@@ -284,7 +284,7 @@
     sector: 1
     short_name: ''
     website: http://www.rdc.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 4
 - fields:
     address: ''
@@ -299,7 +299,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.voertuigdata.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 5
 - fields:
     address: ''
@@ -314,7 +314,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.voertuigdata.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 6
 - fields:
     address: ''
@@ -329,7 +329,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.vwe.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 7
 - fields:
     address: ''
@@ -344,7 +344,7 @@
     sector: 1
     short_name: ''
     website: http://www.abnamro.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 9
 - fields:
     address: ''
@@ -359,7 +359,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.ing.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 10
 - fields:
     address: ''
@@ -374,7 +374,7 @@
     sector: 1
     short_name: ''
     website: http://www.rabobank.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 11
 - fields:
     address: ''
@@ -389,7 +389,7 @@
     sector: 1
     short_name: ''
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 12
 - fields:
     address: ''
@@ -404,7 +404,7 @@
     sector: 1
     short_name: ''
     website: http://www.mobile2pay.nl/
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 13
 - fields:
     address: ''
@@ -419,7 +419,7 @@
     sector: 1
     short_name: ''
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 14
 - fields:
     address: ''
@@ -434,7 +434,7 @@
     sector: null
     short_name: bureau-voor-kredietinformaties-wgj-jansen-bv
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 36
 - fields:
     address: ''
@@ -449,7 +449,7 @@
     sector: 1
     short_name: ''
     website: http://www.albert.nl/
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 16
 - fields:
     address: ''
@@ -464,7 +464,7 @@
     sector: 1
     short_name: ''
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 17
 - fields:
     address: ''
@@ -479,7 +479,7 @@
     sector: 1
     short_name: ''
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 18
 - fields:
     address: ''
@@ -494,7 +494,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.maxeda.com/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 19
 - fields:
     address: ''
@@ -509,7 +509,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.debijenkorf.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 20
 - fields:
     address: ''
@@ -524,7 +524,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.debijenkorf.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 21
 - fields:
     address: ''
@@ -539,7 +539,7 @@
     sector: 1
     short_name: ''
     website: 'http://www.debijenkorf.nl/ '
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 22
 - fields:
     address: ''
@@ -554,7 +554,7 @@
     sector: 1
     short_name: ''
     website: http://www.cendris.nl/
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 23
 - fields:
     address: ''
@@ -569,7 +569,7 @@
     sector: null
     short_name: bovag
     website: www.bovag.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 32
 - fields:
     address: ''
@@ -584,7 +584,7 @@
     sector: null
     short_name: dienst-wegverkeerrdw
     website: http://www.rdw.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 33
 - fields:
     address: Wielingenstraat 28
@@ -599,7 +599,7 @@
     sector: null
     short_name: rai-vereniging
     website: www.rai.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 34
 - fields:
     address: ''
@@ -614,7 +614,7 @@
     sector: 4
     short_name: bis-consumerdata
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 35
 - fields:
     address: Postbus 16604
@@ -630,7 +630,7 @@
     sector: null
     short_name: experian
     website: http://www.experian.nl/
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 30
 - fields:
     address: ''
@@ -645,7 +645,7 @@
     sector: null
     short_name: anwb
     website: http://anwb.nl
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 31
 - fields:
     address: ''
@@ -660,7 +660,7 @@
     sector: null
     short_name: dun-bradstreet-bv
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 37
 - fields:
     address: ''
@@ -675,40 +675,40 @@
     sector: 4
     short_name: graydon-nederland-bv
     website: ''
-  model: letter.organisation
+  model: pimbase.organisation
   pk: 38
 - fields: {name: LevertGegevensAan, slug: levertgegevensaan}
-  model: letter.relationtype
+  model: pimbase.relationtype
   pk: 1
 - fields: {name: OntvangtGegevensVan, slug: ontvangtgegevensvan}
-  model: letter.relationtype
+  model: pimbase.relationtype
   pk: 2
 - fields: {name: IsAandeelhouderVan, slug: isaandeelhoudervan}
-  model: letter.relationtype
+  model: pimbase.relationtype
   pk: 3
 - fields: {name: HeeftAandeelhouder, slug: heeftaandeelin}
-  model: letter.relationtype
+  model: pimbase.relationtype
   pk: 4
 - fields: {name: IsWerkmaatschappijVan, slug: iswerkmaatschappijvan}
-  model: letter.relationtype
+  model: pimbase.relationtype
   pk: 5
 - fields: {name: HeeftWerkmaatschapij, slug: heeftwerkmaatschapij}
-  model: letter.relationtype
+  model: pimbase.relationtype
   pk: 6
 - fields: {name: Autotrace, organisation: 30, purpose: 'Combineert alle relevante
       gegevens uit openbaar beschikbare bronnen en maakt adressen, schulden en bezittingen
       inzichtelijk', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8b8e888d82'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1249896
 - fields: {name: Credit Check, organisation: 30, purpose: Online inzicht in kredietwaardigheid
       en betaalgedrag van consumenten, url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8b8e888d80'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1249903
 - fields: {name: Family View, organisation: 30, purpose: Het verzamelen van gegevens
       op adresniveau teneinde een waarschijnlijkheidsscore te kunnen bepalen dat iemand
       op een bepaald aanbod reageert. Bevat meer dan 1400 onderscheidende kenmerken.
       Geeft inzicht in specifieke kenmerken van alle huishoudens in Nederland, url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=808588898f'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1197570
 - fields: {name: Occasion Check, organisation: 30, purpose: 'Het beschikbaar stellen
       van informatie aan de consument met betrekking tot een occasion Indien de consument
@@ -717,24 +717,24 @@
       toestemming heeft verleend, het beschikbaar stellen van de gegevens en voertuiggegevens
       aan de autobranche De gegevens worden verwerkt ten behoeve van statistische
       doeleinden ', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8f8f85828b'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1357351
 - fields: {name: Person View, organisation: 30, purpose: 'Beschikbare demografische
       gegevens zijn: geslacht, leeftijdsklasse, Mosaic Origins type en tijdsduur huidige
       bewoning persoon; toegevoegd worden andere kenmerken als burgerlijke staat,
       hoofdhuishouden en inkomen', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=80808e8d89'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1430071
 - fields: {name: Verhaalsinformatie, organisation: 30, purpose: 'Voor consumenten
       worden inkomens, uitkeringen en vermogensbestanddelen onderzocht', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8b8e888d8f'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1249915
 - fields: {name: Best address, organisation: 30, purpose: "Het verifi\xEBren van het\
       \ woonadres en/of verblijfadres en/of correspondentieadres van personen. Het\
       \ traceren van personen. Het leveren van een bijdrage aan voorkoming en signalering\
       \ van fraude en andere vormen van criminaliteit door de opdrachtgevers zelf.",
     url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8e8d8f8d89'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1290948
 - fields: {name: Klantenadministratie, organisation: 1, purpose: 'Verantwoorde uitoefening
       van bedrijfsdoelstellingen van de ANWB mede t.b.v de dochtervennootschappen
@@ -747,5 +747,5 @@
       of toepassing van andere wetten Het behandelen van geschillen en het doen uitoefenen
       van (accountants)controle Uitvoeren van debiteuren controle t.b.v. orderverwerking
       en verkoopondersteuning/marketing', url: 'http://www.cbpweb.nl/asp/ORDetail.asp?moid=8084898884&refer=true&theme=purple'}
-  model: letter.cbpregistration
+  model: pimbase.cbpregistration
   pk: 1107519

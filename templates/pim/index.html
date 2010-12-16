@@ -1,4 +1,4 @@
-{% extends "pim/pimbase.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 		<div id="wizard">
@@ -17,13 +17,13 @@
             {% if selected_tags or selected_citizenroles or selected_sectors %}
               <ul>
                 {% for role in selected_citizenroles %}
-                <li><a href="{% url letter.views.delcitizenrole role.pk %}">{{ role.firstperson }}</a></li>
+                <li><a href="{% url pimbase.views.delcitizenrole role.pk %}">{{ role.firstperson }}</a></li>
                 {% endfor %}
                 {% for tag in selected_tags %}
-                <li><a href="{% url letter.views.delkeyword tag.pk %}">{{ tag }}</li></a>
+                <li><a href="{% url pimbase.views.delkeyword tag.pk %}">{{ tag }}</li></a>
                 {% endfor %}
                 {% for sector in selected_sectors %}
-                <li><a href="{% url letter.views.delsector sector.pk %}">{{ sector }}</a></li>
+                <li><a href="{% url pimbase.views.delsector sector.pk %}">{{ sector }}</a></li>
                 {% endfor %}
               </ul>
             {% endif %}
@@ -42,7 +42,7 @@
 					<h4>Zoek afhankelijk van uw situatie</h4>
           <ul>
             {% for citizenrole in citizenroles %}
-            <li><a href="{% url letter.views.addcitizenrole citizenrole.id %}">{{ citizenrole.firstperson }}</a></li>
+            <li><a href="{% url pimbase.views.addcitizenrole citizenrole.id %}">{{ citizenrole.firstperson }}</a></li>
             {% endfor %}
           </ul>
 
@@ -50,7 +50,7 @@
           <p>Trefwoorden</p>
           <ul>
             {% for tag in tags %}
-            <li><a href="{% url letter.views.addkeyword tag.id %}">{{ tag }}</a></li>
+            <li><a href="{% url pimbase.views.addkeyword tag.id %}">{{ tag }}</a></li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -58,7 +58,7 @@
           {% if sectors %}
           <ul>
             {% for sector in sectors %}
-            <li><a href="{% url letter.views.addsector sector.id %}">{{ sector }}</a></li>
+            <li><a href="{% url pimbase.views.addsector sector.id %}">{{ sector }}</a></li>
             {% endfor %}
           </ul>
           {% endif %}
@@ -75,7 +75,7 @@
 					
 					<ol>
             {% for org in organisations.object_list %}
-						<li><a href="{% url letter.views.addcompany org.id %}">{{ org }}</a></li>
+						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org }}</a></li>
             {% endfor %}
 					</ol>
 				</div>
@@ -93,6 +93,6 @@
           {% endif %}
 				</div>
 				
-				<a href="{% url letter.views.userdata %}" id="next-step">Klaar<span>Door naar stap 2</span></a>
+				<a href="{% url pimbase.views.userdata %}" id="next-step">Klaar<span>Door naar stap 2</span></a>
 			</div>
 {% endblock %}

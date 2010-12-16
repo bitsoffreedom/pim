@@ -18,7 +18,7 @@ else:
     urlpatterns = patterns('')
 
 urlpatterns += patterns('',
-    (r'^', include('letter.urls')),
+    (r'^', include('pimbase.urls')),
 
     # Django Admin
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),

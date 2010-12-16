@@ -1,4 +1,4 @@
-{% extends "pim/pimbase.html" %}
+{% extends "base.html" %}
 
 {% block content %}
 		<div id="wizard">
@@ -9,7 +9,7 @@
 			</ol>
           <ul>
             {% for c in selected_companies %}
-            <li><a href="{% url letter.views.generatehtml c.pk %}">{{ c }}</a></li>
+            <li><a href="{% url pimbase.views.generatehtml c.pk %}">{{ c }}</a></li>
             {% endfor %}
           </ul>
       </div>
