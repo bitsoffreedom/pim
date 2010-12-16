@@ -134,6 +134,10 @@ class Organisation(models.Model):
 	def __unicode__(self):
 		return self.name
 
+	def html_link(self):
+		return "<a href=\"%s\">%s</a>" % (self.website, self.website)
+	html_link.allow_tags = True
+
 class RelationType(models.Model):
 	""" Types of relationships. """
 

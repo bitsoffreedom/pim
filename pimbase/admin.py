@@ -40,7 +40,7 @@ class CBPRegistrationInline(admin.TabularInline):
 
 class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    list_display = ('name',)
+    list_display = ('name', 'html_link')
     list_filter = ('collectedinformation', 'citizenrole', 'country', 'sector')
     search_fields = ['name', 'short_name']
     
