@@ -7,6 +7,7 @@ from pimbase.forms import UserForm
 from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+import datetime
 
 def search(request):
 	""" Search for specific tags. """
@@ -243,7 +244,8 @@ def generatehtml(request, param):
 		'lastname': request.session['lastname'],
 		'street_address': request.session['street_address'],
 		'postcode': request.session['postcode'],
-		'city': request.session['city']
+		'city': request.session['city'],
+		'currentdate': datetime.date.today(),
 		})
 
 def generatepdf(request, param):
