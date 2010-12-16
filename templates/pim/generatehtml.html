@@ -11,6 +11,7 @@
       <li>{{ postcode }} {{ city }}</li>
     </ul>
 
+    <p>Aan:</p>
     <ul>
       <li>{{ organisation }},</li>
       <li>{{ organisation.street_address }}</li>
@@ -18,7 +19,7 @@
       <li>{{ organisation.country }} </li>
     </ul>
 
-    <p>{{ organisation }}</p>
+    <p>{{ city }}, {{ currentdate }}</p>
 
     <p>Onderwerp: Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
 
@@ -37,6 +38,8 @@
 
     <p>Een kopie van mijn identiteitsbewijs is als bijlage opgenomen.</p>
 
-    <p>Hoogachtend, {{ firstname }} {{ lastname }}</p>
+    <p>Hoogachtend,</p>
+
+    <p>{{ firstname }} {{ lastname }}</p>
   </body>
 </html>

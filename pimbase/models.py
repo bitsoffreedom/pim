@@ -39,8 +39,8 @@ class Sector(models.Model):
 	
 class CitizenRole(models.Model):
 	name = models.CharField(max_length=20)
-	firstperson = models.CharField(max_length=200, help_text=_("First \
-		person singular description of the citizen role. This is used to generate \
+	label = models.CharField(max_length=200, help_text=_("Description of \
+		the citizen role. This is used to generate \
 		understandable descriptions for the filters."))
 
 	class Meta:
@@ -71,12 +71,13 @@ class Identifier(models.Model):
 		verbose_name=_('consumer identifier')
 		verbose_name_plural=_('consumer identifiers')
 
-class P3PCategory(models.Model):
+class CollectedInformationType(models.Model):
 	name = models.CharField(max_length=200)
+	description = models.CharField(max_length=400)
 
 	class Meta:
-		verbose_name=_('P3P category')
-		verbose_name_plural=_('P3P categories')
+		verbose_name=_('Collected information type')
+		verbose_name_plural=_('Collected information types')
 	def __unicode__(self):
 		return self.name
 
@@ -84,7 +85,7 @@ class CollectedInformation(models.Model):
 	""" Information which companies have about an user"""
 	
 	name = models.CharField(max_length=200, blank=True, help_text="")
-	p3p_category = models.ForeignKey(P3PCategory)
+	type = models.ForeignKey(CollectedInformationType)
 
 	class Meta:
 		verbose_name=_('collected information')

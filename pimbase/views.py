@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
@@ -7,6 +7,7 @@ from pimbase.forms import UserForm
 from django.core.urlresolvers import reverse
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+import datetime
 
 def search(request):
 	""" Search for specific tags. """
@@ -36,7 +37,7 @@ def index(request, param = None):
 		try:
 			page_id = int(param)
 		except (ValueError, TypeError):
-			return HttpResponse("fail")
+			return HttpResponseServerError("Invalid parameter")
 
 	tags = Organisation.tags.all()
 	sectors = Sector.objects.all()
@@ -52,7 +53,7 @@ def index(request, param = None):
 	try:
 		org = paginator.page(page_id)
 	except (EmptyPage, InvalidPage):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Page doesn't exist")
 
 	return render_to_response('pim/index.html',
 		{
@@ -72,10 +73,10 @@ def addcitizenrole(request, param):
 	try:
 		role_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	if not CitizenRole.objects.filter(pk=role_id):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	if role_id not in request.session['roles']:
 		request.session['roles'].append(role_id)
@@ -88,7 +89,7 @@ def delcitizenrole(request, param):
 	try:
 		role_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	request.session['roles'].remove(role_id)
 	request.session.modified = True
@@ -100,10 +101,10 @@ def addsector(request, param):
 	try:
 		sector_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	if not Sector.objects.filter(pk=sector_id):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	if sector_id not in request.session['sectors']:
 		request.session['sectors'].append(sector_id)
@@ -116,7 +117,7 @@ def delsector(request, param):
 	try:
 		sector_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	request.session['sectors'].remove(sector_id)
 	request.session.modified = True
@@ -128,10 +129,10 @@ def addcompany(request, param):
 	try:
 		company_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	if not Organisation.objects.filter(pk=company_id):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	if company_id not in request.session['companies']:
 		request.session['companies'].append(company_id)
@@ -144,7 +145,7 @@ def delcompany(request, param):
 	try:
 		company_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	request.session['companies'].remove(company_id)
 	request.session.modified = True
@@ -157,10 +158,10 @@ def addkeyword(request, param):
 	try:
 		tag_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	if not Organisation.tags.filter(pk=tag_id):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	if tag_id not in request.session['tags']:
 		request.session['tags'].append(tag_id)
@@ -173,7 +174,7 @@ def delkeyword(request, param):
 	try:
 		tag_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	request.session['tags'].remove(tag_id)
 	request.session.modified = True
@@ -215,10 +216,10 @@ def generatehtml(request, param):
 	try:
 		company_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	if company_id not in request.session['companies']:
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	required_keys = (
 		'firstname',
@@ -229,12 +230,12 @@ def generatehtml(request, param):
 	)
 	# <= means issubset
 	if required_keys <= request.session.keys():
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameters")
 
 	try:
 		organisation = Organisation.objects.get(pk=company_id)
 	except Organisation.DoesNotExist:
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	return render_to_response('pim/generatehtml.html',
 		{
@@ -243,7 +244,8 @@ def generatehtml(request, param):
 		'lastname': request.session['lastname'],
 		'street_address': request.session['street_address'],
 		'postcode': request.session['postcode'],
-		'city': request.session['city']
+		'city': request.session['city'],
+		'currentdate': datetime.date.today(),
 		})
 
 def generatepdf(request, param):
@@ -252,10 +254,10 @@ def generatepdf(request, param):
 	try:
 		company_id = int(param)
 	except (ValueError, TypeError):
-		return HttpResponse("fail")
+		return HttpResponseServerError("Invalid parameter")
 
 	if company_id not in request.session['companies']:
-		return HttpResponse("fail")
+		return HttpResponseServerError("Object doesn't exist")
 
 	try:
 		organisation = Organisation.objects.get(pk=company_id)
@@ -272,3 +274,7 @@ def generatepdf(request, param):
 	p.save()
 
 	return response
+
+def datadetectives(request):
+	return render_to_response('pim/datadetectives.html')
+	
