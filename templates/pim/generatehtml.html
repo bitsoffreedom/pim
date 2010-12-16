@@ -1,24 +1,26 @@
 <html>
   <head>
     <title>Brief</title>
+		<link href="/static/global/letter.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
+    <p>Afzender:</p>
     <ul>
       <li>{{ firstname }} {{ lastname }}</li>
       <li>{{ street_address }}</li>
-      <li>{{ postcode }}</li>
-      <li>{{ city }}</li>
+      <li>{{ postcode }} {{ city }}</li>
     </ul>
 
     <ul>
       <li>{{ organisation }},</li>
       <li>{{ organisation.street_address }}</li>
-      <li>{{ organisation.city }}</li>
+      <li>{{ organisation.postcode }} {{ organisation.city }}</li>
+      <li>{{ organisation.country }} </li>
     </ul>
 
     <p>{{ organisation }}</p>
 
-    <p>Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
+    <p>Onderwerp: Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
 
     <p>Geachte Heer/Mevrouw,</p>
 
