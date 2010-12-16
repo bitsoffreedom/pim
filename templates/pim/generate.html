@@ -1,9 +1,17 @@
 {% extends "pim/pimbase.html" %}
 
 {% block content %}
+		<div id="wizard">
+			<ol id="steps" class="flat-list">
+				<li><span class="step-count">1</span> Kies de bedrijven</li>
+				<li><span class="step-count">2</span> Vul je gegevens in</li>
+				<li class="selected" id="step-3"><span class="step-count">3</span> Maak de brieven</li>
+			</ol>
           <ul>
             {% for c in selected_companies %}
             <li><a href="{% url letter.views.generatehtml c.pk %}">{{ c }}</a></li>
             {% endfor %}
           </ul>
+      </div>
+    </div>
 {% endblock %}

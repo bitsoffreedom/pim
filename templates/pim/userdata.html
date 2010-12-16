@@ -1,13 +1,18 @@
     {% extends "pim/pimbase.html" %}
 
     {% block content %}
-    <div id="search">
-      <div style="background-color: white; ">
-      <form action="{% url letter.views.userdata %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="verzenden"/>
-      </form>
+		<div id="wizard">
+			<ol id="steps" class="flat-list">
+				<li><span class="step-count">1</span> Kies de bedrijven</li>
+				<li class="selected"><span class="step-count">2</span> Vul je gegevens in</li>
+				<li id="step-3"><span class="step-count">3</span> Maak de brieven</li>
+			</ol>
+      <div style="padding: 20px;">
+        <form action="{% url letter.views.userdata %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="verzenden"/>
+        </form>
       </div>
     </div>
     {% endblock %}
