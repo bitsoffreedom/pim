@@ -147,9 +147,9 @@ class OrganisationTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(OrganisationType, OrganisationTypeAdmin)
 
-class P3PCategoryAdmin(admin.ModelAdmin):
-    model = P3PCategory
+class CollectedInformationTypeAdmin(admin.ModelAdmin):
+    model = CollectedInformationType
     extra = 1
 
-admin.site.register(P3PCategory, P3PCategoryAdmin)
+admin.site.register(CollectedInformationType, CollectedInformationTypeAdmin)
 
