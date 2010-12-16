@@ -272,3 +272,7 @@ def generatepdf(request, param):
 	p.save()
 
 	return response
+
+def datadetectives(request):
+	return render_to_response('pim/datadetectives.html')
+	
