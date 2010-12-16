@@ -53,156 +53,156 @@
   model: pimbase.citizenrole
   pk: 7
 - fields: {name: physical}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 1
 - fields: {name: online}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 2
 - fields: {name: uniqueid}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 3
 - fields: {name: purchase}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 4
 - fields: {name: financial}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 5
 - fields: {name: computer}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 6
 - fields: {name: navigation}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 7
 - fields: {name: interactive}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 8
 - fields: {name: demographic}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 9
 - fields: {name: content}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 10
 - fields: {name: state}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 11
 - fields: {name: political}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 12
 - fields: {name: health}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 13
 - fields: {name: preference}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 14
 - fields: {name: location}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 15
 - fields: {name: government}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 16
 - fields: {name: other-category}
-  model: pimbase.p3pcategory
+  model: pimbase.CollectedInformationType
   pk: 17
-- fields: {name: naam, p3p_category: 1}
+- fields: {name: naam, type: 1}
   model: pimbase.collectedinformation
   pk: 1
-- fields: {name: naw, p3p_category: 1}
+- fields: {name: naw, type: 1}
   model: pimbase.collectedinformation
   pk: 2
-- fields: {name: email, p3p_category: 2}
+- fields: {name: email, type: 2}
   model: pimbase.collectedinformation
   pk: 3
-- fields: {name: kenteken, p3p_category: 16}
+- fields: {name: kenteken, type: 16}
   model: pimbase.collectedinformation
   pk: 4
-- fields: {name: burgerservicenummer, p3p_category: 16}
+- fields: {name: burgerservicenummer, type: 16}
   model: pimbase.collectedinformation
   pk: 5
-- fields: {name: rijbewijsnummer, p3p_category: 16}
+- fields: {name: rijbewijsnummer, type: 16}
   model: pimbase.collectedinformation
   pk: 6
-- fields: {name: airmileskaartID, p3p_category: 4}
+- fields: {name: airmileskaartID, type: 4}
   model: pimbase.collectedinformation
   pk: 7
-- fields: {name: telefoon, p3p_category: 1}
+- fields: {name: telefoon, type: 1}
   model: pimbase.collectedinformation
   pk: 8
-- fields: {name: geboortedatum, p3p_category: 9}
+- fields: {name: geboortedatum, type: 9}
   model: pimbase.collectedinformation
   pk: 9
-- fields: {name: leeftijd, p3p_category: 9}
+- fields: {name: leeftijd, type: 9}
   model: pimbase.collectedinformation
   pk: 10
-- fields: {name: burgelijkestaat, p3p_category: 9}
+- fields: {name: burgelijkestaat, type: 9}
   model: pimbase.collectedinformation
   pk: 11
-- fields: {name: verhaalsinformatie, p3p_category: 5}
+- fields: {name: verhaalsinformatie, type: 5}
   model: pimbase.collectedinformation
   pk: 12
-- fields: {name: betalingservaringen, p3p_category: 5}
+- fields: {name: betalingservaringen, type: 5}
   model: pimbase.collectedinformation
   pk: 13
-- fields: {name: bedrijfsinformatie, p3p_category: 9}
+- fields: {name: bedrijfsinformatie, type: 9}
   model: pimbase.collectedinformation
   pk: 14
-- fields: {name: verhuisinformatie, p3p_category: 17}
+- fields: {name: verhuisinformatie, type: 17}
   model: pimbase.collectedinformation
   pk: 15
-- fields: {name: registratie eerdere toetsingen, p3p_category: 17}
+- fields: {name: registratie eerdere toetsingen, type: 17}
   model: pimbase.collectedinformation
   pk: 16
-- fields: {name: verhuisinformatie, p3p_category: 17}
+- fields: {name: verhuisinformatie, type: 17}
   model: pimbase.collectedinformation
   pk: 17
-- fields: {name: onroerend goed gegevens, p3p_category: 4}
+- fields: {name: onroerend goed gegevens, type: 4}
   model: pimbase.collectedinformation
   pk: 18
-- fields: {name: voertuiggegevens, p3p_category: 16}
+- fields: {name: voertuiggegevens, type: 16}
   model: pimbase.collectedinformation
   pk: 19
-- fields: {name: faillissementsgegevens, p3p_category: 17}
+- fields: {name: faillissementsgegevens, type: 17}
   model: pimbase.collectedinformation
   pk: 20
-- fields: {name: geslacht, p3p_category: 9}
+- fields: {name: geslacht, type: 9}
   model: pimbase.collectedinformation
   pk: 21
-- fields: {name: leeftijdsklasse, p3p_category: 9}
+- fields: {name: leeftijdsklasse, type: 9}
   model: pimbase.collectedinformation
   pk: 22
-- fields: {name: inkomensklasse, p3p_category: 9}
+- fields: {name: inkomensklasse, type: 9}
   model: pimbase.collectedinformation
   pk: 23
-- fields: {name: Mosaic Origins, p3p_category: 9}
+- fields: {name: Mosaic Origins, type: 9}
   model: pimbase.collectedinformation
   pk: 24
-- fields: {name: kredietwaardigheid, p3p_category: 5}
+- fields: {name: kredietwaardigheid, type: 5}
   model: pimbase.collectedinformation
   pk: 25
-- fields: {name: klasse van type woning, p3p_category: 9}
+- fields: {name: klasse van type woning, type: 9}
   model: pimbase.collectedinformation
   pk: 26
-- fields: {name: leeftijdsklasse kinderen, p3p_category: 9}
+- fields: {name: leeftijdsklasse kinderen, type: 9}
   model: pimbase.collectedinformation
   pk: 27
-- fields: {name: aantal verhuizingen in klassen, p3p_category: 9}
+- fields: {name: aantal verhuizingen in klassen, type: 9}
   model: pimbase.collectedinformation
   pk: 28
-- fields: {name: aantal auto's in huishouden, p3p_category: 9}
+- fields: {name: aantal auto's in huishouden, type: 9}
   model: pimbase.collectedinformation
   pk: 29
-- fields: {name: klasse van eigendom van woning, p3p_category: 9}
+- fields: {name: klasse van eigendom van woning, type: 9}
   model: pimbase.collectedinformation
   pk: 30
-- fields: {name: transactiewaarde van woning, p3p_category: 5}
+- fields: {name: transactiewaarde van woning, type: 5}
   model: pimbase.collectedinformation
   pk: 31
-- fields: {name: hypotheeksom woning, p3p_category: 5}
+- fields: {name: hypotheeksom woning, type: 5}
   model: pimbase.collectedinformation
   pk: 32
-- fields: {name: klasse van laatse verhuizing, p3p_category: 9}
+- fields: {name: klasse van laatse verhuizing, type: 9}
   model: pimbase.collectedinformation
   pk: 33
-- fields: {name: registratie van zakelijk activiteiten op adres, p3p_category: 17}
+- fields: {name: registratie van zakelijk activiteiten op adres, type: 17}
   model: pimbase.collectedinformation
   pk: 34
 - fields: {name: bedrijfsleven}
