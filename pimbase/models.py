@@ -39,8 +39,8 @@ class Sector(models.Model):
 	
 class CitizenRole(models.Model):
 	name = models.CharField(max_length=20)
-	firstperson = models.CharField(max_length=200, help_text=_("First \
-		person singular description of the citizen role. This is used to generate \
+	label = models.CharField(max_length=200, help_text=_("Description of \
+		the citizen role. This is used to generate \
 		understandable descriptions for the filters."))
 
 	class Meta:
@@ -73,6 +73,7 @@ class Identifier(models.Model):
 
 class CollectedInformationType(models.Model):
 	name = models.CharField(max_length=200)
+	description = models.CharField(max_length=400)
 
 	class Meta:
 		verbose_name=_('Collected information type')
