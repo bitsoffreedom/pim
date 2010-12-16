@@ -74,16 +74,24 @@
 					<h2>Bedrijven</h2>
 					
 					<ol>
-            {% if organisations.has_previous %}
-            <a href="{% url pimbase.views.index organisations.previous_page_number %}">vorige</a>
-            {% endif %}
             {% for org in organisations.object_list %}
 						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org }}</a></li>
             {% endfor %}
-            {% if organisations.has_next %}
-            <a href="{% url pimbase.views.index organisations.next_page_number %}">volgende</a>
-            {% endif %}
 					</ol>
+          <div>
+            {% if organisations.has_previous %}
+            <a href="{% url pimbase.views.index organisations.previous_page_number %}">Vorige</a>
+            {% endif %}
+
+            <span class="current">
+            Page {{ organisations.number }} of {{ organisations.paginator.num_pages }}.
+            </span>
+
+
+            {% if organisations.has_next %}
+            <a href="{% url pimbase.views.index organisations.next_page_number %}">Volgende</a>
+            {% endif %}
+          </div>
 				</div>
 				
 				<div id="selected-hamsters" class="column">

@@ -442,20 +442,20 @@ h5 {
 		    text-decoration: none;
 			}
 		
-	#result-list ol {
-		line-height: 153.9%;
-	    list-style: none outside none;
-	    margin-left: 0;
-		}
-		#result-list a {
-			background: url("/static/global/select-company.gif") no-repeat scroll right center transparent;
-		    color: #B6B6B6;
-		    display: block;
-		    text-decoration: none;
-			}
-		#result-list a:hover {
-			color: #6E6E6E;
-			}
+#result-list ol {
+	line-height: 153.9%;
+	list-style: none outside none;
+	margin-left: 0;
+}
+#result-list ol a {
+	background: url("/static/global/select-company.gif") no-repeat scroll right center transparent;
+	color: #B6B6B6;
+	display: block;
+	text-decoration: none;
+}
+#result-list ol a:hover {
+	color: #6E6E6E;
+}
 	
 	#selected-hamsters ul {
 		line-height: 153.9%;
