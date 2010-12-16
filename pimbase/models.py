@@ -102,6 +102,14 @@ class OrganisationType(models.Model):
 	def __unicode__(self):
 		return self.name
 	
+class OrganisationTag(models.Model):
+	""" Simple classification of Organisations. """
+	name = models.CharField(max_length=40, verbose_name=_('name'))
+	value = models.CharField(max_length=40, verbose_name=_('value'))
+
+	def __unicode__(self):
+		return "%s:%s" % (self.name, self.value)
+
 
 class Organisation(models.Model):
 	""" A model representing an organisation. """
@@ -126,7 +134,7 @@ class Organisation(models.Model):
 	     help_text=_('The sort of information this organisation gathers about consumers.'))
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)
-	comments = models.TextField(blank=True, help_text="Just for internal comments")
+	comments = models.ManyToManyField(OrganisationTag, help_text="Just for internal comments")
 
 	class Meta:
 		verbose_name=_('organisation')

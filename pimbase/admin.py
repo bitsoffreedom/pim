@@ -41,7 +41,7 @@ class CBPRegistrationInline(admin.TabularInline):
 class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('name', 'html_link')
-    list_filter = ('collectedinformation', 'citizenrole', 'country', 'sector')
+    list_filter = ('collectedinformation', 'citizenrole', 'country', 'sector', 'comments')
     search_fields = ['name', 'short_name']
     
     save_as = True
@@ -152,4 +152,7 @@ class P3PCategoryAdmin(admin.ModelAdmin):
     extra = 1
 
 admin.site.register(P3PCategory, P3PCategoryAdmin)
+
+admin.site.register(OrganisationTag)
+
 
