@@ -20,9 +20,14 @@ else:
 urlpatterns += patterns('',
     (r'^', include('pimbase.urls')),
 
+    # Sentry for catching exceptions in staging/production
+    (r'^sentry/', include('sentry.urls')),
+
     # Django Admin
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     (r'^admin/', include(admin.site.urls)),
+    
+    # Password management. Consider using django-registration for this stuff, it's great!
     (r'^password_reset/$', 'django.contrib.auth.views.password_reset'),
     (r'^password_reset_done/$', 'django.contrib.auth.views.password_reset_done'),
     (r'^password_reset_confirm/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$$', 'django.contrib.auth.views.password_reset_confirm'),
