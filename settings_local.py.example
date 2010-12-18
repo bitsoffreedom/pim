@@ -40,6 +40,16 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # CACHE_TIMEOUT = 60
 
 
+# Enable debug_toolbar
+# INSTALLED_APPS.append('debug_toolbar')
+# MIDDLEWARE_CLASSES.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+
+
+# Sentry settings
+#
+# Enable Sentry
+# INSTALLED_APPS.append('sentry')
+
 # Sentry settings
 # What should these site's errors by called in the log?
 # SENTRY_NAME = 'www.mysite.com'
