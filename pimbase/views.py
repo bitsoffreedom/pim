@@ -58,7 +58,7 @@ def index(request, param = None):
 	# Based on the Yahoo search pagination pattern:
 	# http://developer.yahoo.com/ypatterns/navigation/pagination/search.html
 	# XXX: make the numbers less mystical.
-	if org.number > 6:
+	if org.number > 4:
 		search_range = range(org.number - 3, min(3 + org.number, org.paginator.num_pages))
 	else:
 		search_range = range(1, min(7, org.paginator.num_pages + 1))
