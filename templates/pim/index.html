@@ -87,9 +87,9 @@
 
             {% for i in search_range %}
               {% if i == organisations.number %}
-              <span style="border: 1px solid #000; padding-right: 2px; padding-left: 2px">{{ i }}</span>
+              <span style="border: 1px solid #000; padding-right: 2px; padding-left: 2px"><a href="{% url pimbase.views.index i %}">{{ i }}</a></span>
               {% else %}
-              <span>{{ i }}</span>
+              <span><a href="{% url pimbase.views.index i %}">{{ i }}</a></span>
               {% endif %}
             {% endfor %}
 
