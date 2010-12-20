@@ -13,7 +13,7 @@ def search(request):
 	
 	org_list = Organisation.objects.all()
 
-	role_ids = request.session['tags']
+	role_ids = request.session['roles']
 	if len(role_ids) > 0:
 		org_list = org_list.filter(citizenrole__in = role_ids)
 
