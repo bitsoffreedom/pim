@@ -4,14 +4,13 @@ from models import Identifier
 class UserForm(forms.Form):
 	def __init__(self, request, *args, **kwargs):
 		super(UserForm, self).__init__(*args, **kwargs)
-		# XXX: the misc form data  shouldn't overwrite firstname, address etc
 
 		request.session.setdefault('companies', [])
 
 		ids = Identifier.objects.filter(organisation__in = request.session['companies'])
 		if ids:
 			for i in ids:
-				self.fields[i.name] = forms.CharField()
+				self.fields['misc_%d' % (i.pk, )] = forms.CharField(label = '%s %s' % (i.organisation.short_name, i.name))
 
 	firstname = forms.CharField()
 	lastname = forms.CharField()

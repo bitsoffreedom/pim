@@ -22,7 +22,9 @@
     <p>Speciale informatie</p>
     <ul>
       {% for m in misc %}
-      <li>{{ m.0 }}: {{ m.1 }}</li>
+        {% if m.0.organisation.pk == organisation.pk %}
+          <li>{{ m.0.name }}: {{ m.1 }}</li>
+        {% endif %}
       {% endfor %}
     </ul>
 

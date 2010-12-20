@@ -206,7 +206,9 @@ def userdata(request):
 
 			misc = []
 			for i in ids:
-				misc.append((i.name, form.cleaned_data[i.name]))
+				if 'misc_%d' % (i.pk, ) in form.cleaned_data.keys():
+					misc.append((i, form.cleaned_data['misc_%d' % (i.pk, )]))
+
 			request.session['misc'] = misc
 			request.session.modified = True
 
