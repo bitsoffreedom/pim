@@ -1,17 +1,33 @@
 {% extends "base.html" %}
 
+{% block bodyparam %}class = "step-3"{% endblock %}
+
 {% block content %}
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
-				<li><span class="step-count">1</span> Kies de bedrijven</li>
+				<li class="last"><span class="step-count">1</span> Kies de bedrijven</li>
 				<li><span class="step-count">2</span> Vul je gegevens in</li>
-				<li class="selected" id="step-3"><span class="step-count">3</span> Maak de brieven</li>
+				<li class="selected"><span class="step-count">3</span> Maak de brieven</li>
 			</ol>
-          <ul>
+			
+			<h1>De brieven zijn klaar.</h1>
+			
+			<div id="column-wrapper" class="clearfix">
+				
+				<div class="triple column clearfix">
+					<p>De brieven zijn voor je aangemaakt! Klik op &eacute;&eacute;n van de onderstaande links om de brieven te openen.</p>
+					
+<!--					<p id="download-all">Alle brieven (pdf) <a href="">Download</a></p> -->
+					
+					<ul id="download-single">
             {% for c in selected_companies %}
-            <li><a href="{% url pimbase.views.generatehtml c.pk %}">{{ c }}</a></li>
+            <li>{{ c }}<a href="{% url pimbase.views.generatehtml c.pk %}">Download</a></li>
             {% endfor %}
-          </ul>
-      </div>
+					</ul>
+				</div>
+				
+				<p><a href="" class="info-nav">Hulp nodig?</a></p>
+				<p><a href="{% url pimbase.views.userdata %}" id="back-step" class="step-button">Terug<span>Naar stap 2</span></a></p>
+					
     </div>
 {% endblock %}

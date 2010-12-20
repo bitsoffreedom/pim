@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load filters %}
 
 {% block content %}
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
 				<li class="selected"><span class="step-count">1</span> Kies de bedrijven</li>
 				<li><span class="step-count">2</span> Vul je gegevens in</li>
-				<li id="step-3"><span class="step-count">3</span> Maak de brieven</li>
+				<li class="last"><span class="step-count">3</span> Maak de brieven</li>
 			</ol>
 			
 			<h1>Kies hieronder welke bedrijven je wilt aanschrijven.</h1>
 			
-			<div id="fake-column-borders" class="clearfix">
+			<div id="column-wrapper" class="clearfix">
 				<div id="filters" class="column">
 					<div id="active-filters">
 						<h3>Actieve filters:</h3>
@@ -67,9 +68,9 @@
 					
 					
 					<!-- XXX: Disabled isn't supported
-					<a href="">Uitgebreid zoeken</a> -->
+          <a href="" class="info-nav">Uitgebreid zoeken</a> -->
 					
-					<a href="">Hulp nodig?</a>
+          <a href="" class="info-nav">Hulp nodig?</a>
 				</div>
 				
 				<div id="result-list" class="column">
@@ -77,7 +78,7 @@
 					
 					<ol>
             {% for org in organisations.object_list %}
-						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org }}</a></li>
+						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:23 }}</a></li>
             {% endfor %}
 					</ol>
           <div>
@@ -106,12 +107,12 @@
           {% else %}
           <ul>
             {% for c in selected_companies %}
-            <li>{{ c }}</li>
+            <li>{{ c|truncchar:10 }}</li>
             {% endfor %}
           </ul>
           {% endif %}
 				</div>
 				
-				<a href="{% url pimbase.views.userdata %}" id="next-step">Klaar<span>Door naar stap 2</span></a>
+				<a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button">Klaar<span>Door naar stap 2</span></a>
 			</div>
 {% endblock %}
