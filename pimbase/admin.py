@@ -131,7 +131,7 @@ admin.site.register(CitizenRole, CitizenRoleAdmin)
 class CollectedInformationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     #list_display = ()
-    list_filter = ()
+    list_filter = ('type',)
     search_fields = []
 
     fieldsets = ()
