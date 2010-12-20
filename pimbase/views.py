@@ -5,7 +5,6 @@ from django.template import RequestContext
 from pimbase.models import *
 from pimbase.forms import UserForm
 from django.core.urlresolvers import reverse
-from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 import datetime
 
@@ -256,33 +255,6 @@ def generatehtml(request, param):
 		'city': request.session['city'],
 		'currentdate': datetime.date.today(),
 		})
-
-def generatepdf(request, param):
-	request.session.setdefault('companies', [])
-
-	try:
-		company_id = int(param)
-	except (ValueError, TypeError):
-		return HttpResponseServerError("Invalid parameter")
-
-	if company_id not in request.session['companies']:
-		return HttpResponseServerError("Object doesn't exist")
-
-	try:
-		organisation = Organisation.objects.get(pk=company_id)
-	except Organisation.DoesNotExist:
-		return HttpResponse("fail")
-
-	response = HttpResponse(mimetype='application/pdf')
-	response['Content-Disposition'] = "attachment; filename=brief_bedrijf%d.pdf" % (company_id)
-
-	p = canvas.Canvas(response)
-	p.drawString(1, 1, "Onderwerp: Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)")
-	p.drawString(2, 2, "Geachte Heer/Mevrouw,")
-	p.showPage()
-	p.save()
-
-	return response
 
 def datadetectives(request):
 	return render_to_response('pim/datadetectives.html')

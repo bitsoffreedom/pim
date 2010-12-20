@@ -14,6 +14,5 @@ urlpatterns = patterns('',
     (r'^userdata$', 'pimbase.views.userdata'),
     (r'^generate$', 'pimbase.views.generate'),
     (r'^generatehtml/(?P<param>\d+)$', 'pimbase.views.generatehtml'),
-    (r'^generatepdf/(?P<param>\d+)$', 'pimbase.views.generatepdf'),
     (r'^datadetectives$', 'pimbase.views.datadetectives'),
 )
