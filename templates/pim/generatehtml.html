@@ -19,6 +19,13 @@
       <li>{{ organisation.country }} </li>
     </ul>
 
+    <p>Speciale informatie</p>
+    <ul>
+      {% for m in misc %}
+      <li>{{ m.0 }}: {{ m.1 }}</li>
+      {% endfor %}
+    </ul>
+
     <p>{{ city }}, {{ currentdate }}</p>
 
     <p>Onderwerp: Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>

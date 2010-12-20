@@ -194,16 +194,25 @@ def userdata(request):
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 
 	if request.method == 'POST':
-		form = UserForm(request.POST)
+		form = UserForm(request, request.POST)
 		if form.is_valid():
 			request.session['firstname'] = form.cleaned_data['firstname']
 			request.session['lastname'] = form.cleaned_data['lastname']
 			request.session['street_address'] = form.cleaned_data['street_address']
 			request.session['postcode'] = form.cleaned_data['postcode']
 			request.session['city'] = form.cleaned_data['city']
+
+			ids = Identifier.objects.filter(organisation__in = request.session['companies'])
+
+			misc = []
+			for i in ids:
+				misc.append((i.name, form.cleaned_data[i.name]))
+			request.session['misc'] = misc
+			request.session.modified = True
+
 			return HttpResponseRedirect(reverse('pimbase.views.generate'))
 	else:
-		form = UserForm()
+		form = UserForm(request)
 
 	return render_to_response('pim/userdata.html',
 		{
@@ -253,6 +262,7 @@ def generatehtml(request, param):
 		'street_address': request.session['street_address'],
 		'postcode': request.session['postcode'],
 		'city': request.session['city'],
+		'misc': request.session['misc'],
 		'currentdate': datetime.date.today(),
 		})
 

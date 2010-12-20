@@ -154,5 +154,6 @@ class CollectedInformationTypeAdmin(admin.ModelAdmin):
 admin.site.register(CollectedInformationType, CollectedInformationTypeAdmin)
 
 admin.site.register(OrganisationTag)
+admin.site.register(Identifier)
 
 
