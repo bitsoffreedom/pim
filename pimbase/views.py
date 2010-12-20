@@ -55,6 +55,14 @@ def index(request, param = None):
 	except (EmptyPage, InvalidPage):
 		return HttpResponseServerError("Page doesn't exist")
 
+	# Based on the Yahoo search pagination pattern:
+	# http://developer.yahoo.com/ypatterns/navigation/pagination/search.html
+	# XXX: make the numbers less mystical.
+	if org.number > 6:
+		search_range = range(org.number - 3, min(3 + org.number, org.paginator.num_pages))
+	else:
+		search_range = range(1, min(7, org.paginator.num_pages + 1))
+
 	return render_to_response('pim/index.html',
 		{
 		'tags': tags,
@@ -66,6 +74,7 @@ def index(request, param = None):
 		'selected_citizenroles': selected_citizenroles,
 		'selected_companies': selected_companies,
 		'selected_tags': selected_tags,
+		'search_range': search_range,
 		},
 		context_instance=RequestContext(request))
 def addcitizenrole(request, param):

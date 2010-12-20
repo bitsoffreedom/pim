@@ -85,10 +85,13 @@
             <a href="{% url pimbase.views.index organisations.previous_page_number %}">Vorige</a>
             {% endif %}
 
-            <span class="current">
-            Page {{ organisations.number }} of {{ organisations.paginator.num_pages }}.
-            </span>
-
+            {% for i in search_range %}
+              {% if i == organisations.number %}
+              <span style="border: 1px solid #000; padding-right: 2px; padding-left: 2px">{{ i }}</span>
+              {% else %}
+              <span>{{ i }}</span>
+              {% endif %}
+            {% endfor %}
 
             {% if organisations.has_next %}
             <a href="{% url pimbase.views.index organisations.next_page_number %}">Volgende</a>
