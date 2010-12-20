@@ -18,7 +18,7 @@
             {% if selected_tags or selected_citizenroles or selected_sectors %}
               <ul>
                 {% for role in selected_citizenroles %}
-                <li><a href="{% url pimbase.views.delcitizenrole role.pk %}">{{ role.firstperson }}</a></li>
+                <li><a href="{% url pimbase.views.delcitizenrole role.pk %}">{{ role.label }}</a></li>
                 {% endfor %}
                 {% for tag in selected_tags %}
                 <li><a href="{% url pimbase.views.delkeyword tag.pk %}">{{ tag }}</li></a>
@@ -45,7 +45,7 @@
 					<h4>Zoek afhankelijk van uw situatie</h4>
           <ul>
             {% for citizenrole in citizenroles %}
-            <li><a href="{% url pimbase.views.addcitizenrole citizenrole.id %}">{{ citizenrole.firstperson }}</a></li>
+            <li><a href="{% url pimbase.views.addcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
             {% endfor %}
           </ul>
 
