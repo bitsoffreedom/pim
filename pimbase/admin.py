@@ -42,7 +42,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     date_hierarchy = ''
     list_display = ('name', 'html_link')
     list_filter = ('collectedinformation', 'citizenrole', 'country', 'sector', 'comments')
-    search_fields = ['name', 'short_name']
+    search_fields = ['name', 'short_name' , 'collectedinformation__type__name' ]
     
     save_as = True
     inlines = [RelationInline, BrandInline, IdentifierInline, CBPRegistrationInline]
