@@ -718,4 +718,9 @@ button#next-step {
 #sidetext ul {
   list-style-position: inside;
 }
-
+.datadetective {
+  padding: 20px; 
+}
+.datadetective p {
+  padding: 5px;
+}
