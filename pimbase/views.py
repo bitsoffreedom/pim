@@ -9,26 +9,32 @@ from django.http import HttpResponse
 import datetime
 
 def search(request):
-	""" Search for specific tags. """
+	""" Search for specific organisationtype, sector or role. """
 	
 	org_list = Organisation.objects.all()
 
-	role_ids = request.session['roles']
-	if len(role_ids) > 0:
-		org_list = org_list.filter(citizenrole__in = role_ids)
+	otype = request.session['organisationtype']
+	if otype:
+		org_list = org_list.filter(organisationtype = otype)
 
-	tag_ids = request.session['tags']
-	if len(tag_ids) > 0:
-		org_list = org_list.filter(tags__in = tag_ids)
+	sector_id = request.session['sector']
+	if sector_id:
+		org_list = org_list.filter(sector = sector_id)
+
+	role_id = request.session['role']
+	if role_id:
+		org_list = org_list.filter(citizenrole = role_id)
 
 	return org_list
 
 def index(request, param = None):
 	# initialize the session
-	request.session.setdefault('roles', [])
-	request.session.setdefault('companies', [])
-	request.session.setdefault('tags', [])
-	request.session.setdefault('sectors', [])
+	request.session.setdefault('role', None)
+	request.session.setdefault('companies', None)
+	request.session.setdefault('sector', None)
+	request.session.setdefault('organisationtype', None)
+	request.session.setdefault('collectedinfo', None)
+	request.session.setdefault('collectedinfo_more', None)
 
 	# URL processing
 	page_id = 1
@@ -38,16 +44,35 @@ def index(request, param = None):
 		except (ValueError, TypeError):
 			return HttpResponseServerError("Invalid parameter")
 
-	tags = Organisation.tags.all()
 	sectors = Sector.objects.all()
 	citizenroles = CitizenRole.objects.all()
-	selected_sectors = Sector.objects.filter(pk__in = request.session['sectors'])
-	selected_citizenroles = CitizenRole.objects.filter(pk__in = request.session['roles'])
-	selected_tags = Organisation.tags.filter(pk__in = request.session['tags'])
+	orgtypes = OrganisationType.objects.all()
+	collectedinfo = CollectedInformation.objects.all()
+
+	selected_orgtype = None
+	if request.session['organisationtype']:
+		selected_orgtype = OrganisationType.objects.get(pk = \
+			request.session['organisationtype'])
+
+	selected_sector = None
+	if request.session['sector']:
+		selected_sector = Sector.objects.get(pk = \
+			request.session['sector'])
+
+	selected_role = None
+	if request.session['role']:
+		selected_role = CitizenRole.objects.get(pk = \
+			request.session['role'])
+
+	selected_collectedinfo = None
+	if request.session['collectedinfo']:
+		selected_collectedinfo = CollectedInformation.objects.get(pk = \
+			request.session['collectedinfo'])
+
 	selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 	org_list = search(request)
 	org_count = org_list.count()
-	paginator = Paginator(org_list, 10)
+	paginator = Paginator(org_list, 30)
 
 	try:
 		org = paginator.page(page_id)
@@ -64,20 +89,101 @@ def index(request, param = None):
 
 	return render_to_response('pim/index.html',
 		{
-		'tags': tags,
 		'sectors': sectors,
 		'citizenroles': citizenroles,
 		'org_count': org_count,
 		'organisations': org,
-		'selected_sectors': selected_sectors,
-		'selected_citizenroles': selected_citizenroles,
+		'orgtypes': orgtypes,
+		'collectedinfo': collectedinfo,
+		'selected_collectedinfo': selected_collectedinfo,
+		'selected_orgtype': selected_orgtype,
+		'selected_sector': selected_sector,
+		'selected_role': selected_role,
 		'selected_companies': selected_companies,
-		'selected_tags': selected_tags,
 		'search_range': search_range,
+		'collectedinfo_more': request.session['collectedinfo_more'],
 		},
 		context_instance=RequestContext(request))
-def addcitizenrole(request, param):
-	request.session.setdefault('roles', [])
+
+def morecollectedinfo(request):
+	request.session['collectedinfo_more'] = True;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def lesscollectedinfo(request):
+	request.session['collectedinfo_more'] = False;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def setcollectedinfo(request, param):
+	request.session.setdefault('collectedinfo', [])
+	try:
+		cinfo_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponseServerError("Invalid parameter")
+
+	if not CollectedInformation.objects.filter(pk=cinfo_id):
+		return HttpResponseServerError("Object doesn't exist")
+
+	request.session['collectedinfo'] = cinfo_id;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def delcollectedinfo(request):
+	request.session.setdefault('collectedinfo', [])
+
+	del request.session['collectedinfo']
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def moreorganisationtypes(request):
+	request.session['organisationtype_more'] = True;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def lessorganisationtypes(request):
+	request.session['organisationtype_more'] = False;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def setorganisationtype(request, param):
+	request.session.setdefault('organisationtype', [])
+	try:
+		otype_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponseServerError("Invalid parameter")
+
+	if not OrganisationType.objects.filter(pk=otype_id):
+		return HttpResponseServerError("Object doesn't exist")
+
+	request.session['organisationtype'] = otype_id;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def delorganisationtype(request, param):
+	request.session.setdefault('organisationtype', [])
+
+	try:
+		otype_id = int(param)
+	except (ValueError, TypeError):
+		return HttpResponseServerError("Invalid parameter")
+
+	del request.session['organisationtype']
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def morecitizenroles(request):
+	request.session['citizenrole_more'] = True;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def lesscitizenroles(request):
+	request.session['citizenrole_more'] = False;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def setcitizenrole(request, param):
+	request.session.setdefault('role', [])
 	try:
 		role_id = int(param)
 	except (ValueError, TypeError):
@@ -86,26 +192,34 @@ def addcitizenrole(request, param):
 	if not CitizenRole.objects.filter(pk=role_id):
 		return HttpResponseServerError("Object doesn't exist")
 
-	if role_id not in request.session['roles']:
-		request.session['roles'].append(role_id)
-		request.session.modified = True
+	request.session['role'] = role_id;
+
 	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delcitizenrole(request, param):
-	request.session.setdefault('roles', [])
+	request.session.setdefault('role', [])
 
 	try:
 		role_id = int(param)
 	except (ValueError, TypeError):
 		return HttpResponseServerError("Invalid parameter")
 
-	request.session['roles'].remove(role_id)
-	request.session.modified = True
+	del request.session['role']
 
 	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-def addsector(request, param):
-	sectors = request.session.setdefault('sectors', [])
+def moresectors(request):
+	request.session['sector_more'] = True;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def lesssectors(request):
+	request.session['sector_more'] = False;
+
+	return HttpResponseRedirect(reverse('pimbase.views.index'))
+
+def setsector(request, param):
+	sectors = request.session.setdefault('sector', [])
 	try:
 		sector_id = int(param)
 	except (ValueError, TypeError):
@@ -114,21 +228,19 @@ def addsector(request, param):
 	if not Sector.objects.filter(pk=sector_id):
 		return HttpResponseServerError("Object doesn't exist")
 
-	if sector_id not in request.session['sectors']:
-		request.session['sectors'].append(sector_id)
-		request.session.modified = True
+	request.session['sector'] = sector_id;
+
 	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delsector(request, param):
-	request.session.setdefault('sectors', [])
+	request.session.setdefault('sector', [])
 
 	try:
 		sector_id = int(param)
 	except (ValueError, TypeError):
 		return HttpResponseServerError("Invalid parameter")
 
-	request.session['sectors'].remove(sector_id)
-	request.session.modified = True
+	del request.session['sector']
 
 	return HttpResponseRedirect(reverse('pimbase.views.index'))
 
@@ -156,35 +268,6 @@ def delcompany(request, param):
 		return HttpResponseServerError("Invalid parameter")
 
 	request.session['companies'].remove(company_id)
-	request.session.modified = True
-
-	return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def addkeyword(request, param):
-	request.session.setdefault('tags', [])
-
-	try:
-		tag_id = int(param)
-	except (ValueError, TypeError):
-		return HttpResponseServerError("Invalid parameter")
-
-	if not Organisation.tags.filter(pk=tag_id):
-		return HttpResponseServerError("Object doesn't exist")
-
-	if tag_id not in request.session['tags']:
-		request.session['tags'].append(tag_id)
-		request.session.modified = True
-	return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def delkeyword(request, param):
-	request.session.setdefault('tags', [])
-
-	try:
-		tag_id = int(param)
-	except (ValueError, TypeError):
-		return HttpResponseServerError("Invalid parameter")
-
-	request.session['tags'].remove(tag_id)
 	request.session.modified = True
 
 	return HttpResponseRedirect(reverse('pimbase.views.index'))
