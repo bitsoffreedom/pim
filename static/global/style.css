@@ -667,6 +667,7 @@ button#next-step {
   width: 100%;
 }
 
+
 /*
  * Media queries for responsive design
  * These follow after primary styles so they will successfully override. 
@@ -708,3 +709,13 @@ button#next-step {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
 }
+
+#sidetext p {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+#sidetext ul {
+  list-style-position: inside;
+}
+
