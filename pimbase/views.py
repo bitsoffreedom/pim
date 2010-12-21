@@ -35,6 +35,9 @@ def index(request, param = None):
 	request.session.setdefault('organisationtype', None)
 	request.session.setdefault('collectedinfo', None)
 	request.session.setdefault('collectedinfo_more', None)
+	request.session.setdefault('organisationtype_more', None)
+	request.session.setdefault('citizenrole_more', None)
+	request.session.setdefault('sector_more', None)
 
 	# URL processing
 	page_id = 1
@@ -102,6 +105,9 @@ def index(request, param = None):
 		'selected_companies': selected_companies,
 		'search_range': search_range,
 		'collectedinfo_more': request.session['collectedinfo_more'],
+		'organisationtype_more': request.session['organisationtype_more'],
+		'citizenrole_more': request.session['citizenrole_more'],
+		'sector_more': request.session['sector_more'],
 		},
 		context_instance=RequestContext(request))
 

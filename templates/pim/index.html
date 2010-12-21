@@ -47,7 +47,7 @@
           {% if not selected_orgtype %}
             <h4>Verfijn op type</h4>
             <ul>
-              {% if orgtype_more %}
+              {% if organisationtype_more %}
                 {% for orgtype in orgtypes %}
                 <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}}</a></li>
                 {% endfor %}
@@ -57,10 +57,10 @@
                 {% endfor %}
               {% endif %}
             </ul>
-            {% if not orgtype_more and orgtypes|length > 10 %}
+            {% if not organisationtype_more and orgtypes|length > 10 %}
             <a href="{% url pimbase.views.moreorganisationtypes %}">Meer</a>
             {% endif %}
-            {% if orgtype_more and orgtypes|length > 10 %}
+            {% if organisationtype_more and orgtypes|length > 10 %}
             <a href="{% url pimbase.views.lessorganisationtypes %}">Minder</a>
             {% endif %}
           {% endif %}
