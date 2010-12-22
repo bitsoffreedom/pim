@@ -12,8 +12,8 @@ class UserForm(forms.Form):
 			for i in ids:
 				self.fields['misc_%d' % (i.pk, )] = forms.CharField(label = '%s %s' % (i.organisation.short_name, i.name))
 
-	firstname = forms.CharField()
-	lastname = forms.CharField()
-	street_address = forms.CharField()
-	postcode = forms.CharField()
-	city = forms.CharField()
+	firstname = forms.CharField(label="Voornaam")
+	lastname = forms.CharField(label="Achternaam")
+	street_address = forms.CharField(label="Adres")
+	postcode = forms.CharField(label="Postcode")
+	city = forms.CharField(label="Stad")
