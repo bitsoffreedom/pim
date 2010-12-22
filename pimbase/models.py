@@ -135,7 +135,7 @@ class Organisation(models.Model):
 	     help_text=_('The sort of information this organisation gathers about consumers.'))
 	relation = models.ManyToManyField("self", through="Relation",
 		symmetrical=False, blank=True, null=True)
-	comments = models.ManyToManyField(OrganisationTag, help_text="Just for internal comments")
+	comments = models.ManyToManyField(OrganisationTag, help_text="Just for internal comments", blank=True, null=True)
 
 	class Meta:
 		verbose_name=_('organisation')
