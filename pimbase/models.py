@@ -140,6 +140,7 @@ class Organisation(models.Model):
 	class Meta:
 		verbose_name=_('organisation')
 		verbose_name_plural=_('organisations')
+		ordering = [ "name", ]
 
 	def __unicode__(self):
 		return self.name
