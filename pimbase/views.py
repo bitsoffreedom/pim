@@ -30,7 +30,7 @@ def search(request):
 def index(request, param = None):
 	# initialize the session
 	request.session.setdefault('role', None)
-	request.session.setdefault('companies', None)
+	request.session.setdefault('companies', [])
 	request.session.setdefault('sector', None)
 	request.session.setdefault('organisationtype', None)
 	request.session.setdefault('collectedinfo', None)
