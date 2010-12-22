@@ -14,7 +14,7 @@
 			<div id="column-wrapper" class="clearfix">
 				<div id="filters" class="column">
 					<div id="active-filters">
-						<h3>Actieve filters:</h3>
+						<h3>Pim verfijnt nu op:</h3>
             {% if selected_sector or selected_orgtype or selected_role or selected_collectedinfo %}
               <ul>
                 {% if selected_orgtype %}
@@ -30,10 +30,12 @@
                 <li><a href="{% url pimbase.views.delcollectedinfo %}">{{ selected_collectedinfo.name }}</a></li>
                 {% endif %}
               </ul>
+            {% else %}
+              <p>Nog niets</p>
             {% endif %}
 					</div>
 					
-					<h3>Verfijn resultaat op:</h3>
+					<h3>Laat PIM verfijnen:</h3>
 				
           <!-- XXX: Disabled. Isn't supported.
 					<h4>Zoekterm</h4>
@@ -45,7 +47,7 @@
 					</form>
           -->
           {% if not selected_orgtype %}
-            <h4>Verfijn op type</h4>
+            <h4>op type</h4>
             <ul>
               {% if organisationtype_more %}
                 {% for orgtype in orgtypes %}
@@ -66,7 +68,7 @@
           {% endif %}
 
           {% if not selected_sector %}
-            <h4>Verfijn op sector</h4>
+            <h4>op sector</h4>
             <ul>
               {% if sector_more %}
                 {% for sector in sectors %}
@@ -87,7 +89,7 @@
           {% endif %}
 					
           {% if not selected_role %}
-            <h4>Zoek afhankelijk van je situatie</h4>
+            <h4>afhankelijk van je situatie</h4>
             <ul>
               {% if citizenrole_more %}
                 {% for citizenrole in citizenroles %}
@@ -108,7 +110,7 @@
           {% endif %}
 
           {% if not selected_collectedinfo %}
-            <h4>Verfijn op organisaties die belang hebben</h4>
+            <h4>op organisaties die belang hebben</h4>
             <ul>
               {% if collectedinfo_more %}
                 {% for info in collectedinfo %}
