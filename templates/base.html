@@ -22,7 +22,7 @@
 		<img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/>
 		
 		<ul id="main-nav" class="flat-list">
-			<li><a href="">Home</a></li>
+			<li><a href="{% url pimbase.views.index %}">Home</a></li>
 			<li><a href="">Over PIM</a></li>
 			<li><a href="">Contact</a></li>
 			<li><a href="">Pers</a></li>
@@ -56,8 +56,6 @@
         <li>ide&euml;en voor uitbreiding</li>
       </ul>
 
-      <br />
-
       <p>Zou je via een basecamp message aan Helmer Wieringa willen reageren?</p>
 
       <p>In de volgende versie zullen we ook:</p>
@@ -67,7 +65,6 @@
         <li>de mogelijkheid om te reageren via de site bieden</li>
         <li>de website optimaliseren voor zoekmachines</li>
       </ul>
-      <br />
 
       <p>Wil je op een andere manier bijdragen aan PIM? Word een datadetective!</p>
       <p><a href="{% url pimbase.views.datadetectives %}">Klik hier voor meer informatie.</a></p>
