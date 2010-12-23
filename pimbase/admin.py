@@ -117,7 +117,7 @@ admin.site.register(Sector, SectorAdmin)
 
 class CitizenRoleAdmin(admin.ModelAdmin):
     date_hierarchy = ''
-    #list_display = ()
+    list_display = ('name', 'label')
     list_filter = ()
     search_fields = []
 
