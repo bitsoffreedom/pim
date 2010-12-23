@@ -18,7 +18,7 @@ digraph name {
 
 
   
-    pim_letter_models_City [label=<
+    pim_pimbase_models_City [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -51,7 +51,7 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_Country [label=<
+    pim_pimbase_models_Country [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -84,7 +84,7 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_Sector [label=<
+    pim_pimbase_models_Sector [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -117,11 +117,11 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_ConsumerRelation [label=<
+    pim_pimbase_models_CitizenRole [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >ConsumerRelation</FONT></TD></TR>
+     >CitizenRole</FONT></TD></TR>
 
     
         
@@ -133,7 +133,14 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT FACE="Helvetica Bold">role</FONT
+        ><FONT FACE="Helvetica Bold">name</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">label</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT FACE="Helvetica Bold">CharField</FONT
@@ -143,7 +150,7 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_Brand [label=<
+    pim_pimbase_models_Brand [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -183,7 +190,7 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_Identifier [label=<
+    pim_pimbase_models_Identifier [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -216,7 +223,40 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_CollectedInformation [label=<
+    pim_pimbase_models_CollectedInformationType [label=<
+    <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+     <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
+     ><FONT FACE="Helvetica Bold" COLOR="white"
+     >CollectedInformationType</FONT></TD></TR>
+
+    
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">id</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">AutoField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">name</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">description</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+    
+    </TABLE>
+    >]
+  
+    pim_pimbase_models_CollectedInformation [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -238,11 +278,77 @@ digraph name {
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
         ></TD></TR>
         
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">type</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">ForeignKey</FONT
+        ></TD></TR>
+        
     
     </TABLE>
     >]
   
-    pim_letter_models_Organisation [label=<
+    pim_pimbase_models_OrganisationType [label=<
+    <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+     <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
+     ><FONT FACE="Helvetica Bold" COLOR="white"
+     >OrganisationType</FONT></TD></TR>
+
+    
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">id</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">AutoField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">name</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+    
+    </TABLE>
+    >]
+  
+    pim_pimbase_models_OrganisationTag [label=<
+    <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
+     <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
+     ><FONT FACE="Helvetica Bold" COLOR="white"
+     >OrganisationTag</FONT></TD></TR>
+
+    
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">id</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">AutoField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">name</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT FACE="Helvetica Bold">value</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+    
+    </TABLE>
+    >]
+  
+    pim_pimbase_models_Organisation [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -279,28 +385,7 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">street_address</FONT
-        ></TD>
-        <TD ALIGN="LEFT"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
-        ></TD></TR>
-        
-        <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">housenr</FONT
-        ></TD>
-        <TD ALIGN="LEFT"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
-        ></TD></TR>
-        
-        <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">answernr</FONT
-        ></TD>
-        <TD ALIGN="LEFT"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
-        ></TD></TR>
-        
-        <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">postbus</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">address</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
@@ -311,6 +396,13 @@ digraph name {
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">organisationtype</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">ForeignKey</FONT
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
@@ -342,7 +434,7 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">consumerrelation</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">citizenrole</FONT
         ></TD>
         <TD ALIGN="LEFT"
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">ManyToManyField</FONT
@@ -362,11 +454,18 @@ digraph name {
         ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">ManyToManyField</FONT
         ></TD></TR>
         
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">comments</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">ManyToManyField</FONT
+        ></TD></TR>
+        
     
     </TABLE>
     >]
   
-    pim_letter_models_RelationType [label=<
+    pim_pimbase_models_RelationType [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -399,7 +498,7 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_Relation [label=<
+    pim_pimbase_models_Relation [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
@@ -439,11 +538,11 @@ digraph name {
     </TABLE>
     >]
   
-    pim_letter_models_CPBRegistration [label=<
+    pim_pimbase_models_CBPRegistration [label=<
     <TABLE BGCOLOR="palegoldenrod" BORDER="0" CELLBORDER="0" CELLSPACING="0">
      <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="olivedrab4"
      ><FONT FACE="Helvetica Bold" COLOR="white"
-     >CPBRegistration</FONT></TD></TR>
+     >CBPRegistration</FONT></TD></TR>
 
     
         
@@ -462,10 +561,24 @@ digraph name {
         ></TD></TR>
         
         <TR><TD ALIGN="LEFT" BORDER="0"
-        ><FONT FACE="Helvetica Bold">name</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">name</FONT
         ></TD>
         <TD ALIGN="LEFT"
-        ><FONT FACE="Helvetica Bold">CharField</FONT
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">purpose</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">CharField</FONT
+        ></TD></TR>
+        
+        <TR><TD ALIGN="LEFT" BORDER="0"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">url</FONT
+        ></TD>
+        <TD ALIGN="LEFT"
+        ><FONT COLOR="#7B7B7B" FACE="Helvetica Bold">URLField</FONT
         ></TD></TR>
         
     
@@ -487,13 +600,13 @@ digraph name {
   
     
     
-    pim_letter_models_Brand -> pim_letter_models_Organisation
+    pim_pimbase_models_Brand -> pim_pimbase_models_Organisation
     [label="owner"] ;
     
   
     
     
-    pim_letter_models_Identifier -> pim_letter_models_Organisation
+    pim_pimbase_models_Identifier -> pim_pimbase_models_Organisation
     [label="organisation"] ;
     
   
@@ -501,45 +614,63 @@ digraph name {
   
     
     
-    pim_letter_models_Organisation -> pim_letter_models_City
+    pim_pimbase_models_CollectedInformation -> pim_pimbase_models_CollectedInformationType
+    [label="type"] ;
+    
+  
+    
+  
+    
+  
+    
+    
+    pim_pimbase_models_Organisation -> pim_pimbase_models_OrganisationType
+    [label="organisationtype"] ;
+    
+    
+    pim_pimbase_models_Organisation -> pim_pimbase_models_City
     [label="city"] ;
     
     
-    pim_letter_models_Organisation -> pim_letter_models_Country
+    pim_pimbase_models_Organisation -> pim_pimbase_models_Country
     [label="country"] ;
     
     
-    pim_letter_models_Organisation -> pim_letter_models_Sector
+    pim_pimbase_models_Organisation -> pim_pimbase_models_Sector
     [label="sector"] ;
     
     
-    pim_letter_models_Organisation -> pim_letter_models_ConsumerRelation
-    [label="consumerrelation"] [arrowhead=normal arrowtail=normal];
+    pim_pimbase_models_Organisation -> pim_pimbase_models_CitizenRole
+    [label="citizenrole"] [arrowhead=normal arrowtail=normal];
     
     
-    pim_letter_models_Organisation -> pim_letter_models_CollectedInformation
+    pim_pimbase_models_Organisation -> pim_pimbase_models_CollectedInformation
     [label="collectedinformation"] [arrowhead=normal arrowtail=normal];
     
-  
+    
+    pim_pimbase_models_Organisation -> pim_pimbase_models_OrganisationTag
+    [label="comments"] [arrowhead=normal arrowtail=normal];
     
   
     
+  
     
-    pim_letter_models_Relation -> pim_letter_models_Organisation
+    
+    pim_pimbase_models_Relation -> pim_pimbase_models_Organisation
     [label="from_organisation"] ;
     
     
-    pim_letter_models_Relation -> pim_letter_models_Organisation
+    pim_pimbase_models_Relation -> pim_pimbase_models_Organisation
     [label="to_organisation"] ;
     
     
-    pim_letter_models_Relation -> pim_letter_models_RelationType
+    pim_pimbase_models_Relation -> pim_pimbase_models_RelationType
     [label="type"] ;
     
   
     
     
-    pim_letter_models_CPBRegistration -> pim_letter_models_Organisation
+    pim_pimbase_models_CBPRegistration -> pim_pimbase_models_Organisation
     [label="organisation"] ;
     
   
