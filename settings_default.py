@@ -41,6 +41,18 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'simplesite.middleware.SimplesiteFallbackMiddleware',
+]
+
+# This is the default lis of context processors from Django
+TEMPLATE_CONTEXT_PROCESSORS = [
+    "django.contrib.auth.context_processors.auth",
+    # "django.core.context_processors.debug", Not used
+    #"django.core.context_processors.i18n", Not used
+    "django.core.context_processors.media",
+    #"django.core.context_processors.static", Django 1.3
+    #"django.contrib.messages.context_processors.messages",
+    "simplesite.context_processors.menu",
 ]
 
 ROOT_URLCONF = 'urls'
@@ -48,6 +60,42 @@ ROOT_URLCONF = 'urls'
 TEMPLATE_DIRS = (
     path.join(PROJECT_ROOT, 'templates')
 )
+
+# Configuration for TinyMCE WYSIWYG editor
+TINYMCE_DEFAULT_CONFIG = {
+    'mode' : "textareas",
+    'theme' : "advanced",
+    'plugins' : "paste,table",
+    
+    'theme_advanced_buttons1' : "formatselect,|,undo,redo,|,bold,italic,underline,|,charmap,|,bullist,numlist,|,pastetext, pasteword,cleanup,code",
+    'theme_advanced_buttons2' : "",
+    #'theme_advanced_buttons2' : "anchor,link,unlink,|,tablecontrols",
+    'theme_advanced_buttons3' : "",
+    'theme_advanced_toolbar_location' : "top",
+    'theme_advanced_toolbar_align' : "left",
+    'theme_advanced_blockformats': "h3,h4,p",
+    #'theme_advanced_path_location' : "bottom",
+    
+    'extended_valid_elements': 'a[name|href|target|title|onclick|rel]',
+
+    'paste_create_paragraphs' : True,
+    'paste_create_linebreaks' : True,
+    'paste_use_dialog' : True,
+    'paste_auto_cleanup_on_paste' : True,
+
+    'theme_advanced_resizing' : True,
+    'force_p_newlines' : True,
+    
+    'apply_source_formatting' : True,
+
+    'verify_html' : True,
+
+    'browsers' : "msie,gecko,opera",
+    'entity_encoding' : "raw",
+
+    'width' : 450,
+    'height' : 350
+}
 
 # Log debug messages to standard output
 if DEBUG:
@@ -83,6 +131,8 @@ INSTALLED_APPS = [
     'sentry',
     'sentry.client',
     'staticfiles',
+    'tinymce',
+    'simplesite',
     'taggit',
     'pim.pimbase'
 ]
