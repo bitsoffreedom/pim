@@ -32,7 +32,8 @@ fi
 if [ ! -f portnumber ]; then
     echo 'Port number not set.'
     while [ -z "$PORTNUMBER"  ]; do
-        read 'Which port number should the builtin server listen to? ' PORTNUMBER
+        echo 'Which port number should the builtin server listen to? '
+        read PORTNUMBER
         echo
         echo "Setting default port number to: $PORTNUMBER"
         echo
