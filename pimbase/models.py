@@ -50,17 +50,7 @@ class CitizenRole(models.Model):
 	def __unicode__(self):
 		return self.name;
 
-class Brand(models.Model):
-	owner = models.ForeignKey('Organisation')
-	name = models.CharField(max_length=20)
-	slug = models.SlugField()
 
-	class Meta:
-		verbose_name=_('brand')
-		verbose_name_plural=_('brands')
-
-	def __unicode__(self):
-		return self.name
 
 class Identifier(models.Model):
 	""" Identifier which company require to identify a user in the letter """
