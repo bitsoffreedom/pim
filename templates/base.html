@@ -20,13 +20,13 @@
 	<div id="content" class="clearfix">
 		<img src="/static/global/pim_logo.png" alt="PIM logo" id="pim-logo"/>
 		<img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/>
+
 		
 		<ul id="main-nav" class="flat-list">
 			<li><a href="{% url pimbase.views.index %}">Home</a></li>
-			<li><a href="">Over PIM</a></li>
-			<li><a href="">Contact</a></li>
-			<li><a href="">Pers</a></li>
-			<li><a href="">Privacy</a></li>
+      {% for m in menu_list %}
+      <li><a href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
+      {% endfor %}
 		</ul>
 		
 		<div id="sub-nav"><a href="">Disclaimer</a> | <a href="">FAQ</a></div>

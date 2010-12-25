@@ -111,6 +111,17 @@ def index(request, param = None):
 		},
 		context_instance=RequestContext(request))
 
+from simplesite.models import Page, Menu
+
+def start(request):
+	try:
+		p = Page.objects.get(title='start')
+	except (Page.DoesNotExist):
+		return HttpResponseServerError("Object doesn't exist")
+		
+	menu_list = Menu.objects.filter(visible=True)
+	return render_to_response('pim/start.html', {'page_current': p, 'menu_list': menu_list})
+
 def morecollectedinfo(request):
 	request.session['collectedinfo_more'] = True;
 
