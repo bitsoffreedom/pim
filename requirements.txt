@@ -6,6 +6,6 @@ django-sentry
 django-taggit
 surlex
 django-tinymce
--e git://github.com/dokterbob/django-metadata.git#egg=django-metadata
--e git+http://github.com/dokterbob/django-simplesite.git#egg=django-simplesite
+-e git+http://github.com/bitsoffreedom/django-metadata.git#egg=django-metadata
+-e git+http://github.com/bitsoffreedom/django-simplesite.git#egg=django-simplesite
 
