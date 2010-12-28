@@ -2,8 +2,12 @@
 
 import mechanize
 from BeautifulSoup import BeautifulSoup
+import urllib2
+import pprint
 
-SEARCH_FORM = "http://www.cbpweb.nl/asp/ORSearch.asp"
+BASE_URL = "http://www.cbpweb.nl/asp/"
+SEARCH_FORM = BASE_URL + "ORSearch.asp"
+
 
 
 def list_postcode(pc=""):
@@ -36,9 +40,44 @@ def list_companies_from_page(page):
 	for row in rows:
 		colls = row.findAll("td")
 		companies.append({
-				"link": colls[0].find("a")["href"],
+				"name": colls[0].find("a").string,
+				"url": BASE_URL+colls[0].find("a")["href"],
 		})
 	return companies
+
+
+def get_company_info(company):
+	page = BeautifulSoup(urllib2.urlopen(company["url"]).read())
+	company["meldingen"] = {}
+	for row in page.find("table", {"class": "list"}).findAll("tr")[1:]:
+		colls = row.findAll("td")
+		id = colls[1].string
+		url = BASE_URL + colls[0].find("a")["href"]
+		description = colls[0].find("a").string
+		melding = get_detailed_info(url)
+		melding["url"] = url
+		melding["description"] = description
+		company["meldingen"][id] = melding
+	return company
+
+def get_detailed_info(url):
+	page = BeautifulSoup(urllib2.urlopen(url).read())
+	info = {}
+	print url
+	for row in page.find("table", {"class": "list"}).findAll("tr", recursive=False):
+		r = row.findAll("td", recursive=False)
+		if len(r) == 2:
+			table = r[1].find("table")
+			if table:
+				print "TABLE"
+			else:	
+				key = r[0].string
+				value = r[1].string
+				info[key.strip()] = value.strip()
+				print "OK"
+		else:
+			print "ERROR"
+	return info
 
 
 if __name__ == "__main__":
@@ -51,12 +90,8 @@ if __name__ == "__main__":
 		if not page:
 			postcodes += [pc+"%d" % (i) for i in range(10)]
 			continue
-		print pc
 		comp = list_companies_from_page(page)
-		if comp:
-			companies += comp
-		print "Total:", len(companies)
-	print companies
-	print len(companies)
-
+		for c in comp:
+			pprint.pprint(get_company_info(c))
+		
 
