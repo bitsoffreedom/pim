@@ -68,8 +68,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'plugins' : "paste,table",
     
     'theme_advanced_buttons1' : "formatselect,|,undo,redo,|,bold,italic,underline,|,charmap,|,bullist,numlist,|,pastetext, pasteword,cleanup,code",
-    'theme_advanced_buttons2' : "",
-    #'theme_advanced_buttons2' : "anchor,link,unlink,|,tablecontrols",
+    'theme_advanced_buttons2' : "link,unlink",
     'theme_advanced_buttons3' : "",
     'theme_advanced_toolbar_location' : "top",
     'theme_advanced_toolbar_align' : "left",
