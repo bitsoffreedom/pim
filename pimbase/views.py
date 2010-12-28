@@ -291,6 +291,8 @@ def delcompany(request, param):
 
 def userdata(request):
     request.session.setdefault('companies', [])
+    if len(request.session['companies']) == 0:
+        return HttpResponseServerError("No companies selected")
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 
     if request.method == 'POST':
@@ -325,12 +327,16 @@ def userdata(request):
 
 def generate(request):
     request.session.setdefault('companies', [])
+    if len(request.session['companies']) == 0:
+        return HttpResponseServerError("No companies selected")
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 
     return render_to_response('pim/generate.html', {'selected_companies': selected_companies})
 
 def generatehtml(request, param):
     request.session.setdefault('companies', [])
+    if len(request.session['companies']) == 0:
+        return HttpResponseServerError("No companies selected")
 
     try:
         company_id = int(param)
