@@ -83,15 +83,43 @@ def get_detailed_info(url):
 			if colls[0].has_key("rowspan"):
 				if len(colls) > 1:
 					values.append(clean(colls[1]))
-				cs = int(colls[0]["rowspan"])
-				for j in xrange(1,cs):
+				rs = int(colls[0]["rowspan"])
+				for j in xrange(1,rs):
 					values.append(clean(rows[i+j]))
-				i += cs - 1
+				i += rs - 1
 			else:
 				print "ERROR: no rowspan!"
 			info["ontvangers"] = values
 		elif clean(colls[0]) == "Meldingsnummer":
 			info["id"] = int(clean(colls[1]))
+		elif clean(colls[0]) == "Naam verwerking":
+			info["naam_verwerking"] = clean(colls[1])
+		elif clean(colls[0]) == "Verantwoordelijke(n)":
+			info["verantwoordelijken"] = "TODO"
+		elif clean(colls[0]) == "Doel(en) van verwerking":
+			values = []
+			if colls[0].has_key("rowspan"):
+				if len(colls) > 1:
+					values.append(clean(colls[1]))
+				rs = int(colls[0]["rowspan"])
+				for j in xrange(1,rs):
+					values.append(clean(rows[i+j]))
+				i += rs - 1
+			else:
+				print "ERROR: no rowspan!"
+			info["doelen"] = values
+		elif clean(colls[0]) == "Betrokkene(n)":
+			info["betrokkenen"] = "TODO"
+		elif clean(colls[0]) == "Doorgifte buiten EU":
+			v = clean(colls[1])
+			if v == "J": v = True
+			elif v == "N": v = False
+			info["doorgifte_buiten_eu"] = v
+		elif clean(colls[0]) == "Doorgifte passend":
+			v = clean(colls[1])
+			if v == "J": v = True
+			elif v == "N": v = False
+			info["doorgifte_passend"] = v
 		else:
 			print "UNKNOWN: " + clean(colls[0])
 		i += 1
@@ -110,6 +138,7 @@ if __name__ == "__main__":
 			continue
 		comp = list_companies_from_page(page)
 		for c in comp:
-			pprint.pprint(get_company_info(c))
+			#pprint.pprint(get_company_info(c))
+			get_company_info(c)
 		
 
