@@ -9,6 +9,16 @@ BASE_URL = "http://www.cbpweb.nl/asp/"
 SEARCH_FORM = BASE_URL + "ORSearch.asp"
 
 
+def clean(s):
+	return strip_tags(str(s)).strip()
+
+def strip_tags(s):
+    start = s.find("<")
+    if start == -1:
+        return s # No tags
+    end = s.find(">", start)+1
+    return s[:start]+strip_tags(s[end:])
+
 
 def list_postcode(pc=""):
 	if len(pc) < 2:
@@ -64,19 +74,27 @@ def get_detailed_info(url):
 	page = BeautifulSoup(urllib2.urlopen(url).read())
 	info = {}
 	print url
-	for row in page.find("table", {"class": "list"}).findAll("tr", recursive=False):
-		r = row.findAll("td", recursive=False)
-		if len(r) == 2:
-			table = r[1].find("table")
-			if table:
-				print "TABLE"
-			else:	
-				key = r[0].string
-				value = r[1].string
-				info[key.strip()] = value.strip()
-				print "OK"
+	rows = page.find("table", {"class": "list"}).findAll("tr", recursive=False)
+	i = 0
+	while i < len(rows):
+		colls = rows[i].findAll("td", recursive=False)
+		if clean(colls[0]) == "Ontvanger(s)":
+			values = []
+			if colls[0].has_key("rowspan"):
+				if len(colls) > 1:
+					values.append(clean(colls[1]))
+				cs = int(colls[0]["rowspan"])
+				for j in xrange(1,cs):
+					values.append(clean(rows[i+j]))
+				i += cs - 1
+			else:
+				print "ERROR: no rowspan!"
+			info["ontvangers"] = values
+		elif clean(colls[0]) == "Meldingsnummer":
+			info["id"] = int(clean(colls[1]))
 		else:
-			print "ERROR"
+			print "UNKNOWN: " + clean(colls[0])
+		i += 1
 	return info
 
 
