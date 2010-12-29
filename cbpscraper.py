@@ -71,7 +71,14 @@ def get_company_info(company):
 	return company
 
 def parse_persoonsgegevens_table(table):
-	return "TODO"
+	persoonsgegevens = {}
+	rows = table.findAll("tr", recursive=False)
+	for r in range(1, len(rows)-1, 3):
+		name = clean(rows[r].findAll("td")[1])
+		value = clean(rows[r+1].findAll("td")[1])
+		persoonsgegevens[name] = value
+	persoonsgegevens["bijzonder"] = clean(rows[-1].findAll("td")[1])
+	return persoonsgegevens
 
 
 def get_detailed_info(url):
@@ -99,6 +106,7 @@ def get_detailed_info(url):
 		elif clean(colls[0]) == "Naam verwerking":
 			info["naam_verwerking"] = clean(colls[1])
 		elif clean(colls[0]) == "Verantwoordelijke(n)":
+			print colls[1].find("table")
 			info["verantwoordelijken"] = "TODO"
 		elif clean(colls[0]) == "Doel(en) van verwerking":
 			values = []
