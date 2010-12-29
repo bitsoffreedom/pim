@@ -70,10 +70,14 @@ def get_company_info(company):
 		company["meldingen"][id] = melding
 	return company
 
+def parse_persoonsgegevens_table(table):
+	return "TODO"
+
+
 def get_detailed_info(url):
 	page = BeautifulSoup(urllib2.urlopen(url).read())
 	info = {}
-	print url
+	#print url
 	rows = page.find("table", {"class": "list"}).findAll("tr", recursive=False)
 	i = 0
 	while i < len(rows):
@@ -109,9 +113,20 @@ def get_detailed_info(url):
 				print "ERROR: no rowspan!"
 			info["doelen"] = values
 		elif clean(colls[0]) == "Betrokkene(n)":
-			info["betrokkenen"] = "TODO"
+			betrokkenen = {}
+			done = False
+			while not done:
+				colls = rows[i+1].findAll("td", recursive=False)
+				name = clean(colls[0])
+				value = parse_persoonsgegevens_table(colls[1].find("table"))
+				betrokkenen[name] = value
+				if clean(rows[i+2]) != "":
+					done = True
+				i += 2
+			i -= 1
+			info["betrokkenen"] = betrokkenen
 		elif clean(colls[0]) == "Doorgifte buiten EU":
-			v = clean(colls[1])
+			v = clean(colls[1].string)
 			if v == "J": v = True
 			elif v == "N": v = False
 			info["doorgifte_buiten_eu"] = v
@@ -138,7 +153,7 @@ if __name__ == "__main__":
 			continue
 		comp = list_companies_from_page(page)
 		for c in comp:
-			#pprint.pprint(get_company_info(c))
-			get_company_info(c)
+			pprint.pprint(get_company_info(c))
+			#get_company_info(c)
 		
 
