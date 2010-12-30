@@ -80,11 +80,14 @@ def parse_persoonsgegevens_table(table):
 	persoonsgegevens["bijzonder"] = clean(rows[-1].findAll("td")[1])
 	return persoonsgegevens
 
+def parse_addres_table(table):
+	return "TODO"
+
 
 def get_detailed_info(url):
 	page = BeautifulSoup(urllib2.urlopen(url).read())
 	info = {}
-	#print url
+	print url
 	rows = page.find("table", {"class": "list"}).findAll("tr", recursive=False)
 	i = 0
 	while i < len(rows):
@@ -106,8 +109,17 @@ def get_detailed_info(url):
 		elif clean(colls[0]) == "Naam verwerking":
 			info["naam_verwerking"] = clean(colls[1])
 		elif clean(colls[0]) == "Verantwoordelijke(n)":
-			print colls[1].find("table")
-			info["verantwoordelijken"] = "TODO"
+			values = []
+			if colls[0].has_key("rowspan"):
+				if len(colls) > 1:
+					values.append(parse_addres_table(colls[1].find("table")))
+				rs = int(colls[0]["rowspan"])
+				for j in range(1, rs):
+					values.append(parse_addres_table(rows[i+j].find("table")))
+				i += rs - 1
+			else:
+				print "ERROR!"
+			info["verantwoordelijken"] = values
 		elif clean(colls[0]) == "Doel(en) van verwerking":
 			values = []
 			if colls[0].has_key("rowspan"):
@@ -161,7 +173,7 @@ if __name__ == "__main__":
 			continue
 		comp = list_companies_from_page(page)
 		for c in comp:
-			pprint.pprint(get_company_info(c))
-			#get_company_info(c)
+			#pprint.pprint(get_company_info(c))
+			print get_company_info(c)
 		
 
