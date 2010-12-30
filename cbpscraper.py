@@ -3,7 +3,7 @@
 import mechanize
 from BeautifulSoup import BeautifulSoup
 import urllib2
-import pprint
+import json
 
 BASE_URL = "http://www.cbpweb.nl/asp/"
 SEARCH_FORM = BASE_URL + "ORSearch.asp"
@@ -81,13 +81,20 @@ def parse_persoonsgegevens_table(table):
 	return persoonsgegevens
 
 def parse_addres_table(table):
-	return "TODO"
+	addres = {}
+	rows = table.findAll("tr", recursive=False)
+	for r in range(len(rows)):
+		colls = rows[r].findAll("td")
+		name = clean(colls[0])
+		value = clean(colls[1])
+		addres[name] = value
+	return addres
 
 
 def get_detailed_info(url):
 	page = BeautifulSoup(urllib2.urlopen(url).read())
 	info = {}
-	print url
+	print "PAGE:", url
 	rows = page.find("table", {"class": "list"}).findAll("tr", recursive=False)
 	i = 0
 	while i < len(rows):
@@ -166,6 +173,7 @@ if __name__ == "__main__":
 	postcodes = ["%02d" % (i) for i in range(100)]
 	while postcodes:
 		pc = postcodes.pop()
+		print "POSTCODE:", pc
 		page = list_postcode(pc)
 		if page == None: continue
 		if not page:
@@ -174,6 +182,12 @@ if __name__ == "__main__":
 		comp = list_companies_from_page(page)
 		for c in comp:
 			#pprint.pprint(get_company_info(c))
-			print get_company_info(c)
+			companies.append(get_company_info(c))
+		print "DUMPING DATA"
+		f = open("data.json", "wb")
+		json.dump(companies, f, indent=2)
+		f.close()
+		print "DONE"
+
 		
 
