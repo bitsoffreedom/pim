@@ -4,6 +4,7 @@ import mechanize
 from BeautifulSoup import BeautifulSoup
 import urllib2
 import json
+import sys
 
 BASE_URL = "http://www.cbpweb.nl/asp/"
 SEARCH_FORM = BASE_URL + "ORSearch.asp"
@@ -170,7 +171,8 @@ def get_detailed_info(url):
 
 if __name__ == "__main__":
 	companies = []
-	postcodes = ["%02d" % (i) for i in range(100)]
+	postcodes = [sys.argv[1],]
+	#postcodes = ["%02d" % (i) for i in range(100)]
 	while postcodes:
 		pc = postcodes.pop()
 		print "POSTCODE:", pc
@@ -183,11 +185,11 @@ if __name__ == "__main__":
 		for c in comp:
 			#pprint.pprint(get_company_info(c))
 			companies.append(get_company_info(c))
-		print "DUMPING DATA"
-		f = open("data.json", "wb")
-		json.dump(companies, f, indent=2)
-		f.close()
-		print "DONE"
+	print "DUMPING DATA"
+	f = open("data/%s.json" % (sys.argv[1]), "wb")
+	json.dump(companies, f, indent=2)
+	f.close()
+	print "DONE"
 
 		
 
