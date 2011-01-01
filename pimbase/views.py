@@ -115,7 +115,7 @@ from simplesite.models import Page, Menu
 
 def start(request):
     try:
-        p = Page.objects.get(title='start')
+        p = Page.objects.get(title='voorpagina')
     except (Page.DoesNotExist):
         return HttpResponseServerError("Object doesn't exist")
         
