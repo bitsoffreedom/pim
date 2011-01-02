@@ -23,7 +23,6 @@
 
 		
 		<ul id="main-nav" class="flat-list">
-			<li><a href="{% url pimbase.views.index %}">Home</a></li>
       {% for m in menu_list %}
       <li><a href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
       {% endfor %}
