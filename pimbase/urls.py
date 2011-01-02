@@ -2,8 +2,8 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
     (r'^$', 'pimbase.views.start'),
-    (r'^filter/$', 'pimbase.views.index'),
-    (r'^filter/(?P<param>\d+)$', 'pimbase.views.index'),
+    (r'^start/$', 'pimbase.views.index'),
+    (r'^start/(?P<param>\d+)$', 'pimbase.views.index'),
 
     (r'^morecollectedinfo', 'pimbase.views.morecollectedinfo'),
     (r'^lesscollectedinfo', 'pimbase.views.lesscollectedinfo'),
