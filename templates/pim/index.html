@@ -5,8 +5,6 @@
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
 				<li class="selected"><span class="step-count">1</span> Kies de organisaties</li>
-				<li><span class="step-count">2</span> Vul je gegevens in</li>
-				<li class="last"><span class="step-count">3</span> Maak de brieven</li>
 			</ol>
 			
 			<h1>Kies hieronder welke organisaties je wilt aanschrijven.</h1>
@@ -165,9 +163,9 @@
 				</div>
 				
 				<div id="selected-hamsters" class="column">
-					<h2>Geselecteerd</h2>
+					<h2>Mijn verzendlijst</h2>
           {% if selected_companies|length == 0 %}
-          <p>Je hebt nog geen organisaties geselecteerd</p>
+          <p>Er staan nog geen organisaties in de verzendlijst</p>
           {% else %}
           <ul>
             {% for c in selected_companies %}
@@ -177,6 +175,8 @@
           {% endif %}
 				</div>
 				
+				{% if selected_companies|length > 0 %}
 				<a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button">Klaar<span>Door naar stap 2</span></a>
+				{% endif %}
 			</div>
 {% endblock %}

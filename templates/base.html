@@ -18,57 +18,21 @@
 	</head>
 <body "{% block bodyparam %}{% endblock %}">
 	<div id="content" class="clearfix">
-		<img src="/static/global/pim_logo.png" alt="PIM logo" id="pim-logo"/>
-		<img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/>
+		<a href="/"><img src="/static/global/pim_logo.png" alt="PIM logo" id="pim-logo"/></a>
+		<a href="http://www.bof.nl"><img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/></a>
+
 		
 		<ul id="main-nav" class="flat-list">
-			<li><a href="{% url pimbase.views.index %}">Home</a></li>
-			<li><a href="">Over PIM</a></li>
-			<li><a href="">Contact</a></li>
-			<li><a href="">Pers</a></li>
-			<li><a href="">Privacy</a></li>
+      {% for m in menu_list %}
+      <li><a href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
+      {% endfor %}
 		</ul>
 		
-		<div id="sub-nav"><a href="">Disclaimer</a> | <a href="">FAQ</a></div>
+		<div id="sub-nav"><a href="/disclaimer/">Disclaimer</a> | <a href="/faq/">FAQ</a></div>
         {% block content %}
         {% endblock %}
 			<div id="footer">Bits of Freedom 2010 | <a href="mailto:info@bitsoffreedom.nl">info@bitsoffreedom.nl</a> | <a href="">Creative Commons</a></div>
 		</div>
-    <div id="sidetext">
-      <h5> Privacy Inzage Machine </h5>
-
-      <p>Welkom op de testsite van PIM. In de huidige versie is vrijwel alle
-      beoogde functionaliteit geimplementeerd, zodat het zin heeft om een
-      gebruikertest te beginnen (een zgn. alpha 1.0 versie). Nu is het tijd om
-      te kijken hoe PIM in de praktijk bevalt. Fijn dat je Bits of Freedom
-      wilt helpen met testen!</p>
-
-      <p>Omdat je voor het eerst PIM ziet, zijn we ten eerste geïnteresseerd in
-      je:</p>
-
-      <ul>
-        <li>algemene indruk die deze applicatie op je maakt</li>
-        <li>mening over het visuele ontwerp</li>
-        <li>mening over het nut van de zoekfilters</li>
-        <li>mening over de gebruikersvriendelijkheid</li>
-        <li>je ide&euml;en over de belangrijkste factoren voor succes en falen</li>
-        <li>suggesties voor verbetering</li>
-        <li>ide&euml;en voor uitbreiding</li>
-      </ul>
-
-      <p>Zou je via een basecamp message aan Helmer Wieringa willen reageren?</p>
-
-      <p>In de volgende versie zullen we ook:</p>
-
-      <ul>
-        <li>brieven in PDF-vorm kunnen genereren</li>
-        <li>de mogelijkheid om te reageren via de site bieden</li>
-        <li>de website optimaliseren voor zoekmachines</li>
-      </ul>
-
-      <p>Wil je op een andere manier bijdragen aan PIM? Word een datadetective!</p>
-      <p><a href="{% url pimbase.views.datadetectives %}">Klik hier voor meer informatie.</a></p>
-    </div>
 	</div>
 	
 	<div id="bottom">

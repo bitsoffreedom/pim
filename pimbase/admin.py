@@ -25,11 +25,6 @@ class RelationInline(admin.TabularInline):
     extra = 1
     fields = ('type', 'to_organisation')
 
-class BrandInline(admin.TabularInline):
-    model = Brand
-    prepopulated_fields = {"slug": ("name",)}
-    extra = 1
-
 class IdentifierInline(admin.TabularInline):
     model = Identifier
     extra = 1
@@ -45,7 +40,7 @@ class OrganisationAdmin(admin.ModelAdmin):
     search_fields = ['name', 'short_name' , 'collectedinformation__type__name' ]
     
     save_as = True
-    inlines = [RelationInline, BrandInline, IdentifierInline, CBPRegistrationInline]
+    inlines = [RelationInline, IdentifierInline, CBPRegistrationInline]
 
     prepopulated_fields = {"short_name": ("name",)}
 
