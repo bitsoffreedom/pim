@@ -140,7 +140,7 @@
 					
 					<ol>
             {% for org in organisations.object_list %}
-						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:23 }}</a></li>
+						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:35 }}</a></li>
             {% endfor %}
 					</ol>
           <div>
@@ -169,7 +169,7 @@
           {% else %}
           <ul>
             {% for c in selected_companies %}
-            <li>{{ c|truncchar:23 }}</li>
+            <li>{{ c|truncchar:35 }}</li>
             {% endfor %}
           </ul>
           {% endif %}
