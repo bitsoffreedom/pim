@@ -370,7 +370,7 @@ h5 {
 }
 
 #column-wrapper {
-  background: url("/static/global/bg-wizard.gif") repeat scroll 0 0 transparent;
+  background: url("/static/global/bg-wizard.gif") repeat-x scroll 0 0 transparent;
   margin-bottom: 15px;
   min-height: 400px;
   position: relative;
