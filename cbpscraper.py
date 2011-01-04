@@ -87,7 +87,7 @@ def parse_addres_table(table):
 	for r in range(len(rows)):
 		colls = rows[r].findAll("td")
 		name = clean(colls[0])
-		value = clean(colls[1])
+		value = clean(str(colls[1]).replace("<br />", "\n"))
 		addres[name] = value
 	return addres
 
