@@ -1,6 +1,6 @@
 #!/bin/sh
 
-i=0
+i=99
 while [ $i -lt 1000 ]; do
 	if [ -e data/`printf %03d ${i}`.log ]; then
 		echo "done"
