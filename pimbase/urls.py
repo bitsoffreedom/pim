@@ -29,8 +29,8 @@ urlpatterns = patterns('',
     (r'^addcompany/(?P<param>\d+)$', 'pimbase.views.addcompany'),
     (r'^delcompany/(?P<param>\d+)$', 'pimbase.views.delcompany'),
 
-    (r'^userdata$', 'pimbase.views.userdata'),
-    (r'^generate$', 'pimbase.views.generate'),
+    (r'^gebruikers-gegevens$', 'pimbase.views.userdata'),
+    (r'^genereer-brieven$', 'pimbase.views.generate'),
     (r'^generatehtml/(?P<param>\d+)$', 'pimbase.views.generatehtml'),
     (r'^datadetectives$', 'pimbase.views.datadetectives'),
 )
