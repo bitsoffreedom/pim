@@ -44,6 +44,27 @@
 						</fieldset>
 					</form>
           -->
+          {% if not selected_role %}
+            <h4>afhankelijk van je situatie</h4>
+            <ul>
+              {% if citizenrole_more %}
+                {% for citizenrole in citizenroles %}
+                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
+                {% endfor %}
+              {% else %}
+                {% for citizenrole in citizenroles|slice:":10" %}
+                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
+                {% endfor %}
+              {% endif %}
+            </ul>
+            {% if not citizenrole_more and citizenroles|length > 10 %}
+            <a href="{% url pimbase.views.morecitizenroles %}">Meer</a>
+            {% endif %}
+            {% if citizenrole_more and citizenroles|length > 10 %}
+            <a href="{% url pimbase.views.lesscitizenroles %}">Minder</a>
+            {% endif %}
+          {% endif %}
+
           {% if not selected_orgtype %}
             <h4>op type</h4>
             <ul>
@@ -83,27 +104,6 @@
             {% endif %}
             {% if sector_more and sectors|length > 10 %}
             <a href="{% url pimbase.views.lesssectors %}">Minder</a>
-            {% endif %}
-          {% endif %}
-					
-          {% if not selected_role %}
-            <h4>afhankelijk van je situatie</h4>
-            <ul>
-              {% if citizenrole_more %}
-                {% for citizenrole in citizenroles %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
-                {% endfor %}
-              {% else %}
-                {% for citizenrole in citizenroles|slice:":10" %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
-                {% endfor %}
-              {% endif %}
-            </ul>
-            {% if not citizenrole_more and citizenroles|length > 10 %}
-            <a href="{% url pimbase.views.morecitizenroles %}">Meer</a>
-            {% endif %}
-            {% if citizenrole_more and citizenroles|length > 10 %}
-            <a href="{% url pimbase.views.lesscitizenroles %}">Minder</a>
             {% endif %}
           {% endif %}
 
