@@ -261,6 +261,12 @@ def delsector(request, param):
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
+def cleancompanylist(request):
+    request.session['companies'] = []
+    request.session.modified = True
+
+    return HttpResponseRedirect(reverse('pimbase.views.index'))
+
 def addcompany(request, param):
     company = request.session.setdefault('companies', [])
     try:

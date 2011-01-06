@@ -163,7 +163,7 @@
 				</div>
 				
 				<div id="selected-hamsters" class="column">
-					<h2>Mijn verzendlijst</h2>
+					<h2><a href="{% url pimbase.views.cleancompanylist %}">Mijn verzendlijst</a></h2>
           {% if selected_companies|length == 0 %}
           <p>Er staan nog geen organisaties in de verzendlijst</p>
           {% else %}
