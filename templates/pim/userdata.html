@@ -5,9 +5,7 @@
     {% block content %}
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
-				<li><span class="step-count">1</span> Kies de organisaties</li>
 				<li class="selected"><span class="step-count">2</span> Vul je gegevens in</li>
-				<li class="last"><span class="step-count">3</span> Maak de brieven</li>
 			</ol>
 			
 			<h1>Geef het adres op waar je het antwoord op wil ontvangen.</h1>
@@ -17,7 +15,6 @@
           {% csrf_token %}
 					<div id="address-form" class="double column">
               {{ form.as_p }}
-							<a href="" class="info-nav">Hulp nodig?</a>
           </div>
 				
 					<div id="selected-hamsters" class="column">
