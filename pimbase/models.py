@@ -101,10 +101,30 @@ class OrganisationTag(models.Model):
     def __unicode__(self):
         return "%s:%s" % (self.name, self.value)
 
+Class Involved(model.Models) 
+       name = models.Charfield(max_length=200), help_text="Betrokkene"   
+
+
+class Registration(models.Model):
+    PrivacYAuthorityNotificationNumber = models.Charfield( max_lenght=200,verbose_name=_('meldingennr'), help_text="Het CBP meldingen nummer")
+    NameofRegistration = models.Charfield(max_length=200), verbose_name=_'name', help_text="Naam van de CBP verwerking "
+    organisation = models.ForeignKey(Organisation)
+    involved = models.ForeignKey(involved)
+
+citizenrole = models.ManyToManyField(CitizenRole, blank=True, null=True,
+         verbose_name='citizen role',
+         help_text=_('The sort of relations this organisation has with citizens.'))
+
+collectedinformation = models.ManyToManyField(CollectedInformation, blank=True, null=True,
+         verbose_name=('collected information'),
+         help_text=_('The sort of information this organisation gathers about consumers.'))
+    relation = models.ManyToManyField("self", through="Relation",
+        symmetrical=False, blank=True, null=True)
+    comments = models.ManyToManyField(OrganisationTag, help_text="Just for internal comments", blank=True, null=True)
+
 
 class Organisation(models.Model):
     """ A model representing an organisation. """
-
     name = models.CharField(max_length=200, verbose_name=_('name'), help_text="De officiele naam van de organisatie")
     """ Official name of organisation. """
     short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
@@ -117,15 +137,7 @@ class Organisation(models.Model):
     sector = models.ForeignKey(Sector, blank=True, null=True)
     website = models.CharField(max_length=200, blank=True)
     tags = TaggableManager()
-    citizenrole = models.ManyToManyField(CitizenRole, blank=True, null=True,
-         verbose_name='citizen role',
-         help_text=_('The sort of relations this organisation has with citizens.'))
-    collectedinformation = models.ManyToManyField(CollectedInformation, blank=True, null=True,
-         verbose_name=('collected information'),
-         help_text=_('The sort of information this organisation gathers about consumers.'))
-    relation = models.ManyToManyField("self", through="Relation",
-        symmetrical=False, blank=True, null=True)
-    comments = models.ManyToManyField(OrganisationTag, help_text="Just for internal comments", blank=True, null=True)
+    
 
     class Meta:
         verbose_name=_('organisation')
