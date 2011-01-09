@@ -643,7 +643,7 @@ button#next-step {
 }
 
 .step-3 #wizard #download-all a {
-  background-image: url("/static/global/download-all.gif");
+  background-image: url("/static/global/download-all_hover.gif");
   background-position: 155px center;
   font-size: 197%;
   height: 35px;
