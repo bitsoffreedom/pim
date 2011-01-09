@@ -76,7 +76,7 @@ input, select { vertical-align:middle; }
    * we normalize monospace styles ourselves
    * table font-size is reset in the HTML5 reset above so there is no need to repeat
 */
-body { font:13px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
+body { font:11px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
 
 select, input, textarea, button { font:99% sans-serif; }
 
@@ -398,7 +398,7 @@ h5 {
   width: 590px;
 }
 .triple.column {
-  width: 608px;
+  width: 920px;
 }
 
 #filters {
@@ -570,6 +570,7 @@ button#next-step {
   width: 130px;
   margin-bottom: 10px;
   clear: left;
+  font-size: 11px !important;
 }
 
 #address-form input{
@@ -620,7 +621,7 @@ button#next-step {
 }
 .step-3 #wizard #download-all a,
   .step-3 #wizard #download-single a {
-  background: url("/static/global/download-single.gif") no-repeat scroll 115px center #8EC363;
+  background: url("/static/global/download-single.gif") no-repeat scroll 115px center #000;
   border: medium none;
   clear: right;
   color: #FFFFFF;
@@ -634,7 +635,7 @@ button#next-step {
 }
 .step-3 #wizard #download-all a:hover,
   .step-3 #wizard #download-single a:hover {
-  background-color: #00000;
+  background-color: #333;
 }
 
 .step-3 #wizard #download-all a {
@@ -652,7 +653,8 @@ button#next-step {
 		
 .step-3 #wizard #download-single li {
   height: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 20px
+  width: 600px;
 }
 .step-3 #wizard #download-single a {
   font-size: 138.5%;

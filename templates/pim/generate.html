@@ -5,20 +5,18 @@
 {% block content %}
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
-				<li class="selected"><span class="step-count">3</span> Maak de brieven</li>
+				<li class="selected"><span class="step-count">3</span> Download de brieven.</li>
 			</ol>
-			
-			<h1>De brieven zijn klaar.</h1>
 			
 			<div id="column-wrapper" class="clearfix">
 				
 				<div class="triple column clearfix">
-					<p>Hieronder zijn de brieven naar de door u geselecteerde organisaties gegenereerd. Klik op de brieven om deze te bekijken en af te drukken.</p>
+					<p>De brieven zijn voor je aangemaakt! Klik op &eacute;&eacute;n van onderstaande links om de brieven te openen.</p>
 					
-<!--					<p id="download-all">Alle brieven (pdf) <a href="">Download</a></p> -->
+					<p id="download-all">Alle brieven (pdf) <a href="">Download</a></p>
 					
 					<ul id="download-single">
-            {% for c in selected_companies %}
+            Brief voor {% for c in selected_companies %}
             <li>{{ c }}<a href="{% url pimbase.views.generatehtml c.pk %}">Download</a></li>
             {% endfor %}
 					</ul>

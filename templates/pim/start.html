@@ -3,9 +3,11 @@
 {% block content %}
 
     <div id="wizard">
-      {% autoescape off %}
-        {{ page_current.content }}
-      {% endautoescape %}
+    	<div class="triple column clearfix">
+	      {% autoescape off %}
+	        {{ page_current.content }}
+	      {% endautoescape %}
+	    </div>
     </div>
 
 {% endblock %}
