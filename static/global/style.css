@@ -76,7 +76,7 @@ input, select { vertical-align:middle; }
    * we normalize monospace styles ourselves
    * table font-size is reset in the HTML5 reset above so there is no need to repeat
 */
-body { font:13px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
+body { font:11px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
 
 select, input, textarea, button { font:99% sans-serif; }
 
@@ -234,7 +234,7 @@ h1 {
   width: 350px;
 }
 
-h2 {
+h2, h2 a {
   color: #58A618;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
   font-size: 146.5%;
@@ -274,7 +274,6 @@ h5 {
 }
 
 #pim-logo {
-  left: -101px;
   margin-top: 65px;
   position: relative;
 }
@@ -334,27 +333,30 @@ h5 {
   margin-bottom: 155px;
   margin-right: 20px;
   min-height: 100%;
-  width: 940px;
+  width: 960px;
+  -moz-box-shadow: 1px 1px 1px #333;
+  -webkit-box-shadow: 1px 1px 1px #333;
 }
 
 #steps {
-  height: 55px;
+  height: 67px;
+  padding-top: 7px;
   margin: 0;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  background-color: #43B100;
 }
+
 #steps li {
-  background: none repeat scroll 0 0 #E7F2DE;
   color: #58A618;
-  font-size: 123.1%;
+  font-size: 25px;
   font-weight: bold;
   height: 35px;
-  padding: 15px 0 0 35px;
+  padding: 15px 0 0 98px;
   position: relative;
-  width: 178px;
 }
+
 #steps li.selected {
-  background: #fff;
-  color: #000;
+  color: #fff;
 }
 #steps li.last {
   background: none repeat scroll 0 0 #D0E5BE;
@@ -362,21 +364,21 @@ h5 {
 }
 
 #steps .step-count {
-  font-size: 197%;
-  left: 10px;
+  font-size: 45px;
+  left: 35px;
   position: absolute;
-  top: 7px;
-  color: #8dc363;
+  top: 1px;
+  color: #fff;
 }
 
 #column-wrapper {
-  background: url("/static/global/bg-wizard.gif") repeat-x scroll 0 0 transparent;
+  background: url("/static/global/bg-wizard.gif") repeat-y scroll 0 0 transparent;
   margin-bottom: 15px;
   min-height: 400px;
   position: relative;
 }
 .step-2 #column-wrapper {
-  background-image: url("/static/global/bg-wizard_step-2.gif");
+  background: url("/static/global/bg-wizard_step-2.gif") repeat-y 190px 0;
 }
 .step-3 #column-wrapper {
   background-image: none;
@@ -390,10 +392,10 @@ h5 {
   width: 261px;
 }
 .double.column {
-  width: 392px;
+  width: 590px;
 }
 .triple.column {
-  width: 608px;
+  width: 920px;
 }
 
 #filters {
@@ -561,7 +563,17 @@ button#next-step {
   display: block;
   width: 100px;
   color: #000;
+  float: left;
+  width: 130px;
+  margin-bottom: 10px;
+  clear: left;
+  font-size: 11px !important;
 }
+
+#address-form input{
+   margin-bottom: 10px;
+}
+
 #address-form input[type="text"] {
   background-color: #EAF3E2;
   border-color: #99AD88 #99AD88 -moz-use-text-color -moz-use-text-color;
@@ -570,6 +582,7 @@ button#next-step {
   height: 16px;
   width: 260px;
 }
+
 #address-form #postcode-nr {
   width: 60px;
 }
@@ -605,7 +618,7 @@ button#next-step {
 }
 .step-3 #wizard #download-all a,
   .step-3 #wizard #download-single a {
-  background: url("/static/global/download-single.gif") no-repeat scroll 115px center #8EC363;
+  background: url("/static/global/download-single.gif") no-repeat scroll 115px center #000;
   border: medium none;
   clear: right;
   color: #FFFFFF;
@@ -619,7 +632,7 @@ button#next-step {
 }
 .step-3 #wizard #download-all a:hover,
   .step-3 #wizard #download-single a:hover {
-  background-color: #00000;
+  background-color: #333;
 }
 
 .step-3 #wizard #download-all a {
@@ -637,7 +650,8 @@ button#next-step {
 		
 .step-3 #wizard #download-single li {
   height: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 20px
+  width: 600px;
 }
 .step-3 #wizard #download-single a {
   font-size: 138.5%;

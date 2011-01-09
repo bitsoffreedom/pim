@@ -4,15 +4,14 @@
 {% block content %}
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
-				<li class="selected"><span class="step-count">1</span> Kies de organisaties</li>
+				<li class="selected"><span class="step-count">1</span> Kies welke organisaties je wilt aanschrijven.</li>
 			</ol>
-			
-			<h1>Kies hieronder welke organisaties je wilt aanschrijven.</h1>
 			
 			<div id="column-wrapper" class="clearfix">
 				<div id="filters" class="column">
+					<h2>Filter</h2>
 					<div id="active-filters">
-						<h3>Pim verfijnt nu op:</h3>
+						<h3>Gefilterd op:</h3>
             {% if selected_sector or selected_orgtype or selected_role or selected_collectedinfo %}
               <ul>
                 {% if selected_orgtype %}
@@ -44,6 +43,30 @@
 						</fieldset>
 					</form>
           -->
+          <h4>Industrie</h4>
+          <ul>
+          	<li>Internet platforms <span class="list-count">(5)</span></li>
+          	<li>Internet <span class="list-count">(10)</span></li>
+          	<li>Direct marketing <span class="list-count">(10)</span></li>
+          	<li>Politie en justitie <span class="list-count">(4)</span></li>
+          	<li>Internet platforms <span class="list-count">(5)</span></li>
+          	<li>Et cetera <span class="list-count">(5)</span></li>
+		  </ul>
+
+          <h4>Dienst</h4>
+          <ul>
+          	<li>Winkel <span class="list-count">(5)</span></li>
+          	<li>Service <span class="list-count">(10)</span></li>
+          	<li>Product <span class="list-count">(10)</span></li>
+		  </ul>         	
+
+          <h4>Categorie 3</h4>
+          <ul>
+          	<li>Facet 1 <span class="list-count">(17)</span></li>
+          	<li>Facet 2 <span class="list-count">(4)</span></li>
+          	<li>Facet 3 <span class="list-count">(10)</span></li>
+		  </ul>         
+          
           {% if not selected_role %}
             <h4>afhankelijk van je situatie</h4>
             <ul>
@@ -176,7 +199,7 @@
 				</div>
 				
 				{% if selected_companies|length > 0 %}
-				<a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button">Klaar<span>Door naar stap 2</span></a>
+				<a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button">Volgende</a>
 				{% endif %}
 			</div>
 {% endblock %}

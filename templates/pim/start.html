@@ -3,9 +3,13 @@
 {% block content %}
 
     <div id="wizard">
-      {% autoescape off %}
-        {{ page_current.content }}
-      {% endautoescape %}
+    	<div class="triple column clearfix">
+	      {% autoescape off %}
+	        {{ page_current.content }}
+	      {% endautoescape %}
+	      <a class="intro_screenshot" href="/start"><img src="/static/global/screenshot.png" alt="screenshot pim" /></a> 
+	      <a id="next-step" href="/start">Start Pim </a>
+	    </div>
     </div>
 
 {% endblock %}

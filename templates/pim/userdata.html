@@ -5,10 +5,10 @@
     {% block content %}
 		<div id="wizard">
 			<ol id="steps" class="flat-list">
-				<li class="selected"><span class="step-count">2</span> Vul je gegevens in</li>
+				<li class="selected"><span class="step-count">2</span> Vul je gegevens in.</li>
 			</ol>
 			
-			<h1>Geef het adres op waar je het antwoord op wil ontvangen.</h1>
+			<h1>Algemene gegevens</h1>
 			
 			<div id="column-wrapper" class="clearfix">
         <form action="{% url pimbase.views.userdata %}" method="post">
@@ -26,8 +26,8 @@
 						</ul>
 					</div>
 
-					<p><a href="{% url pimbase.views.index %}" id="back-step" class="step-button">Terug<span>Naar stap 1</span></a></p>
-					<p><button type="submit" id="next-step" class="step-button">Klaar<span>Door naar stap 3</span></button></p>
+					<p><a href="{% url pimbase.views.index %}" id="back-step" class="step-button">Vorige</a></p>
+					<p><button type="submit" id="next-step" class="step-button">Volgende</button></p>
 					
 				</form>
 			</div>
