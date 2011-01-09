@@ -305,6 +305,7 @@ h5 {
   margin-right: 20px;
   text-decoration: none;
   text-transform: uppercase;
+  padding: 2px 7px;
 }
 
 #main-nav a:hover {
@@ -519,7 +520,7 @@ a.step-button,
   button.step-button {	
   bottom: 0;
   color: #FFFFFF;
-  font-size: 153.9%;
+  font-size: 27px;
   font-weight: bold;
   position: absolute;
   text-decoration: none;
@@ -534,19 +535,18 @@ a.step-button span,
 
 #next-step {
   font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
-  background: url("/static/global/next-step.gif") no-repeat scroll 90px center #000000;
+  background: url("/static/global/next-step.gif") no-repeat scroll 156px center #000000;
   right: 20px;
-  padding: 3px 20px 5px 10px;
-  width: 95px;
+  padding: 4px 20px 7px 10px;
 }
+
 button#next-step {
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
-  background: url("/static/global/next-step.gif") no-repeat scroll 100px center #000000;
+  background: url("/static/global/next-step.gif") no-repeat scroll 211px center #000000;
   border: medium none;
-  padding: 5px 20px 5px 10px;
+  padding: 5px 45px 5px 10px;
   right: 20px;
   text-align: left;
-  width: 135px;
 }
 #next-step:hover {
   background-image: url("/static/global/next-step_hover.gif");
@@ -557,8 +557,7 @@ button#next-step {
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
   background: url("/static/global/back-step.gif") no-repeat scroll 10px center #000000;
   left: 20px;
-  padding: 3px 0 5px 40px;
-  width: 85px;
+  padding: 4px 0 13px 40px;
 }
 #back-step:hover {
   background-image: url("/static/global/back-step_hover.gif");
