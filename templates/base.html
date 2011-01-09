@@ -24,7 +24,11 @@
 		
 		<ul id="main-nav" class="flat-list">
       {% for m in menu_list %}
+	{% if m == menu_current %}
+      <li><a class="active" href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
+	{% else %}
       <li><a href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
+	{% endif %}
       {% endfor %}
 		</ul>
 		
