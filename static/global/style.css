@@ -334,24 +334,29 @@ h5 {
   margin-bottom: 155px;
   margin-right: 20px;
   min-height: 100%;
-  width: 940px;
+  width: 960px;
+  -moz-box-shadow: 1px 1px 1px #333;
+  -webkit-box-shadow: 1px 1px 1px #333;
 }
 
 #steps {
-  height: 55px;
+  height: 67px;
+  padding-top: 7px;
   margin: 0;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  background-color: #43B100;
 }
+
 #steps li {
   background: none repeat scroll 0 0 #E7F2DE;
   color: #58A618;
   font-size: 123.1%;
   font-weight: bold;
   height: 35px;
-  padding: 15px 0 0 35px;
+  padding: 15px 0 0 98px;
   position: relative;
-  width: 178px;
 }
+
 #steps li.selected {
   background: #fff;
   color: #000;
@@ -362,10 +367,10 @@ h5 {
 }
 
 #steps .step-count {
-  font-size: 197%;
-  left: 10px;
+  font-size: 45px;
+  left: 35px;
   position: absolute;
-  top: 7px;
+  top: 1px;
   color: #8dc363;
 }
 
