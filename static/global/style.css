@@ -234,7 +234,7 @@ h1 {
   width: 350px;
 }
 
-h2 {
+h2, h2 a {
   color: #58A618;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
   font-size: 146.5%;
@@ -375,7 +375,7 @@ h5 {
 }
 
 #column-wrapper {
-  background: url("/static/global/bg-wizard.gif") repeat-x scroll 0 0 transparent;
+  background: url("/static/global/bg-wizard.gif") repeat-y scroll 0 0 transparent;
   margin-bottom: 15px;
   min-height: 400px;
   position: relative;
