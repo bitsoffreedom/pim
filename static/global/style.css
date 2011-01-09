@@ -358,8 +358,7 @@ h5 {
 }
 
 #steps li.selected {
-  background: #fff;
-  color: #000;
+  color: #fff;
 }
 #steps li.last {
   background: none repeat scroll 0 0 #D0E5BE;
@@ -371,7 +370,7 @@ h5 {
   left: 35px;
   position: absolute;
   top: 1px;
-  color: #8dc363;
+  color: #fff;
 }
 
 #column-wrapper {
