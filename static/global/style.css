@@ -306,8 +306,15 @@ h5 {
   text-decoration: none;
   text-transform: uppercase;
 }
+
 #main-nav a:hover {
-  text-decoration: underline;
+  background-color: #66ad2b;
+  padding: 2px 7px;
+}
+
+#main-nav .active {
+  background-color: #66ad2b;
+  padding: 2px 7px;
 }
 
 #sub-nav {
