@@ -8,12 +8,11 @@
 				<li class="selected"><span class="step-count">2</span> Vul je gegevens in.</li>
 			</ol>
 			
-			<h1>Algemene gegevens</h1>
-			
 			<div id="column-wrapper" class="clearfix">
         <form action="{% url pimbase.views.userdata %}" method="post">
           {% csrf_token %}
 					<div id="address-form" class="double column">
+						<h1>Algemene gegevens</h1>
               {{ form.as_p }}
           </div>
 				

@@ -222,7 +222,7 @@ body, html {
 }
 
 body {
-  background: url("/static/global/bg.jpg") no-repeat scroll center 0 #E7F2DE;
+  background: url("/static/global/bg.jpg") no-repeat scroll center 0 #a3cd81;
 }
 
 h1 {
@@ -334,8 +334,8 @@ h5 {
   margin-right: 20px;
   min-height: 100%;
   width: 960px;
-  -moz-box-shadow: 1px 1px 1px #333;
-  -webkit-box-shadow: 1px 1px 1px #333;
+  -moz-box-shadow: 1px 1px 1px #000;
+  -webkit-box-shadow: 1px 1px 1px #000;
 }
 
 #steps {
@@ -526,12 +526,14 @@ a.step-button span,
 }
 
 #next-step {
+  font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
   background: url("/static/global/next-step.gif") no-repeat scroll 90px center #000000;
   right: 20px;
   padding: 3px 20px 5px 10px;
   width: 95px;
 }
 button#next-step {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
   background: url("/static/global/next-step.gif") no-repeat scroll 100px center #000000;
   border: medium none;
   padding: 5px 20px 5px 10px;
@@ -545,6 +547,7 @@ button#next-step {
 }
 
 #back-step {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
   background: url("/static/global/back-step.gif") no-repeat scroll 10px center #000000;
   left: 20px;
   padding: 3px 0 5px 40px;
