@@ -254,7 +254,8 @@ h3 {
 h4 {
   color: #58A618;
   margin: 15px 0 5px;
-  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
 }
 
 h5 {
@@ -447,8 +448,12 @@ h5 {
   color: #58A618;
 }
 #filters > ul li {
-  font-size: 85%;
-  line-height: 138.5%;
+  font-size: 11px;
+  line-height: 22px;
+}
+
+#filters .list-count{
+  color: #6f6f6f;
 }
 
 #filters .count {
