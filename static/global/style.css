@@ -381,7 +381,7 @@ h5 {
   position: relative;
 }
 .step-2 #column-wrapper {
-  background-image: url("/static/global/bg-wizard_step-2.gif");
+  background: url("/static/global/bg-wizard_step-2.gif") repeat-y 190px 0;
 }
 .step-3 #column-wrapper {
   background-image: none;
@@ -395,7 +395,7 @@ h5 {
   width: 261px;
 }
 .double.column {
-  width: 392px;
+  width: 590px;
 }
 .triple.column {
   width: 608px;
@@ -566,7 +566,16 @@ button#next-step {
   display: block;
   width: 100px;
   color: #000;
+  float: left;
+  width: 130px;
+  margin-bottom: 10px;
+  clear: left;
 }
+
+#address-form input{
+   margin-bottom: 10px;
+}
+
 #address-form input[type="text"] {
   background-color: #EAF3E2;
   border-color: #99AD88 #99AD88 -moz-use-text-color -moz-use-text-color;
@@ -575,6 +584,7 @@ button#next-step {
   height: 16px;
   width: 260px;
 }
+
 #address-form #postcode-nr {
   width: 60px;
 }
