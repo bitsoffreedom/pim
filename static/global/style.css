@@ -353,15 +353,20 @@ h5 {
 }
 
 .triple h2{
-padding-left: 20px;
-margin-top: 20px;
-margin-bottom: 10px;
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .intro_screenshot{
   position: absolute;
-  top: 240px;
+  top: 290px;
   left: 600px;
+}
+
+.triple #next-step{
+  position: absolute;
+  margin-bottom: 170px;
 }
 
 /* WIZARD */
