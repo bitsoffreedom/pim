@@ -47,11 +47,11 @@
             <ul>
               {% if citizenrole_more %}
                 {% for citizenrole in citizenroles %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
+                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}({{ citizenrole.organisation_set.count }})</a></li>
                 {% endfor %}
               {% else %}
                 {% for citizenrole in citizenroles|slice:":10" %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}</a></li>
+                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}({{ citizenrole.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
             </ul>
@@ -68,11 +68,11 @@
             <ul>
               {% if organisationtype_more %}
                 {% for orgtype in orgtypes %}
-                <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}}</a></li>
+                <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
                 {% endfor %}
               {% else %}
                 {% for orgtype in orgtypes|slice:":10" %}
-                <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}}</a></li>
+                <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
             </ul>
@@ -89,11 +89,11 @@
             <ul>
               {% if sector_more %}
                 {% for sector in sectors %}
-                <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }}</a></li>
+                <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
                 {% endfor %}
               {% else %}
                 {% for sector in sectors|slice:":10" %}
-                <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }}</a></li>
+                <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
             </ul>
@@ -110,11 +110,11 @@
             <ul>
               {% if collectedinfo_more %}
                 {% for info in collectedinfo %}
-                <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }}</a></li>
+                <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
                 {% endfor %}
               {% else %}
                 {% for info in collectedinfo|slice:":10" %}
-                <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }}</a></li>
+                <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
             </ul>
