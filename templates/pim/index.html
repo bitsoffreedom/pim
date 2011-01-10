@@ -45,7 +45,7 @@
           {% if not selected_role %}
             <h4>afhankelijk van je situatie</h4>
             <ul>
-		<li><a href="">onbepaald ({{ citizenroles_empty }})</a></li>
+		<li>onbepaald ({{ citizenroles_empty }})</li>
               {% if citizenrole_more %}
                 {% for citizenrole in citizenroles %}
                 <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
@@ -67,7 +67,7 @@
           {% if not selected_orgtype %}
             <h4>op type</h4>
             <ul>
-		<li><a href="">onbepaald ({{ orgtypes_empty }})</a></li>
+		<li>onbepaald ({{ orgtypes_empty }})</li>
               {% if organisationtype_more %}
                 {% for orgtype in orgtypes %}
                 <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
@@ -89,7 +89,7 @@
           {% if not selected_sector %}
             <h4>op sector</h4>
             <ul>
-		<li><a href="">onbepaald ({{ sectors_empty }})</a></li>
+		<li>onbepaald ({{ sectors_empty }})</li>
               {% if sector_more %}
                 {% for sector in sectors %}
                 <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
@@ -111,7 +111,7 @@
           {% if not selected_collectedinfo %}
             <h4>op wat ze mogelijk van je weten</h4>
             <ul>
-		<li><a href="">onbepaald ({{ collectedinfo_empty }})</a></li>
+		<li>onbepaald ({{ collectedinfo_empty }})</li>
               {% if collectedinfo_more %}
                 {% for info in collectedinfo %}
                 <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
