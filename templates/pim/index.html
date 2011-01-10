@@ -45,7 +45,6 @@
           {% if not selected_role %}
             <h4>afhankelijk van je situatie</h4>
             <ul>
-		<li>onbepaald ({{ citizenroles_empty }})</li>
               {% if citizenrole_more %}
                 {% for citizenrole in citizenroles %}
                 <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
@@ -55,6 +54,7 @@
                 <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
+		<li>onbepaald ({{ citizenroles_empty }})</li>
             </ul>
             {% if not citizenrole_more and citizenroles|length > 10 %}
             <a href="{% url pimbase.views.morecitizenroles %}">Meer</a>
@@ -67,7 +67,6 @@
           {% if not selected_orgtype %}
             <h4>op type</h4>
             <ul>
-		<li>onbepaald ({{ orgtypes_empty }})</li>
               {% if organisationtype_more %}
                 {% for orgtype in orgtypes %}
                 <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
@@ -77,6 +76,7 @@
                 <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
+		<li>onbepaald ({{ orgtypes_empty }})</li>
             </ul>
             {% if not organisationtype_more and orgtypes|length > 10 %}
             <a href="{% url pimbase.views.moreorganisationtypes %}">Meer</a>
@@ -89,7 +89,6 @@
           {% if not selected_sector %}
             <h4>op sector</h4>
             <ul>
-		<li>onbepaald ({{ sectors_empty }})</li>
               {% if sector_more %}
                 {% for sector in sectors %}
                 <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
@@ -99,6 +98,7 @@
                 <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
+		<li>onbepaald ({{ sectors_empty }})</li>
             </ul>
             {% if not sector_more and sectors|length > 10 %}
             <a href="{% url pimbase.views.moresectors %}">Meer</a>
@@ -111,7 +111,6 @@
           {% if not selected_collectedinfo %}
             <h4>op wat ze mogelijk van je weten</h4>
             <ul>
-		<li>onbepaald ({{ collectedinfo_empty }})</li>
               {% if collectedinfo_more %}
                 {% for info in collectedinfo %}
                 <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
@@ -121,6 +120,7 @@
                 <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
+		<li>onbepaald ({{ collectedinfo_empty }})</li>
             </ul>
             {% if not collectedinfo_more and collectedinfo|length > 10 %}
             <a href="{% url pimbase.views.morecollectedinfo %}">Meer</a>
