@@ -213,7 +213,7 @@ button {  width: auto; overflow: visible; }
 .clearfix { zoom: 1; }
 
  /* Primary Styles
-    Author: Rein Groot
+    Author: Rein Groot, Coen Warmer
  */
 body, html {
   height: 100%;
@@ -225,10 +225,11 @@ body {
   background: url("/static/global/bg.jpg") no-repeat scroll center 0 #a3cd81;
 }
 
+/* BASIC TYPOGRAPHY */
 h1 {
   color: #000000;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
-  font-size: 167%;
+  font-size: 36px;
   line-height: 100%;
   margin: 15px 20px;
   width: 350px;
@@ -240,6 +241,7 @@ h2, h2 a {
   font-size: 21px;
   margin-bottom: 20px;
 }
+
 #address-form h2 {
   border-top: 2px dotted #C0C0C0;
   margin-bottom: 25px;
@@ -274,6 +276,7 @@ h5 {
   float: left;
 }
 
+/* HEADER */
 #pim-logo {
   margin-top: 65px;
   position: relative;
@@ -284,6 +287,8 @@ h5 {
   top: 65px;
 }
 
+/* BASIC LAYOUT */
+
 #content {
   margin: 0 auto;
   min-height: 100%;
@@ -291,6 +296,7 @@ h5 {
   width: 960px;
 }
 
+/* NAVIGATION */
 #main-nav {
   color: #FFFFFF;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
@@ -334,6 +340,31 @@ h5 {
   margin-bottom: 15px;
 }
 
+/* FRONTPAGE */
+.triple{
+  padding-top: 10px;
+}
+
+.triple p{
+  width: 500px;
+  line-height: 18px;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.triple h2{
+padding-left: 20px;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+
+.intro_screenshot{
+  position: absolute;
+  top: 240px;
+  left: 600px;
+}
+
+/* WIZARD */
 #wizard {
   background: none repeat scroll 0 0 #FFFFFF;
   float: left;
@@ -404,15 +435,18 @@ h5 {
   padding-right: 20px;
   width: 261px;
 }
+
 .double.column {
   width: 590px;
 }
+
 .triple.column {
   width: 920px;
 }
 
 #filters {
 }
+
 #active-filters {
   border: 1px solid #58A618;
   margin-bottom: 20px;
@@ -425,6 +459,7 @@ h5 {
   font-size: 85%;
   line-height: 138.5%
 }
+
 #active-filters a, #selected-hamsters a {
   background: url("/static/global/remove-filter.gif") no-repeat scroll right center transparent;
   color: #000000;
@@ -684,6 +719,8 @@ button#next-step {
   background-color: #000000;
   background-image: url("/static/global/download-single_hover.gif");
 }
+
+/* FOOTER */
 #footer {
   bottom: 105px;
   color: #FFFFFF;
