@@ -47,11 +47,11 @@
             <ul>
               {% if citizenrole_more %}
                 {% for citizenrole in citizenroles %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}({{ citizenrole.organisation_set.count }})</a></li>
+                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
                 {% endfor %}
               {% else %}
                 {% for citizenrole in citizenroles|slice:":10" %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }}({{ citizenrole.organisation_set.count }})</a></li>
+                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
                 {% endfor %}
               {% endif %}
             </ul>
