@@ -369,6 +369,12 @@ h5 {
   margin-bottom: 170px;
 }
 
+/* NON WIZARD PAGES */
+#page{
+  background: url("/static/global/page_bg.jpg") no-repeat;
+  padding: 20px;
+}
+
 /* WIZARD */
 #wizard {
   background: none repeat scroll 0 0 #FFFFFF;
