@@ -6,6 +6,7 @@ from pimbase.models import *
 from pimbase.forms import UserForm
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
+from django.db.models import Count
 import datetime
 
 def search(request):
@@ -93,11 +94,15 @@ def index(request, param = None):
     return render_to_response('pim/index.html',
         {
         'sectors': sectors,
+        'sectors_empty': Organisation.objects.annotate(empty = Count('sector')).filter(empty = 0).count(),
         'citizenroles': citizenroles,
+        'citizenroles_empty': Organisation.objects.annotate(empty = Count('citizenrole')).filter(empty = 0).count(),
         'org_count': org_count,
         'organisations': org,
         'orgtypes': orgtypes,
+        'orgtypes_empty': Organisation.objects.annotate(empty = Count('organisationtype')).filter(empty = 0).count(),
         'collectedinfo': collectedinfo,
+        'collectedinfo_empty': Organisation.objects.annotate(empty = Count('collectedinformation')).filter(empty = 0).count(),
         'selected_collectedinfo': selected_collectedinfo,
         'selected_orgtype': selected_orgtype,
         'selected_sector': selected_sector,
