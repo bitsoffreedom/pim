@@ -222,7 +222,7 @@ body, html {
 }
 
 body {
-  background: url("/static/global/bg.jpg") no-repeat scroll center 0 #a3cd81;
+  background: url("/static/global/bg.jpg") no-repeat scroll center 0 #a0cb7b;
 }
 
 /* BASIC TYPOGRAPHY */
@@ -293,7 +293,7 @@ h5 {
   margin: 0 auto;
   min-height: 100%;
   position: relative;
-  width: 960px;
+  width: 940px;
 }
 
 /* NAVIGATION */
@@ -382,7 +382,7 @@ h5 {
   margin-bottom: 155px;
   margin-right: 20px;
   min-height: 100%;
-  width: 960px;
+  width: 940px;
   -moz-box-shadow: 1px 1px 1px #000;
   -webkit-box-shadow: 1px 1px 1px #000;
 }
