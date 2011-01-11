@@ -339,18 +339,20 @@ h5 {
 }
 
 /* FRONTPAGE */
-.triple{
-  padding-top: 10px;
+.frontpage{
+  padding-top: 10px !important;
+  margin-top: 5px !important;
+  padding-bottom: 50px !important;
 }
 
-.triple p{
+.frontpage p{
   width: 500px;
   line-height: 18px;
   padding-left: 20px;
   margin-bottom: 15px;
 }
 
-.triple h2{
+.frontpage h2{
   padding-left: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -362,9 +364,9 @@ h5 {
   left: 600px;
 }
 
-.triple #next-step{
+.frontpage #next-step{
   position: absolute;
-  margin-bottom: 170px;
+  margin-bottom: 58px;
 }
 
 /* NON WIZARD PAGES */
