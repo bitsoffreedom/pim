@@ -345,11 +345,8 @@ h5 {
   padding-bottom: 50px !important;
 }
 
-.frontpage p{
+.frontpage h1{
   width: 500px;
-  line-height: 18px;
-  padding-left: 20px;
-  margin-bottom: 15px;
 }
 
 .frontpage h2{
@@ -357,6 +354,14 @@ h5 {
   margin-top: 20px;
   margin-bottom: 10px;
 }
+
+.frontpage p{
+  width: 500px;
+  line-height: 18px;
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
 
 .intro_screenshot{
   position: absolute;
