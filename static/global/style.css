@@ -1,5 +1,5 @@
 /* 
-  HTML5 ✰ Boilerplate 
+  HTML5 â° Boilerplate 
   
   style.css contains a reset, font normalization and some base styles.
   
@@ -243,10 +243,8 @@ h2, h2 a {
 }
 
 #address-form h2 {
-  border-top: 2px dotted #C0C0C0;
-  margin-bottom: 25px;
-  margin-top: 25px;
-  padding-top: 20px;
+  font-size:  25px;
+  color: #000 !important;
 }
 
 h3 {
@@ -293,7 +291,7 @@ h5 {
   margin: 0 auto;
   min-height: 100%;
   position: relative;
-  width: 960px;
+  width: 940px;
 }
 
 /* NAVIGATION */
@@ -341,22 +339,29 @@ h5 {
 }
 
 /* FRONTPAGE */
-.triple{
-  padding-top: 10px;
+.frontpage{
+  padding-top: 10px !important;
+  margin-top: 5px !important;
+  padding-bottom: 50px !important;
 }
 
-.triple p{
+.frontpage h1{
+  width: 500px;
+}
+
+.frontpage h2{
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.frontpage p{
   width: 500px;
   line-height: 18px;
   padding-left: 20px;
   margin-bottom: 15px;
 }
 
-.triple h2{
-  padding-left: 20px;
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
 
 .intro_screenshot{
   position: absolute;
@@ -364,22 +369,87 @@ h5 {
   left: 600px;
 }
 
-.triple #next-step{
+.frontpage #next-step{
   position: absolute;
-  margin-bottom: 170px;
+  margin-bottom: 58px;
 }
 
 /* NON WIZARD PAGES */
 #page{
   background: url("/static/global/page_bg.jpg") no-repeat;
-  padding: 20px;
+  margin-bottom: 55px;
+  margin-top: -15px;
+  padding: 0;
+}
+
+#page p{
+  line-height: 18px;
+}
+
+#page_sidebar{
+  width: 310px;
+  float: right;
+  border-left: dotted 2px #72C445;
+  height: 610px;
+}
+
+.page_sidebar_item{
+  border-bottom: dotted 2px #72C445;
+  padding: 17px 15px 24px 21px;
+}
+
+.page_sidebar_item h3{
+  width: 245px;
+  text-transform: uppercase;
+  font-size: 19px;
+  line-height: 22px;
+  margin-bottom: 13px;
+}
+
+.page_sidebar_item h3 a{
+  color: #000;
+  text-decoration: none;
+}
+
+#page_header h1{
+  margin: 25px 0 0 38px;
+  padding: 25px 0;
+  width: 460px;
+}
+
+#page_header{
+  border-bottom: dotted 2px #72C445;
+}
+
+.page_item{
+  padding: 25px 0 25px 38px;
+  border-bottom: dotted 2px #72C445;
+  width: 572px;
+  overflow: hidden;
+}
+
+.page_item h2{
+  color: #000 !important;
+}
+
+.page_item img{
+  width: 104px;
+  height: 116px;
+  border: solid 1px;
+  display: block;
+  float: left;
+  margin-right: 20px;
+}
+
+.page_item.last{
+  border-bottom: 0;
 }
 
 /* WIZARD */
 #wizard {
-  background: none repeat scroll 0 0 #FFFFFF;
+  background: url("http://www.deoptimist.net/frame_bg.png") repeat-x 0 bottom #FFFFFF;
   float: left;
-  margin-bottom: 155px;
+  margin-bottom: 55px;
   margin-right: 20px;
   min-height: 100%;
   width: 960px;
@@ -428,7 +498,7 @@ h5 {
 
 #column-wrapper {
   background: url("/static/global/bg-wizard.gif") repeat-y scroll 0 0 transparent;
-  margin: 20px 0 15px 0;
+  margin: 20px 0 75px 0;
   min-height: 400px;
   position: relative;
 }
@@ -441,7 +511,6 @@ h5 {
 
 .column {
   float: left;
-  margin-bottom: 60px;
   padding-left: 20px;
   padding-right: 20px;
   width: 261px;
@@ -595,6 +664,7 @@ a.step-button span,
   background: url("/static/global/next-step.gif") no-repeat scroll 156px center #000000;
   right: 20px;
   padding: 3px 42px 7px 10px;
+  bottom: -38px
 }
 
 button#next-step {
@@ -613,6 +683,7 @@ button#next-step {
   background: url("/static/global/back-step.gif") no-repeat scroll 10px center #000000;
   left: 20px;
   padding: 4px 12px 7px 47px;
+  bottom: -38px
 }
 #back-step:hover {
   background-image: url("/static/global/back-step_hover.gif");
@@ -664,10 +735,9 @@ button#next-step {
 }
 .step-3 #wizard p {
   margin: 0 0 15px 20px;
-  width: 430px;
+  width: 500px;
 }
 .step-3 #wizard ul {
-  border-top: 2px dotted #C0C0C0;
   line-height: 153.9%;
   list-style: none outside none;
   margin: 0;
@@ -686,7 +756,7 @@ button#next-step {
 }
 .step-3 #wizard #download-all a,
   .step-3 #wizard #download-single a {
-  background: url("/static/global/download-single.gif") no-repeat scroll 115px center #000;
+  background: url("/static/global/download-single_hover.gif") no-repeat scroll 115px center #000;
   border: medium none;
   clear: right;
   color: #FFFFFF;
@@ -718,8 +788,8 @@ button#next-step {
 		
 .step-3 #wizard #download-single li {
   height: 30px;
-  margin-bottom: 20px
-  width: 600px;
+  margin-bottom: 20px;
+  width: 500px;
 }
 .step-3 #wizard #download-single a {
   font-size: 138.5%;
@@ -727,18 +797,20 @@ button#next-step {
   width: 85px;
 }
 .step-3 #wizard #download-single a:hover {
-  background-color: #000000;
-  background-image: url("/static/global/download-single_hover.gif");
+  background-color: #8EC363 !important;
+  background-image: url("/static/global/download-single.gif");
 }
 
 /* FOOTER */
 #footer {
-  bottom: 105px;
   color: #FFFFFF;
   font-size: 85%;
-  left: 0;
-  position: absolute;
+  width: 940px;
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 10px;
 }
+
 #footer a {
   color: #fff;
   text-decoration: none;
@@ -747,7 +819,6 @@ button#next-step {
 #bottom {
   background: none repeat scroll 0 0 #000000;
   height: 125px;
-  margin-top: -125px;
   width: 100%;
 }
 
@@ -802,9 +873,11 @@ button#next-step {
 #sidetext ul {
   list-style-position: inside;
 }
+
 .datadetective {
   padding: 20px; 
 }
+
 .datadetective p {
   padding: 5px;
 }
