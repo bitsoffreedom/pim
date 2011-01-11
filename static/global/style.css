@@ -243,10 +243,8 @@ h2, h2 a {
 }
 
 #address-form h2 {
-  border-top: 2px dotted #C0C0C0;
-  margin-bottom: 25px;
-  margin-top: 25px;
-  padding-top: 20px;
+  font-size:  25px;
+  color: #000 !important;
 }
 
 h3 {
@@ -442,7 +440,7 @@ h5 {
 
 /* WIZARD */
 #wizard {
-  background: none repeat scroll 0 0 #FFFFFF;
+  background: url("http://www.deoptimist.net/frame_bg.png") repeat-x 0 bottom #FFFFFF;
   float: left;
   margin-bottom: 55px;
   margin-right: 20px;
@@ -493,7 +491,7 @@ h5 {
 
 #column-wrapper {
   background: url("/static/global/bg-wizard.gif") repeat-y scroll 0 0 transparent;
-  margin: 20px 0 15px 0;
+  margin: 20px 0 75px 0;
   min-height: 400px;
   position: relative;
 }
@@ -506,7 +504,6 @@ h5 {
 
 .column {
   float: left;
-  margin-bottom: 60px;
   padding-left: 20px;
   padding-right: 20px;
   width: 261px;
@@ -660,6 +657,7 @@ a.step-button span,
   background: url("/static/global/next-step.gif") no-repeat scroll 156px center #000000;
   right: 20px;
   padding: 3px 42px 7px 10px;
+  bottom: -38px
 }
 
 button#next-step {
@@ -678,6 +676,7 @@ button#next-step {
   background: url("/static/global/back-step.gif") no-repeat scroll 10px center #000000;
   left: 20px;
   padding: 4px 12px 7px 47px;
+  bottom: -38px
 }
 #back-step:hover {
   background-image: url("/static/global/back-step_hover.gif");
@@ -729,10 +728,9 @@ button#next-step {
 }
 .step-3 #wizard p {
   margin: 0 0 15px 20px;
-  width: 430px;
+  width: 500px;
 }
 .step-3 #wizard ul {
-  border-top: 2px dotted #C0C0C0;
   line-height: 153.9%;
   list-style: none outside none;
   margin: 0;
@@ -751,7 +749,7 @@ button#next-step {
 }
 .step-3 #wizard #download-all a,
   .step-3 #wizard #download-single a {
-  background: url("/static/global/download-single.gif") no-repeat scroll 115px center #000;
+  background: url("/static/global/download-single_hover.gif") no-repeat scroll 115px center #000;
   border: medium none;
   clear: right;
   color: #FFFFFF;
@@ -783,8 +781,8 @@ button#next-step {
 		
 .step-3 #wizard #download-single li {
   height: 30px;
-  margin-bottom: 20px
-  width: 600px;
+  margin-bottom: 20px;
+  width: 500px;
 }
 .step-3 #wizard #download-single a {
   font-size: 138.5%;
@@ -792,8 +790,8 @@ button#next-step {
   width: 85px;
 }
 .step-3 #wizard #download-single a:hover {
-  background-color: #000000;
-  background-image: url("/static/global/download-single_hover.gif");
+  background-color: #8EC363 !important;
+  background-image: url("/static/global/download-single.gif");
 }
 
 /* FOOTER */
