@@ -587,6 +587,10 @@ text-decoration: none;
   line-height: 138.5%
 }
 
+.column a{
+  font-weight: normal;	
+}
+
 #active-filters a, #selected-hamsters a {
   background: url("/static/global/remove-filter.gif") no-repeat scroll right center transparent;
   color: #000000;
