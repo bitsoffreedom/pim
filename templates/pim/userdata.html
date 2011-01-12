@@ -13,7 +13,7 @@
         <form action="{% url pimbase.views.userdata %}" method="post">
           {% csrf_token %}
 					<div id="address-form" class="double column">
-						<h1>Algemene gegevens</h1>
+						<h2>Algemene gegevens</h2>
               {{ form.as_p }}
           </div>
 				

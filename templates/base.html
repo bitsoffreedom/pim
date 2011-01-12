@@ -17,9 +17,18 @@
 		<!--<base href="http://82.94.216.83/dataview/" />-->
 	</head>
 <body "{% block bodyparam %}{% endblock %}">
+        <div id="top-nav-container">
+                <div id="top-nav"><a href="/disclaimer/">Disclaimer</a> | <a href="/faq/">FAQ</a></div>
+        </div>
 	<div id="content" class="clearfix">
 		<a href="/"><img src="/static/global/pim_logo.png" alt="PIM logo" id="pim-logo"/></a>
 		<a href="http://www.bof.nl"><img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/></a>
+                <div id="search">
+                         <form id="searchform" action="" method="get" role="search">
+                                    <input id="s" type="text" name="s" value="" />
+                                    <input id="searchsubmit" type="submit" value="Zoek" />
+                         </form>
+                </div>
 
 		
 		<ul id="main-nav" class="flat-list">
@@ -32,15 +41,16 @@
       {% endfor %}
 		</ul>
 		
-		<div id="sub-nav"><a href="/disclaimer/">Disclaimer</a> | <a href="/faq/">FAQ</a></div>
         {% block content %}
         {% endblock %}
-			<div id="footer"><a href="http://www.bof.nl">Bits of Freedom 2010</a> | <a href="mailto:info@bitsoffreedom.nl">info@bitsoffreedom.nl</a> | <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/nl/">Creative Commons</a></div>
+			
 		</div>
 	</div>
 	
 	<div id="bottom">
-		
+		<div id="footer">
+				<a href="http://www.bof.nl">Bits of Freedom 2010</a> | <a href="mailto:info@bitsoffreedom.nl">info@bitsoffreedom.nl</a> | <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/nl/">Creative Commons</a>
+		</div>
 	</div>
 </body>
 </html>

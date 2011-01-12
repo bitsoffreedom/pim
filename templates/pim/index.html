@@ -157,7 +157,6 @@
               <span><a href="{% url pimbase.views.index i %}">{{ i }}</a></span>
               {% endif %}
             {% endfor %}
-			{{ org_count }} Organisaties
 
             {% if organisations.has_next %}
             <a href="{% url pimbase.views.index organisations.next_page_number %}">Volgende</a>
