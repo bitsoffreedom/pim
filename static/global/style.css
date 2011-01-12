@@ -109,7 +109,7 @@ html { overflow-y: scroll; }
 /* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
 a:hover, a:active { outline: none; }
 
-a, a:active, a:visited { color: #607890; }
+a, a:active, a:visited { font-weight: bold; color: #58A618; }
 a:hover { color: #036; }
 
 ul, ol { margin-left: 1.8em; }
@@ -275,6 +275,22 @@ h5 {
 }
 
 /* HEADER */
+#top-nav-container{
+background-color: #000000;
+}
+
+#top-nav{
+margin: 0 auto;
+width: 940px;
+text-align: right;
+padding: 5px 0px;
+}
+
+#top-nav a{
+color: #fff;
+text-decoration: none;
+}
+
 #pim-logo {
   margin-top: 65px;
   position: relative;
@@ -358,7 +374,7 @@ h5 {
 .frontpage p{
   width: 500px;
   line-height: 18px;
-  padding-left: 20px;
+  padding-left: 40px;
   margin-bottom: 15px;
 }
 
@@ -396,6 +412,7 @@ h5 {
 .page_sidebar_item{
   border-bottom: dotted 2px #72C445;
   padding: 17px 15px 24px 21px;
+  margin-left: 10px;
 }
 
 .page_sidebar_item h3{
@@ -424,7 +441,7 @@ h5 {
 .page_item{
   padding: 25px 0 25px 38px;
   border-bottom: dotted 2px #72C445;
-  width: 572px;
+  width: 580px;
   overflow: hidden;
 }
 
@@ -497,7 +514,7 @@ h5 {
 }
 
 #column-wrapper {
-  background: url("/static/global/bg-wizard.gif") repeat-y scroll 0 0 transparent;
+  background: url("/static/global/bg-wizard.gif") repeat-y scroll 10px 0 transparent;
   margin: 20px 0 75px 0;
   min-height: 400px;
   position: relative;
@@ -525,6 +542,7 @@ h5 {
 }
 
 #filters {
+margin-left: 10px;
 }
 
 #active-filters {
@@ -566,7 +584,7 @@ h5 {
 #filters > ul {
   color: #000000;
   list-style: none outside none;
-  margin-left: 0;;
+  margin-left: 10px;
 }
 #filters > ul a {
   color: #000000;
