@@ -22,10 +22,30 @@ from BeautifulSoup import BeautifulSoup
 import urllib2
 import json
 import sys
+import pickle
 
 BASE_URL = "http://www.cbpweb.nl/asp/"
 SEARCH_FORM = BASE_URL + "ORSearch.asp"
 
+SHARED_STACK = "stack.pickle"
+CHARS = " !\"'(9876543210zyxwvutsrqponmlkjihgfedcba"
+
+def get_item():
+	try:
+		items = pickle.load(open(SHARED_STACK))
+		i = items.pop()
+		pickle.dump(items, open(SHARED_STACK, "w"))
+		return i
+	except:
+		return ""
+
+def add_items(items):
+	try:	
+		i = pickle.load(open(SHARED_STACK))
+		i += items
+	except:
+		i = []
+	pickle.dump(i, open(SHARED_STACK, "w"))
 
 def clean(s):
 	return strip_tags(str(s)).strip()
@@ -51,6 +71,27 @@ def list_postcode(pc=""):
 		br[name[0]] = pc
 	# Mark the "search by postcode" radio button
 	br["level0"] = ["3"]
+	# For now, just return the raw page with results
+	resp = br.submit().read()
+	if resp.find("Er zijn meer dan 50 meldingen gevonden.") > -1:
+		return False
+	elif resp.find("Er zijn geen meldingen gevonden") > -1:
+		return None
+	return resp
+
+def list_name(name=""):
+	if len(name) < 3:
+		return False # Should give at least 3 digits
+	# Start a new browseer
+	br = mechanize.Browser()
+	br.open(SEARCH_FORM)
+	# Select the right form
+	br.select_form("searchform")
+	# Because the page is obfuscated, just fill in all the fields.
+	for n in br.form._pairs():
+		br[n[0]] = "%s%%" % (name)
+	# Mark the "search by postcode" radio button
+	br["level0"] = ["1"]
 	# For now, just return the raw page with results
 	resp = br.submit().read()
 	if resp.find("Er zijn meer dan 50 meldingen gevonden.") > -1:
@@ -188,25 +229,20 @@ def get_detailed_info(url):
 
 if __name__ == "__main__":
 	companies = []
-	postcodes = [sys.argv[1],]
-	#postcodes = ["%02d" % (i) for i in range(100)]
-	while postcodes:
-		pc = postcodes.pop()
-		print "POSTCODE:", pc
-		page = list_postcode(pc)
-		if page == None: continue
-		if not page:
-			postcodes += [pc+"%d" % (i) for i in range(10)]
-			continue
-		comp = list_companies_from_page(page)
-		for c in comp:
-			#pprint.pprint(get_company_info(c))
-			companies.append(get_company_info(c))
-	print "DUMPING DATA"
-	f = open("data/%s.json" % (sys.argv[1]), "wb")
+	name  = get_item()
+	print "Trying \"%s\"" % (name)
+	page = list_name(name)
+	if page == None: sys.exit()
+	if not page:
+		add_items([name+"%s" % (c) for c in CHARS])
+		sys.exit()
+	comp = list_companies_from_page(page)
+	for c in comp:
+		companies.append(get_company_info(c))
+	print "Dumping data/%s.json" % (name)
+	f = open("data/%s.json" % (name), "wb")
 	json.dump(companies, f, indent=2)
 	f.close()
-	print "DONE"
 
 		
 
