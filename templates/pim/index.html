@@ -131,9 +131,11 @@
 					<h2>Organisaties</h2>
 					
 					<ol>
-            {% for org in organisations.object_list %}
+					{% for org in organisations.object_list %}
+						{% if org not in selected_companies %}
 						<li><a href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:35 }}</a></li>
-            {% endfor %}
+						{% endif %}
+					{% endfor %}
 					</ol>
           <div>
             {% if organisations.has_previous %}
