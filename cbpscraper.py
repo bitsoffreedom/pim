@@ -33,7 +33,7 @@ CHARS = " !\"'(9876543210zyxwvutsrqponmlkjihgfedcba"
 def get_item():
 	try:
 		items = pickle.load(open(SHARED_STACK))
-		i = items.pop()
+		i = items["todo"].pop()
 		pickle.dump(items, open(SHARED_STACK, "w"))
 		return i
 	except:
@@ -42,9 +42,11 @@ def get_item():
 def add_items(items):
 	try:	
 		i = pickle.load(open(SHARED_STACK))
-		i += items
+		for item in items:
+			if item not in i["done"]:
+				i["todo"].add(item)
 	except:
-		i = []
+		i = {"todo": set(["",]), "done": set()}
 	pickle.dump(i, open(SHARED_STACK, "w"))
 
 def clean(s):
