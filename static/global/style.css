@@ -664,14 +664,21 @@ a.info-nav:hover {
   list-style: none outside none;
   margin-left: 0;
 }
-#result-list ol a {
+#result-list ol div.menuitem {
   background: url("/static/global/select-company.gif") no-repeat scroll right center transparent;
+}
+
+#result-list ol a.menuitem {
   color: #6E6E6E;
-  display: block;
   text-decoration: none;
 }
 
-#result-list ol a:hover {
+#result-list ol a.info {
+  color: #000;
+  text-decoration: none;
+}
+
+#result-list ol div.menuitem:hover {
   color: #B6B6B6;
 }
 
