@@ -3,7 +3,7 @@
 {% block content %}
 
 	<div id="page">
-		<h1>Hier moet de titel van een pagina komen (graag dynamisch maken)</h1>
+		<h1>{{ page_current.title }}</h1>
       {% autoescape off %}
         {{ page_current.content }}
       {% endautoescape %}
