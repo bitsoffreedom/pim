@@ -9,6 +9,46 @@ from django.http import HttpResponse
 from django.db.models import Count
 import datetime
 
+def textsearch(request):
+    # initialize the session
+    request.session.setdefault('companies', [])
+
+    # URL processing
+    page_id = 1
+    if 'p' in request.GET.keys():
+        try:
+            page_id = int(request.GET.get('p', ''))
+        except (ValueError, TypeError):
+            return HttpResponseServerError("Invalid parameter")
+    query = request.GET.get('q', '')
+
+    org_list = Organisation.objects.filter(name__icontains = query)
+
+    selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
+
+    # Pagination
+    paginator = Paginator(org_list, 30)
+    try:
+        org = paginator.page(page_id)
+    except (EmptyPage, InvalidPage):
+        return HttpResponseServerError("Page doesn't exist")
+
+    # Based on the Yahoo search pagination pattern:
+    # http://developer.yahoo.com/ypatterns/navigation/pagination/search.html
+    # XXX: make the numbers less mystical.
+    if org.number > 4:
+        search_range = range(org.number - 3, min(3 + org.number, org.paginator.num_pages))
+    else:
+        search_range = range(1, min(7, org.paginator.num_pages + 1))
+
+    context = {
+        'query': query,
+        'organisations': org,
+        'selected_companies': selected_companies,
+        'search_range': search_range
+    }
+    return render_to_response('pim/textsearch.html', context)
+
 def search(request):
     """ Search for specific organisationtype, sector or role. """
     
@@ -28,7 +68,7 @@ def search(request):
 
     return org_list
 
-def index(request, param = None):
+def index(request):
     # initialize the session
     request.session.setdefault('role', None)
     request.session.setdefault('companies', [])
@@ -42,9 +82,9 @@ def index(request, param = None):
 
     # URL processing
     page_id = 1
-    if param != None:
+    if 'p' in request.GET.keys():
         try:
-            page_id = int(param)
+            page_id = int(request.GET.get('p', ''))
         except (ValueError, TypeError):
             return HttpResponseServerError("Invalid parameter")
 
@@ -266,13 +306,22 @@ def delsector(request, param):
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-def cleancompanylist(request):
+def cleancompanylist2(request):
+    return cleancompanylist(request, refer = 'pimbase.views.textsearch')
+
+def cleancompanylist(request, refer = None):
     request.session['companies'] = []
     request.session.modified = True
 
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
+    if (refer == None):
+        refer = 'pimbase.views.index'
 
-def addcompany(request, param):
+    return HttpResponseRedirect(reverse(refer))
+
+def addcompany2(request, param):
+    return addcompany(request, param, refer = 'pimbase.views.textsearch')
+
+def addcompany(request, param, refer = None):
     company = request.session.setdefault('companies', [])
     try:
         company_id = int(param)
@@ -285,9 +334,16 @@ def addcompany(request, param):
     if company_id not in request.session['companies']:
         request.session['companies'].append(company_id)
         request.session.modified = True
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-def delcompany(request, param):
+    if (refer == None):
+        refer = 'pimbase.views.index'
+
+    return HttpResponseRedirect(reverse(refer))
+
+def delcompany2(request, param):
+    return delcompany(request, param, refer = 'pimbase.views.textsearch')
+
+def delcompany(request, param, refer = None):
     request.session.setdefault('companies', [])
 
     try:
@@ -298,7 +354,10 @@ def delcompany(request, param):
     request.session['companies'].remove(company_id)
     request.session.modified = True
 
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
+    if (refer == None):
+        refer = 'pimbase.views.index'
+
+    return HttpResponseRedirect(reverse(refer))
 
 def userdata(request):
     request.session.setdefault('companies', [])

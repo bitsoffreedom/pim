@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load filters %}
+{% load pagination %}
+
+{% block content %}
+		<div id="wizard">
+			<ol id="steps" class="flat-list">
+				<li class="selected"><span class="step-count">1</span> Kies welke organisaties je wilt aanschrijven.</li>
+				<li class="progress"><img src="/static/global/progressbar_1.png"</li>
+			</ol>
+			
+			<div id="column-wrapper" class="clearfix">
+				<div id="filters" class="column">
+					<h2>Filter</h2>
+					<form action="" method="GET">
+						<input type="text" name="q" value="{{ query }}" />
+						<input type="submit" value="Zoek" />
+					</form>
+
+				</div>
+				
+				<div id="result-list" class="column">
+					<h2>Organisaties</h2>
+					
+					<ol>
+					{% for org in organisations.object_list %}
+						{% if org not in selected_companies %}
+						<li><div class="menuitem"><a class="info" target="_blank" href="{{ org.website }}">(i) </a><a class="menuitem" href="{% url pimbase.views.addcompany2 org.id %}">{{ org|truncchar:40 }}</a></div></li>
+						{% endif %}
+					{% endfor %}
+					</ol>
+          <div>
+            {% if organisations.has_previous %}
+            <a href="{% paginator_url query organisations.previous_page_number %}">Vorige</a>
+            {% endif %}
+
+
+            {% for i in search_range %}
+              {% if i == organisations.number %}
+              <span style="border: 1px solid #000; padding-right: 2px; padding-left: 2px"><a href="{% url pimbase.views.textsearch  %}">{{ i }}</a></span>
+              {% else %}
+              <span><a href="{% paginator_url query i %}">{{ i }}</a></span>
+              {% endif %}
+            {% endfor %}
+
+            {{ org_count }} Organisaties
+
+            {% if organisations.has_next %}
+            <a href="{% paginator_url query organisations.next_page_number%}">Volgende</a>
+            {% endif %}
+          </div>
+				</div>
+				
+				<div id="selected-hamsters" class="column">
+					<h2><a href="{% url pimbase.views.cleancompanylist2 %}">Mijn verzendlijst</a></h2>
+          {% if selected_companies|length == 0 %}
+          <p>Er staan nog geen organisaties in de verzendlijst</p>
+          {% else %}
+          <ul>
+            {% for c in selected_companies %}
+            <li><a href="{% url pimbase.views.delcompany2 c.id %}">{{ c|truncchar:35 }}</a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+				</div>
+				
+				{% if selected_companies|length > 0 %}
+				<a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button">Volgende</a>
+				{% endif %}
+			</div>
+{% endblock %}
