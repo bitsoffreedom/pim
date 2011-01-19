@@ -36,6 +36,5 @@ urlpatterns = patterns('',
     (r'^gebruikers-gegevens$', 'pimbase.views.userdata'),
     (r'^genereer-brieven$', 'pimbase.views.generate'),
     (r'^generatehtml/(?P<param>\d+)$', 'pimbase.views.generatehtml'),
-    (r'^datadetectives$', 'pimbase.views.datadetectives'),
     (r'^zoeken/$', 'pimbase.views.textsearch'),
 )

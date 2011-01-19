@@ -131,8 +131,7 @@ def index(request):
     else:
         search_range = range(1, min(7, org.paginator.num_pages + 1))
 
-    return render_to_response('pim/index.html',
-        {
+    context = {
         'sectors': sectors,
         'sectors_empty': Organisation.objects.filter(sector = None).count(),
         'citizenroles': citizenroles,
@@ -153,7 +152,9 @@ def index(request):
         'organisationtype_more': request.session['organisationtype_more'],
         'citizenrole_more': request.session['citizenrole_more'],
         'sector_more': request.session['sector_more'],
-        },
+    }
+
+    return render_to_response('pim/index.html', context,
         context_instance=RequestContext(request))
 
 from simplesite.models import Page, Menu
@@ -388,11 +389,12 @@ def userdata(request):
     else:
         form = UserForm(request)
 
-    return render_to_response('pim/userdata.html',
-        {
+    context = {
         'form': form,
         'selected_companies': selected_companies
-        },
+    }
+
+    return render_to_response('pim/userdata.html', context,
         context_instance=RequestContext(request))
 
 def generate(request):
@@ -432,8 +434,7 @@ def generatehtml(request, param):
     except Organisation.DoesNotExist:
         return HttpResponseServerError("Object doesn't exist")
 
-    return render_to_response('pim/generatehtml.html',
-        {
+    context = {
         'organisation': organisation,
         'firstname': request.session['firstname'],
         'lastname': request.session['lastname'],
@@ -442,8 +443,6 @@ def generatehtml(request, param):
         'city': request.session['city'],
         'misc': request.session['misc'],
         'currentdate': datetime.date.today(),
-        })
+    }
 
-def datadetectives(request):
-    return render_to_response('pim/datadetectives.html')
-    
+    return render_to_response('pim/generatehtml.html', context)
