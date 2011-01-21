@@ -9,66 +9,6 @@ from django.http import HttpResponse
 from django.db.models import Count
 import datetime
 
-def search(query, fm):
-    """ Search for specific organisationtype, sector or role. """
-    
-    org_list = Organisation.objects.all()
-
-    for f in fm:
-        if f.is_selected():
-            filter_context = {
-                '%s' % (f.definition.name, ): f.get_selected(),
-            }
-            org_list = org_list.filter(**filter_context)
-
-    if query:
-        org_list = org_list.filter(name__icontains = query)
-
-    return org_list
-
-def index(request):
-    # initialize the session
-    request.session.setdefault('companies', [])
-
-    # URL processing
-    page_id = 1
-    if 'p' in request.GET.keys():
-        try:
-            page_id = int(request.GET.get('p', ''))
-        except (ValueError, TypeError):
-            return HttpResponseServerError("Invalid parameter")
-    query = request.GET.get('q', '')
-
-    selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
-    org_list = search(query, fm.get_filterdata(request))
-    org_count = org_list.count()
-    paginator = Paginator(org_list, 30)
-
-    try:
-        org = paginator.page(page_id)
-    except (EmptyPage, InvalidPage):
-        return HttpResponseServerError("Page doesn't exist")
-
-    # Based on the Yahoo search pagination pattern:
-    # http://developer.yahoo.com/ypatterns/navigation/pagination/search.html
-    # XXX: make the numbers less mystical.
-    if org.number > 4:
-        search_range = range(org.number - 3, min(3 + org.number, org.paginator.num_pages))
-    else:
-        search_range = range(1, min(7, org.paginator.num_pages + 1))
-
-    context = {
-        'query': query,
-        'fm': fm.get_filterdata(request),
-        'org_count': org_count,
-        'organisations': org,
-        'selected_companies': selected_companies,
-        'search_range': search_range,
-    }
-
-    return render_to_response('pim/index.html', context,
-        context_instance=RequestContext(request))
-
 class FilterData:
     def __init__(self, request, definition):
         self.definition = definition
@@ -162,9 +102,69 @@ fm.register(FilterDefinition('organisationtype', OrganisationType, 'op type', 'n
 fm.register(FilterDefinition('sector', Sector, 'op sector', 'name'))
 fm.register(FilterDefinition('collectedinformation', CollectedInformation, 'op wat ze mogelijk van je weten', 'name'))
 
-from simplesite.models import Page, Menu
+def search(query, fm):
+    """ Search for specific organisationtype, sector or role. """
+    
+    org_list = Organisation.objects.all()
+
+    for f in fm:
+        if f.is_selected():
+            filter_context = {
+                '%s' % (f.definition.name, ): f.get_selected(),
+            }
+            org_list = org_list.filter(**filter_context)
+
+    if query:
+        org_list = org_list.filter(name__icontains = query)
+
+    return org_list
+
+def index(request):
+    # initialize the session
+    request.session.setdefault('companies', [])
+
+    # URL processing
+    page_id = 1
+    if 'p' in request.GET.keys():
+        try:
+            page_id = int(request.GET.get('p', ''))
+        except (ValueError, TypeError):
+            return HttpResponseServerError("Invalid parameter")
+    query = request.GET.get('q', '')
+
+    selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
+    org_list = search(query, fm.get_filterdata(request))
+    org_count = org_list.count()
+    paginator = Paginator(org_list, 30)
+
+    try:
+        org = paginator.page(page_id)
+    except (EmptyPage, InvalidPage):
+        return HttpResponseServerError("Page doesn't exist")
+
+    # Based on the Yahoo search pagination pattern:
+    # http://developer.yahoo.com/ypatterns/navigation/pagination/search.html
+    # XXX: make the numbers less mystical.
+    if org.number > 4:
+        search_range = range(org.number - 3, min(3 + org.number, org.paginator.num_pages))
+    else:
+        search_range = range(1, min(7, org.paginator.num_pages + 1))
+
+    context = {
+        'query': query,
+        'fm': fm.get_filterdata(request),
+        'org_count': org_count,
+        'organisations': org,
+        'selected_companies': selected_companies,
+        'search_range': search_range,
+    }
+
+    return render_to_response('pim/index.html', context,
+        context_instance=RequestContext(request))
 
 def start(request):
+    from simplesite.models import Page, Menu
+
     try:
         p = Page.objects.get(title='voorpagina')
     except (Page.DoesNotExist):
@@ -173,22 +173,13 @@ def start(request):
     menu_list = Menu.objects.filter(visible=True)
     return render_to_response('pim/start.html', {'page_current': p, 'menu_list': menu_list})
 
-def cleancompanylist2(request):
-    return cleancompanylist(request, refer = 'pimbase.views.textsearch')
-
-def cleancompanylist(request, refer = None):
+def cleancompanylist(request):
     request.session['companies'] = []
     request.session.modified = True
 
-    if (refer == None):
-        refer = 'pimbase.views.index'
+    return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-    return HttpResponseRedirect(reverse(refer))
-
-def addcompany2(request, param):
-    return addcompany(request, param, refer = 'pimbase.views.textsearch')
-
-def addcompany(request, param, refer = None):
+def addcompany(request, param):
     company = request.session.setdefault('companies', [])
     try:
         company_id = int(param)
@@ -202,15 +193,9 @@ def addcompany(request, param, refer = None):
         request.session['companies'].append(company_id)
         request.session.modified = True
 
-    if (refer == None):
-        refer = 'pimbase.views.index'
+    return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-    return HttpResponseRedirect(reverse(refer))
-
-def delcompany2(request, param):
-    return delcompany(request, param, refer = 'pimbase.views.textsearch')
-
-def delcompany(request, param, refer = None):
+def delcompany(request, param):
     request.session.setdefault('companies', [])
 
     try:
@@ -221,10 +206,7 @@ def delcompany(request, param, refer = None):
     request.session['companies'].remove(company_id)
     request.session.modified = True
 
-    if (refer == None):
-        refer = 'pimbase.views.index'
-
-    return HttpResponseRedirect(reverse(refer))
+    return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def userdata(request):
     request.session.setdefault('companies', [])
