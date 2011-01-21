@@ -1,0 +1,9 @@
+{% if show_status %}
+  <ul>
+    {% for s in selected %}
+        <li><a href="{{ s.url }}">{{ s.name }}</a></li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Nog niets</p>
+{% endif %}

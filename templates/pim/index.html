@@ -14,116 +14,16 @@
 					<h2>Filter</h2>
 					<div id="active-filters">
 						<h3>pim verfijnt op:</h3>
-            {% if selected_sector or selected_orgtype or selected_role or selected_collectedinfo %}
-              <ul>
-                {% if selected_orgtype %}
-                <li><a href="{% url pimbase.views.delorganisationtype 1 %}">{{ selected_orgtype.name }}</a></li>
-                {% endif %}
-                {% if selected_role %}
-                <li><a href="{% url pimbase.views.delcitizenrole 1 %}">{{ selected_role.label }}</a></li>
-                {% endif %}
-                {% if selected_sector %}
-                <li><a href="{% url pimbase.views.delsector 1 %}">{{ selected_sector.name }}</a></li>
-                {% endif %}
-                {% if selected_collectedinfo %}
-                <li><a href="{% url pimbase.views.delcollectedinfo %}">{{ selected_collectedinfo.name }}</a></li>
-                {% endif %}
-              </ul>
-            {% else %}
-              <p>Nog niets</p>
-            {% endif %}
+                        {% show_filter_status fm %}
 					</div>
 					<form action="/zoeken/" method="GET">
 						<input type="text" name="q" />
 						<input type="submit" value="Zoek" />
 					</form>
-          {% if not selected_role %}
-            <h4>afhankelijk van je situatie</h4>
-            <ul>
-              {% if citizenrole_more %}
-                {% for citizenrole in citizenroles %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% else %}
-                {% for citizenrole in citizenroles|slice:":10" %}
-                <li><a href="{% url pimbase.views.setcitizenrole citizenrole.id %}">{{ citizenrole.label }} ({{ citizenrole.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% endif %}
-		<li>onbepaald ({{ citizenroles_empty }})</li>
-            </ul>
-            {% if not citizenrole_more and citizenroles|length > 10 %}
-            <a href="{% url pimbase.views.morecitizenroles %}">Meer</a>
-            {% endif %}
-            {% if citizenrole_more and citizenroles|length > 10 %}
-            <a href="{% url pimbase.views.lesscitizenroles %}">Minder</a>
-            {% endif %}
-          {% endif %}
 
-          {% if not selected_orgtype %}
-            <h4>op type</h4>
-            <ul>
-              {% if organisationtype_more %}
-                {% for orgtype in orgtypes %}
-                <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% else %}
-                {% for orgtype in orgtypes|slice:":10" %}
-                <li><a href="{% url pimbase.views.setorganisationtype orgtype.id %}">{{orgtype.name}} ({{ orgtype.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% endif %}
-		<li>onbepaald ({{ orgtypes_empty }})</li>
-            </ul>
-            {% if not organisationtype_more and orgtypes|length > 10 %}
-            <a href="{% url pimbase.views.moreorganisationtypes %}">Meer</a>
-            {% endif %}
-            {% if organisationtype_more and orgtypes|length > 10 %}
-            <a href="{% url pimbase.views.lessorganisationtypes %}">Minder</a>
-            {% endif %}
-          {% endif %}
-
-          {% if not selected_sector %}
-            <h4>op sector</h4>
-            <ul>
-              {% if sector_more %}
-                {% for sector in sectors %}
-                <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% else %}
-                {% for sector in sectors|slice:":10" %}
-                <li><a href="{% url pimbase.views.setsector sector.id %}">{{ sector }} ({{ sector.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% endif %}
-		<li>onbepaald ({{ sectors_empty }})</li>
-            </ul>
-            {% if not sector_more and sectors|length > 10 %}
-            <a href="{% url pimbase.views.moresectors %}">Meer</a>
-            {% endif %}
-            {% if sector_more and sectors|length > 10 %}
-            <a href="{% url pimbase.views.lesssectors %}">Minder</a>
-            {% endif %}
-          {% endif %}
-
-          {% if not selected_collectedinfo %}
-            <h4>op wat ze mogelijk van je weten</h4>
-            <ul>
-              {% if collectedinfo_more %}
-                {% for info in collectedinfo %}
-                <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% else %}
-                {% for info in collectedinfo|slice:":10" %}
-                <li><a href="{% url pimbase.views.setcollectedinfo info.id %}">{{ info }} ({{ info.organisation_set.count }})</a></li>
-                {% endfor %}
-              {% endif %}
-		<li>onbepaald ({{ collectedinfo_empty }})</li>
-            </ul>
-            {% if not collectedinfo_more and collectedinfo|length > 10 %}
-            <a href="{% url pimbase.views.morecollectedinfo %}">Meer</a>
-            {% endif %}
-            {% if collectedinfo_more and collectedinfo|length > 10 %}
-            <a href="{% url pimbase.views.lesscollectedinfo %}">Minder</a>
-            {% endif %}
-          {% endif %}
+                    {% for f in fm %}
+                        {% show_filter f %}
+                    {% endfor %}
 
 					<!-- XXX: Disabled isn't supported
           <a href="" class="info-nav">Uitgebreid zoeken</a> -->
