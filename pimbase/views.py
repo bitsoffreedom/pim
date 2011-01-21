@@ -75,8 +75,6 @@ def index(request):
         except (ValueError, TypeError):
             return HttpResponseServerError("Invalid parameter")
 
-    sectors = Sector.objects.all()
-
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
     org_list = search(request, fm.get_filterdata(request))
     org_count = org_list.count()
