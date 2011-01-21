@@ -20,10 +20,12 @@
           <a href="/start/">"{{ query }}" in de organisatienaam</a>
         {% endif %}
       </div>
+      {% if not query %}
       <form action="/start/" method="GET">
         <input type="text" name="q" />
         <input type="submit" value="Zoek" />
       </form>
+      {% endif %}
 
       {% for f in fm %}
           {% show_filter f %}
