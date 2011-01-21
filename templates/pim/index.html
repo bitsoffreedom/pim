@@ -15,8 +15,12 @@
       <div id="active-filters">
         <h3>pim verfijnt op:</h3>
         {% show_filter_status fm %}
+        {% if query %}
+          <h3>pim zoekt op:</h3>
+          <a href="/start/">"{{ query }}"</a>
+        {% endif %}
       </div>
-      <form action="/zoeken/" method="GET">
+      <form action="/start/" method="GET">
         <input type="text" name="q" />
         <input type="submit" value="Zoek" />
       </form>
