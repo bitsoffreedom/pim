@@ -1,34 +1,34 @@
-    {% extends "base.html" %}
+{% extends "base.html" %}
 
-    {% block bodyparam %}class="step-2{% endblock %}
+{% block bodyparam %}class="step-2"{% endblock %}
 
-    {% block content %}
-		<div id="wizard">
-			<ol id="steps" class="flat-list">
-				<li class="selected"><span class="step-count">2</span> Vul je gegevens in.</li>
-				<li class="progress"><img src="/static/global/progressbar_2.png"</li>
-			</ol>
-			
-			<div id="column-wrapper" class="clearfix">
-        <form action="{% url pimbase.views.userdata %}" method="post">
-          {% csrf_token %}
-					<div id="address-form" class="double column">
-						<h2>Algemene gegevens</h2>
-              {{ form.as_p }}
-          </div>
-				
-					<div id="selected-hamsters" class="column">
-						<h2>Mijn verzendlijst</h2>
-						<ul>
-            {% for org in selected_companies %}
-							<li>{{ org }}</li>
-            {% endfor %}
-						</ul>
-					</div>
+{% block content %}
+<div id="wizard">
+  <ol id="steps" class="flat-list">
+    <li class="selected"><span class="step-count">2</span> Vul je gegevens in.</li>
+    <li class="progress"><img src="/static/global/progressbar_2.png"</li>
+  </ol>
+  
+  <div id="column-wrapper" class="clearfix">
+    <form action="{% url pimbase.views.userdata %}" method="post">
+      {% csrf_token %}
+      <div id="address-form" class="double column">
+        <h2>Algemene gegevens</h2>
+        {{ form.as_p }}
+      </div>
+    
+      <div id="selected-hamsters" class="column">
+        <h2>Mijn verzendlijst</h2>
+        <ul>
+        {% for org in selected_companies %}
+          <li>{{ org }}</li>
+        {% endfor %}
+        </ul>
+      </div>
 
-					<p><a href="{% url pimbase.views.index %}" id="back-step" class="step-button">Vorige</a></p>
-					<p><button type="submit" id="next-step" class="step-button">Volgende</button></p>
-					
-				</form>
-			</div>
-    {% endblock %}
+      <p><a href="{% url pimbase.views.index %}" id="back-step" class="step-button">Vorige</a></p>
+      <p><button type="submit" id="next-step" class="step-button">Volgende</button></p>
+      
+    </form>
+  </div>
+{% endblock %}

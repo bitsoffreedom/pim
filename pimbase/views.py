@@ -9,72 +9,131 @@ from django.http import HttpResponse
 from django.db.models import Count
 import datetime
 
-def search(request):
+class FilterData:
+    def __init__(self, request, definition):
+        self.definition = definition
+        self.request = request
+    def is_more(self):
+        self.request.session.setdefault('%s_more' % (self.definition.name, ), False)
+        return self.request.session['%s_more' % (self.definition.name, )]
+    def is_selected(self):
+        self.request.session.setdefault('%s' % (self.definition.name, ), None)
+
+        return self.request.session['%s' % (self.definition.name, )] != None 
+    def get_selected(self):
+        self.request.session.setdefault('%s' % (self.definition.name, ), None)
+
+        return self.request.session['%s' % (self.definition.name, )]
+
+class FilterDefinition:
+    def __init__(self, name, model, title, attr):
+        self.name = name
+        self.model = model
+        self.title = title
+        self.attr = attr
+    def show_more(self, request):
+        request.session['%s_more' % (self.name, )] = True
+
+        return HttpResponseRedirect(reverse('pimbase.views.index'))
+    def show_less(self, request):
+        request.session['%s_more' % (self.name, )] = False
+
+        return HttpResponseRedirect(reverse('pimbase.views.index'))
+    def set_filter(self, request, param):
+        try:
+            id = int(param)
+        except (ValueError, TypeError):
+            return HttpResponseServerError("Invalid parameter")
+
+        if not self.model.objects.filter(pk=id):
+            return HttpResponseServerError("Object doesn't exist")
+
+        request.session['%s' % (self.name, )] = id
+
+        return HttpResponseRedirect(reverse('pimbase.views.index'))
+    def unset_filter(self, request):
+        del request.session['%s' % (self.name, )]
+
+        return HttpResponseRedirect(reverse('pimbase.views.index'))
+    def get_urls(self):
+        from django.conf.urls.defaults import patterns, url
+
+        urlpatterns = patterns('',
+            url('show_more_%s' % (self.name, ), self.show_more),
+            url('show_less_%s' % (self.name, ), self.show_less),
+            url('set_%s/(?P<param>\d+)' % (self.name, ), self.set_filter),
+            url('unset_%s' % (self.name, ), self.unset_filter),
+        )
+
+        return urlpatterns
+    @property
+    def urls(self):
+        return self.get_urls()
+
+class FilterManager:
+    def __init__(self):
+        self.registry = []
+    def register(self, filter):
+        self.registry.append(filter)
+    def get_filterdata(self, request):
+        l = []
+        for r in self.registry:
+            l.append(FilterData(request, r))
+
+        return l
+    def get_urls(self):
+        from django.conf.urls.defaults import patterns, url, include
+
+        urlpatterns = patterns('')
+
+        for f in self.registry:
+            # XXX: prolly a better way to do this.
+            urlpatterns += patterns('', url('', include(f.urls)) )
+
+        return urlpatterns
+
+    @property
+    def urls(self):
+        return self.get_urls()
+
+fm = FilterManager()
+fm.register(FilterDefinition('citizenrole', CitizenRole, 'afhankelijk van je situatie', 'label'))
+fm.register(FilterDefinition('organisationtype', OrganisationType, 'op type', 'name'))
+fm.register(FilterDefinition('sector', Sector, 'op sector', 'name'))
+fm.register(FilterDefinition('collectedinformation', CollectedInformation, 'op wat ze mogelijk van je weten', 'name'))
+
+def search(query, fm):
     """ Search for specific organisationtype, sector or role. """
     
     org_list = Organisation.objects.all()
 
-    otype = request.session['organisationtype']
-    if otype:
-        org_list = org_list.filter(organisationtype = otype)
+    for f in fm:
+        if f.is_selected():
+            filter_context = {
+                '%s' % (f.definition.name, ): f.get_selected(),
+            }
+            org_list = org_list.filter(**filter_context)
 
-    sector_id = request.session['sector']
-    if sector_id:
-        org_list = org_list.filter(sector = sector_id)
-
-    role_id = request.session['role']
-    if role_id:
-        org_list = org_list.filter(citizenrole = role_id)
+    if query:
+        org_list = org_list.filter(name__icontains = query)
 
     return org_list
 
-def index(request, param = None):
+def index(request):
     # initialize the session
-    request.session.setdefault('role', None)
     request.session.setdefault('companies', [])
-    request.session.setdefault('sector', None)
-    request.session.setdefault('organisationtype', None)
-    request.session.setdefault('collectedinfo', None)
-    request.session.setdefault('collectedinfo_more', None)
-    request.session.setdefault('organisationtype_more', None)
-    request.session.setdefault('citizenrole_more', None)
-    request.session.setdefault('sector_more', None)
 
     # URL processing
     page_id = 1
-    if param != None:
+    if 'p' in request.GET.keys():
         try:
-            page_id = int(param)
+            page_id = int(request.GET.get('p', ''))
         except (ValueError, TypeError):
             return HttpResponseServerError("Invalid parameter")
-
-    sectors = Sector.objects.all()
-    citizenroles = CitizenRole.objects.all()
-    orgtypes = OrganisationType.objects.all()
-    collectedinfo = CollectedInformation.objects.all()
-
-    selected_orgtype = None
-    if request.session['organisationtype']:
-        selected_orgtype = OrganisationType.objects.get(pk = \
-            request.session['organisationtype'])
-
-    selected_sector = None
-    if request.session['sector']:
-        selected_sector = Sector.objects.get(pk = \
-            request.session['sector'])
-
-    selected_role = None
-    if request.session['role']:
-        selected_role = CitizenRole.objects.get(pk = \
-            request.session['role'])
-
-    selected_collectedinfo = None
-    if request.session['collectedinfo']:
-        selected_collectedinfo = CollectedInformation.objects.get(pk = \
-            request.session['collectedinfo'])
+    query = request.GET.get('q', '')
 
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
-    org_list = search(request)
+    org_list = search(query, fm.get_filterdata(request))
     org_count = org_list.count()
     paginator = Paginator(org_list, 30)
 
@@ -91,34 +150,21 @@ def index(request, param = None):
     else:
         search_range = range(1, min(7, org.paginator.num_pages + 1))
 
-    return render_to_response('pim/index.html',
-        {
-        'sectors': sectors,
-        'sectors_empty': Organisation.objects.filter(sector = None).count(),
-        'citizenroles': citizenroles,
-        'citizenroles_empty': Organisation.objects.annotate(empty = Count('citizenrole')).filter(empty = 0).count(),
+    context = {
+        'query': query,
+        'fm': fm.get_filterdata(request),
         'org_count': org_count,
         'organisations': org,
-        'orgtypes': orgtypes,
-        'orgtypes_empty': Organisation.objects.filter(organisationtype = None).count(),
-        'collectedinfo': collectedinfo,
-        'collectedinfo_empty': Organisation.objects.annotate(empty = Count('collectedinformation')).filter(empty = 0).count(),
-        'selected_collectedinfo': selected_collectedinfo,
-        'selected_orgtype': selected_orgtype,
-        'selected_sector': selected_sector,
-        'selected_role': selected_role,
         'selected_companies': selected_companies,
         'search_range': search_range,
-        'collectedinfo_more': request.session['collectedinfo_more'],
-        'organisationtype_more': request.session['organisationtype_more'],
-        'citizenrole_more': request.session['citizenrole_more'],
-        'sector_more': request.session['sector_more'],
-        },
+    }
+
+    return render_to_response('pim/index.html', context,
         context_instance=RequestContext(request))
 
-from simplesite.models import Page, Menu
-
 def start(request):
+    from simplesite.models import Page, Menu
+
     try:
         p = Page.objects.get(title='voorpagina')
     except (Page.DoesNotExist):
@@ -126,145 +172,6 @@ def start(request):
         
     menu_list = Menu.objects.filter(visible=True)
     return render_to_response('pim/start.html', {'page_current': p, 'menu_list': menu_list})
-
-def morecollectedinfo(request):
-    request.session['collectedinfo_more'] = True;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def lesscollectedinfo(request):
-    request.session['collectedinfo_more'] = False;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def setcollectedinfo(request, param):
-    request.session.setdefault('collectedinfo', [])
-    try:
-        cinfo_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    if not CollectedInformation.objects.filter(pk=cinfo_id):
-        return HttpResponseServerError("Object doesn't exist")
-
-    request.session['collectedinfo'] = cinfo_id;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def delcollectedinfo(request):
-    request.session.setdefault('collectedinfo', [])
-
-    del request.session['collectedinfo']
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def moreorganisationtypes(request):
-    request.session['organisationtype_more'] = True;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def lessorganisationtypes(request):
-    request.session['organisationtype_more'] = False;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def setorganisationtype(request, param):
-    request.session.setdefault('organisationtype', [])
-    try:
-        otype_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    if not OrganisationType.objects.filter(pk=otype_id):
-        return HttpResponseServerError("Object doesn't exist")
-
-    request.session['organisationtype'] = otype_id;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def delorganisationtype(request, param):
-    request.session.setdefault('organisationtype', [])
-
-    try:
-        otype_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    del request.session['organisationtype']
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def morecitizenroles(request):
-    request.session['citizenrole_more'] = True;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def lesscitizenroles(request):
-    request.session['citizenrole_more'] = False;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def setcitizenrole(request, param):
-    request.session.setdefault('role', [])
-    try:
-        role_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    if not CitizenRole.objects.filter(pk=role_id):
-        return HttpResponseServerError("Object doesn't exist")
-
-    request.session['role'] = role_id;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def delcitizenrole(request, param):
-    request.session.setdefault('role', [])
-
-    try:
-        role_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    del request.session['role']
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def moresectors(request):
-    request.session['sector_more'] = True;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def lesssectors(request):
-    request.session['sector_more'] = False;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def setsector(request, param):
-    sectors = request.session.setdefault('sector', [])
-    try:
-        sector_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    if not Sector.objects.filter(pk=sector_id):
-        return HttpResponseServerError("Object doesn't exist")
-
-    request.session['sector'] = sector_id;
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
-
-def delsector(request, param):
-    request.session.setdefault('sector', [])
-
-    try:
-        sector_id = int(param)
-    except (ValueError, TypeError):
-        return HttpResponseServerError("Invalid parameter")
-
-    del request.session['sector']
-
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def cleancompanylist(request):
     request.session['companies'] = []
@@ -285,6 +192,7 @@ def addcompany(request, param):
     if company_id not in request.session['companies']:
         request.session['companies'].append(company_id)
         request.session.modified = True
+
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
 def delcompany(request, param):
@@ -329,11 +237,12 @@ def userdata(request):
     else:
         form = UserForm(request)
 
-    return render_to_response('pim/userdata.html',
-        {
+    context = {
         'form': form,
         'selected_companies': selected_companies
-        },
+    }
+
+    return render_to_response('pim/userdata.html', context,
         context_instance=RequestContext(request))
 
 def generate(request):
@@ -373,8 +282,7 @@ def generatehtml(request, param):
     except Organisation.DoesNotExist:
         return HttpResponseServerError("Object doesn't exist")
 
-    return render_to_response('pim/generatehtml.html',
-        {
+    context = {
         'organisation': organisation,
         'firstname': request.session['firstname'],
         'lastname': request.session['lastname'],
@@ -383,8 +291,6 @@ def generatehtml(request, param):
         'city': request.session['city'],
         'misc': request.session['misc'],
         'currentdate': datetime.date.today(),
-        })
+    }
 
-def datadetectives(request):
-    return render_to_response('pim/datadetectives.html')
-    
+    return render_to_response('pim/generatehtml.html', context)
