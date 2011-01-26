@@ -14,6 +14,6 @@ class UserForm(forms.Form):
 
     firstname = forms.CharField(label="Voornaam")
     lastname = forms.CharField(label="Achternaam")
-    street_address = forms.CharField(label="Adres")
+    street_address = forms.CharField(label="Straat")
     postcode = forms.CharField(label="Postcode")
-    city = forms.CharField(label="Stad")
+    city = forms.CharField(label="Woonplaats")
