@@ -251,7 +251,8 @@ def generate(request):
         return HttpResponseServerError("No companies selected")
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 
-    return render_to_response('pim/generate.html', {'selected_companies': selected_companies})
+    return render_to_response('pim/generate.html', {'selected_companies': selected_companies},
+        context_instance=RequestContext(request))
 
 def generatehtml(request, param):
     request.session.setdefault('companies', [])
