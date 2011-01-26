@@ -281,7 +281,7 @@ background-color: #000000;
 
 #top-nav{
 margin: 0 auto;
-width: 940px;
+width: 960px;
 text-align: right;
 padding: 5px 0px;
 }
@@ -292,13 +292,13 @@ text-decoration: none;
 }
 
 #pim-logo {
-  margin-top: 65px;
+  margin-top: 20px;
   position: relative;
 }
 #bof-logo {
   position: absolute;
   right: 0;
-  top: 65px;
+  top: 20px;
 }
 
 /* BASIC LAYOUT */
@@ -306,7 +306,7 @@ text-decoration: none;
   margin: 0 auto;
   min-height: 100%;
   position: relative;
-  width: 940px;
+  width: 960px;
 }
 
 /* NAVIGATION */
@@ -864,7 +864,7 @@ button#next-step {
 #footer {
   color: #FFFFFF;
   font-size: 85%;
-  width: 940px;
+  width: 960px;
   margin: 0 auto;
   text-align: left;
   padding-top: 10px;
