@@ -70,7 +70,7 @@
       {% else %}
       <ul>
         {% for c in selected_companies %}
-          <li><a href="{% url pimbase.views.delcompany c.id %}">{{ c|truncchar:35 }}</a></li>
+          <li>{{ c|truncchar:35 }}</li>
         {% endfor %}
       </ul>
       {% endif %}
