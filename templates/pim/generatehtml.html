@@ -1,17 +1,15 @@
 <html>
   <head>
-    <title>Brief</title>
-		<link href="/static/global/letter.css" media="screen" rel="stylesheet" type="text/css" />
+     <title>Inzageverzoek aan {{ organisation }}</title>
+     <link href="/static/global/letter.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <p>Afzender:</p>
     <ul>
       <li>{{ firstname }} {{ lastname }}</li>
       <li>{{ street_address }}</li>
       <li>{{ postcode }} {{ city }}</li>
     </ul>
-
-    <p>Aan:</p>
+    <hr noshade>
     <ul>
       <li>{{ organisation }},</li>
       <li>{{ organisation.address }}</li>
@@ -19,20 +17,11 @@
       <li>{{ organisation.country }} </li>
     </ul>
 
-    <p>Speciale informatie</p>
-    <ul>
-      {% for m in misc %}
-        {% if m.0.organisation.pk == organisation.pk %}
-          <li>{{ m.0.name }}: {{ m.1 }}</li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-
     <p>{{ city }}, {{ currentdate }}</p>
 
-    <p>Onderwerp: Verzoeken in het kader van de Wet bescherming persoonsgegevens (Wbp)</p>
+    <p>Betreft: inzageverzoek op grond van de Wet bescherming persoonsgegevens (Wbp)</p>
 
-    <p>Geachte Heer/Mevrouw,</p>
+    <p>Geachte heer, mevrouw,</p>
 
     <p>Op basis van artikel 35 van de Wet bescherming persoonsgegevens (Wbp)
     verneem ik graag of u persoonsgegevens van mij verwerkt. Indien dat het
