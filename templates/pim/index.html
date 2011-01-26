@@ -64,10 +64,11 @@
     </div>
 
     <div id="selected-hamsters" class="column">
-      <h2><a href="{% url pimbase.views.cleancompanylist %}">Mijn verzendlijst</a></h2>
       {% if selected_companies|length == 0 %}
+      <h2>Mijn verzendlijst</h2>
       <p>Er staan nog geen organisaties in de verzendlijst.</p>
       {% else %}
+      <h2><a href="{% url pimbase.views.cleancompanylist %}">Mijn verzendlijst</a></h2>
       <ul>
         {% for c in selected_companies %}
           <li>{{ c|truncchar:35 }}</li>
