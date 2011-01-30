@@ -98,9 +98,11 @@ class FilterManager:
 
 fm = FilterManager()
 fm.register(FilterDefinition('citizenrole', CitizenRole, 'afhankelijk van je situatie', 'label'))
-fm.register(FilterDefinition('organisationtype', OrganisationType, 'op type', 'name'))
-fm.register(FilterDefinition('sector', Sector, 'op sector', 'name'))
-fm.register(FilterDefinition('collectedinformation', CollectedInformation, 'op wat ze mogelijk van je weten', 'name'))
+
+# Disable these options temporarily since they aren't used with te current dataset.
+#fm.register(FilterDefinition('organisationtype', OrganisationType, 'op type', 'name'))
+#fm.register(FilterDefinition('sector', Sector, 'op sector', 'name'))
+#fm.register(FilterDefinition('collectedinformation', CollectedInformation, 'op wat ze mogelijk van je weten', 'name'))
 
 def search(query, fm):
     """ Search for specific organisationtype, sector or role. """
