@@ -1,9 +1,18 @@
 @media screen {
 	body {
 		width: 700px;
+		font-family: arial, helvetica, sans-serif;
 	}
 }
+
 ul {
 	list-style: none;
 	padding-left: 0;
+}
+p {
+	font-size: 12px;	
+}
+
+.address{
+	font-size: 11px;
 }

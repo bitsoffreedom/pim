@@ -6,7 +6,7 @@
 <div id="wizard">
   <ol id="steps" class="flat-list">
     <li class="selected"><span class="step-count">1</span> Welke organisatie wil je aanschrijven?</li>
-    <li class="progress"><img src="/static/global/progressbar_1.png"</li>
+    <li class="progress"><img src="/static/global/progressbar_1.png" alt="voortgang" /></li>
   </ol>
 
   <div id="column-wrapper" class="clearfix">
@@ -42,24 +42,24 @@
         {% endif %}
       {% endfor %}
       </ol>
-      <div>
+      <div class="paginator">
         {% if organisations.has_previous %}
         <a href="{% paginator_url 0 organisations.previous_page_number %}">Vorige</a>
         {% endif %}
 
         {% for i in search_range %}
           {% if i == organisations.number %}
-          <span style="border: 1px solid #000; padding-right: 2px; padding-left: 2px"><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
+          <span><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
           {% else %}
           <span><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
           {% endif %}
         {% endfor %}
 
-        {{ org_count }} Organisaties
-
         {% if organisations.has_next %}
         <a href="{% paginator_url 0 organisations.next_page_number %}">Volgende</a>
         {% endif %}
+        
+        <span class="orgcount">{{ org_count }} Organisaties</span>
       </div>
     </div>
 

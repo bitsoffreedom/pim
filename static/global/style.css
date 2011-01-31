@@ -669,7 +669,7 @@ a.info-nav:hover {
 }
 
 #result-list ol a.menuitem {
-  color: #6E6E6E;
+  color: #000;
   text-decoration: none;
 }
 
@@ -684,6 +684,15 @@ a.info-nav:hover {
 
 #result-list li{
   line-height: 22px;
+}
+
+.paginator{
+  margin-top: 10px;	
+}
+
+.orgcount{
+  text-align: right;
+  color: #B6B6B6;
 }
 
 #selected-hamsters {
@@ -723,7 +732,8 @@ a.step-button span,
   background: url("/static/global/next-step.gif") no-repeat scroll 156px center #000000;
   right: 20px;
   padding: 3px 42px 7px 10px;
-  bottom: -38px
+  margin-left: 95px;
+  position: relative !important;
 }
 
 button#next-step {

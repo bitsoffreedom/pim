@@ -4,13 +4,13 @@
      <link href="/static/global/letter.css" media="screen" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <ul>
+    <ul class="address">
       <li>{{ firstname }} {{ lastname }}</li>
       <li>{{ street_address }}</li>
       <li>{{ postcode }} {{ city }}</li>
     </ul>
     <hr noshade>
-    <ul>
+    <ul class="address">
       <li>{{ organisation }},</li>
       <li>{{ organisation.address }}</li>
       <li>{{ organisation.postcode }} {{ organisation.city }}</li>
