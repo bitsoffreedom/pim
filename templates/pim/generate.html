@@ -12,11 +12,13 @@
   <div id="column-wrapper" class="clearfix">
     
     <div class="triple column clearfix">
-      <p>De brieven zijn voor je aangemaakt! Klik op &eacute;&eacute;n van onderstaande links om de brieven te openen.</p>
-      
+	    <p>De brieven zijn voor je aangemaakt</p>
+	    <p>Klik op elk van de onderstaande links om de brieven te openen en uit te printen. Vergeet niet voor het dichtplakken van de envelop een kopie van je identiteitsbewijs toe te voegen.</p>
+
+      <p>Brief voor</p>
       <ul id="download-single">
-        Brief voor {% for c in selected_companies %}
-        <li>{{ c }}<a href="{% url pimbase.views.generatehtml c.pk %}">Download</a></li>
+        {% for c in selected_companies %}
+        <li>{{ c }} <a href="{% url pimbase.views.generatehtml c.pk %}">Download</a></li>
         {% endfor %}
       </ul>
     </div>
