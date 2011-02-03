@@ -13,8 +13,9 @@
     <form action="{% url pimbase.views.userdata %}" method="post">
       {% csrf_token %}
       <div id="address-form" class="double column">
-        <h2>Algemene gegevens</h2>
-        {{ form.as_p }}
+        <h2>Je adresgegevens</h2>
+	<p>Vul hier je adresgegevens in, zodat wij je brieven kunnen aanmaken.</p>
+	{{ form.as_p }}
       </div>
     
       <div id="selected-hamsters" class="column">
