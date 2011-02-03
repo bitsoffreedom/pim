@@ -281,7 +281,7 @@ background-color: #000000;
 
 #top-nav{
 margin: 0 auto;
-width: 960px;
+width: 941px;
 text-align: right;
 padding: 5px 0px;
 }
@@ -306,7 +306,7 @@ text-decoration: none;
   margin: 0 auto;
   min-height: 100%;
   position: relative;
-  width: 960px;
+  width: 941px;
 }
 
 /* NAVIGATION */
@@ -423,11 +423,13 @@ text-decoration: none;
   background: url("/static/global/page_bg.jpg") no-repeat;
   margin-bottom: 55px;
   margin-top: -15px;
-  padding: 0;
+  padding: 0 10 10 10;
 }
 
 #page p{
-  line-height: 18px;
+  line-height: 18px
+  margin-bottom: 15px;
+  width: 630px;
 }
 
 #page_sidebar{
@@ -497,7 +499,7 @@ text-decoration: none;
   margin-bottom: 55px;
   margin-right: 20px;
   min-height: 100%;
-  width: 960px;
+  width: 941px;
   -moz-box-shadow: 1px 1px 1px #000;
   -webkit-box-shadow: 1px 1px 1px #000;
 }
@@ -874,7 +876,7 @@ button#next-step {
 #footer {
   color: #FFFFFF;
   font-size: 85%;
-  width: 960px;
+  width: 941px;
   margin: 0 auto;
   text-align: left;
   padding-top: 10px;
