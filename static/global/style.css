@@ -423,13 +423,20 @@ text-decoration: none;
   background: url("/static/global/page_bg.jpg") no-repeat;
   margin-bottom: 55px;
   margin-top: -15px;
-  padding: 0 10 10 10;
+  padding: 0px 10px 10px 10px;
+}
+
+#page h2{
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 #page p{
   line-height: 18px;
   margin-bottom: 15px;
-  width: 630px;
+  padding-left: 40px;
+  width: 500px;
 }
 
 #page_sidebar{
