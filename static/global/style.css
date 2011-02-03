@@ -433,7 +433,7 @@ text-decoration: none;
   margin-bottom: 10px;
 }
 
-#page p{
+#page p,ul{
   line-height: 18px;
   margin-bottom: 15px;
   padding-left: 40px;
