@@ -76,7 +76,7 @@ input, select { vertical-align:middle; }
    * we normalize monospace styles ourselves
    * table font-size is reset in the HTML5 reset above so there is no need to repeat
 */
-body { font:11px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
+body { font:12px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
 
 select, input, textarea, button { font:99% sans-serif; }
 
@@ -390,8 +390,13 @@ text-decoration: none;
   padding-bottom: 50px !important;
 }
 
+.fp_column{
+  width: 450px;
+  float: left;
+  margin-right: 20px;
+}
+
 .frontpage h1{
-  width: 500px;
 }
 
 .frontpage h2{
@@ -407,6 +412,9 @@ text-decoration: none;
   margin-bottom: 15px;
 }
 
+.frontpage .column{
+  width: 400px;
+}
 
 .intro_screenshot{
   position: absolute;
@@ -425,6 +433,7 @@ text-decoration: none;
   margin-bottom: 55px;
   margin-top: -15px;
   padding: 0px 10px 10px 10px;
+  overflow: hidden;
 }
 
 #page h2{
@@ -437,7 +446,6 @@ text-decoration: none;
   line-height: 18px;
   margin-bottom: 15px;
   padding-left: 40px;
-  width: 500px;
 }
 
 #page_sidebar{
@@ -542,7 +550,7 @@ text-decoration: none;
 
 #steps .progress{
   position: absolute !important;
-  left: 590px;
+  left: 564px;
 }
 
 #steps li.last {
