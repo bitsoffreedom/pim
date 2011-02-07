@@ -38,6 +38,8 @@ class Sector(models.Model):
         return self.name
     
 class CitizenRole(models.Model):
+    """ TODO: Describe what this entity means. """
+
     name = models.CharField(max_length=20)
     label = models.CharField(max_length=200, help_text=_("Description of \
         the citizen role. This is used to generate \
@@ -62,6 +64,8 @@ class Identifier(models.Model):
         verbose_name_plural=_('consumer identifiers')
 
 class CollectedInformationType(models.Model):
+    """ TODO: Describe what this entity means. """
+
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=400)
 
