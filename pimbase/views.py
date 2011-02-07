@@ -96,6 +96,8 @@ class FilterManager:
     def urls(self):
         return self.get_urls()
 
+# This stuff is VERY elegant :)
+# NICE! :)
 fm = FilterManager()
 fm.register(FilterDefinition('citizenrole', CitizenRole, 'afhankelijk van je situatie', 'label'))
 
@@ -142,6 +144,7 @@ def index(request):
     try:
         org = paginator.page(page_id)
     except (EmptyPage, InvalidPage):
+        # Shouldn't this just raise a 404?
         return HttpResponseServerError("Page doesn't exist")
 
     # Based on the Yahoo search pagination pattern:
@@ -219,6 +222,19 @@ def userdata(request):
     if request.method == 'POST':
         form = UserForm(request, request.POST)
         if form.is_valid():
+            # TODO: We might consider a neat Class wrapper for the
+            # user data - for both generality and oversight. This class
+            # could later be extended to hold it's data in some other form
+            # and can be extended with smart functionality.
+            #
+            # It could essentially be a Django model which is never saved.
+            # This would give us access to all the database's relational
+            # stuff and will make it a lot easier to provide for
+            # (optional and anonymous) user feedback later.
+            #
+            # Furthermore: a 'standardized' way of storing this data
+            # might add some oversight to what data is kept, where and
+            # how.
             request.session['firstname'] = form.cleaned_data['firstname']
             request.session['lastname'] = form.cleaned_data['lastname']
             request.session['street_address'] = form.cleaned_data['street_address']
