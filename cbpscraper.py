@@ -27,26 +27,18 @@ import pickle
 BASE_URL = "http://www.cbpweb.nl/asp/"
 SEARCH_FORM = BASE_URL + "ORSearch.asp"
 
-SHARED_STACK = "stack.pickle"
+SHARED_STACK = sys.argv[1]
 CHARS = " !\"'(9876543210zyxwvutsrqponmlkjihgfedcba"
 
 def get_item():
-	try:
-		items = pickle.load(open(SHARED_STACK))
-		i = items["todo"].pop()
-		pickle.dump(items, open(SHARED_STACK, "w"))
-		return i
-	except:
-		return ""
+	items = pickle.load(open(SHARED_STACK))
+	i = items.pop()
+	pickle.dump(items, open(SHARED_STACK, "w"))
+	return i
 
 def add_items(items):
-	try:	
-		i = pickle.load(open(SHARED_STACK))
-		for item in items:
-			if item not in i["done"]:
-				i["todo"].add(item)
-	except:
-		i = {"todo": set(["",]), "done": set()}
+	i = pickle.load(open(SHARED_STACK))
+	i += items
 	pickle.dump(i, open(SHARED_STACK, "w"))
 
 def clean(s):
