@@ -25,8 +25,8 @@ class UserForm(forms.Form):
 #            for i in ids:
 #                self.fields['misc_%d' % (i.pk, )] = forms.CharField(label = '%s %s' % (i.organisation.short_name, i.name))
 
-    firstname = NameField(label="Voornaam", max_length=200)
-    lastname = NameField(label="Achternaam", max_length=200)
-    street_address = NameField(label="Straat", max_length=200)
-    postcode = NLZipCodeField(label="Postcode")
-    city = NameField(label="Woonplaats", max_length=200)
+    firstname = NameField(label=_("Firstname"), max_length=200)
+    lastname = NameField(label=_("Lastname"), max_length=200)
+    street_address = NameField(label=_("Street"), max_length=200)
+    postcode = NLZipCodeField(label=_("Postcode"))
+    city = NameField(label=_("Residence"), max_length=200)
