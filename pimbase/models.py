@@ -206,7 +206,8 @@ class CBPRegistration(models.Model):
     # XXX: at some point we want to change this to just the unique internal
     # cbp identifier (moid). 
     url = models.URLField(max_length=255,verbose_name=_('cbp url'), blank=True, null=True)
-    
+	outside_eu = models.BooleanField()
+
     def __unicode__(self):
         return self.name
 
