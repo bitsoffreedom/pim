@@ -10,4 +10,9 @@ def cbphex(c):
 
 	return r
 
-print binascii.unhexlify(cbphex(""))
+
+def url_decode(url):
+	url = url.replace("http://www.cbpweb.nl/asp/ORMelding.asp?id=", "")
+	s =  binascii.unhexlify(cbphex(url))
+	return s.split("!!")
+
