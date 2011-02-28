@@ -1,3 +1,4 @@
+from django.template import defaultfilters
 from taggit.managers import TaggableManager
 
 from django.utils.translation import ugettext_lazy as _
@@ -15,6 +16,10 @@ class City(models.Model):
     def __unicode__(self):
         return self.name
 
+    def setname(self,name):
+        self.name = name
+        self.slug = defaultfilters.slugify(name)
+
 class Country(models.Model):
     name = models.CharField(max_length=64, verbose_name=_('name'))
     slug = models.SlugField()
@@ -25,6 +30,10 @@ class Country(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    def setname(self,name):
+        self.name = name
+        self.slug = defaultfilters.slugify(name)
 
 class Sector(models.Model):
     name = models.CharField(max_length=64, verbose_name=_('name'))
@@ -117,7 +126,7 @@ class Organisation(models.Model):
     postcode = models.CharField(max_length=20, blank=True)
     organisationtype = models.ForeignKey(OrganisationType, blank=True, null=True)
     city = models.ForeignKey(City, blank=True, null=True)
-    country = models.ForeignKey(Country, blank=True, null=True, default=lambda:Country.objects.get(name='Nederland'))
+    country = models.ForeignKey(Country, blank=True, null=True) #, default=lambda:Country.objects.get(name='Nederland'))
     sector = models.ForeignKey(Sector, blank=True, null=True)
     website = models.CharField(max_length=200, blank=True)
     tags = TaggableManager()
@@ -188,7 +197,7 @@ class CBPRegistration(models.Model):
         Reference: http://www.cbpweb.nl/Pages/ind_reg_meldreg.aspx
     """
     
-    organisation = models.ForeignKey(Organisation)      
+    organisation = models.ForeignKey(Organisation, blank=True, null=True)      
     # To do: add a validator here making sure that the result is always 7 digits long.
     registration_number = models.PositiveIntegerField(primary_key=True, verbose_name=_('registration number'))
     name = models.CharField(max_length=255, verbose_name=_('database name'), blank=True, null=True)
