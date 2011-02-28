@@ -7,11 +7,15 @@ import settings
 from pimbase.models import *
 setup_environ(settings)
 
+from cbphex import *
+
+
 for f in glob.glob("data/*.json"):
 	print f
 	companies = json.load(open(f))
 	for c in companies:
 		print "\t", c["name"].encode("utf-8")
+		print "\t\t", url_decode(c["url"])
 		o = Organisation(country=None)
 		o.name = c["name"]
 		o.website = c["url"]
