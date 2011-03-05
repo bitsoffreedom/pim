@@ -11,22 +11,22 @@ setup_environ(settings)
 
 from cbphex import *
 
-
-for f in glob.glob("data/*.json"):
-	print f
-	companies = json.load(open(f))
-	for c in companies:
-		print "\t", c["name"].encode("utf-8")
-		print "\t\t", url_decode(c["url"])
-		o = Organisation(country=None)
-		o.name = c["name"]
-		o.website = c["url"]
+flist = glob.glob("data/*.json")
+i = 0
+for f in flist:
+    i = i + 1
+    print "%d of %d (%s)" % (i, len(flist), f)
+    companies = json.load(open(f))
+    for c in companies:
+        o = Organisation(country=None)
+        o.name = c["name"]
+        o.website = c["url"]
         url_dec = url_decode(c["url"])
         if (url_dec[2]):
             o.postcode = url_dec[2]
         else:
             o.postcode = url_dec[1]
-	    o.save()
+        o.save()
         for mid in c["meldingen"].keys():
             for v in c["meldingen"][mid]["verantwoordelijken"]:
                 if v.has_key("Bezoekadres"):
@@ -64,20 +64,20 @@ for f in glob.glob("data/*.json"):
             o2.save()
 
             city = City()
-            if len(v["Bezoekadres"].split("\n")) > 1:
-                city.setname(v["Bezoekadres"].split("\n")[1].split(" ")[1])
+            if len(v["Bezoekadres"].split("\n")) > 1 and len(v["Bezoekadres"].split("\n")[1].split(" ")) > 1:
+                city.setname(v["Bezoekadres"].split("\n")[1].split(" ")[1].lower())
 
             city.save()
 
             country = Country()
-            if len(v["Bezoekadres"].split("\n")) > 1:
-                country.setname(v["Bezoekadres"].split("\n")[2])
+            if len(v["Bezoekadres"].split("\n")) > 2:
+                country.setname(v["Bezoekadres"].split("\n")[2].lower())
 
             country.save()
 
-            reg = CBPRegistration()
-            reg.organisation = o
-            reg.registration_number = mid
-            reg.outside_eu = v["doorgifte_buiten_eu"]
-			#reg.name = mid["naam_verwerking"]
-            reg.save()
+#            reg = CBPRegistration()
+#            reg.organisation = o
+#            reg.registration_number = mid
+#            reg.outside_eu = c["meldingen"][mid]["doorgifte_buiten_eu"]
+#            #reg.name = mid["naam_verwerking"]
+#            reg.save()
