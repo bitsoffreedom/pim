@@ -63,13 +63,13 @@ for f in flist:
 
             o2.save()
 
-            if len(v["Bezoekadres"].split("\n")) > 1 and len(v["Bezoekadres"].split("\n")[1].split(" ")) > 1:
+            if len(v["Bezoekadres"].split("\n")) > 1 and len(v["Bezoekadres"].split("\n")[1].split(" ", 1)) > 1:
                 try:
-                    city = City.objects.get(name=v["Bezoekadres"].split("\n")[1].split(" ")[1].lower())
+                    city = City.objects.get(name=v["Bezoekadres"].split("\n")[1].split(" ", 1)[1].lower())
                 except City.DoesNotExist:
                     city = City()
 
-                city.setname(v["Bezoekadres"].split("\n")[1].split(" ")[1].lower())
+                city.setname(v["Bezoekadres"].split("\n")[1].split(" ", 1)[1].lower())
 
                 city.save()
 
