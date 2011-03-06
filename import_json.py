@@ -63,17 +63,26 @@ for f in flist:
 
             o2.save()
 
-            city = City()
             if len(v["Bezoekadres"].split("\n")) > 1 and len(v["Bezoekadres"].split("\n")[1].split(" ")) > 1:
+                try:
+                    city = City.objects.get(name=v["Bezoekadres"].split("\n")[1].split(" ")[1].lower())
+                except City.DoesNotExist:
+                    city = City()
+
                 city.setname(v["Bezoekadres"].split("\n")[1].split(" ")[1].lower())
 
-            city.save()
+                city.save()
 
-            country = Country()
+
             if len(v["Bezoekadres"].split("\n")) > 2:
+                try:
+                    country = Country.objects.get(name=v["Bezoekadres"].split("\n")[2].lower())
+                except Country.DoesNotExist:
+                    country = Country()
+
                 country.setname(v["Bezoekadres"].split("\n")[2].lower())
 
-            country.save()
+                country.save()
 
 #            reg = CBPRegistration()
 #            reg.organisation = o
