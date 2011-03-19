@@ -88,7 +88,7 @@ class CollectedInformation(models.Model):
     """ Information which companies have about an user"""
     
     name = models.CharField(max_length=200, blank=True, help_text="")
-    type = models.ForeignKey(CollectedInformationType)
+    type = models.ForeignKey(CollectedInformationType, blank=True, null=True)
 
     class Meta:
         verbose_name=_('collected information')

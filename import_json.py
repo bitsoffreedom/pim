@@ -11,11 +11,11 @@ setup_environ(settings)
 
 from cbphex import *
 
-flist = glob.glob("data/*.json")
+flist = glob.glob("/mnt/ramdisk/data/*.json")
 i = 0
 for f in flist:
     i = i + 1
-    print "%d of %d (%s)" % (i, len(flist), f)
+    print "%d of %d (%s)" % (i, len(flist) * 2, f)
     companies = json.load(open(f))
     for c in companies:
         o = Organisation(country=None)
@@ -27,6 +27,24 @@ for f in flist:
         else:
             o.postcode = url_dec[1]
         o.save()
+#        for mid in c["meldingen"].keys():
+#            if c["meldingen"][mid].has_key("betrokkenen"):
+#                for b in c["meldingen"][mid]["betrokkenen"].keys():
+#                    try:
+#                        collected = CollectedInformation.objects.get(name=b)
+#                    except CollectedInformation.DoesNotExist:
+#                        collected = CollectedInformation()
+#                        collected.name = b
+#                    collected.save()
+#                    o.collectedinformation.add(collected)
+#                    o.save()
+
+# pass 2
+for f in flist:
+    i = i + 1
+    print "%d of %d (%s)" % (i, len(flist) * 2, f)
+    companies = json.load(open(f))
+    for c in companies:
         for mid in c["meldingen"].keys():
             for v in c["meldingen"][mid]["verantwoordelijken"]:
                 if v.has_key("Bezoekadres"):
@@ -49,7 +67,8 @@ for f in flist:
                     if (o2):
                         o2 = o2[0]
                     else:
-                        o2 = Organisation()
+                        assert("omgwtfbbq: no organisation found!")
+#                        o2 = Organisation()
 
                 o2.name = v["Naam"]
                 if (v.has_key("Postadres")):
@@ -62,6 +81,8 @@ for f in flist:
                         o2.postcode = v["Bezoekadres"].split("\n")[1].split(" ")[0]
 
             o2.save()
+
+            # XXX: add city/country to company
 
             if len(v["Bezoekadres"].split("\n")) > 1 and len(v["Bezoekadres"].split("\n")[1].split(" ", 1)) > 1:
                 try:
