@@ -65,7 +65,7 @@ for f in flist:
                 else:
                     if v.has_key("Postadres"):
                         if len(v["Postadres"].split("\n")) > 1:
-                            o2 = Organisation.objects.filter(postcode = v["Postadres"].split("\n")[1][:4], name = v["Naam"])
+                            o2 = Organisation.objects.filter(postcode__startswith = v["Postadres"].split("\n")[1][:4], name = v["Naam"])
                         else:
                             o2 = None
                     else:
