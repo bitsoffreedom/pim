@@ -1,6 +1,6 @@
 import os
 os.environ["DJANGO_SETTINGS_MODULE"] = "settings"
-
+import sys
 import glob
 import json
 
@@ -14,7 +14,10 @@ setup_environ(settings)
 
 from cbphex import *
 
-flist = glob.glob("/mnt/ramdisk/data/*.json")
+if len(sys.argv) == 2:
+	flist = glob.glob(os.path.join(sys.argv[1], "*.json"))
+else:
+	flist = glob.glob("/mnt/ramdisk/data/*.json")
 i = 0
 for f in flist:
     i = i + 1
