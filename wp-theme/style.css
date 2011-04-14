@@ -1,0 +1,977 @@
+/* 
+  HTML5 â° Boilerplate 
+  
+  style.css contains a reset, font normalization and some base styles.
+  
+  credit is left where credit is due.
+  much inspiration was taken from these projects:
+    yui.yahooapis.com/2.8.1/build/base/base.css
+    camendesign.com/design/
+    praegnanz.de/weblog/htmlcssjs-kickstart
+*/
+
+/* 
+  html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+  v1.4 2009-07-27 | Authors: Eric Meyer & Richard Clark
+  html5doctor.com/html-5-reset-stylesheet/
+*/
+
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
+}                  
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { 
+  display:block;
+}
+
+nav ul { list-style:none; }
+
+blockquote, q { quotes:none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after { content:''; content:none; }
+
+a { margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent; }
+
+ins { background-color:#ff9; color:#000; text-decoration:none; }
+
+mark { background-color:#ff9; color:#000; font-style:italic; font-weight:bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom:1px dotted; cursor:help; }
+
+/* tables still need cellspacing="0" in the markup */
+table { border-collapse:collapse; border-spacing:0; }
+
+hr { display:block; height:1px; border:0; border-top:1px solid #ccc; margin:1em 0; padding:0; }
+
+input, select { vertical-align:middle; }
+
+/* END RESET CSS */
+
+/* fonts.css from the YUI Library: developer.yahoo.com/yui/
+   Refer to developer.yahoo.com/yui/3/cssfonts/ for font sizing percentages
+
+  There are three custom edits:
+   * remove arial, helvetica from explicit font stack
+   * we normalize monospace styles ourselves
+   * table font-size is reset in the HTML5 reset above so there is no need to repeat
+*/
+body { font:12px/1.231 sans-serif; *font-size:small; } /* hack retained to preserve specificity */
+
+select, input, textarea, button { font:99% sans-serif; }
+
+/* normalize monospace sizing 
+ * en.wikipedia.org/wiki/MediaWiki_talk:Common.css/Archive_11#Teletype_style_fix_for_Chrome
+ */
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+ 
+
+/* 
+ * minimal base styles 
+ */
+
+
+body, select, input, textarea { 
+  /* #444 looks better than black: twitter.com/H_FJ/statuses/11800719859 */ 
+  color: #444; 
+  /* set your base font here, to apply evenly */
+  /* font-family: Georgia, serif;  */   
+}
+
+/* Headers (h1,h2,etc) have no default font-size or margin,
+   you'll want to define those yourself. */ 
+h1,h2,h3,h4,h5,h6 { font-weight: bold; }
+
+/* always force a scrollbar in non-IE */ 
+html { overflow-y: scroll; }
+
+ 
+/* Accessible focus treatment: people.opera.com/patrickl/experiments/keyboard/test */
+a:hover, a:active { outline: none; }
+
+a, a:active, a:visited { font-weight: bold; color: #58A618; }
+a:hover { color: #036; }
+
+ul, ol { margin-left: 1.8em; }
+ol { list-style-type: decimal; }
+
+/* Remove margins for navigation lists */
+nav ul, nav li { margin: 0; } 
+
+small { font-size: 85%; }
+strong, th { font-weight: bold; }
+
+td, td img { vertical-align: top; } 
+
+sub { vertical-align: sub; font-size: smaller; }
+sup { vertical-align: super; font-size: smaller; }
+
+pre { 
+  padding: 15px; 
+  
+  /* www.pathf.com/blogs/2008/05/formatting-quoted-code-in-blog-posts-css21-white-space-pre-wrap/ */
+  white-space: pre; /* CSS2 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+  word-wrap: break-word; /* IE */
+}
+ 
+textarea { overflow: auto; } /* thnx ivannikolic! www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+
+.ie6 legend, .ie7 legend { margin-left: -7px; } /* thnx ivannikolic! */
+
+/* align checkboxes, radios, text inputs with their label
+   by: Thierry Koblentz tjkdesign.com/ez-css/css/base.css  */
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: bottom; }
+.ie7 input[type="checkbox"] { vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+ 
+/* webkit browsers add a 2px margin outside the chrome of form elements */  
+button, input, select, textarea { margin: 0; }
+
+/* colors for form validity */
+input:valid, textarea:valid   {  }
+input:invalid, textarea:invalid { 
+      border-radius: 1px;
+    -moz-box-shadow: 0px 0px 5px red; 
+ -webkit-box-shadow: 0px 0px 5px red; 
+         box-shadow: 0px 0px 5px red;
+}
+.no-boxshadow input:invalid, 
+.no-boxshadow textarea:invalid { background-color: #f0dddd; }
+
+/* These selection declarations have to be separate.
+   No text-shadow: twitter.com/miketaylr/status/12228805301 
+   Also: hot pink. */
+::-moz-selection { background: #FF5E99; color:#fff; text-shadow: none; }
+::selection { background:#FF5E99; color:#fff; text-shadow: none; } 
+
+/*  j.mp/webkit-tap-highlight-color */
+a:link { -webkit-tap-highlight-color: #FF5E99; } 
+
+/* make buttons play nice in IE:    
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {  width: auto; overflow: visible; }
+ 
+/* bicubic resizing for non-native sized IMG: 
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+/* 
+ * Non-semantic helper classes 
+ */
+
+/* for image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+
+/* Hide for both screenreaders and browsers
+   css-discuss.incutio.com/wiki/Screenreader_Visibility */
+.hidden { display: none; visibility: hidden; } 
+
+/* Hide only visually, but have it available for screenreaders 
+   www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden  */
+.visuallyhidden {
+  position: absolute !important;    
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }
+
+/* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
+.clearfix:before, .clearfix:after {
+  content: "\0020"; display: block; height: 0; visibility: hidden;	
+} 
+
+.clearfix:after { clear: both; }
+/* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
+.clearfix { zoom: 1; }
+
+ /* Primary Styles
+    Author: Rein Groot, Coen Warmer
+ */
+body, html {
+  height: 100%;
+  position: relative;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: url("images/bg.jpg") no-repeat scroll center 0 #a3cd81;
+}
+
+/* BASIC TYPOGRAPHY */
+h1 {
+  color: #000000;
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  font-size: 36px;
+  line-height: 100%;
+  margin: 15px 20px;
+  width: 350px;
+}
+
+h2, h2 a {
+  color: #58a618 !important;
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  font-size: 21px;
+  margin-bottom: 20px;
+}
+
+#address-form h2 {
+  font-size:  25px;
+  color: #000 !important;
+}
+
+h3 {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+}
+
+h4 {
+  color: #58A618;
+  margin: 15px 0 5px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+h5 {
+  color: #000000;
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  font-size: 300%;
+  line-height: 93%;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.flat-list { 
+  list-style: none;
+}
+.flat-list li {
+  float: left;
+}
+
+/* HEADER */
+#top-nav-container{
+background-color: #000000;
+color: #fff;
+}
+
+#top-nav{
+margin: 0 auto;
+width: 941px;
+text-align: right;
+padding: 5px 0px;
+}
+
+#top-nav a{
+color: #fff;
+text-decoration: none;
+}
+
+#pim-logo {
+  margin-top: 20px;
+  position: relative;
+}
+#bof-logo {
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
+/* BASIC LAYOUT */
+#content {
+  margin: 0 auto;
+  min-height: 100%;
+  position: relative;
+  width: 941px;
+}
+
+/* NAVIGATION */
+#main-nav {
+  color: #FFFFFF;
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  height: 35px;
+  margin: 30px 0 5px;
+  padding-left: 0px;
+}
+
+#main-nav a {
+  color: #FFFFFF;
+  font-size: 146.5%;
+  font-weight: bold;
+  margin-right: 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 4px 10px;
+}
+
+#main-nav a:hover {
+  background-color: #66ad2b;
+}
+
+#main-nav .active {
+  background-color: #66ad2b;
+}
+
+#sub-nav {
+  padding-top: 7px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #fff;
+}
+#sub-nav a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#content > p {
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+/* HEADER SEARCH FORM */
+#search{
+  position: absolute;
+  margin-left: 734px;
+  top: 194px;
+}
+
+#searchsubmit{
+  background-color: #000000;
+  color: #ffffff;
+  height: 24px;
+  border: solid 1px #000000;
+  font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding-bottom: 2px;
+  width: 52px;
+}
+
+#search #s{
+  border-top: solid 1px #c0c0c0;
+  border-left: solid 1px #c0c0c0;
+  border-bottom: solid 1px #e0e0e0;
+  border-right: solid 1px #e0e0e0;
+  height: 20px;
+  margin-right: 3px;
+  width: 145px;
+}
+
+/* FRONTPAGE */
+.frontpage{
+  padding-top: 10px !important;
+  margin-top: 5px !important;
+  padding-bottom: 50px !important;
+}
+
+.fp_column{
+  width: 450px;
+  float: left;
+  margin-right: 20px;
+}
+
+.frontpage h1{
+}
+
+.frontpage h2{
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.frontpage p{
+  width: 500px;
+  line-height: 18px;
+  padding-left: 40px;
+  margin-bottom: 15px;
+}
+
+.frontpage .column{
+  width: 400px;
+}
+
+.intro_screenshot{
+  position: absolute;
+  top: 290px;
+  left: 600px;
+}
+
+.frontpage #next-step{
+  position: absolute;
+  margin-bottom: 58px;
+}
+
+/* NON WIZARD PAGES */
+#page{
+  background: url("images/page_bg.jpg") no-repeat;
+  margin-bottom: 55px;
+  margin-top: -15px;
+  padding: 0px 10px 10px 10px;
+  overflow: hidden;
+}
+
+#page h2{
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+#page p{
+  line-height: 18px;
+  margin-bottom: 15px;
+  padding-left: 40px;
+}
+
+#page_sidebar{
+  width: 310px;
+  float: right;
+  border-left: dotted 2px #72C445;
+  height: 610px;
+}
+
+.page_sidebar_item{
+  border-bottom: dotted 2px #72C445;
+  padding: 17px 15px 24px 21px;
+  margin-left: 10px;
+}
+
+.page_sidebar_item h3{
+  width: 245px;
+  text-transform: uppercase;
+  font-size: 19px;
+  line-height: 22px;
+  margin-bottom: 13px;
+}
+
+.page_sidebar_item h3 a{
+  color: #000;
+  text-decoration: none;
+}
+
+#page_header h1{
+  margin: 25px 0 0 38px;
+  padding: 25px 0;
+  width: 460px;
+}
+
+#page_header{
+  border-bottom: dotted 2px #72C445;
+}
+
+.page_item{
+  padding: 25px 0 25px 38px;
+  border-bottom: dotted 2px #72C445;
+  width: 555px;
+  overflow: hidden;
+}
+
+.page_item h2{
+  color: #000 !important;
+}
+
+.page_item img{
+  width: 104px;
+  height: 116px;
+  border: solid 1px;
+  display: block;
+  float: left;
+  margin-right: 20px;
+}
+
+.page_item.last{
+  border-bottom: 0;
+}
+
+.credits{
+  padding: 25px 0 25px 38px;
+  border-bottom: dotted 2px #72C445;
+  width: 580px;
+  overflow: hidden;
+}
+
+/* WIZARD */
+#wizard {
+  background: url("images/frame_bg.png") repeat-x 0 bottom #FFFFFF;
+  float: left;
+  margin-bottom: 55px;
+  margin-right: 20px;
+  min-height: 100%;
+  width: 941px;
+  -moz-box-shadow: 1px 1px 1px #000;
+  -webkit-box-shadow: 1px 1px 1px #000;
+}
+
+#steps {
+  height: 67px;
+  padding-top: 7px;
+  margin: 0;
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  background-color: #66ad2b;
+}
+
+#steps li {
+  color: #58A618;
+  font-size: 25px;
+  font-weight: bold;
+  height: 35px;
+  padding: 15px 0 0 98px;
+  position: relative;
+}
+
+#steps li.selected {
+  color: #fff;
+}
+
+#steps .progress{
+  position: absolute !important;
+  left: 564px;
+}
+
+#steps li.last {
+  background: none repeat scroll 0 0 #D0E5BE;
+  width: 189px;
+}
+
+#steps .step-count {
+  font-size: 45px;
+  left: 35px;
+  position: absolute;
+  top: 1px;
+  color: #fff;
+}
+
+#column-wrapper {
+  background: url("images/bg-wizard.gif") repeat-y scroll 10px 0 transparent;
+  margin: 20px 0 75px 0;
+  min-height: 400px;
+  position: relative;
+}
+.step-2 #column-wrapper {
+  background: url("images/bg-wizard_step-2.gif") repeat-y 190px 0;
+}
+.step-3 #column-wrapper {
+  background-image: none;
+}
+
+.column {
+  float: left;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 261px;
+}
+
+.double.column {
+  width: 590px;
+}
+
+.triple.column {
+  width: 920px;
+}
+
+#filters {
+  margin-left: 10px;
+}
+
+#active-filters {
+  border: 1px solid #58A618;
+  margin-bottom: 20px;
+  min-height: 75px;
+  padding: 5px;
+}
+
+#active-filters ul {
+  list-style: none;
+  margin-left: 0;
+  font-size: 85%;
+  line-height: 138.5%
+}
+
+.column a{
+  font-weight: normal;	
+}
+
+#active-filters a, #selected-hamsters a {
+  background: url("images/remove-filter.gif") no-repeat scroll right center transparent;
+  color: #000000;
+  display: block;
+  text-decoration: none;
+}
+
+#filters input[type="text"] {
+  border: 1px dotted;
+  height: 16px;
+  width: 115px;
+}
+
+#filters input[type="submit"] {
+  background: none repeat scroll 0 0 #000000;
+  border: medium none;
+  color: #FFFFFF;
+  height: 20px;
+  text-transform: uppercase;
+}
+#filters input[type="submit"]:hover {
+  background-color: #58A618;
+}
+
+#filters > ul {
+  color: #000000;
+  list-style: none outside none;
+  margin-left: 10px;
+}
+#filters > ul a {
+  color: #000000;
+  text-decoration: none;
+}
+#filters > ul a:hover {
+  color: #58A618;
+}
+#filters > ul li {
+  font-size: 11px;
+  line-height: 22px;
+}
+
+#filters .list-count{
+  color: #6f6f6f;
+}
+
+#filters .count {
+  color: #6e6e6e;
+}
+
+a.info-nav {
+  border-top: 2px dotted #C0C0C0;
+  color: #58A618;
+  display: block;
+  height: 15px;
+  margin-top: 10px;
+  padding-top: 5px;
+  text-decoration: none;
+  width: 176px;
+}
+a.info-nav:hover {
+  color: #000000;
+}
+.step-3 a.info-nav {
+  bottom: 60px;
+  left: 20px;
+  position: absolute;
+}
+
+#result-list ol {
+  line-height: 153.9%;
+  list-style: none outside none;
+  margin-left: 0;
+}
+#result-list ol div.menuitem {
+  background: url("images/select-company.gif") no-repeat scroll right center transparent;
+}
+
+#result-list ol a.menuitem {
+  color: #000;
+  text-decoration: none;
+}
+
+#result-list ol a.info {
+  color: #000;
+  text-decoration: none;
+}
+
+#result-list ol div.menuitem:hover {
+  color: #B6B6B6;
+}
+
+#result-list li{
+  line-height: 22px;
+}
+
+.paginator{
+  margin-top: 10px;	
+}
+
+.orgcount{
+  text-align: right;
+  color: #B6B6B6;
+}
+
+#selected-hamsters {
+  margin-bottom: 60px;
+}
+
+#selected-hamsters ul {
+  line-height: 153.9%;
+  list-style: none outside none;
+  margin-left: 0;
+}
+.step-2 #selected-hamsters ul {
+  font-weight:bold;
+  color: #000;
+}
+
+a.step-button,
+  button.step-button {	
+  bottom: 0;
+  color: #FFFFFF;
+  font-size: 27px;
+  font-weight: bold;
+  position: absolute;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a.step-button span,
+  button.step-button span {
+  display: block;
+  font-size: 46%;
+  text-transform: none;	
+}
+
+#next-step {
+  font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
+  background: url("images/next-step.gif") no-repeat scroll 156px center #000000;
+  right: 20px;
+  padding: 3px 42px 7px 10px;
+  margin-left: 95px;
+  position: relative !important;
+}
+
+button#next-step {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  border: medium none;
+  right: 20px;
+}
+
+#next-step:hover {
+  background-image: url("images/next-step_hover.gif");
+  background-color: #58A618;
+}
+
+#back-step {
+  font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
+  background: url("images/back-step.gif") no-repeat scroll 10px center #000000;
+  left: 20px;
+  padding: 4px 12px 7px 47px;
+  bottom: -38px
+}
+#back-step:hover {
+  background-image: url("images/back-step_hover.gif");
+  background-color: #58A618;
+}
+
+#address-form {
+  margin-bottom: 60px;
+}
+
+#address-form td {
+  padding-bottom: 10px;
+}
+
+#address-form label {
+  display: block;
+  width: 100px;
+  color: #000;
+  float: left;
+  width: 130px;
+  margin-bottom: 10px;
+  clear: left;
+  font-size: 11px !important;
+}
+
+#address-form input{
+   margin-bottom: 10px;
+}
+
+#address-form input[type="text"] {
+  background-color: #EAF3E2;
+  border-color: #99AD88 #99AD88 -moz-use-text-color -moz-use-text-color;
+  border-style: solid solid none none;
+  border-width: 1px 1px medium medium;
+  height: 16px;
+  width: 260px;
+}
+
+#address-form #postcode-nr {
+  width: 60px;
+}
+#address-form #postcode-letter {
+  width: 30px;
+}
+
+.step-3 #wizard {
+  color: #000;
+  text-decoration: none;
+}
+.step-3 #wizard p {
+  margin: 0 0 15px 20px;
+  width: 500px;
+}
+.step-3 #wizard ul {
+  line-height: 153.9%;
+  list-style: none outside none;
+  margin: 0;
+  padding-left: 50px;
+  padding-top: 15px;
+}
+.step-3 #wizard #download-all {
+  font-weight: bold;
+  height: 60px;
+  margin-left: 50px;
+  width: 508px;
+}
+.step-3 #wizard #download-single {
+  font-weight: bold;
+  padding-right: 50px;
+}
+.step-3 #wizard #download-all a,
+  .step-3 #wizard #download-single a {
+  background: url("images/download-single_hover.gif") no-repeat scroll 115px center #000;
+  border: medium none;
+  clear: right;
+  color: #FFFFFF;
+  float: right;
+  font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
+  font-weight: bold;
+  padding: 5px 43px 5px 10px;
+  text-align: left;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.step-3 #wizard #download-all a:hover,
+  .step-3 #wizard #download-single a:hover {
+  background-color: #333;
+}
+
+.step-3 #wizard #download-all a {
+  background-image: url("images/download-all_hover.gif");
+  background-position: 155px center;
+  font-size: 197%;
+  height: 35px;
+  padding-right: 45px;
+  width: 135px;
+}
+.step-3 #wizard #download-all a:hover {
+  background-color: #000000;
+  background-image: url("images/download-all_hover.gif");
+}
+		
+.step-3 #wizard #download-single li {
+  height: 30px;
+  margin-bottom: 20px;
+  width: 500px;
+}
+.step-3 #wizard #download-single a {
+  font-size: 138.5%;
+  height: 20px;
+  width: 85px;
+}
+.step-3 #wizard #download-single a:hover {
+  background-color: #8EC363 !important;
+  background-image: url("images/download-single.gif");
+}
+
+/* FOOTER */
+#footer {
+  color: #FFFFFF;
+  font-size: 85%;
+  width: 941px;
+  margin: 0 auto;
+  text-align: left;
+  padding-top: 10px;
+}
+
+#footer a {
+  color: #fff;
+  text-decoration: none;
+}
+		
+#bottom {
+  background: none repeat scroll 0 0 #000000;
+  height: 125px;
+  width: 100%;
+}
+
+
+/*
+ * Media queries for responsive design
+ * These follow after primary styles so they will successfully override. 
+ */
+
+@media all and (orientation:portrait) { 
+  /* Style adjustments for portrait mode goes here */
+  
+}
+
+@media all and (orientation:landscape) { 
+  /* Style adjustments for landscape mode goes here */
+  
+}
+
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
+   Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width: 480px) {
+  
+  
+  /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you
+     j.mp/textsizeadjust 
+  html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
+}
+
+/* 
+ * print styles
+ * inlined to avoid required HTTP connection www.phpied.com/delay-loading-your-print-css/ 
+ */
+@media print {
+  * { background: transparent !important; color: #444 !important; text-shadow: none !important; }
+  a, a:visited { color: #444 !important; text-decoration: underline; }
+  a:after { content: " (" attr(href) ")"; } 
+  abbr:after { content: " (" attr(title) ")"; }
+  .ir a:after { content: ""; }  /* Don't show links for images */
+  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
+  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */ 
+  tr, img { page-break-inside: avoid; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3{ page-break-after: avoid; }
+}
+
+#sidetext p {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+#sidetext ul {
+  list-style-position: inside;
+}
+
+.datadetective {
+  padding: 20px; 
+}
+
+.datadetective p {
+  padding: 5px;
+}
