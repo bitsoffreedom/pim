@@ -167,17 +167,6 @@ def index(request):
     return render_to_response('pim/index.html', context,
         context_instance=RequestContext(request))
 
-def start(request):
-    from simplesite.models import Page, Menu
-
-    try:
-        p = Page.objects.get(title='voorpagina')
-    except (Page.DoesNotExist):
-        return HttpResponseServerError("Object doesn't exist")
-        
-    menu_list = Menu.objects.filter(visible=True)
-    return render_to_response('pim/start.html', {'page_current': p, 'menu_list': menu_list})
-
 def cleancompanylist(request):
     request.session['companies'] = []
     request.session.modified = True

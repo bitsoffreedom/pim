@@ -3,7 +3,7 @@ from django.conf.urls.defaults import *
 from pimbase.views import fm
 
 urlpatterns = patterns('',
-    (r'^$', 'pimbase.views.start'),
+    (r'^$', 'pimbase.views.index'),
     (r'^start/$', 'pimbase.views.index'),
 
     (r'^', include(fm.urls)),

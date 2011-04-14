@@ -4,8 +4,3 @@ django_debug_toolbar
 django-staticfiles
 django-sentry
 django-taggit
-surlex
-django-tinymce
--e git+http://github.com/bitsoffreedom/django-metadata.git#egg=django-metadata
--e git+http://github.com/bitsoffreedom/django-simplesite.git#egg=django-simplesite
-

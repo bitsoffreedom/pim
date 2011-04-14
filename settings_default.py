@@ -41,7 +41,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'simplesite.middleware.SimplesiteFallbackMiddleware',
 ]
 
 # This is the default lis of context processors from Django
@@ -52,7 +51,6 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.media",
     #"django.core.context_processors.static", Django 1.3
     #"django.contrib.messages.context_processors.messages",
-    "simplesite.context_processors.menu",
 ]
 
 ROOT_URLCONF = 'urls'
@@ -131,7 +129,6 @@ INSTALLED_APPS = [
     'sentry.client',
     'staticfiles',
     'tinymce',
-    'simplesite',
     'taggit',
     'pim.pimbase'
 ]
