@@ -96,8 +96,6 @@ class FilterManager:
     def urls(self):
         return self.get_urls()
 
-# This stuff is VERY elegant :)
-# NICE! :)
 fm = FilterManager()
 fm.register(FilterDefinition('citizenrole', CitizenRole, 'afhankelijk van je situatie', 'label'))
 
