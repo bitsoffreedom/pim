@@ -6,36 +6,6 @@ Security audit
 
 Hoog risico
 --------------------------------------
-Géén SSL
-********
-**Probleem**
-
-Op dit moment wordt in de PIM staging omgeving géén gerbuik gemaakt van
-SSL. Dit betekent niet alleen dat alle opgevraagde data voor buitenstaanders
-precies is te volgen, het impliceert vooral dat de persoonsgegevens die op
-dit moment voor het aanmaken van brieven worden verstuurd door iedereen in
-het pad tussen bezoeker en server eenvoudig in te zien en af te tappen is.
-
-Gezien de uitgebreide tapinfrastructuur die in ons land, van overheidswege,   
-aanwezig is impliceert dit een zeer risicovolle situatie. Daarnaast gaan de   
-wachtwoorden voor de beheersinterface op `/admin/` ook zonder enige vorm van 
-codering over het web. Dit betekent dat alle data voor inventieve hackers en 
-beveiligingsdiensten vrijwel zonder ons medeweten goed in kaart te brengen 
-is en zelfs te veranderen is.
-
-Het is zelfs niet ondenkbaar dat enkele internetproviders ervoor kiezen het 
-verkeer van en naar PIM (ongezien) te inspecteren.
-
-**Oplossing**
-
-De oplossing voor dit probleem is, in essentie, eenvoudig. Er moet een 'officieel' ondertekend beveiligingscertificaat aangemaakt worden voor pim.bof.nl. Dit certificaat kan door de systeembeheerder eenvoudig gebruikt worden voor het instellen van een SSL-configuratie van de server.
-
-Daarnaast is het aan te raden om bezoekers van de site automatisch te dwingen SSL in te schakelen.
-
-**Referenties**
-
-* `NGINX HttpSslModule <http://wiki.nginx.org/HttpSslModule>`_
-* `How Can I Force SSL in nginx? <http://serverfault.com/questions/122766/how-can-i-force-ssl-in-nginx>`_.
 
 Datadiefstal persoonlijke gegevens dmv. sessie
 **********************************************
