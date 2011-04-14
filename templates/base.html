@@ -25,18 +25,17 @@
 		<a href="http://www.bof.nl"><img src="/static/global/pim_bof.png" alt="BOF logo" id="bof-logo"/></a>
 		
 		<ul id="main-nav" class="flat-list">
-      {% for m in menu_list %}
-	{% if m == menu_current %}
-      <li><a class="active" href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
-	{% else %}
-      <li><a href="{{ m.get_absolute_url }}">{{ m.title }}</a></li>
-	{% endif %}
-      {% endfor %}
+      {% NOTE: THESE NEED TO BE KEPT IN SYNC WITH WORDPRESS %}
+      <li><a href="/">Voorpagina</a></li>
+      <li><a class="active" href="/start/">Start</a></li>
+      <li><a href="/achtergrond/">Achtergrond</a></li>
+      <li><a href="/contact/">Contact</a></li>
+      <li><a href="/beta/">{{ m.title }}</a></li>
 		</ul>
 		
-        {% block content %}
-        {% endblock %}
-			
+    {% block content %}
+    {% endblock %}
+  
 		</div>
 	</div>
 	
