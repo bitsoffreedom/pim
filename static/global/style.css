@@ -517,7 +517,7 @@ text-decoration: none;
 
 /* WIZARD */
 #wizard {
-  background: url("http://www.deoptimist.net/frame_bg.png") repeat-x 0 bottom #FFFFFF;
+  background: url("/static/global/frame_bg.png") repeat-x 0 bottom #FFFFFF;
   float: left;
   margin-bottom: 55px;
   margin-right: 20px;
