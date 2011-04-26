@@ -1,15 +1,5 @@
 <?php
 
-add_action( 'init', 'kapitein_haak' );
-
-/* yarrrr pirates ftw */
-function kapitein_haak()
-{
-	register_nav_menus(
-		array('header' => __( 'Main menu' ) )
-	);
-}
-
 add_filter('get_pages', 'custom_get_page', 10, 1);
 
 function custom_get_page($pages) {
