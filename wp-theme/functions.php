@@ -10,6 +10,38 @@ function kapitein_haak()
 	);
 }
 
+add_filter('get_pages', 'custom_get_page', 10, 1);
+
+function custom_get_page($pages) {
+	/*
+	 * XXX: this is a dirty hack. However, I think that is in style with
+	 * the rest of Wordpress.
+	 *
+	 * With the right Wordpress URL configuration this will create a menu
+	 * item pointing to /start/. Which is what we want.
+	 *
+	 * Add a "start" page which points to Django as the second list item.
+	 */
+
+	$r_pages = Array();
+	$i = 0;
+	foreach ($pages as $p) {
+		// If is the second item in the list create both a start page
+		// and copy the third item.
+		if ($i == 1) {
+			$p2 = new stdClass;
+			$p2->post_title = 'start';
+			$p2->ID = 1337;
+			$r_pages[] = $p2;
+		}
+		$r_pages[] = $p;
+	
+		$i++;
+	}
+
+	return $r_pages;
+}
+
 add_filter('page_css_class', 'custom_page_css_class', 10, 2);
 /**
  *  custom_page_css_class()
