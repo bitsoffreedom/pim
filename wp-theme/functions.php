@@ -21,6 +21,8 @@ function custom_get_page($pages) {
 		if ($i == 1) {
 			$p2 = new stdClass;
 			$p2->post_title = 'start';
+			$p2->post_name = 'start';
+			$p2->post_parent = 0;
 			$p2->ID = 1337;
 			$r_pages[] = $p2;
 		}
