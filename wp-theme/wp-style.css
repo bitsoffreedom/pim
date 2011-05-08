@@ -17,4 +17,27 @@
 }
 
 
+/* Nasty overwrite of style.css styles to fix conflicts with WP specific classes */
+.page_item{
+  padding: 0;
+  border-bottom: none;
+  width: auto;
+  overflow:visible;
+}
 
+.page_item h2{
+  color: transparent;
+}
+
+.page_item img{
+  width: auto;
+  height: auto;
+  border: none;
+  display:inherit;
+  float: none;
+  margin-right: 0;
+}
+
+.page_item.last{
+  border-bottom: 0;
+}

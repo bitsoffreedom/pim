@@ -311,7 +311,7 @@ text-decoration: none;
 }
 
 /* NAVIGATION */
-#main-nav {
+.main-nav {
   color: #FFFFFF;
   font-family: "ff-din-web-pro-1", "ff-din-web-pro-2", sans-serif;
   height: 35px;
@@ -319,7 +319,7 @@ text-decoration: none;
   padding-left: 0px;
 }
 
-#main-nav a {
+.main-nav a {
   color: #FFFFFF;
   font-size: 146.5%;
   font-weight: bold;
@@ -329,11 +329,8 @@ text-decoration: none;
   padding: 4px 10px;
 }
 
-#main-nav a:hover {
-  background-color: #66ad2b;
-}
-
-#main-nav .active {
+.main-nav a:hover,
+.main-nav .current-menu-item a {
   background-color: #66ad2b;
 }
 
@@ -429,9 +426,8 @@ text-decoration: none;
 
 /* NON WIZARD PAGES */
 #page{
-  background: url("images/page_bg.jpg") no-repeat;
+  background-color: #ffffff;
   margin-bottom: 55px;
-  margin-top: -15px;
   padding: 0px 10px 10px 10px;
   overflow: hidden;
 }
