@@ -15,7 +15,10 @@ get_header();
 			
 			<?php
 			if(have_posts()) : while(have_posts()) : the_post();
-			
+				
+				$perma_link = get_permalink();
+				$title = get_the_title();
+				
 				$args = array('posts_per_page' => -1,
 							'post_parent' => $post->ID,
 							'post_type' => 'page');
@@ -49,11 +52,12 @@ get_header();
 					</ol>
 				</div>
 				
+				
 				<?php // Show sub nav ?>
 				<ol id="page-sub-nav">
 					
 					<li class="selected uneven">
-						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						<a href="<?php echo $perma_link; ?>"><?php echo $title; ?></a>
 					</li>
 					
 					<?php
@@ -76,7 +80,11 @@ get_header();
 		} else { // if this page is sub page 
 		
 			if(have_posts()) : while(have_posts()) : the_post();
-			
+				
+				$parent_title = get_the_title($post->post_parent);
+				$parent_link = get_permalink($post->post_parent);
+				$current_title = get_the_title();
+				
 				echo '<div id="article">';
 				if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
 					the_post_thumbnail();
@@ -88,8 +96,8 @@ get_header();
 				// Show sub nav ?>
 				<ol id="page-sub-nav">
 					
-					<li class="selected uneven">
-						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					<li class="uneven">
+						<a href="<?php echo $parent_link; ?>"><?php echo $parent_title; ?></a>
 					</li>
 					
 					<?php
@@ -100,9 +108,12 @@ get_header();
 					$child_pages = new WP_Query($args); 
 				
 					$parity = 'even';
-					if($child_pages->have_posts()) : while($child_pages->have_posts()) : $child_pages->the_post(); ?>
+					if($child_pages->have_posts()) : while($child_pages->have_posts()) : $child_pages->the_post();
+						// Select the current sub nav item
+						$selected = (get_the_title() == $current_title) ? 'selected' : '';
+					?>
 						
-						<li class="<?php echo $parity ?>">
+						<li class="<?php echo $parity; echo ' '.$selected; ?>">
 							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
 						</li>
 					

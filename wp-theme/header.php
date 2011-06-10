@@ -34,3 +34,9 @@
 
 		<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'menu_class' => 'flat-list clearfix main-nav', 'theme_location' => 'primary' ) ); ?>
 
+		<form action="<?php echo site_url(); ?>" method="get" id="search">
+			<fieldset>
+				<input type="text" name="s" value="<?php is_search() ? the_search_query() : ''; ?>" />
+				<input type="submit" value="zoek" id="searchsubmit" />
+			</fieldset>
+		</form>

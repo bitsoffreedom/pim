@@ -7,7 +7,7 @@
 			<!-- Footer -->
 			<div id="footer">
 				<ul class="links-list">
-					<li class="first">Pim is een initiatief van BitsOfFreedom</li>
+					<li class="first">PIM is een initiatief van Bits Of Freedom</li>
 					<li>
 						<a href="#">info@bof.nl</a>
 					</li>
