@@ -4,44 +4,118 @@
  * @subpackage Pim
  */
 
-get_header(); ?>
+get_header(); 
 
-	<div id="page">
-		
-		
-		
-		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-		<?php 
-		$args = array('child_of' => $post->ID);
-		?>
-		<ul>
-		<?php wp_list_pages($args); ?>
-		
-		<?php
-			$defaults = array( 
-			    'post_parent' => $post->ID,
-			    'post_type'   => 'page', 
-			    'numberposts' => -1,
-			    'post_status' => 'any'
-			);
-			$child_pages = get_children($defaults);
-			
-			foreach ($child_pages as $page) {
-				echo get_post_meta($page->ID, 'page-excerpt', true);
-			}
-			
-		?>
-		</ul>
-		
-		<div class="post" id="post-<?php $post->ID; ?>">
-		<h2><?php the_title(); ?></h2>
-			<div class="entry">
-				<?php the_content('<p class="serif">' . __('Read the rest of this page &raquo;', 'kubrick') . '</p>'); ?>
+?>
 
+	<!-- Content -->
+	<div id="content" class="clearfix">
+		
+		<?php if ( ! is_subpage() ) { // if this page is a main page ?>
+			
+			<?php
+			if(have_posts()) : while(have_posts()) : the_post();
+			
+				$args = array('posts_per_page' => -1,
+							'post_parent' => $post->ID,
+							'post_type' => 'page');
+							
+				$child_pages = new WP_Query($args); 
 				
-			</div>
-		</div>
-		<?php endwhile; endif; ?>
-	</div>
-
+				echo '<div id="articles">';
+				echo '<h1>' . get_the_title('') . '</h1>';
+				echo '<ol>';
+				
+				// List all child pages
+				if($child_pages->have_posts()) : while($child_pages->have_posts()) : $child_pages->the_post();
+				
+					$page_excerpt = get_post_meta($post->ID, 'page-excerpt', true);
+					?>
+					
+					<li class="clearfix excerpt">
+						<?php
+						if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+							the_post_thumbnail('thumbnail');
+							echo '<div class="thumb-mask"></div>';
+						} ?>
+						
+						<h2><?php the_title(); ?></h2>
+							
+						<p><?php echo $page_excerpt; ?> <a href="<?php the_permalink(); ?>">Lees meer</a></p>
+					</li>
+				
+				<?php endwhile; endif; // end child pages ?>
+				
+					</ol>
+				</div>
+				
+				<?php // Show sub nav ?>
+				<ol id="page-sub-nav">
+					
+					<li class="selected uneven">
+						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					</li>
+					
+					<?php
+					$parity = 'even';
+					if($child_pages->have_posts()) : while($child_pages->have_posts()) : $child_pages->the_post(); ?>
+						
+						<li class="<?php echo $parity ?>">
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</li>
+					
+					<?php
+					$parity = $parity == 'uneven' ? 'even' : 'uneven';
+					endwhile; endif; ?>
+					
+				</ol>
+				<?php // end sub nav ?>
+				
+			<?php endwhile; endif; // end main loop
+			
+		} else { // if this page is sub page 
+		
+			if(have_posts()) : while(have_posts()) : the_post();
+			
+				echo '<div id="article">';
+				if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+					the_post_thumbnail();
+				}
+				echo '<h1>' . get_the_title('') . '</h1>';
+				the_content();
+				echo '</div>';
+				
+				// Show sub nav ?>
+				<ol id="page-sub-nav">
+					
+					<li class="selected uneven">
+						<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+					</li>
+					
+					<?php
+					$args = array('posts_per_page' => -1,
+							'post_parent' => $post->post_parent,
+							'post_type' => 'page');
+							
+					$child_pages = new WP_Query($args); 
+				
+					$parity = 'even';
+					if($child_pages->have_posts()) : while($child_pages->have_posts()) : $child_pages->the_post(); ?>
+						
+						<li class="<?php echo $parity ?>">
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</li>
+					
+					<?php
+					$parity = $parity == 'uneven' ? 'even' : 'uneven';
+					endwhile; endif; ?>
+					
+				</ol>
+				<?php // end sub nav ?>
+				
+			<?php endwhile; endif; // end main loop
+			
+		}
+		?>
+		
 <?php get_footer(); ?>

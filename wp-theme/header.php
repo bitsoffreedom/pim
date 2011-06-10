@@ -22,16 +22,13 @@
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 		
 		<!--<base href="http://82.94.216.83/dataview/" />-->
-<?php if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); ?> 
 
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-
-        <div id="top-nav-container">
-		<div id="top-nav"><a href="/">PIM</a> is een project van <a href="http://www.bof.nl">Bits of Freedom</a></div>
-        </div>
-	<div id="content" class="clearfix">
+	
+	<!-- Wrapper -->
+	<div id="wrapper" class="clearfix">
 		<a href="/"><img src="<?php bloginfo("template_url"); ?>/images/pim_logo.png" alt="PIM logo" id="pim-logo"/></a>
 		<a href="http://www.bof.nl"><img src="<?php bloginfo("template_url"); ?>/images/pim_bof.png" alt="BOF logo" id="bof-logo"/></a>
 

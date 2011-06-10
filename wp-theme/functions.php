@@ -2,7 +2,22 @@
 // This theme uses wp_nav_menu() in one location.  
 register_nav_menus( array(  
     'primary' => __( 'Primary Navigation', 'pim' ),  
-) ); 
+) );
+
+// Add support for post thumbnails
+if ( function_exists( 'add_theme_support' ) ) { 
+	add_theme_support( 'post-thumbnails' ); 
+} 
+
+// Check to see if page is a subpage
+function is_subpage() {
+	global $post;                                 // load details about this page
+	if ( is_page() && $post->post_parent ) {      // test to see if the page has a parent
+		return $post->post_parent;             // return the ID of the parent post
+	} else {                                      // there is no parent so...
+		return false;                          // ...the answer to the question is false
+	}
+}
 
 add_filter('page_css_class', 'custom_page_css_class', 10, 2);
 /**
