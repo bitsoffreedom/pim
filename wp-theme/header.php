@@ -13,6 +13,7 @@
 		
 		<link href="<?php bloginfo('template_url'); ?>/style.css" media="screen" rel="stylesheet" type="text/css" />
 		<link href="<?php bloginfo('template_url'); ?>/wp-style.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="<?php bloginfo('template_url'); ?>/webkit.css" media="screen" rel="stylesheet" type="text/css" />
 		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="/static/global/IE9.js"></script>
