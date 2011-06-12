@@ -6,7 +6,8 @@ register_nav_menus( array(
 
 // Add support for post thumbnails
 if ( function_exists( 'add_theme_support' ) ) { 
-	add_theme_support( 'post-thumbnails' ); 
+	add_theme_support( 'post-thumbnails' );
+	add_image_size( 'article-image', 547, 228, true );
 } 
 
 // Check to see if page is a subpage
