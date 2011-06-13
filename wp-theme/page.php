@@ -11,9 +11,8 @@ get_header();
 	<!-- Content -->
 	<div id="content" class="clearfix">
 		
-		<?php if ( ! is_subpage() ) { // if this page is a main page ?>
+		<?php if ( ! is_subpage() ) { // if this page is a main page 
 			
-			<?php
 			if(have_posts()) : while(have_posts()) : the_post();
 				
 				$perma_link = get_permalink();
@@ -21,7 +20,9 @@ get_header();
 				
 				$args = array('posts_per_page' => -1,
 							'post_parent' => $post->ID,
-							'post_type' => 'page');
+							'post_type' => 'page',
+							'orderby' => 'menu_order',
+							'order' => 'ASC');
 							
 				$child_pages = new WP_Query($args); 
 				
@@ -42,7 +43,7 @@ get_header();
 							echo '<div class="thumb-mask"></div>';
 						} ?>
 						
-						<h2><?php the_title(); ?></h2>
+						<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 							
 						<p><?php echo $page_excerpt; ?> <a href="<?php the_permalink(); ?>">Lees meer</a></p>
 					</li>
