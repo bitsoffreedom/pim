@@ -7,27 +7,21 @@
 			<!-- Footer -->
 			<div id="footer">
 				<ul class="links-list">
-					<li class="first">PIM is een initiatief van Bits Of Freedom</li>
+					<li class="first">PIM is een initiatief van <a href="https://www.bof.nl/">Bits of Freedom</a></li>
 					<li>
-						<a href="#">info@bof.nl</a>
-					</li>
-					<li>
-						<a href="#">Creative Commons</a>
+						<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/nl/">Creative Commons BY-NC SA 3.0</a>
 					</li>
 				</ul>
 				
 				<ul class="links-list">
 					<li class="first">
-						<a href="#">Contributors</a>
+						<a href="/over-ons/ere-wie-ere-toekomt/">Ere wie ere toekomt</a>
 					</li>
 					<li>
-						<a href="#">Privacy-verklaring</a>
+						<a href="/over-ons/privacy-verklaring/">Privacy verklaring</a>
 					</li>
 					<li>
-						<a href="#">Huisregels voor blog</a>
-					</li>
-					<li>
-						<a href="#">Contact</a>
+						<a href="/over-ons/contact/">Contact</a>
 					</li>
 				</ul>
 			</div>
