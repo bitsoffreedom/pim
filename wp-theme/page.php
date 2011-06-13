@@ -87,7 +87,11 @@ get_header();
 				
 				echo '<div id="article">';
 				if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+					echo '<div id="article-image">';
 					the_post_thumbnail('article-image');
+					echo '<span class="caption">'.get_post(get_post_thumbnail_id())->post_excerpt.'</span>';
+					echo '<div class="article-image-mask"></div>';
+					echo '</div>';
 				}
 				echo '<h1>' . get_the_title('') . '</h1>';
 				the_content();
