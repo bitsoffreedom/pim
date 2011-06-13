@@ -39,7 +39,7 @@
 	<!-- Wrapper -->
 	<div id="wrapper" class="clearfix">
 		<a href="/"><img src="<?php bloginfo("template_url"); ?>/images/pim_logo.png" alt="PIM logo" id="pim-logo"/></a>
-		<a href="http://www.bof.nl"><img src="<?php bloginfo("template_url"); ?>/images/pim_bof.png" alt="BOF logo" id="bof-logo"/></a>
+		<a href="https://www.bof.nl"><img src="<?php bloginfo("template_url"); ?>/images/pim_bof.png" alt="BOF logo" id="bof-logo"/></a>
 
 		<?php wp_nav_menu( array( 'container_class' => 'menu-header', 'menu_class' => 'flat-list clearfix main-nav', 'theme_location' => 'primary' ) ); ?>
 
