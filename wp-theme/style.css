@@ -246,6 +246,7 @@ body.home h1 {
 	}
 #article h1 {
 	margin-bottom: 5px;
+	clear: both;
 	}
 
 h2, h2 a {
@@ -442,10 +443,30 @@ text-decoration: none;
 	    padding-top: 35px;
 	    width: 585px;
 		}
+	#content #article {
+		padding-top: 13px;
+		}
 		
-		#content #article > img {
-			padding-left: 35px;
+		#content #article-image {
+			position: relative;
+			margin-left: 35px;
 			}
+			#content #article-image .caption {
+				float: right;
+			    font-size: 95%;
+			    margin-bottom: 15px;
+				}
+				#content #article-image .caption a {
+					font-weight: normal;
+					}
+			#content #article-image .article-image-mask {
+				background: url("images/article-image-mask.png") repeat scroll 0 0 transparent;
+			    height: 228px;
+			    left: 0;
+			    position: absolute;
+			    top: 0;
+			    width: 547px;
+				}
 		
 		#content ol {
 		    list-style: none outside none;
@@ -756,12 +777,12 @@ a.step-button span,
   font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
   background: url("images/next-step.gif") no-repeat scroll 156px center #000000;
   right: 20px;
-  padding: 3px 42px 7px 10px;
+  padding: 10px 44px 4px 10px;
   margin-left: 95px;
   position: relative !important;
 }
 body.home #next-step {
-	background-position: 205px center;
+	background-position: 215px center;
     bottom: auto;
     font-size: 37px;
     left: 500px;

@@ -15,6 +15,14 @@
 		<link href="<?php bloginfo('template_url'); ?>/wp-style.css" media="screen" rel="stylesheet" type="text/css" />
 		<link href="<?php bloginfo('template_url'); ?>/webkit.css" media="screen" rel="stylesheet" type="text/css" />
 		
+		<!--[if lte IE 8]>
+		<link href="<?php bloginfo('template_url'); ?>/ie8.css" media="screen" rel="stylesheet" type="text/css" />
+		<![endif]-->
+		
+		<!--[if lte IE 7]>
+		<link href="<?php bloginfo('template_url'); ?>/ie7.css" media="screen" rel="stylesheet" type="text/css" />
+		<![endif]-->
+		
 		<!--[if lt IE 9]>
 		<script type="text/javascript" src="/static/global/IE9.js"></script>
 		<![endif]-->
