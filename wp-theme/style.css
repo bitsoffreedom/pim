@@ -535,6 +535,19 @@ body.home #content {
     height: 421px;
     padding-top: 35px;
 	}
+	
+	body.home #content ul,
+	body.home #content ol {
+		list-style-image: url("images/bullet-big.png");
+    	padding-left: 35px;
+		}
+		body.home #content li {
+			color: #58A618;
+		    font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
+		    font-size: 1.6em;
+		    font-weight: bold;
+		    letter-spacing: 0.04em;
+			}
 
 /* WIZARD */
 #wizard {
