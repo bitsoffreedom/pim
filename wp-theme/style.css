@@ -536,17 +536,18 @@ body.home #content {
     padding-top: 35px;
 	}
 	
-	body.home #content ul,
-	body.home #content ol {
+	body.home #content > ul,
+	body.home #content > ol {
 		list-style-image: url("images/bullet-big.png");
     	padding-left: 35px;
 		}
-		body.home #content li {
+		body.home #content > ul li,
+		body.home #content > ol li,
+		body.home #content > ul li a,
+		body.home #content > ol li a {
 			color: #58A618;
-		    font-family: "ff-din-web-pro-1","ff-din-web-pro-2",sans-serif;
 		    font-size: 1.6em;
 		    font-weight: bold;
-		    letter-spacing: 0.04em;
 			}
 
 /* WIZARD */
@@ -799,6 +800,7 @@ body.home #next-step {
     bottom: auto;
     font-size: 37px;
     left: 500px;
+    padding: 10px 50px 4px 10px;
     position: absolute !important;
     right: auto;
     top: 200px;
