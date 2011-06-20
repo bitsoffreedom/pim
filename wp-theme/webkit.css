@@ -3,4 +3,8 @@
 	.main-nav li {
     	background-position: right 11px;
 	}
+	
+	body.home #next-step {
+	    padding: 2px 50px 4px 10px;
+		}
 }
