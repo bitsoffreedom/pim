@@ -79,7 +79,7 @@ get_header();
 			<?php endwhile; endif; // end main loop
 			
 		} else { // if this page is sub page 
-		
+			
 			if(have_posts()) : while(have_posts()) : the_post();
 				
 				$parent_title = get_the_title($post->post_parent);
@@ -108,7 +108,9 @@ get_header();
 					<?php
 					$args = array('posts_per_page' => -1,
 							'post_parent' => $post->post_parent,
-							'post_type' => 'page');
+							'post_type' => 'page',
+							'orderby' => 'menu_order',
+							'order' => 'ASC');
 							
 					$child_pages = new WP_Query($args); 
 				
