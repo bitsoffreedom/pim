@@ -9,23 +9,25 @@
     <li class="progress"><img src="/static/global/progressbar_3.png" alt="voortgang" /></li>
   </ol>
   
-  <div id="column-wrapper" class="clearfix">
+  <div id="column-wrapper" class="clearfix step-3">
     
-    <div class="triple column clearfix">
-	    <p>De brieven zijn voor je aangemaakt</p>
+    <div class="double column clearfix">
+	    <h2>De brieven zijn voor je aangemaakt</h2>
 	    <p>Klik op elk van de onderstaande links om de brieven te openen en uit te printen. Vergeet niet voor het dichtplakken van de envelop een kopie van je identiteitsbewijs toe te voegen.</p>
 
       <ul id="download-single">
         {% for c in selected_companies %}
-        <li>{{ c }} <a href="{% url pimbase.views.generatehtml c.pk %}">Download</a></li>
+        <li><a href="{% url pimbase.views.generatehtml c.pk %}">Download</a> <span>{{ c }}</span> </li>
         {% endfor %}
       </ul>
+    </div>
     
-	<p>We zijn zeer nieuwsgierig naar je ervaring met PIM. We willen je daarom vragen om <a href="https://www.bof.nl/live/wp-content/limesurvey/index.php?sid=41472&amp;newtest=Y&amp;lang=nl">onze enquete</a> in te vullen nadat je een aantal brieven hebt aangemaakt. We horen verder natuurlijk graag <a href="/contact/">je overige suggesties</a>. Een paar problemen zijn <a href="/beta/">ons al bekend</a>.</p>
+    <div class="column">
+		<p>We zijn zeer nieuwsgierig naar je ervaring met PIM. We willen je daarom vragen om <a href="https://www.bof.nl/live/wp-content/limesurvey/index.php?sid=41472&amp;newtest=Y&amp;lang=nl">onze enquete</a> in te vullen nadat je een aantal brieven hebt aangemaakt. We horen verder natuurlijk graag <a href="/contact/">je overige suggesties</a>. Een paar problemen zijn <a href="/beta/">ons al bekend</a>.</p>
       
     </div>
     
-    <p><a href="{% url pimbase.views.userdata %}" id="back-step" class="step-button">Vorige</a></p>
+    <p><a href="{% url pimbase.views.userdata %}" id="back-step" class="step-button" title="Ga naar de volgende stap"></a></p>
   </div>
       
 </div>
