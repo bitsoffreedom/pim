@@ -112,10 +112,6 @@ a:hover, a:active { outline: none; }
 a, a:active, a:visited { font-weight: bold; color: #58A618; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-#footer a {	color: #FFFFFF; font-weight: normal; text-decoration: none; }
-#footer a:hover { text-decoration: underline; }
-
-
 ul, ol { margin-left: 1.8em; }
 ol { list-style-type: decimal; }
 
@@ -375,7 +371,7 @@ text-decoration: none;
 .main-nav li:hover,
 .main-nav .current-menu-item,
 .main-nav .current-page-ancestor {
-  background-color: #66ad2b;
+	background-color: #66ad2b;
 }
 
 #sub-nav {
@@ -531,8 +527,8 @@ text-decoration: none;
 
 /* FRONTPAGE */
 body.home #content {
-	background: url("images/bg-home.jpg") repeat scroll 0 0 transparent;
-    height: 421px;
+	background: url("images/bg-home.jpg") no-repeat scroll 0 0 #FFFFFF;
+    min-height: 421px;
     padding-top: 35px;
 	}
 	
@@ -969,6 +965,15 @@ button#next-step {
 	#footer .first {
 		padding-left: 0;
 		border: 0;
+		}
+	
+	#footer a {
+		color: #FFFFFF;
+		font-weight: normal;
+		text-decoration: none;
+		}
+	#footer a:hover {
+		text-decoration: underline;
 		}
 	
 #bottom {
