@@ -1,8 +1,5 @@
 /* webkit filter */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-	.main-nav li {
-    	background-position: right 11px;
-	}
 	
 	body.home #next-step {
 	    padding: 2px 50px 4px 10px;
