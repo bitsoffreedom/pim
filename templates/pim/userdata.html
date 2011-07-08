@@ -9,20 +9,19 @@
     <li class="progress"><img src="/static/global/progressbar_2.png" alt="voortgang" /></li>
   </ol>
   
-  <div id="column-wrapper" class="clearfix">
+  <div id="column-wrapper" class="clearfix step-2">
     <form action="{% url pimbase.views.userdata %}" method="post">
       {% csrf_token %}
       <div id="address-form" class="double column">
         <h2>Je adresgegevens</h2>
-	<p>Vul hier je adresgegevens in, zodat wij je brieven kunnen aanmaken.</p>
-	{{ form.as_p }}
-      </div>
-      <div id="warning">
-        <p>Laat niet zomaar je persoonlijke gegevens achter op internet. Bits of
-        Freedom belooft dat ze deze gegevens niet opslaat en niet doorverkoopt.
-        Het is verstandig om te onderzoeken wat een website doet met je gegevens
-        voordat je deze achterlaat. Klik hier voor meer informatie over het
-        privacy-beleid van Bits of Freedom.</p>
+        <fieldset>
+			<p class="fieldset-header">Vul hier je adresgegevens in, zodat wij je brieven kunnen aanmaken.</p>
+			{{ form.as_p }}
+		</fieldset>
+		<p class="disclaimer">
+			Deze gegevens hebben we nodig om je brief te kunnen genereren. De gegevens worden alleen naar de volgende pagina gestuurd, we slaan ze niet op. We gebruiken je gegevens nergens anders voor.<br />
+			Voor meer informatie: zie <a href="">de kleine lettertjes</a>.
+		</p>
       </div>
     
       <div id="selected-hamsters" class="column">
@@ -34,8 +33,8 @@
         </ul>
       </div>
 
-      <p><a href="{% url pimbase.views.index %}" id="back-step" class="step-button">Vorige</a></p>
-      <p><button type="submit" id="next-step" class="step-button">Volgende</button></p>
+      <p><a href="{% url pimbase.views.index %}" id="back-step" class="step-button" title="Ga naar de volgende stap"></a></p>
+      <p><button type="submit" id="next-step" class="step-button" title="Ga naar de volgende stap"></button></p>
       
     </form>
   </div>

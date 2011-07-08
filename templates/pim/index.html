@@ -9,7 +9,7 @@
     <li class="progress"><img src="/static/global/progressbar_1.png" alt="voortgang" /></li>
   </ol>
 
-  <div id="column-wrapper" class="clearfix">
+  <div id="column-wrapper" class="clearfix step-1">
     <div id="filters" class="column">
       <h2>Filter</h2>
       <div id="active-filters">
@@ -78,7 +78,7 @@
     </div>
 
     {% if selected_companies|length > 0 %}
-    <a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button">Volgende</a>
+    <a href="{% url pimbase.views.userdata %}" id="next-step" class="step-button" title="Ga naar de volgende stap"></a>
     {% endif %}
 </div>
 {% endblock %}
