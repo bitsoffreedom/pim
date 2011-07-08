@@ -9,7 +9,7 @@
 				<ul class="links-list">
 					<li class="first">PIM is een initiatief van <a href="https://www.bof.nl/">Bits of Freedom</a></li>
 					<li>
-						<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/nl/">Creative Commons BY-NC SA 3.0</a>
+						<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/nl/">Creative Commons BY-NC-SA 3.0</a>
 					</li>
 				</ul>
 				
