@@ -11,7 +11,7 @@
 
   <div id="column-wrapper" class="clearfix step-1">
     <div id="filters" class="column">
-      <h2>Filter</h2>
+      <h2>Zoeken</h2>
       <div id="active-filters">
         <h3>PIM filtert op:</h3>
         {% show_filter_status fm %}
@@ -65,10 +65,10 @@
 
     <div id="selected-hamsters" class="column">
       {% if selected_companies|length == 0 %}
-      <h2>Mijn verzendlijst</h2>
-      <p>Er staan nog geen organisaties in de verzendlijst.</p>
+      <h2>Mijn keuze</h2>
+      <p>Je hebt nog geen organisaties geselecteerd.</p>
       {% else %}
-      <h2><a href="{% url pimbase.views.cleancompanylist %}">Mijn verzendlijst</a></h2>
+      <h2><a href="{% url pimbase.views.cleancompanylist %}">Mijn keuze</a></h2>
       <ul>
         {% for c in selected_companies %}
           <li>{{ c|truncchar:35 }}</li>
