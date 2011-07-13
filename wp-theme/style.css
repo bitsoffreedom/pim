@@ -535,7 +535,8 @@ body.home #content {
 	body.home #content > ul,
 	body.home #content > ol {
 		list-style-image: url("images/bullet-big.png");
-    	padding-left: 35px;
+    		padding-left: 35px;
+		margin-top: 40px;
 		}
 		body.home #content > ul li,
 		body.home #content > ol li,
@@ -544,6 +545,7 @@ body.home #content {
 			color: #58A618;
 		    font-size: 1.6em;
 		    font-weight: bold;
+		    margin-top: 10px;
 			}
 
 /* WIZARD */
