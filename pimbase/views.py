@@ -299,4 +299,4 @@ def generatehtml(request, param):
         'currentdate': datetime.date.today(),
     }
 
-    return render_to_response('pim/generatehtml.html', context)
+    return render_to_response('pim/letter.html', context)

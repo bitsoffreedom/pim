@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		
+		<link rel="stylesheet" href="/static/global/letter.css" type="text/css" media="print, screen" />
+	</head>
+	<body>
+		<div class="vcard" id="sender">
+			<span class="fn">{{ firstname }} {{ lastname }}</span>
+			<div class="adr">
+				<div class="street-address">{{ street_address }}</div>
+				<span class="locality">{{ city }}</span>
+				<span class="postal-code">{{ postcode }}</span>
+			</div>
+		</div>
+
+		<div class="vcard" id="receiver">
+			<span class="fn">{{ organisation }}</span>
+			<div class="adr">
+				<div class="extended-address">{{ organisation.address }}</div>
+				<span class="locality">{{ organisation.city }}</span>
+				<span class="postal-code">{{ organisation.postcode }}</span>
+				<div class="country-name">{{ organisation.country }}</div>
+			</div>
+		</div>
+		
+		<p id="date-signature">{{ city }}, {{ currentdate }}</p>
+		
+		<h1>Betreft: Inzageverzoek op grond van de Wet bescherming persoonsgegevens (Wbp)</h1>
+		
+		<p>Geachte heer, mevrouw,<br />
+		<br />
+		Op basis van artikel 35 van de Wet bescherming persoonsgegevens (Wbp) verneem ik graag of u persoonsgegevens van mij verwerkt. Indien dat het geval is, verzoek ik u om een volledig overzicht in begrijpelijke vorm, een omschrijving van de doeleinden van de verwerking, de herkomst van de gegevens en een overzicht van de organisaties aan wie u deze gegevens heeft verstrekt.</p>
+		
+		<p>Wellicht ten overvloede vermeld ik dat ik in lid 1 van het wetsartikel een termijn van vier weken wordt genoemd waarin u aan dit verzoek moet voldoen.</p>
+		
+		<p>Een kopie van mijn identiteitsbewijs is als bijlage opgenomen.</p>
+		
+		<p id="signature">Hoogachtend,<br />
+		<br />
+		{{ firstname }} {{ lastname }}</p>
+
+	</body>
+</html>
