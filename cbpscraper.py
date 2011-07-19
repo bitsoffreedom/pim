@@ -222,6 +222,13 @@ def get_detailed_info(url):
 
 
 if __name__ == "__main__":
+    try:
+        f = open(SHARED_STACK, "r")
+        f.close()
+    except:
+        print "Creating new stack"
+        stack = [a+b+c for a in CHARS for b in CHARS for c in CHARS]
+        pickle.dump(stack, open(SHARED_STACK, "w"))
 	companies = []
 	name  = get_item()
 	print "Trying \"%s\"" % (name)
