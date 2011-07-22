@@ -3,8 +3,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
-		
+
+{% if export == "pdf" %}
 		<link rel="stylesheet" href="letter.css" type="text/css" media="print, screen" />
+{% else %}
+		<link rel="stylesheet" href="/static/global/letter.css" type="text/css" media="print, screen" />
+{% endif %}
 	</head>
 	<body>
 		<div class="vcard" id="sender">

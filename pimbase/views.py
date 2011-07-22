@@ -313,6 +313,8 @@ def generateletter(request, param):
 def generatehtml(request, param):
     context = generateletter(request, param)
 
+    context.update({'export': 'html'})
+
     return render_to_response('pim/letter.html', context)
 
 def render_to_pdf(template_src, context_dict):
@@ -328,6 +330,8 @@ def render_to_pdf(template_src, context_dict):
 
 def generatepdf(request, param):
     context = generateletter(request, param)
+
+    context.update({'export': 'pdf'})
 
     return render_to_pdf('pim/letter.html', context)
         
