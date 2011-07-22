@@ -7,7 +7,16 @@ from pimbase.forms import UserForm
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.db.models import Count
+from django.template.loader import get_template
+from django.template import Context
+from django import http
+
+import settings
+
 import datetime
+import ho.pisa as pisa
+import cStringIO as StringIO
+import cgi
 
 class FilterData:
     def __init__(self, request, definition):
@@ -259,7 +268,7 @@ def generate(request):
     return render_to_response('pim/generate.html', {'selected_companies': selected_companies},
         context_instance=RequestContext(request))
 
-def generatehtml(request, param):
+def generateletter(request, param):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
         return HttpResponseServerError("No companies selected")
@@ -299,4 +308,26 @@ def generatehtml(request, param):
         'currentdate': datetime.date.today(),
     }
 
+    return context
+
+def generatehtml(request, param):
+    context = generateletter(request, param)
+
     return render_to_response('pim/letter.html', context)
+
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    context = Context(context_dict)
+    html  = template.render(context)
+    result = StringIO.StringIO()
+    # XXX: for some reason the path has to end one directory lower. I'm clueless why.
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result, path=settings.STATIC_ROOT + "/XXX/")
+    if not pdf.err:
+        return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
+
+def generatepdf(request, param):
+    context = generateletter(request, param)
+
+    return render_to_pdf('pim/letter.html', context)
+        
