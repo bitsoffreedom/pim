@@ -128,7 +128,6 @@ INSTALLED_APPS = [
     'sentry',
     'sentry.client',
     'staticfiles',
-    'tinymce',
     'taggit',
     'pim.pimbase'
 ]
