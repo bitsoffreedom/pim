@@ -11,25 +11,23 @@
 {% endif %}
 	</head>
 	<body>
+
 		<div class="vcard" id="sender">
-			<span class="fn">{{ firstname }} {{ lastname }}</span>
-			<div class="adr">
-				<div class="street-address">{{ street_address }}</div>
-				<span class="postal-code">{{ postcode }}</span>
-				<span class="locality">{{ city }}</span>
-			</div>
+			<span class="fn">{{ firstname }} {{ lastname }}</span><br />
+			<span class="street-address">{{ street_address }}</span><br />
+			<span class="postal-code">{{ postcode }}</span>
+			<span class="locality">{{ city }}</span><br />
+			<span class="country-name">Nederland</span><br />
 		</div>
 
 		<div class="vcard" id="receiver">
-			<span class="fn">{{ organisation }}</span>
-			<div class="adr">
-				<div class="extended-address">{{ organisation.address }}</div>
-				<span class="postal-code">{{ organisation.postcode }}</span>
-				<span class="locality">{{ organisation.city }}</span>
-				<div class="country-name">{{ organisation.country }}</div>
-			</div>
+			<span class="fn">{{ organisation }}</span><br />
+			<span class="extended-address">{{ organisation.address }}</span><br />
+			<span class="postal-code">{{ organisation.postcode }}</span>
+			<span class="locality">{{ organisation.city }}</span><br />
+			<span class="country-name">{{ organisation.country }}</span><br />
 		</div>
-		
+
 		<p id="date-signature">{{ city }}, {{ currentdate }}</p>
 		
 		<h1>Betreft: Inzageverzoek op grond van de Wet bescherming persoonsgegevens (Wbp)</h1>

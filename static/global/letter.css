@@ -69,6 +69,11 @@ input, select { vertical-align:middle; }
 /* END RESET CSS */
 
 
+
+@page {
+	margin: 2cm;
+	} 
+
 body {
 	border: 0 none;
 	font-family: Arial, sans-serif;
