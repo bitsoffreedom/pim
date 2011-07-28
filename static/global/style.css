@@ -529,7 +529,9 @@ text-decoration: none;
 	background-color: #FFFFFF;
     float: left;
     margin-right: 20px;
-    min-height: 100%;
+    /* Next line disabled to fix issue in Opera (and doesn't */
+    /* seem to break anything in other browsers. */
+    /* min-height: 100%; */
 	width: 941px;
 	
 	-moz-box-shadow: 2px 2px 2px #000000;
