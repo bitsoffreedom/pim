@@ -120,7 +120,7 @@ class Organisation(models.Model):
 
     name = models.CharField(max_length=200, verbose_name=_('name'), help_text="De officiele naam van de organisatie", unique=True)
     """ Official name of organisation. """
-    short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'), unique=True)
+    short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
     kvknumber = models.CharField(max_length=200, blank=True)
     address = models.CharField(max_length=200, verbose_name=_('street address or PO box'), blank=True)
     postcode = models.CharField(max_length=20, blank=True)
