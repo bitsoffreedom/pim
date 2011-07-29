@@ -16,8 +16,10 @@
         <h3>PIM filtert op:</h3>
         {% show_filter_status fm %}
         {% if query %}
-          <h3>PIM zoekt op:</h3>
-          <a href="/start/">"{{ query }}" in de organisatienaam</a>
+	<h3>PIM zoekt op:</h3>
+	  <ul>
+	    <li><a href="/start/">"{{ query }}" in de organisatienaam</a></li>
+	  </ul>
         {% endif %}
       </div>
       {% if not query %}
