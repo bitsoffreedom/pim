@@ -9,7 +9,9 @@
         <li><a href="{{ set_url }}/{{ i.id }}">{{ i.name }} ({{ i.count }})</a></li>
     {% endfor %}
 {% endif %}
+    {% if undefined > 0 %}
     <li>onbepaald ({{ undefined }})</li>
+    {% endif %}
 </ul>
 
 {% if not show_more and items|length > 20 %}
