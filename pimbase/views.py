@@ -145,7 +145,6 @@ def index(request):
 
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
     org_list = search(query, fm.get_filterdata(request))
-    org_count = org_list.count()
     paginator = Paginator(org_list, 30)
 
     try:
@@ -165,7 +164,6 @@ def index(request):
     context = {
         'query': query,
         'fm': fm.get_filterdata(request),
-        'org_count': org_count,
         'organisations': org,
         'selected_companies': selected_companies,
         'search_range': search_range,
