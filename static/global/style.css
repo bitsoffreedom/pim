@@ -862,7 +862,7 @@ button#next-step {
   text-decoration: none;
 }
 .step-3 #wizard p {
-  margin: 0 0 15px 20px;
+  margin: 0 0 15px 0px;
 }
 #download-single {
   line-height: 153.9%;
