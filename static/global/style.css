@@ -590,10 +590,6 @@ text-decoration: none;
 .step-1 {
   background: url("/static/global/bg-wizard.gif") repeat-y scroll 10px 0 transparent;
 }
-.step-2,
-.step-3 {
-  background: url("/static/global/bg-wizard_step-2.gif") repeat-y 190px 0;
-}
 
 .column {
   float: left;
@@ -867,9 +863,8 @@ button#next-step {
 }
 .step-3 #wizard p {
   margin: 0 0 15px 20px;
-  width: 500px;
 }
-.step-3 #wizard ul {
+#download-single {
   line-height: 153.9%;
   list-style: none outside none;
   margin: 0;
