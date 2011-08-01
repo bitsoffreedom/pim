@@ -49,19 +49,19 @@
         <a href="{% paginator_url 0 organisations.previous_page_number %}">Vorige</a>
         {% endif %}
 
-        {% for i in search_range %}
-          {% if i == organisations.number %}
-          <span><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
-          {% else %}
-          <span><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
-          {% endif %}
-        {% endfor %}
+        {% if search_range|length > 1 %}
+          {% for i in search_range %}
+            {% if i == organisations.number %}
+            <span><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
+            {% else %}
+            <span><a href="{% paginator_url 0 i %}">{{ i }}</a></span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
 
         {% if organisations.has_next %}
         <a href="{% paginator_url 0 organisations.next_page_number %}">Volgende</a>
         {% endif %}
-        
-        <span class="orgcount">{{ org_count }} Organisaties</span>
       </div>
     </div>
 

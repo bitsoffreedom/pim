@@ -145,7 +145,6 @@ def index(request):
 
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
     org_list = search(query, fm.get_filterdata(request))
-    org_count = org_list.count()
     paginator = Paginator(org_list, 30)
 
     try:
@@ -165,7 +164,6 @@ def index(request):
     context = {
         'query': query,
         'fm': fm.get_filterdata(request),
-        'org_count': org_count,
         'organisations': org,
         'selected_companies': selected_companies,
         'search_range': search_range,
@@ -268,7 +266,18 @@ def generate(request):
     return render_to_response('pim/generate.html', {'selected_companies': selected_companies},
         context_instance=RequestContext(request))
 
-def generateletter(request, param):
+def render_to_pdf(template_src, context_dict):
+    template = get_template(template_src)
+    context = Context(context_dict)
+    html  = template.render(context)
+    result = StringIO.StringIO()
+    # XXX: for some reason the path has to end one directory lower. I'm clueless why.
+    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result, path=settings.STATIC_ROOT + "/XXX/")
+    if not pdf.err:
+        return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
+    return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
+
+def generateletter(request, param, type):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
         return HttpResponseServerError("No companies selected")
@@ -308,30 +317,20 @@ def generateletter(request, param):
         'currentdate': datetime.date.today(),
     }
 
-    return context
+    if type == "html":
+        context.update({'export': 'html'})
+
+        return render_to_response('pim/letter.html', context)
+    elif type == "pdf":
+        context.update({'export': 'pdf'})
+
+        return render_to_pdf('pim/letter.html', context)
+    else:
+        return HttpResponseServerError("Output type doesn't exist.")
 
 def generatehtml(request, param):
-    context = generateletter(request, param)
-
-    context.update({'export': 'html'})
-
-    return render_to_response('pim/letter.html', context)
-
-def render_to_pdf(template_src, context_dict):
-    template = get_template(template_src)
-    context = Context(context_dict)
-    html  = template.render(context)
-    result = StringIO.StringIO()
-    # XXX: for some reason the path has to end one directory lower. I'm clueless why.
-    pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result, path=settings.STATIC_ROOT + "/XXX/")
-    if not pdf.err:
-        return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
-    return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
+    return generateletter(request, param, 'html')
 
 def generatepdf(request, param):
-    context = generateletter(request, param)
+    return generateletter(request, param, 'pdf')
 
-    context.update({'export': 'pdf'})
-
-    return render_to_pdf('pim/letter.html', context)
-        
