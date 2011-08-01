@@ -7,7 +7,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 # Safe sessions for a very limited time since they hold personal information.
-SESSION_COOKIE_AGE = 15 * 60
+SESSION_COOKIE_AGE = 10 * 60
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SITE_ID = 1
