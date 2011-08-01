@@ -49,4 +49,4 @@ pim -> /data/WWW/pim.bof.nl/pim/wp-theme/
 
 CRONTAB
 
-0 0 * * * /usr/bin/python /data/WWW/pim.bof.nl/pim/manage.py cleanup
+*/5 * * * * /usr/bin/python /data/WWW/pim.bof.nl/pim/manage.py cleanup
