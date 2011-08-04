@@ -5,7 +5,7 @@
         <li><a href="{{ set_url }}/{{ i.id }}">{{ i.name }} ({{ i.count }})</a></li>
     {% endfor %}
 {% else %}
-    {% for i in items|slice:":10" %}
+    {% for i in items|slice:":20" %}
         <li><a href="{{ set_url }}/{{ i.id }}">{{ i.name }} ({{ i.count }})</a></li>
     {% endfor %}
 {% endif %}
