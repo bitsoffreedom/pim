@@ -353,8 +353,8 @@ text-decoration: none;
 .main-nav a {
 	background: url("images/menu-separator-left.png") no-repeat scroll 0 center transparent;
     color: #FFFFFF;
-    font-size: 146.5%;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
     padding: 0 10px;
     text-decoration: none;
     text-transform: uppercase;
