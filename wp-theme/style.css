@@ -361,7 +361,7 @@ text-decoration: none;
 }
 
 .main-nav li {
-	background: url("images/menu-separator-right.png") no-repeat scroll right 10px transparent;
+	background: url("images/menu-separator-right.png") no-repeat scroll right 8px transparent;
 }
 .main-nav #menu-item-80 a,
 .main-nav #menu-item-79 {
