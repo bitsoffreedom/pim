@@ -22,6 +22,9 @@
 
 		<div class="vcard" id="receiver">
 			<span class="fn">{{ organisation }}</span><br />
+      {% if organisation.addressee %}
+      <span class="addressee">{{ organisation.addressee }}</span><br />
+      {% endif %}
 			<span class="extended-address">{{ organisation.address }}</span><br />
 			<span class="postal-code">{{ organisation.postcode }}</span>
 			<span class="locality">{{ organisation.city }}</span><br />

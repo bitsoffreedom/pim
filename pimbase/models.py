@@ -122,6 +122,7 @@ class Organisation(models.Model):
     """ Official name of organisation. """
     short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
     kvknumber = models.CharField(max_length=200, blank=True)
+    addressee = models.CharField(max_length=200, verbose_name=_('The name of the department or contact to send the letter to'), blank=True)
     address = models.CharField(max_length=200, verbose_name=_('street address or PO box'), blank=True)
     postcode = models.CharField(max_length=20, blank=True)
     organisationtype = models.ForeignKey(OrganisationType, blank=True, null=True)
