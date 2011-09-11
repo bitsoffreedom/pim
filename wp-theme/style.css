@@ -353,15 +353,15 @@ text-decoration: none;
 .main-nav a {
 	background: url("images/menu-separator-left.png") no-repeat scroll 0 center transparent;
     color: #FFFFFF;
-    font-size: 146.5%;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
     padding: 0 10px;
     text-decoration: none;
     text-transform: uppercase;
 }
 
 .main-nav li {
-	background: url("images/menu-separator-right.png") no-repeat scroll right 10px transparent;
+	background: url("images/menu-separator-right.png") no-repeat scroll right 8px transparent;
 }
 .main-nav #menu-item-80 a,
 .main-nav #menu-item-79 {
@@ -423,141 +423,143 @@ text-decoration: none;
 /* NON WIZARD PAGES */
 #content {
 	background: none repeat scroll 0 0 #ACD28C;
-    padding: 0 0 60px;
-    position: relative;
-    
-    -moz-box-shadow: 2px 2px 2px #000000;
+	padding: 0 0 60px;
+	position: relative;
+
+	-moz-box-shadow: 2px 2px 2px #000000;
 	-webkit-box-shadow: 2px 2px 2px #000000;
 	box-shadow: 2px 2px 2px #000000;
+}
+
+#content #articles,
+#content #article {
+	background-color: #FFFFFF;
+	float: left;
+	padding-right: 35px;
+	padding-top: 35px;
+	width: 585px;
+	line-height: 19px;
 	}
-	
-	#content #articles,
-	#content #article {
-		background-color: #FFFFFF;
-	    float: left;
-	    padding-right: 35px;
-	    padding-top: 35px;
-	    width: 585px;
-		}
 	#content #article {
 		padding-top: 13px;
+		padding-bottom: 15px;
+	}
+
+	#content #article-image {
+		position: relative;
+		margin-left: 35px;
 		}
-		
-		#content #article-image {
+		#content #article-image .caption {
+			float: right;
+			font-size: 95%;
+			margin-bottom: 15px;
+			}
+			#content #article-image .caption a {
+				font-weight: normal;
+				}
+				#content #article-image .article-image-mask {
+					background: url("images/article-image-mask.png") repeat scroll 0 0 transparent;
+					height: 228px;
+					left: 0;
+					position: absolute;
+					top: 0;
+					width: 550px;
+			}
+
+			#content ol {
+				list-style: none outside none;
+				margin-left: 0;
+		}
+
+		#content li.excerpt {
+			border-top: 2px dotted #83BC55;
+			padding: 35px;
 			position: relative;
-			margin-left: 35px;
+			width: 550px;
 			}
-			#content #article-image .caption {
-				float: right;
-			    font-size: 95%;
-			    margin-bottom: 15px;
-				}
-				#content #article-image .caption a {
-					font-weight: normal;
-					}
-			#content #article-image .article-image-mask {
-				background: url("images/article-image-mask.png") repeat scroll 0 0 transparent;
-			    height: 228px;
-			    left: 0;
-			    position: absolute;
-			    top: 0;
-			    width: 550px;
-				}
-		
-		#content ol {
-		    list-style: none outside none;
-		    margin-left: 0;
-			}
-			
-			#content li.excerpt {
-				border-top: 2px dotted #83BC55;
-			    padding: 35px;
-			    position: relative;
-			    width: 550px;
-				}
-			
+
 			#content li.excerpt img {
 				float: left;
-		    	margin-right: 25px;
-				}
+				margin-right: 25px;
+			}
 			#content li.excerpt .thumb-mask {
 				background: url("images/thumbnail-mask.png") repeat scroll 0 0 transparent;
-			    height: 140px;
-			    left: 35px;
-			    position: absolute;
-			    width: 140px;
-				}
-			
+				height: 140px;
+				left: 35px;
+				position: absolute;
+				width: 140px;
+			}
+
 			#content li.excerpt p {
 				margin-bottom: 0;
-	    		padding-left: 165px;
-				}
-
-	#content #page-sub-nav {
-		background-color: #ACD28C;
-	    float: right;
-	    padding: 13px;
-	    width: 295px;
-		}
-		#page-sub-nav ol {
-			list-style: none;
-			padding: 0;
-			margin: 0;
+				padding-left: 165px;
 			}
-			#page-sub-nav li {
-			    background: url("images/sidebar-item-sub.png") no-repeat scroll 0 0 transparent;
-			    float: left;
-			    height: 158px;
-			    margin-bottom: 13px;
-			    padding: 5px;
-			    width: 130px;
-				}
+
+			#content #page-sub-nav {
+				background-color: #ACD28C;
+				float: right;
+				padding: 13px;
+				width: 295px;
+	}
+	#page-sub-nav ol {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		}
+		#page-sub-nav li {
+			background: url("images/sidebar-item-sub.png") no-repeat scroll 0 0 transparent;
+			float: left;
+			height: 158px;
+			margin-bottom: 13px;
+			padding: 5px;
+			width: 130px;
+			}
 			#page-sub-nav li.uneven {
 				margin-right: 13px;
-				}
+			}
 			#page-sub-nav li.selected {
 				background: url("images/sidebar-main-sub.png") no-repeat scroll 0 0 transparent;
-				}
-				#page-sub-nav li a {
-					color: #FFFFFF;
-				    font-size: 19px;
-				    text-transform: uppercase;
-				    text-decoration: none;
-					}
-
-/* FRONTPAGE */
-body.home #content {
-	background: url("images/bg-home.jpg") no-repeat scroll 0 0 #FFFFFF;
-    min-height: 421px;
-    padding-top: 35px;
-	}
-	
-	body.home #content > ul,
-	body.home #content > ol {
-		list-style-image: url("images/bullet-big.png");
-    		padding-left: 35px;
-		margin-top: 40px;
-		}
-		body.home #content > ul li,
-		body.home #content > ol li,
-		body.home #content > ul li a,
-		body.home #content > ol li a {
-			color: #58A618;
-		    font-size: 1.6em;
-		    font-weight: bold;
-		    margin-top: 10px;
 			}
+			#page-sub-nav li a {
+				color: #FFFFFF;
+				font-size: 19px;
+				text-transform: uppercase;
+				text-decoration: none;
+				}
 
-/* WIZARD */
-#wizard {
-  background: url("images/frame_bg.png") repeat-x 0 bottom #FFFFFF;
-  float: left;
-  margin-bottom: 55px;
-  margin-right: 20px;
-  min-height: 100%;
-  width: 941px;
-  -moz-box-shadow: 1px 1px 1px #000;
-  -webkit-box-shadow: 1px 1px 1px #000;
+				/* FRONTPAGE */
+				body.home #content {
+					background: url("images/bg-home.jpg") no-repeat scroll 0 0 #FFFFFF;
+					min-height: 421px;
+					padding-top: 35px;
+}
+
+body.home #content > ul,
+body.home #content > ol {
+	list-style-image: url("images/bullet-big.png");
+	padding-left: 35px;
+	margin-top: 40px;
+	}
+	body.home #content > ul li,
+	body.home #content > ol li,
+	body.home #content > ul li a,
+	body.home #content > ol li a {
+		color: #58A618;
+		font-size: 1.6em;
+		font-weight: bold;
+		margin-top: 10px;
+		}
+
+		/* WIZARD */
+		#wizard {
+			background: url("images/frame_bg.png") repeat-x 0 bottom #FFFFFF;
+			float: left;
+			margin-bottom: 55px;
+			margin-right: 20px;
+			min-height: 100%;
+			width: 941px;
+			-moz-box-shadow: 1px 1px 1px #000;
+			-webkit-box-shadow: 1px 1px 1px #000;
 }
 
 #steps {
@@ -798,7 +800,7 @@ body.home #next-step {
     bottom: auto;
     font-size: 37px;
     left: 500px;
-    padding: 10px 50px 4px 10px;
+    padding: 10px 54px 4px 10px;
     position: absolute !important;
     right: auto;
     top: 200px;
@@ -942,9 +944,9 @@ button#next-step {
 #footer {
 	background-color: #5FA822;
     bottom: 0;
-    height: 35px;
+    height: 38px;
     left: 0;
-    padding-top: 25px;
+    padding-top: 22px;
     position: absolute;
     width: 100%;
 	}

@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="/static/global/IE9.js"></script>
 		<![endif]-->
 		
-		<script type="text/javascript" src="http://use.typekit.com/wge3fla.js"></script>
+		<script type="text/javascript" src="https://pim.bof.nl/wp-content/uploads/wge3fla.js"></script>
 		<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 		
 		<!--<base href="http://82.94.216.83/dataview/" />-->

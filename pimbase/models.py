@@ -6,8 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 class City(models.Model):
-    name = models.CharField(max_length=64, verbose_name=_('name'))
-    slug = models.SlugField()
+    name = models.CharField(max_length=64, verbose_name=_('name'), unique=True)
+    slug = models.SlugField(unique=True)
     
     class Meta:
         verbose_name=_('city')
@@ -21,8 +21,8 @@ class City(models.Model):
         self.slug = defaultfilters.slugify(name)
 
 class Country(models.Model):
-    name = models.CharField(max_length=64, verbose_name=_('name'))
-    slug = models.SlugField()
+    name = models.CharField(max_length=64, verbose_name=_('name'), unique=True)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name=_('country')
@@ -37,7 +37,7 @@ class Country(models.Model):
 
 class Sector(models.Model):
     name = models.CharField(max_length=64, verbose_name=_('name'))
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name=_('sector')
@@ -118,10 +118,11 @@ class OrganisationTag(models.Model):
 class Organisation(models.Model):
     """ A model representing an organisation. """
 
-    name = models.CharField(max_length=200, verbose_name=_('name'), help_text="De officiele naam van de organisatie")
+    name = models.CharField(max_length=200, verbose_name=_('name'), help_text="De officiele naam van de organisatie", unique=True)
     """ Official name of organisation. """
     short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
     kvknumber = models.CharField(max_length=200, blank=True)
+    addressee = models.CharField(max_length=200, verbose_name=_('The name of the department or contact to send the letter to'), blank=True)
     address = models.CharField(max_length=200, verbose_name=_('street address or PO box'), blank=True)
     postcode = models.CharField(max_length=20, blank=True)
     organisationtype = models.ForeignKey(OrganisationType, blank=True, null=True)
@@ -156,7 +157,7 @@ class RelationType(models.Model):
     """ Types of relationships. """
 
     name = models.CharField(max_length=64, verbose_name=_('name'))
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
 
     class Meta:
         verbose_name = _('relation type')

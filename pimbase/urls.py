@@ -4,7 +4,6 @@ from pimbase.views import fm
 
 urlpatterns = patterns('',
     (r'^$', 'pimbase.views.index'),
-    (r'^start/$', 'pimbase.views.index'),
 
     (r'^', include(fm.urls)),
 
@@ -15,4 +14,5 @@ urlpatterns = patterns('',
     (r'^gebruikers-gegevens$', 'pimbase.views.userdata'),
     (r'^genereer-brieven$', 'pimbase.views.generate'),
     (r'^generatehtml/(?P<param>\d+)$', 'pimbase.views.generatehtml'),
+    (r'^generatepdf/(?P<param>\d+)$', 'pimbase.views.generatepdf'),
 )

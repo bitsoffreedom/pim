@@ -12,7 +12,7 @@ else:
     urlpatterns = patterns('')
 
 urlpatterns += patterns('',
-    (r'^', include('pimbase.urls')),
+    (r'^start/', include('pimbase.urls')),
 
     # Sentry for catching exceptions in staging/production
     (r'^sentry/', include('sentry.urls')),

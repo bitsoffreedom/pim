@@ -4,3 +4,4 @@ django_debug_toolbar
 django-staticfiles
 django-sentry
 django-taggit
+pisa

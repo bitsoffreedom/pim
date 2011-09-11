@@ -325,15 +325,15 @@ text-decoration: none;
 .main-nav a {
 	background: url("/static/global/menu-separator-left.png") no-repeat scroll 0 center transparent;
     color: #FFFFFF;
-    font-size: 146.5%;
-    font-weight: bold;
+    font-size: 16px;
+    font-weight: 700;
     padding: 0 10px;
     text-decoration: none;
     text-transform: uppercase;
 }
 
 .main-nav li {
-	background: url("/static/global/menu-separator-right.png") no-repeat scroll right 10px transparent;
+	background: url("/static/global/menu-separator-right.png") no-repeat scroll right 8px transparent;
 }
 .main-nav #menu-item-80 a,
 .main-nav #menu-item-79 {
@@ -529,6 +529,9 @@ text-decoration: none;
 	background-color: #FFFFFF;
     float: left;
     margin-right: 20px;
+    /* Next line disabled to fix issue in Opera (and doesn't */
+    /* seem to break anything in other browsers. */
+    /* min-height: 100%; */
 	width: 941px;
 	
 	-moz-box-shadow: 2px 2px 2px #000000;
@@ -580,16 +583,18 @@ text-decoration: none;
 }
 
 #column-wrapper {
-  margin: 20px 0 75px 0;
+  margin: 20px 0 35px 0;
   min-height: 400px;
   position: relative;
 }
+
 .step-1 {
   background: url("/static/global/bg-wizard.gif") repeat-y scroll 10px 0 transparent;
 }
+
 .step-2,
-.step-3 {
-  background: url("/static/global/bg-wizard_step-2.gif") repeat-y 190px 0;
+.step-3 {       
+	  background: url("/static/global/bg-wizard_step-2.gif") repeat-y 190px 0;
 }
 
 .column {
@@ -863,10 +868,9 @@ button#next-step {
   text-decoration: none;
 }
 .step-3 #wizard p {
-  margin: 0 0 15px 20px;
-  width: 500px;
+  margin: 0 0 15px 0px;
 }
-.step-3 #wizard ul {
+#download-single {
   line-height: 153.9%;
   list-style: none outside none;
   margin: 0;
@@ -942,10 +946,9 @@ button#next-step {
 #footer {
 	background-color: #5FA822;
     bottom: 0;
-    height: 35px;
+    height: 38px;
     left: 0;
-    padding-top: 25px;
-    position: absolute;
+    padding-top: 22px;
     width: 100%;
 	}
 	#footer ul {

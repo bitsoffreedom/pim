@@ -5,17 +5,19 @@
         <li><a href="{{ set_url }}/{{ i.id }}">{{ i.name }} ({{ i.count }})</a></li>
     {% endfor %}
 {% else %}
-    {% for i in items|slice:":10" %}
+    {% for i in items|slice:":20" %}
         <li><a href="{{ set_url }}/{{ i.id }}">{{ i.name }} ({{ i.count }})</a></li>
     {% endfor %}
 {% endif %}
+    {% if undefined > 0 %}
     <li>onbepaald ({{ undefined }})</li>
+    {% endif %}
 </ul>
 
-{% if not show_more and items|length > 10 %}
+{% if not show_more and items|length > 20 %}
   <a href="{{ show_more_url }}">Meer</a>
 {% endif %}
-{% if show_more and items|length > 10 %}
+{% if show_more and items|length > 20 %}
   <a href="{{ show_less_url }}">Minder</a>
 {% endif %}
 

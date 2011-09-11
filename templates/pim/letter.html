@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+
+{% if export == "pdf" %}
+		<link rel="stylesheet" href="letter.css" type="text/css" media="print, screen" />
+{% else %}
+		<link rel="stylesheet" href="/static/global/letter.css" type="text/css" media="print, screen" />
+{% endif %}
+	</head>
+	<body>
+
+		<div class="vcard" id="sender">
+			<span class="fn">{{ firstname }} {{ lastname }}</span><br />
+			<span class="street-address">{{ street_address }}</span><br />
+			<span class="postal-code">{{ postcode }}</span>
+			<span class="locality">{{ city }}</span><br />
+			<span class="country-name">Nederland</span><br />
+		</div>
+
+		<div class="vcard" id="receiver">
+			<span class="fn">{{ organisation }}</span><br />
+      {% if organisation.addressee %}
+      <span class="addressee">{{ organisation.addressee }}</span><br />
+      {% endif %}
+			<span class="extended-address">{{ organisation.address }}</span><br />
+			<span class="postal-code">{{ organisation.postcode }}</span>
+			<span class="locality">{{ organisation.city }}</span><br />
+			<span class="country-name">{{ organisation.country }}</span><br />
+		</div>
+
+		<p id="date-signature">{{ city }}, {{ currentdate|date:"j F Y" }}</p>
+		
+		<h1>Betreft: Inzageverzoek op grond van de Wet bescherming persoonsgegevens (Wbp)</h1>
+		
+		<p>Geachte heer, mevrouw,<br />
+		<br />
+	
+		<p>Met een beroep op artikel 35 van de Wet bescherming persoonsgegevens (Wbp) verneem ik graag of u persoonsgegevens van mij verwerkt. Indien dat het geval is, verzoek ik u om een overzicht hiervan.</p>
+
+		<p>Ik wijs u graag op lid 2 en lid 4 van artikel 35 van de Wbp. In lid 2 staat vermeld dat uw mededeling naast een volledig overzicht van de persoonsgegevens in begrijpelijke vorm ook &lsquo;een omschrijving van het doel of de doeleinden van de verwerking, de categorie&euml;n van gegevens waarop de verwerking betrekking heeft en de ontvangers of categorie&euml;n van ontvangers, alsmede de beschikbare informatie over de herkomst van de gegevens [bevat].&rsquo; Ik vertrouw erop dat u deze onderdelen zult opnemen in uw reactie op mijn verzoek.</p>
+
+		<p>Op grond van lid 4 van artikel 35 Wbp doet u &lsquo;desgevraagd (&hellip;) mededelingen omtrent de logica die ten grondslag ligt aan de geautomatiseerde verwerking van hem betreffende gegevens.&rsquo; Hierbij verzoek ik u expliciet mededelingen te doen inzake de logica die aan de verwerkingen van mijn persoonsgegevens ten grondslag ligt.</p>
+		
+		<p>Wellicht ten overvloede vermeld ik dat in lid 1 van het wetsartikel een termijn van vier weken wordt genoemd waarin u aan dit verzoek moet voldoen.</p>
+		
+		<p>Een kopie van mijn identiteitsbewijs is als bijlage opgenomen.</p>
+		
+		<p id="signature">Hoogachtend,<br />
+		<br />
+		<br />
+		{{ firstname }} {{ lastname }}</p>
+
+	</body>
+</html>
