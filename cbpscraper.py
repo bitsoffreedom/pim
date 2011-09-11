@@ -27,7 +27,7 @@ import pickle
 BASE_URL = "http://www.cbpweb.nl/asp/"
 SEARCH_FORM = BASE_URL + "ORSearch.asp"
 
-SHARED_STACK = sys.argv[1]
+SHARED_STACK = "stack.pickle"
 CHARS = " !\"'(9876543210zyxwvutsrqponmlkjihgfedcba"
 
 def get_item():
@@ -130,7 +130,8 @@ def parse_persoonsgegevens_table(table):
 		name = clean(rows[r].findAll("td")[1])
 		value = clean(rows[r+1].findAll("td")[1])
 		persoonsgegevens[name] = value
-	persoonsgegevens["bijzonder"] = clean(rows[-1].findAll("td")[1])
+        if rows:
+            persoonsgegevens["bijzonder"] = clean(rows[-1].findAll("td")[1])
 	return persoonsgegevens
 
 def parse_addres_table(table):
@@ -222,18 +223,20 @@ def get_detailed_info(url):
 
 
 if __name__ == "__main__":
-    try:
-        f = open(SHARED_STACK, "r")
-        f.close()
-    except:
-        print "Creating new stack"
-        stack = [a+b+c for a in CHARS for b in CHARS for c in CHARS]
-        pickle.dump(stack, open(SHARED_STACK, "w"))
+	try:
+		f = open(SHARED_STACK, "r")
+		f.close()
+	except:
+		print "Creating new stack"
+		stack = [a+b+c for a in CHARS for b in CHARS for c in CHARS]
+		pickle.dump(stack, open(SHARED_STACK, "w"))
 	companies = []
 	name  = get_item()
 	print "Trying \"%s\"" % (name)
 	page = list_name(name)
-	if page == None: sys.exit()
+	if page == None:
+		print "No pages found for '%s'" % (name)
+		sys.exit()
 	if not page:
 		add_items([name+"%s" % (c) for c in CHARS])
 		sys.exit()
