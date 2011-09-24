@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load filters %}
 {% load pagination %}
+{% load cache %}
 
 {% block content %}
 <div id="wizard">
@@ -29,20 +30,30 @@
       </form>
       {% endif %}
 
+      {% cache 3600 filter_list %}
       {% for f in fm %}
           {% show_filter f %}
       {% endfor %}
+      {% endcache %}
     </div>
 
     <div id="result-list" class="column">
       <h2>Organisaties</h2>
       
       <ol>
-      {% for org in organisations.object_list %}
-        {% if org not in selected_companies %}
-        <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
-        {% endif %}
-      {% endfor %}
+      {% if selected_companies %}
+        {% for org in organisations.object_list %}
+          {% if org not in selected_companies %}
+          <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
+          {% endif %}
+        {% endfor %}
+      {% else %}
+        {% cache 3600 result_list %}
+        {% for org in organisations.object_list %}
+          <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
+        {% endfor %}
+        {% endcache %}
+      {% endif %}
       </ol>
       <div class="paginator">
         {% if organisations.has_previous %}
