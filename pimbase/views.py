@@ -10,6 +10,7 @@ from django.db.models import Count
 from django.template.loader import get_template
 from django.template import Context
 from django import http
+from django.views.decorators.cache import cache_control
 
 import settings
 
@@ -130,6 +131,7 @@ def search(query, fm):
 
     return org_list
 
+@cache_control(public=True, max_age=3600)
 def index(request):
     # initialize the session
     request.session.setdefault('companies', [])
@@ -172,12 +174,14 @@ def index(request):
     return render_to_response('pim/index.html', context,
         context_instance=RequestContext(request))
 
+@cache_control(no_cache=True)
 def cleancompanylist(request):
     request.session['companies'] = []
     request.session.modified = True
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
+@cache_control(no_cache=True)
 def addcompany(request, param):
     company = request.session.setdefault('companies', [])
     try:
@@ -194,6 +198,7 @@ def addcompany(request, param):
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
+@cache_control(no_cache=True)
 def delcompany(request, param):
     request.session.setdefault('companies', [])
 
@@ -207,6 +212,7 @@ def delcompany(request, param):
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
+@cache_control(no_cache=True)
 def userdata(request):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
@@ -257,6 +263,7 @@ def userdata(request):
     return render_to_response('pim/userdata.html', context,
         context_instance=RequestContext(request))
 
+@cache_control(no_cache=True)
 def generate(request):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
@@ -266,6 +273,7 @@ def generate(request):
     return render_to_response('pim/generate.html', {'selected_companies': selected_companies},
         context_instance=RequestContext(request))
 
+@cache_control(no_cache=True)
 def render_to_pdf(template_src, context_dict):
     template = get_template(template_src)
     context = Context(context_dict)
@@ -328,9 +336,11 @@ def generateletter(request, param, type):
     else:
         return HttpResponseServerError("Output type doesn't exist.")
 
+@cache_control(no_cache=True)
 def generatehtml(request, param):
     return generateletter(request, param, 'html')
 
+@cache_control(no_cache=True)
 def generatepdf(request, param):
     return generateletter(request, param, 'pdf')
 
