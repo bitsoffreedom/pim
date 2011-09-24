@@ -29,31 +29,32 @@
         <input type="submit" value="Zoek" />
       </form>
       {% endif %}
-      {% with organisation.number as p_number %}
       {% cache 3600 filter_list p_number %}
       {% for f in fm %}
           {% show_filter f %}
       {% endfor %}
       {% endcache %}
-      {% endwith %}
     </div>
 
     <div id="result-list" class="column">
       <h2>Organisaties</h2>
       
       <ol>
-      {% if selected_companies %}
+      {# If a company or a filter is selected don't do any caching #}
+      {% if selected_companies or has_active_filters %}
         {% for org in organisations.object_list %}
           {% if org not in selected_companies %}
           <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
           {% endif %}
         {% endfor %}
       {% else %}
-        {% cache 3600 result_list %}
+        {% with organisations.number as p_number %}
+        {% cache 3600 result_list p_number %}
         {% for org in organisations.object_list %}
           <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
         {% endfor %}
         {% endcache %}
+        {% endwith %}
       {% endif %}
       </ol>
       <div class="paginator">

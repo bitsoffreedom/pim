@@ -11,6 +11,8 @@ from django.template.loader import get_template
 from django.template import Context
 from django import http
 from django.views.decorators.cache import cache_control
+import logging
+logger = logging.getLogger('pim')
 
 import settings
 
@@ -163,9 +165,17 @@ def index(request):
     else:
         search_range = range(1, min(7, org.paginator.num_pages + 1))
 
+    # Find out if filters are active.
+    has_active_filters = False
+    fm_requests = fm.get_filterdata(request)
+    for filter_data in fm_requests:
+        if filter_data.is_selected():
+            has_active_filters = True
+   
     context = {
         'query': query,
-        'fm': fm.get_filterdata(request),
+        'fm': fm_requests,
+        'has_active_filters': has_active_filters,
         'organisations': org,
         'selected_companies': selected_companies,
         'search_range': search_range,
