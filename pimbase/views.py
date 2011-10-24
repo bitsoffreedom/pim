@@ -284,16 +284,21 @@ def generate(request):
         context_instance=RequestContext(request))
 
 @cache_control(no_cache=True)
-def render_to_pdf(template_src, context_dict):
+def render_to_pdf(template_src, context_dict, filename):
     template = get_template(template_src)
     context = Context(context_dict)
     html  = template.render(context)
     result = StringIO.StringIO()
     # XXX: for some reason the path has to end one directory lower. I'm clueless why.
     pdf = pisa.pisaDocument(StringIO.StringIO(html.encode("ISO-8859-1")), result, path=settings.STATIC_ROOT + "/XXX/")
-    if not pdf.err:
-        return http.HttpResponse(result.getvalue(), mimetype='application/pdf')
-    return http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
+    if pdf.err:
+        response = http.HttpResponse('We had some errors<pre>%s</pre>' % cgi.escape(html))
+    else:
+        response = http.HttpResponse(result.getvalue(), mimetype='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename=%s' % (filename, )
+
+    return response;
+
 
 def generateletter(request, param, type):
     request.session.setdefault('companies', [])
@@ -342,7 +347,7 @@ def generateletter(request, param, type):
     elif type == "pdf":
         context.update({'export': 'pdf'})
 
-        return render_to_pdf('pim/letter.html', context)
+        return render_to_pdf('pim/letter.html', context, '%s.pdf' % (organisation.pk, ))
     else:
         return HttpResponseServerError("Output type doesn't exist.")
 
