@@ -133,7 +133,7 @@ def search(query, fm):
 
     return org_list
 
-@cache_control(public=True, max_age=3600)
+@cache_control(no_cache=True)
 def index(request):
     # initialize the session
     request.session.setdefault('companies', [])
