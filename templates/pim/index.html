@@ -29,7 +29,7 @@
         <input type="submit" value="Zoek" />
       </form>
       {% endif %}
-      {% cache 3600 filter_list p_number %}
+      {% cache 3600 filter_list %}
       {% for f in fm %}
           {% show_filter f %}
       {% endfor %}
