@@ -171,6 +171,8 @@ def index(request):
     for filter_data in fm_requests:
         if filter_data.is_selected():
             has_active_filters = True
+    if query:
+        has_active_filters = True
    
     context = {
         'query': query,
