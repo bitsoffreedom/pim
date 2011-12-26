@@ -44,14 +44,14 @@
       {% if selected_companies or has_active_filters %}
         {% for org in organisations.object_list %}
           {% if org not in selected_companies %}
-          <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
+          <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}?p={{ organisations.number }}">{{ org|truncchar:40 }}</a></div></li>
           {% endif %}
         {% endfor %}
       {% else %}
         {% with organisations.number as p_number %}
         {% cache 3600 result_list p_number %}
         {% for org in organisations.object_list %}
-          <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}">{{ org|truncchar:40 }}</a></div></li>
+          <li><div class="menuitem"><a class="menuitem" href="{% url pimbase.views.addcompany org.id %}?p={{ organisations.number }}">{{ org|truncchar:40 }}</a></div></li>
         {% endfor %}
         {% endcache %}
         {% endwith %}

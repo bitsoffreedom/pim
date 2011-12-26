@@ -133,18 +133,23 @@ def search(query, fm):
 
     return org_list
 
-@cache_control(no_cache=True)
-def index(request):
-    # initialize the session
-    request.session.setdefault('companies', [])
-
-    # URL processing
+def pageid(request):
     page_id = 1
     if 'p' in request.GET.keys():
         try:
             page_id = int(request.GET.get('p', ''))
         except (ValueError, TypeError):
             return HttpResponseServerError("Invalid parameter")
+
+    return page_id
+
+@cache_control(no_cache=True)
+def index(request):
+    # initialize the session
+    request.session.setdefault('companies', [])
+
+    # URL processing
+    page_id = pageid(request);
     query = request.GET.get('q', '')
 
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
@@ -208,7 +213,11 @@ def addcompany(request, param):
         request.session['companies'].append(company_id)
         request.session.modified = True
 
-    return HttpResponseRedirect(reverse('pimbase.views.index'))
+    # It isn't necessary to verify if this page actually exists at this point.
+    # This will be done when the redirect is done and the new page is loaded.
+    page_id = pageid(request);
+
+    return HttpResponseRedirect(reverse('pimbase.views.index') + '?p=%d' % (page_id))
 
 @cache_control(no_cache=True)
 def delcompany(request, param):
