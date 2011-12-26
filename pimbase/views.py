@@ -143,7 +143,7 @@ def pageid(request):
 
     return page_id
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def index(request):
     # initialize the session
     request.session.setdefault('companies', [])
@@ -191,14 +191,14 @@ def index(request):
     return render_to_response('pim/index.html', context,
         context_instance=RequestContext(request))
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def cleancompanylist(request):
     request.session['companies'] = []
     request.session.modified = True
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def addcompany(request, param):
     company = request.session.setdefault('companies', [])
     try:
@@ -219,7 +219,7 @@ def addcompany(request, param):
 
     return HttpResponseRedirect(reverse('pimbase.views.index') + '?p=%d' % (page_id))
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def delcompany(request, param):
     request.session.setdefault('companies', [])
 
@@ -233,7 +233,7 @@ def delcompany(request, param):
 
     return HttpResponseRedirect(reverse('pimbase.views.index'))
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def userdata(request):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
@@ -284,7 +284,7 @@ def userdata(request):
     return render_to_response('pim/userdata.html', context,
         context_instance=RequestContext(request))
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def generate(request):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
@@ -294,7 +294,7 @@ def generate(request):
     return render_to_response('pim/generate.html', {'selected_companies': selected_companies},
         context_instance=RequestContext(request))
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def render_to_pdf(template_src, context_dict, filename):
     template = get_template(template_src)
     context = Context(context_dict)
@@ -362,11 +362,11 @@ def generateletter(request, param, type):
     else:
         return HttpResponseServerError("Output type doesn't exist.")
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def generatehtml(request, param):
     return generateletter(request, param, 'html')
 
-@cache_control(no_cache=True)
+@cache_control(no_cache=True, no_store=True)
 def generatepdf(request, param):
     return generateletter(request, param, 'pdf')
 
