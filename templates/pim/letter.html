@@ -1,3 +1,4 @@
+{% load utils %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
@@ -13,25 +14,25 @@
 	<body>
 
 		<div class="vcard" id="sender">
-			<span class="fn">{{ firstname }} {{ lastname }}</span><br />
-			<span class="street-address">{{ street_address }}</span><br />
+			<span class="fn">{{ firstname|htmlentities }} {{ lastname|htmlentities }}</span><br />
+			<span class="street-address">{{ street_address|htmlentities }}</span><br />
 			<span class="postal-code">{{ postcode }}</span>
-			<span class="locality">{{ city }}</span><br />
+			<span class="locality">{{ city|htmlentities }}</span><br />
 			<span class="country-name">Nederland</span><br />
 		</div>
 
 		<div class="vcard" id="receiver">
 			<span class="fn">{{ organisation }}</span><br />
       {% if organisation.addressee %}
-      <span class="addressee">{{ organisation.addressee }}</span><br />
+      <span class="addressee">{{ organisation.addressee|htmlentities }}</span><br />
       {% endif %}
-			<span class="extended-address">{{ organisation.address }}</span><br />
+			<span class="extended-address">{{ organisation.address|htmlentities }}</span><br />
 			<span class="postal-code">{{ organisation.postcode }}</span>
-			<span class="locality">{{ organisation.city }}</span><br />
-			<span class="country-name">{{ organisation.country }}</span><br />
+			<span class="locality">{{ organisation.city|htmlentities }}</span><br />
+			<span class="country-name">{{ organisation.country|htmlentities }}</span><br />
 		</div>
 
-		<p id="date-signature">{{ city }}, {{ currentdate|date:"j F Y" }}</p>
+		<p id="date-signature">{{ city|htmlentities }}, {{ currentdate|date:"j F Y" }}</p>
 		
 		<h1>Betreft: Inzageverzoek op grond van de Wet bescherming persoonsgegevens (Wbp)</h1>
 		
@@ -51,7 +52,7 @@
 		<p id="signature">Hoogachtend,<br />
 		<br />
 		<br />
-		{{ firstname }} {{ lastname }}</p>
+		{{ firstname|htmlentities }} {{ lastname|htmlentities }}</p>
 
 	</body>
 </html>

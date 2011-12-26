@@ -1,10 +1,14 @@
+from django import template
 from django.utils.http import urlencode
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
-from django.template import Library
-from django.template.defaultfilters import stringfilter
 
-register = Library()
+register = template.Library()
+
+# From: http://djangosnippets.org/snippets/556/ Author:pytechd
+@register.filter()
+def htmlentities(s):
+    return mark_safe(escape(s).encode('ascii', 'xmlcharrefreplace'))
 
 @register.simple_tag
 def paginator_url(query, page_id):
