@@ -8,6 +8,7 @@ TEMPLATE_DEBUG = DEBUG
 
 # Safe sessions for a very limited time since they hold personal information.
 SESSION_COOKIE_AGE = 10 * 60
+STAFF_SESSION_COOKIE_AGE = 24 * 60**2
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SITE_ID = 1
@@ -45,6 +46,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'pimbase.middleware.CookieExpireMiddelware',
 ]
 
 # This is the default lis of context processors from Django
