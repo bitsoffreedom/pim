@@ -1,3 +1,6 @@
+{% load cache %}
+
+{% cache 3600 title show_more %}
 <h4>{{ title }}</h4>
 <ul>
 {% if show_more %}
@@ -21,3 +24,4 @@
   <a href="{{ show_less_url }}">Minder</a>
 {% endif %}
 
+{% endcache %}
