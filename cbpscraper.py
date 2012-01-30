@@ -146,7 +146,8 @@ def parse_addres_table(table):
 
 
 def get_detailed_info(url):
-	page = BeautifulSoup(urllib2.urlopen(url).read())
+	f = urllib2.urlopen(url, timeout=4)
+	page = BeautifulSoup(f.read())
 	info = {}
 	print "PAGE:", url
 	rows = page.find("table", {"class": "list"}).findAll("tr", recursive=False)
