@@ -66,41 +66,6 @@ TEMPLATE_DIRS = (
     path.join(PROJECT_ROOT, 'templates')
 )
 
-# Configuration for TinyMCE WYSIWYG editor
-TINYMCE_DEFAULT_CONFIG = {
-    'mode' : "textareas",
-    'theme' : "advanced",
-    'plugins' : "paste,table",
-    
-    'theme_advanced_buttons1' : "formatselect,|,undo,redo,|,bold,italic,underline,|,charmap,|,bullist,numlist,|,pastetext, pasteword,cleanup,code",
-    'theme_advanced_buttons2' : "link,unlink",
-    'theme_advanced_buttons3' : "",
-    'theme_advanced_toolbar_location' : "top",
-    'theme_advanced_toolbar_align' : "left",
-    'theme_advanced_blockformats': "h1,h2,h3,h4,p",
-    #'theme_advanced_path_location' : "bottom",
-    
-    'extended_valid_elements': 'a[name|href|target|title|onclick|rel]',
-
-    'paste_create_paragraphs' : True,
-    'paste_create_linebreaks' : True,
-    'paste_use_dialog' : True,
-    'paste_auto_cleanup_on_paste' : True,
-
-    'theme_advanced_resizing' : True,
-    'force_p_newlines' : True,
-    
-    'apply_source_formatting' : True,
-
-    'verify_html' : True,
-
-    'browsers' : "msie,gecko,opera",
-    'entity_encoding' : "raw",
-
-    'width' : 450,
-    'height' : 350
-}
-
 # Log debug messages to standard output
 if DEBUG:
     import logging
