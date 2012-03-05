@@ -66,7 +66,7 @@ def insert_school(r):
     context['name'] = r[INSTELLINGSNAAM]
     context['address'] = "%s %s" % (r[STRAATNAAMCORRESPONDENTIEADRES], r[HUISNUMMERTOEVOEGINGCORRESPONDENTIEADRES])
     context['website'] = r[INTERNETADRES]
-    context['postcode'] = r[POSTCODE]
+    context['postcode'] = r[POSTCODECORRESPONDENTIEADRES]
     context['city'] = normalise_city(r[PLAATSNAAMCORRESPONDENTIEADRES])
     context['citizenrole'] = 'school'
 
