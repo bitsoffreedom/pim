@@ -28,11 +28,14 @@ def normalise_city(name):
 def create_organisation(**context):
     o = Organisation(country=None)
 
-    field_list = ['name', 'addressee', 'postcode', 'address', 'website' ]
+    field_list = ['addressee', 'postcode', 'address', 'website' ]
 
     for field in field_list:
         if field in context:
             setattr(o, field, context[field])
+
+    assert len(context['name']) > 0
+    o.setname(context['name'])
 
     try:
         citizenrole = CitizenRole.objects.get(name = context['citizenrole'])
