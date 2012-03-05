@@ -122,7 +122,7 @@ class Organisation(models.Model):
     """ Official name of organisation. """
     short_name = models.CharField(max_length=200, blank=True, verbose_name=('short name'), help_text=('A short name for an organisation.'))
     kvknumber = models.CharField(max_length=200, blank=True)
-    addressee = models.CharField(max_length=200, verbose_name=_('The name of the department or contact to send the letter to'), blank=True)
+    addressee = models.CharField(max_length=200, verbose_name=_('The name of the department or contact to send the letter to'), blank=True, null=True)
     address = models.CharField(max_length=200, verbose_name=_('street address or PO box'), blank=True)
     postcode = models.CharField(max_length=20, blank=True)
     organisationtype = models.ForeignKey(OrganisationType, blank=True, null=True)
@@ -152,6 +152,10 @@ class Organisation(models.Model):
     def html_link(self):
         return "<a href=\"%s\">%s</a>" % (self.website, self.website)
     html_link.allow_tags = True
+
+    def setname(self,name):
+        self.name = name
+        self.short_name = defaultfilters.slugify(name)
 
 class RelationType(models.Model):
     """ Types of relationships. """
