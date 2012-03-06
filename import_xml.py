@@ -17,7 +17,7 @@ for g in gemeenten:
     context = {
     'name': f('p:naam'),
     'website': f('p:contact/p:internet'),
-    'citizenrole': 'gemeente',
+    'citizenrole': 'overheid',
     'organisationtype': 'overheid',
     }
 
