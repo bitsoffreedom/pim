@@ -3,7 +3,7 @@
 from lxml import etree
 from import_utils import create_organisation, normalise_city
 
-f = open('/home/alex/20120301220000.xml', 'r')
+f = open('20120301220000.xml', 'r')
 
 xml_tree = etree.parse(f)
 
@@ -18,6 +18,7 @@ for g in gemeenten:
     'name': f('p:naam'),
     'website': f('p:contact/p:internet'),
     'citizenrole': 'gemeente',
+    'organisationtype': 'overheid',
     }
 
     if g.xpath('.//p:contact/p:postAdres', namespaces=namespaces):

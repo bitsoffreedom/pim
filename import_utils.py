@@ -45,6 +45,13 @@ def create_organisation(**context):
         citizenrole.save()
 
     try:
+        organisationtype = OrganisationType.objects.get(name = context['organisationtype'])
+    except CitizenRole.DoesNotExist:
+        organisationtype = OrganisationType()
+        organisationtype.name = context['organisationtype']
+        organisationtype.save()
+
+    try:
         city = City.objects.get(name = context['city'])
     except City.DoesNotExist:
         print "Creating city: " + context['city']
@@ -63,5 +70,6 @@ def create_organisation(**context):
     o.city = city
     o.country = country
     o.citizenrole.add(citizenrole)
+    o.organisationtype = organisationtype
 
     o.save()
