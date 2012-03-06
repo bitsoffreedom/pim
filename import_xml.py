@@ -13,7 +13,10 @@ gemeenten = xml_tree.xpath('/p:overheidsorganisaties/p:gemeenten/p:gemeente[p:ty
 for g in gemeenten:
     # XXX: Currently deelgementen and stadsdelen (rotterdam, amsterdam) aren't processed.
     def f(name):
-        return g.findtext(name, namespaces=namespaces)
+        node = g.xpath(name, namespaces=namespaces)
+        assert len(node) == 1, "not a single item"
+        return node[0].text
+
     context = {
     'name': f('p:naam'),
     'website': f('p:contact/p:internet'),
