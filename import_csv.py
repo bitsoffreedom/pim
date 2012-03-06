@@ -68,7 +68,7 @@ def insert_school(r):
     context['website'] = r[INTERNETADRES]
     context['postcode'] = r[POSTCODECORRESPONDENTIEADRES]
     context['city'] = normalise_city(r[PLAATSNAAMCORRESPONDENTIEADRES])
-    context['citizenrole'] = 'school'
+    context['citizenrole'] = 'opleiding'
 
     create_organisation(**context)
 
