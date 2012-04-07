@@ -300,8 +300,7 @@ def render_to_pdf(template_src, context_dict, filename):
 
     return response;
 
-
-def generateletter(request, param, type):
+def generate_single_letter(request, param, type):
     request.session.setdefault('companies', [])
     if len(request.session['companies']) == 0:
         return HttpResponseServerError("No companies selected")
@@ -314,6 +313,18 @@ def generateletter(request, param, type):
     if company_id not in request.session['companies']:
         return HttpResponseServerError("Object doesn't exist")
 
+    try:
+        organisation = Organisation.objects.get(pk=company_id)
+    except Organisation.DoesNotExist:
+        return HttpResponseServerError("Object doesn't exist")
+
+    context = {
+        'organisations': [organisation, ],
+    }
+
+    return generateletter(request, context, type, filename='%s.pdf' % (organisation.pk, ))
+
+def generateletter(request, context, type, **kwargs):
     required_keys = (
         'firstname',
         'lastname',
@@ -325,20 +336,16 @@ def generateletter(request, param, type):
     if required_keys <= request.session.keys():
         return HttpResponseServerError("Invalid parameters")
 
-    try:
-        organisation = Organisation.objects.get(pk=company_id)
-    except Organisation.DoesNotExist:
-        return HttpResponseServerError("Object doesn't exist")
-
-    context = {
-        'organisation': organisation,
+    context.update({
+        # userdata
         'firstname': request.session['firstname'],
         'lastname': request.session['lastname'],
         'street_address': request.session['street_address'],
         'postcode': request.session['postcode'],
         'city': request.session['city'],
+
         'currentdate': datetime.date.today(),
-    }
+    })
 
     if type == "html":
         context.update({'export': 'html'})
@@ -347,15 +354,30 @@ def generateletter(request, param, type):
     elif type == "pdf":
         context.update({'export': 'pdf'})
 
-        return render_to_pdf('pim/letter.html', context, '%s.pdf' % (organisation.pk, ))
+        return render_to_pdf('pim/letter.html', context, **kwargs)
     else:
         return HttpResponseServerError("Output type doesn't exist.")
 
 @cache_control(no_cache=True, no_store=True)
 def generatehtml(request, param):
-    return generateletter(request, param, 'html')
+    return generate_single_letter(request, param, 'html')
 
 @cache_control(no_cache=True, no_store=True)
 def generatepdf(request, param):
-    return generateletter(request, param, 'pdf')
+    return generate_single_letter(request, param, 'pdf')
+
+@cache_control(no_cache=True, no_store=True)
+def generate_all_pdf(request):
+    organisations = request.session['companies']
+
+    try:
+        organisations = Organisation.objects.filter(pk__in=organisations)
+    except Organisation.DoesNotExist:
+        return HttpResponseServerError("Object doesn't exist")
+
+    context = {
+        'organisations': organisations,
+    }
+
+    return generateletter(request, context, 'pdf', filename="pim_brieven.pdf")
 

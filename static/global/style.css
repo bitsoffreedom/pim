@@ -880,7 +880,8 @@ button#next-step {
 #download-all {
   font-weight: bold;
   height: 60px;
-  margin-left: 50px;
+  padding-top: 25px;
+  padding-left: 50px;
   width: 508px;
 }
 #download-all a,
@@ -910,10 +911,12 @@ button#next-step {
   height: 35px;
   padding-right: 45px;
   width: 135px;
+  padding: 15px 43px 0px 10px;
 }
+
 #download-all a:hover {
-  background-color: #000000;
-  background-image: url("/static/global/download-all_hover.gif");
+  background-color: #8EC363;
+  background-image: url("/static/global/download-all.gif");
 }
 
 #download-single {

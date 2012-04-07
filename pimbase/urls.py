@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
     (r'^gebruikers-gegevens$', 'pimbase.views.userdata'),
     (r'^genereer-brieven$', 'pimbase.views.generate'),
+    (r'^generateall$', 'pimbase.views.generate_all_pdf'),
     (r'^generatehtml/(?P<param>\d+)$', 'pimbase.views.generatehtml'),
     (r'^generatepdf/(?P<param>\d+)$', 'pimbase.views.generatepdf'),
 )
