@@ -239,7 +239,7 @@ def userdata(request):
     selected_companies = Organisation.objects.filter(pk__in = request.session['companies'])
 
     if request.method == 'POST':
-        form = UserForm(request, request.POST)
+        form = UserForm(request.POST)
         if form.is_valid():
             # TODO: We might consider a neat Class wrapper for the
             # user data - for both generality and oversight. This class
@@ -264,7 +264,7 @@ def userdata(request):
 
             return HttpResponseRedirect(reverse('pimbase.views.generate'))
     else:
-        form = UserForm(request)
+        form = UserForm()
 
     context = {
         'form': form,
@@ -337,7 +337,6 @@ def generateletter(request, param, type):
         'street_address': request.session['street_address'],
         'postcode': request.session['postcode'],
         'city': request.session['city'],
-        'misc': request.session['misc'],
         'currentdate': datetime.date.today(),
     }
 
