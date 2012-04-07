@@ -113,8 +113,6 @@ fm.register(FilterDefinition('citizenrole', CitizenRole, 'afhankelijk van je sit
 
 # Disable these options temporarily since they aren't used with te current dataset.
 #fm.register(FilterDefinition('organisationtype', OrganisationType, 'op type', 'name'))
-#fm.register(FilterDefinition('sector', Sector, 'op sector', 'name'))
-#fm.register(FilterDefinition('collectedinformation', CollectedInformation, 'op wat ze mogelijk van je weten', 'name'))
 
 def search(query, fm):
     """ Search for specific organisationtype, sector or role. """
@@ -262,14 +260,6 @@ def userdata(request):
             request.session['postcode'] = form.cleaned_data['postcode']
             request.session['city'] = form.cleaned_data['city']
 
-            ids = Identifier.objects.filter(organisation__in = request.session['companies'])
-
-            misc = []
-            for i in ids:
-                if 'misc_%d' % (i.pk, ) in form.cleaned_data.keys():
-                    misc.append((i, form.cleaned_data['misc_%d' % (i.pk, )]))
-
-            request.session['misc'] = misc
             request.session.modified = True
 
             return HttpResponseRedirect(reverse('pimbase.views.generate'))
