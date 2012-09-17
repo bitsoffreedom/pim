@@ -473,6 +473,11 @@ text-decoration: none;
     margin-left: 0;
 }
 
+#content ul {
+    padding-left: 35px;
+    padding-bottom: 25px;
+}
+
 #content li.excerpt {
     border-top: 2px dotted #83BC55;
     padding: 35px;
