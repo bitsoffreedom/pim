@@ -589,7 +589,7 @@ text-decoration: none;
 }
 
 .step-1 {
-  background: url("/static/global/bg-wizard.gif") repeat-y scroll 10px 0 transparent;
+  /*background: url("/static/global/bg-wizard.gif") repeat-y scroll 10px 0 transparent;*/
 }
 
 .step-2,
@@ -702,6 +702,11 @@ a.info-nav:hover {
   bottom: 60px;
   left: 20px;
   position: absolute;
+}
+
+#result-list {
+  border-left: 2px dotted #83BC55;
+  border-right: 2px dotted #83BC55;
 }
 
 #result-list ol {
