@@ -1,7 +1,0 @@
-/* webkit filter */
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	
-	body.home #next-step {
-	    padding: 2px 50px 4px 10px;
-		}
-}

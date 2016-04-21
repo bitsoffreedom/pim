@@ -1,9 +1,0 @@
-- fields: {name: Amsterdam, slug: amsterdam}
-  model: pimbase.city
-  pk: 1
-- fields: {name: Hilversum, slug: hilversum}
-  model: pimbase.city
-  pk: 2
-- fields: {name: Rotterdam, slug: rotterdam}
-  model: pimbase.city
-  pk: 3
